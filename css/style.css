@@ -189,13 +189,17 @@ a:hover{
     width: 120px;
 }
 
+.single-book .book-title, .download-page .book-title
+{
+    font-size: 2.5em;
+    font-weight: normal;
+    color: #2ABB9B;
+}
+
 .single-book .book-title
 {
     margin: 0 0 20px 0;
     padding-bottom: 20px;
-    font-size: 2.5em;
-    font-weight: normal;
-    color: #2ABB9B;
     border-bottom: solid 1px #ddd;
 }
 
@@ -234,4 +238,32 @@ a:hover{
     font-weight: 400;
     background: none;
     border: 1px solid #ddd;
+}
+
+/*DOWNLOAD PAGE*/
+
+.download-page
+{
+    text-align: center;
+    font-size: 1.15em;
+    margin: 20px 0 40px;
+}
+
+.download-page .book-title
+{
+    padding: 0 0 10px;
+}
+
+.download-page .timer
+{
+    font-size: 2.5em;
+    color: #8CC152;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.download-page .advertising
+{
+    margin-top: 30px;
+    min-height: 300px;
 }
