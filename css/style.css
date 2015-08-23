@@ -77,9 +77,9 @@ a:hover{
 }
 
 @media (max-width: 600px) {
-  .navbar-simple {
+    .navbar-simple {
 
-  }
+    }
 }
 
 .navbar-simple .navbar-toggle{
@@ -109,14 +109,31 @@ a:hover{
 /*HEADER CSS*/
 .home-header
 {
-    padding: 70px;
+    position: relative;
+    overflow: hidden;
+}
+
+.home-header .background-img
+{
+    background-image: url('../img/bg.jpg');
+    background-size: cover;
+    display: block;
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    margin: 0;
 }
 
 .large-search-box
 {
     max-width: 860px;
     margin: auto;
-    padding: 0 20px;
+    padding: 70px 20px;
 }
 .large-search-box input, .large-search-box button
 {
@@ -154,4 +171,67 @@ a:hover{
 
 .thumbnail .book-title a:hover{
     color: #36D7B7;
+}
+
+/*SINGLE BOOK STYLE*/
+.single-book
+{
+    padding: 40px 0;
+}
+
+.single-book .book-meta tr td
+{
+    border: none;
+}
+.single-book .book-meta tr td:first-child
+{
+    font-weight: bolder;
+    width: 120px;
+}
+
+.single-book .book-title
+{
+    margin: 0 0 20px 0;
+    padding-bottom: 20px;
+    font-size: 2.5em;
+    font-weight: normal;
+    color: #2ABB9B;
+    border-bottom: solid 1px #ddd;
+}
+
+.single-book-cover
+{
+    margin-bottom: 40px;
+}
+.single-book-cover img
+{
+    width: 100%
+}
+
+.book-description-title
+{
+    font-size: 2em;
+    font-weight: 400;
+    color: #2ABB9B;
+    border: 1px solid #ddd;
+    border-left: none;
+    border-right: none;
+    padding: 10px 0;
+}
+
+.tags
+{
+    color: #999;
+    text-transform: uppercase;
+    font-size: 1.15em;
+    vertical-align: bottom;
+}
+
+.tags .label
+{
+    border-radius: 0;
+    padding: 5px 10px;
+    font-weight: 400;
+    background: none;
+    border: 1px solid #ddd;
 }
