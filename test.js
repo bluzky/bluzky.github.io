@@ -113,8 +113,7 @@ function initStartPointSearchBox() {
             geocodePosition(startMarker, startInfo);
         });
 
-        if(startMarker && endMarker)
-            calculateAndDisplayRoute(directionsService, directionsDisplay);
+        calculateAndDisplayRoute(directionsService, directionsDisplay);
     });
 }
 
@@ -165,8 +164,7 @@ function initEndPointSearchBox() {
             geocodePosition(endMarker, endInfo);
         });
 
-        if(startMarker && endMarker)
-            calculateAndDisplayRoute(directionsService, directionsDisplay);
+        calculateAndDisplayRoute(directionsService, directionsDisplay);
     });
 }
 
@@ -193,6 +191,7 @@ function geocodePosition(marker, infowindow) {
         function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 infowindow.setContent(results[0].formatted_address);
+                calculateAndDisplayRoute(directionsService, directionsDisplay);
             } else {
                 $("#mapErrorMsg").html('Cannot determine address at this location.' + status).show(100);
             }
@@ -201,6 +200,10 @@ function geocodePosition(marker, infowindow) {
 }
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+
+    if() startMarker == undefined || endMarker == undefined)
+        return
+
     directionsService.route({
         origin: startMarker.position,
         destination: endMarker.position,
