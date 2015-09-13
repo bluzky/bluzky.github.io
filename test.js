@@ -104,7 +104,7 @@ function initStartPointSearchBox() {
                 content: place.name
             });
             startInfo.open(map, startMarker);
-            google.maps.event.addListener(marker, 'click', function() {
+            google.maps.event.addListener(startMarker, 'click', function() {
                 startInfo.open(map, startMarker);
             });
         });
@@ -156,7 +156,7 @@ function initEndPointSearchBox() {
                 content: place.name
             });
             endInfo.open(map, endMarker);
-            google.maps.event.addListener(marker, 'click', function() {
+            google.maps.event.addListener(endMarker, 'click', function() {
                 endInfo.open(map, endMarker);
             });
         });
