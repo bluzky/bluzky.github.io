@@ -4,9 +4,9 @@ $(document).ready(function() {
 
 google.maps.event.addDomListener(window, 'load', initialize);
 var map = undefined;
-var startPlace = undefined;
+var startInfo = undefined;
 var startMarker = undefined;
-var endPlace = undefined;
+var endInfo = undefined;
 var endMarker = undefined;
 var directionsService = undefined;
 var directionsDisplay = undefined;
@@ -99,10 +99,18 @@ function initStartPointSearchBox() {
                 position: place.geometry.location,
                 icon: startIcon
             });
+
+            startInfo = new google.maps.InfoWindow({
+                content: place.name
+            });
+            startInfo.open(map, startMarker);
+            google.maps.event.addListener(marker, 'click', function() {
+                startInfo.open(map, startMarker);
+            });
         });
 
         google.maps.event.addListener(startMarker, 'dragend', function() {
-            geocodePosition(startMarker);
+            geocodePosition(startMarker, startInfo);
         });
 
         if(startMarker && endMarker)
@@ -143,10 +151,18 @@ function initEndPointSearchBox() {
                 title: place.name,
                 position: place.geometry.location,
             });
+
+            endInfo = new google.maps.InfoWindow({
+                content: place.name
+            });
+            endInfo.open(map, endMarker);
+            google.maps.event.addListener(marker, 'click', function() {
+                endInfo.open(map, endMarker);
+            });
         });
 
-        google.maps.event.addListener(startMarker, 'dragend', function() {
-            geocodePosition(startMarker);
+        google.maps.event.addListener(endMarker, 'dragend', function() {
+            geocodePosition(endMarker, endInfo);
         });
 
         if(startMarker && endMarker)
@@ -169,22 +185,14 @@ function showPosition(position) {
     map.setZoom(13)
 }
 
-function geocodePosition(marker) {
+function geocodePosition(marker, infowindow) {
     geocoder = new google.maps.Geocoder();
     geocoder.geocode({
             latLng: marker.getPosition()
         },
         function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
-                alert(results[0].formatted_address);
-                var infowindow = new google.maps.InfoWindow({
-                    content: results[0].formatted_address
-                });
-
-                infowindow.open(map, marker);
-                google.maps.event.addListener(marker, 'click', function() {
-                    infowindow.open(map, marker);
-                });
+                infowindow.setContent(results[0].formatted_address);
             } else {
                 $("#mapErrorMsg").html('Cannot determine address at this location.' + status).show(100);
             }
