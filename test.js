@@ -10,6 +10,7 @@ var endPlace = undefined;
 var endMarker = undefined;
 var directionsService = undefined;
 var directionsDisplay = undefined;
+var startIcon = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|8CC152";
 
 function initialize() {
 
@@ -22,7 +23,9 @@ function initialize() {
     map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
     directionsService = new google.maps.DirectionsService;
-    directionsDisplay = new google.maps.DirectionsRenderer;
+    directionsDisplay = new google.maps.DirectionsRenderer({
+        suppressMarkers: true
+    });
     directionsDisplay.setMap(map);
 
     // var marker = new google.maps.Marker({
@@ -92,7 +95,8 @@ function initStartPointSearchBox() {
                 map: map,
                 title: place.name,
                 animation: google.maps.Animation.DROP,
-                position: place.geometry.location
+                position: place.geometry.location,
+                icon: startIcon
             });
         });
 
@@ -131,7 +135,7 @@ function initEndPointSearchBox() {
                 map: map,
                 animation: google.maps.Animation.DROP,
                 title: place.name,
-                position: place.geometry.location
+                position: place.geometry.location,
             });
         });
 
