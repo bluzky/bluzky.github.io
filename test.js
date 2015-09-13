@@ -8,6 +8,9 @@ var startPlace = undefined;
 var startMarker = undefined;
 var endPlace = undefined;
 var endMarker = undefined;
+var directionsService = undefined;
+var directionsDisplay = undefined;
+
 function initialize() {
 
     var myCenter = new google.maps.LatLng(51.508742, -0.120850);
@@ -17,6 +20,10 @@ function initialize() {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+    directionsService = new google.maps.DirectionsService;
+    directionsDisplay = new google.maps.DirectionsRenderer;
+    directionsDisplay.setMap(map);
 
     // var marker = new google.maps.Marker({
     //     position: myCenter,
@@ -74,11 +81,10 @@ function initStartPointSearchBox() {
         if (places.length == 0) {
             return;
         }
-        if(startMarker)
+        if (startMarker)
             startMarker.setMap(null);
 
         // For each place, get the icon, name and location.
-        var bounds = new google.maps.LatLngBounds();
         places.forEach(function(place) {
 
             // Create a marker for each place.
@@ -88,15 +94,10 @@ function initStartPointSearchBox() {
                 animation: google.maps.Animation.DROP,
                 position: place.geometry.location
             });
-
-            if (place.geometry.viewport) {
-                // Only geocodes have viewport.
-                bounds.union(place.geometry.viewport);
-            } else {
-                bounds.extend(place.geometry.location);
-            }
         });
-        map.fitBounds(bounds);
+
+        if(startMarker && endMarker)
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
     });
 }
 
@@ -121,28 +122,21 @@ function initEndPointSearchBox() {
             return;
         }
 
-        if(endMarker)
+        if (endMarker)
             endMarker.setMap()
-        // For each place, get the icon, name and location.
-        var bounds = new google.maps.LatLngBounds();
+            // For each place, get the icon, name and location.
         places.forEach(function(place) {
-            console.log("end")
-            // Create a marker for each place.
+                // Create a marker for each place.
             endMarker = new google.maps.Marker({
                 map: map,
                 animation: google.maps.Animation.DROP,
                 title: place.name,
                 position: place.geometry.location
             });
-
-            if (place.geometry.viewport) {
-                // Only geocodes have viewport.
-                bounds.union(place.geometry.viewport);
-            } else {
-                bounds.extend(place.geometry.location);
-            }
         });
-        map.fitBounds(bounds);
+
+        if(startMarker && endMarker)
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
     });
 }
 
@@ -158,7 +152,7 @@ function showPosition(position) {
     var lat = position.coords.latitude;
     var lng = position.coords.longitude;
     map.setCenter(new google.maps.LatLng(lat, lng));
-    map.setZoom(10)
+    map.setZoom(13)
 }
 
 function geocodePosition(pos) {
@@ -176,3 +170,17 @@ function geocodePosition(pos) {
         }
     );
 }
+
+function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+    directionsService.route({
+        origin: startMarker.position,
+        destination: endMarker.position,
+        travelMode: google.maps.TravelMode.DRIVING
+    }, function(response, status) {
+        if (status === google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+        } else {
+            window.alert('Directions request failed due to ' + status);
+        }
+    });
+});
