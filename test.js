@@ -100,8 +100,6 @@ function initStartPointSearchBox() {
                 icon: startIcon
             });
 
-            start_input.value = place.name;
-
             startInfo = new google.maps.InfoWindow({
                 content: place.name
             });
@@ -153,9 +151,6 @@ function initEndPointSearchBox() {
                 position: place.geometry.location,
             });
 
-            // update search box content
-            end_input.value = place.name;
-
             endInfo = new google.maps.InfoWindow({
                 content: place.name
             });
@@ -197,6 +192,14 @@ function geocodePosition(marker, infowindow) {
             if (status == google.maps.GeocoderStatus.OK) {
                 infowindow.setContent(results[0].formatted_address);
                 calculateAndDisplayRoute(directionsService, directionsDisplay);
+
+                var searchBox;
+                if( marker == startMarker){
+                    searchBox = document.getElementById('start-address');
+                }else{
+                    searchBox = document.getElementById('destination-address');
+                }
+                searchBox.value = results[0].formatted_address;
             } else {
                 $("#mapErrorMsg").html('Cannot determine address at this location.' + status).show(100);
             }
