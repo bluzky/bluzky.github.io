@@ -4,7 +4,10 @@ $(document).ready(function() {
 
 google.maps.event.addDomListener(window, 'load', initialize);
 var map = undefined;
-
+var startPlace = undefined;
+var startMarker = undefined;
+var endPlace = undefined;
+var endMarker = undefined;
 function initialize() {
 
     var myCenter = new google.maps.LatLng(51.508742, -0.120850);
@@ -43,14 +46,15 @@ function initialize() {
 
 
     getUserLocation();
-    initAutocomplete();
+    initStartPointSearchBox();
+    initEndPointSearchBox();
 }
 
 // This example adds a search box to a map, using the Google Place Autocomplete
 // feature. People can enter geographical searches. The search box will return a
 // pick list containing a mix of places and predicted search terms.
 
-function initAutocomplete() {
+function initStartPointSearchBox() {
 
     // Create the search box and link it to the UI element.
     var start_input = document.getElementById('start-address');
@@ -62,7 +66,6 @@ function initAutocomplete() {
         startSearchBox.setBounds(map.getBounds());
     });
 
-    var markers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
     startSearchBox.addListener('places_changed', function() {
@@ -72,30 +75,63 @@ function initAutocomplete() {
             return;
         }
 
-        // Clear out the old markers.
-        markers.forEach(function(marker) {
-            marker.setMap(null);
-        });
-        markers = [];
+        startMarker.setMap(null);
 
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds();
         places.forEach(function(place) {
-            var icon = {
-                url: place.icon,
-                size: new google.maps.Size(71, 71),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
-                scaledSize: new google.maps.Size(25, 25)
-            };
 
             // Create a marker for each place.
-            markers.push(new google.maps.Marker({
+            startMarker = new google.maps.Marker({
                 map: map,
-                icon: icon,
+                title: place.name,
+                animation: google.maps.Animation.DROP,
+                position: place.geometry.location
+            });
+
+            if (place.geometry.viewport) {
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
+            } else {
+                bounds.extend(place.geometry.location);
+            }
+        });
+        map.fitBounds(bounds);
+    });
+}
+
+function initEndPointSearchBox() {
+
+    // Create the search box and link it to the UI element.
+    var end_input = document.getElementById('destination-address');
+    var desSearchBox = new google.maps.places.SearchBox(end_input);
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(end_input);
+
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', function() {
+        desSearchBox.setBounds(map.getBounds());
+    });
+
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    desSearchBox.addListener('places_changed', function() {
+        var places = desSearchBox.getPlaces();
+
+        if (places.length == 0) {
+            return;
+        }
+
+        // For each place, get the icon, name and location.
+        var bounds = new google.maps.LatLngBounds();
+        places.forEach(function(place) {
+            console.log("end")
+            // Create a marker for each place.
+            endMarker = new google.maps.Marker({
+                map: map,
+                animation: google.maps.Animation.DROP,
                 title: place.name,
                 position: place.geometry.location
-            }));
+            });
 
             if (place.geometry.viewport) {
                 // Only geocodes have viewport.
