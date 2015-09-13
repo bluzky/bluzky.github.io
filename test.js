@@ -68,8 +68,8 @@ function initStartPointSearchBox() {
 
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
-    startSearchBox.addListener('places_changed', function() {
         var places = startSearchBox.getPlaces();
+    startSearchBox.addListener('places_changed', function() {
 
         if (places.length == 0) {
             return;
