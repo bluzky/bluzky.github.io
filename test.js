@@ -94,10 +94,15 @@ function initStartPointSearchBox() {
             startMarker = new google.maps.Marker({
                 map: map,
                 title: place.name,
+                draggable: true,
                 animation: google.maps.Animation.DROP,
                 position: place.geometry.location,
                 icon: startIcon
             });
+        });
+
+        google.maps.event.addListener(startMarker, 'dragend', function() {
+            geocodePosition(startMarker);
         });
 
         if(startMarker && endMarker)
@@ -134,9 +139,14 @@ function initEndPointSearchBox() {
             endMarker = new google.maps.Marker({
                 map: map,
                 animation: google.maps.Animation.DROP,
+                draggable: true,
                 title: place.name,
                 position: place.geometry.location,
             });
+        });
+
+        google.maps.event.addListener(startMarker, 'dragend', function() {
+            geocodePosition(startMarker);
         });
 
         if(startMarker && endMarker)
@@ -159,15 +169,22 @@ function showPosition(position) {
     map.setZoom(13)
 }
 
-function geocodePosition(pos) {
+function geocodePosition(marker) {
     geocoder = new google.maps.Geocoder();
     geocoder.geocode({
-            latLng: pos
+            latLng: marker.getPosition()
         },
         function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 alert(results[0].formatted_address);
-                $("#mapErrorMsg").hide(100);
+                var infowindow = new google.maps.InfoWindow({
+                    content: results[0].formatted_address
+                });
+
+                infowindow.open(map, marker);
+                google.maps.event.addListener(marker, 'click', function() {
+                    infowindow.open(map, marker);
+                });
             } else {
                 $("#mapErrorMsg").html('Cannot determine address at this location.' + status).show(100);
             }
