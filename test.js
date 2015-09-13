@@ -100,6 +100,8 @@ function initStartPointSearchBox() {
                 icon: startIcon
             });
 
+            start_input.value = place.name;
+
             startInfo = new google.maps.InfoWindow({
                 content: place.name
             });
@@ -150,6 +152,9 @@ function initEndPointSearchBox() {
                 title: place.name,
                 position: place.geometry.location,
             });
+
+            // update search box content
+            end_input.value = place.name;
 
             endInfo = new google.maps.InfoWindow({
                 content: place.name
