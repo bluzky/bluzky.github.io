@@ -3,6 +3,8 @@
 
 <head>
     <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="test.js"></script>
     <script>
         function initialize() {
 
@@ -19,6 +21,10 @@
                 draggable: true,
                 animation: google.maps.Animation.DROP,
             });
+
+            var endPoint = new google.maps.Marker({
+
+            })
 
             marker.setMap(map);
 
@@ -73,7 +79,11 @@
 </head>
 
 <body>
-    <div id="googleMap" style="width:1000px;height:700px;"></div>
+    <div id="search-bar">
+        <input id="begin-address" placeholder="Diem khoi hanh">
+        <input id="end-address" placeholder="Diem ket thuc">
+    </div>
+    <div id="googleMap" style="width:1000px;height:600px;"></div>
 </body>
 
 </html>
