@@ -47,7 +47,7 @@ function initialize() {
 
     getUserLocation();
     initStartPointSearchBox();
-    initEndPointSearchBox();
+    // initEndPointSearchBox();
 }
 
 // This example adds a search box to a map, using the Google Place Autocomplete
