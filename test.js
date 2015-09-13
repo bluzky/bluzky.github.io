@@ -47,7 +47,7 @@ function initialize() {
 
     getUserLocation();
     initStartPointSearchBox();
-    // initEndPointSearchBox();
+    initEndPointSearchBox();
 }
 
 // This example adds a search box to a map, using the Google Place Autocomplete
@@ -68,8 +68,8 @@ function initStartPointSearchBox() {
 
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
-        var places = startSearchBox.getPlaces();
     startSearchBox.addListener('places_changed', function() {
+        var places = startSearchBox.getPlaces();
 
         if (places.length == 0) {
             return;
