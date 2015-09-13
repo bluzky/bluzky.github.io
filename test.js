@@ -201,7 +201,7 @@ function geocodePosition(marker, infowindow) {
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 
-    if() startMarker == undefined || endMarker == undefined)
+    if(startMarker == undefined || endMarker == undefined)
         return
 
     directionsService.route({
