@@ -74,8 +74,8 @@ function initStartPointSearchBox() {
         if (places.length == 0) {
             return;
         }
-
-        startMarker.setMap(null);
+        if(startMarker)
+            startMarker.setMap(null);
 
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds();
@@ -121,6 +121,8 @@ function initEndPointSearchBox() {
             return;
         }
 
+        if(endMarker)
+            endMarker.setMap()
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds();
         places.forEach(function(place) {
