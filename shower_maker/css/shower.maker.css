@@ -192,6 +192,9 @@ h6{ font-size:0.9em; }
         display: block;
         position: relative;
     }
+    .shower.list .slide a {
+        pointer-events: auto;
+    }
 }
 
 #preview {

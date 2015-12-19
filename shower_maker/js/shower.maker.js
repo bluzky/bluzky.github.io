@@ -35,6 +35,7 @@ renderer.link = function(href, title, text) {
 // setup markedjs highlight configuration
 marked.setOptions({
     langPrefix: "language-",
+    renderer: renderer,
     highlight: function (code, lang, callback) {
         var result = Prism.highlight(code, Prism.languages[lang]);
         var err = null;
