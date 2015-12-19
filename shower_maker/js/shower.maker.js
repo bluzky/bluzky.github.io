@@ -219,14 +219,6 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// listen to preview frame key event for exiting preview mode
-// var previewFrame = window.frames['preview-frame'];
-// previewFrame.document.addEventListener('keydown', function(e) {
-//     if(e.keyCode == 114){
-//         hidePreview();
-//     }
-// });
-
 // zip editor content and put in hash string
 function updateHash() {
   window.location.hash = btoa( // base64 so url-safe
@@ -276,3 +268,11 @@ function hidePreview() {
   previewVisible = false;
   preview.style.display = 'none';
 }
+
+// listen to preview frame key event for exiting preview mode
+var previewFrame = window.frames['preview-frame'];
+previewFrame.document.addEventListener('keydown', function(e) {
+    if(e.keyCode == 114){
+        hidePreview();
+    }
+});
