@@ -271,7 +271,7 @@ function hidePreview() {
 
 // listen to preview frame key event for exiting preview mode
 var previewFrame = document.getElementById('preview-frame');
-previewFrame.document.addEventListener('keydown', function(e) {
+previewFrame.contentWindow.document.addEventListener('keydown', function(e) {
     if(e.keyCode == 114){
         hidePreview();
     }
