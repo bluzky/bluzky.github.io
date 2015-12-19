@@ -2,8 +2,6 @@ var URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
 navigator.saveBlob = navigator.saveBlob || navigator.msSaveBlob || navigator.mozSaveBlob || navigator.webkitSaveBlob;
 window.saveAs = window.saveAs || window.webkitSaveAs || window.mozSaveAs || window.msSaveAs;
 
-document.domain = "www.bluzky.github.io";
-
 // custom link renderer for markedjs
 // this will open link/url in a new tab
 var renderer = new marked.Renderer();
