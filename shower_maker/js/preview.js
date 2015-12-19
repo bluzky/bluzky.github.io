@@ -4,3 +4,5 @@ function reloadAll(e){
     DOMContentLoaded_event.initEvent("DOMContentLoaded", true, true);
     window.document.dispatchEvent(DOMContentLoaded_event);
 }
+
+document.domain = "www.bluzky.github.io";
