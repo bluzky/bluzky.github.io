@@ -105,9 +105,9 @@
       .main-content .sidebar .subscribe .title-sm, .main-content .sidebar .subscribe .title-lg {
         color: RGB(89, 167, 185); }
       .main-content .sidebar .subscribe .title-lg {
-        font-size: 26px; }
+        font-size: 38px; }
       .main-content .sidebar .subscribe .title-sm {
-        font-size: 17px; }
+        font-size: 24px; }
     .main-content .sidebar .slide {
       height: 302px;
       padding: 10px; }
@@ -123,7 +123,7 @@
         .main-content .sidebar .slide header img {
           max-width: 66px; }
         .main-content .sidebar .slide header .title {
-          width: 88px;
+          width: 118px;
           padding-left: 7px;
           text-transform: none;
           font-size: 12px;
@@ -135,15 +135,15 @@
           display: table;
           clear: both; }
         .main-content .sidebar .slide .store .btn {
-          width: 64px;
-          margin-left: 10px;
-          font-size: 9.3px;
+          width: 84px;
+          margin-left: 30px;
+          font-size: 11px;
           padding: 3px 0;
           text-align: center; }
         .main-content .sidebar .slide .store .store-logo, .main-content .sidebar .slide .store .product-price {
           display: inline-block; }
         .main-content .sidebar .slide .store .store-logo img {
-          max-width: 76px; }
+          max-width: 86px; }
         .main-content .sidebar .slide .store .product-price {
           vertical-align: middle; }
 
