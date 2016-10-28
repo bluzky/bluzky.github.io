@@ -38,7 +38,7 @@ input[type=text] {
   font-size: 10px; }
 
 .page {
-  width: 100%;
+  max-width: 1366px;
   background: #fff;
   margin: auto;
   font-family: "Dax", Verdana, Geneva, sans-serif;
@@ -46,7 +46,7 @@ input[type=text] {
   color: RGB(77, 77, 77); }
 
 .inner-container {
-  width: 786px;
+  width: 986px;
   margin: auto; }
   .inner-container::before, .inner-container::after {
     display: table;
