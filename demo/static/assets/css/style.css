@@ -38,7 +38,6 @@ input[type=text] {
   font-size: 10px; }
 
 .page {
-  max-width: 1366px;
   background: #fff;
   margin: auto;
   font-family: "Dax", Verdana, Geneva, sans-serif;
@@ -162,6 +161,13 @@ header {
       min-height: 0; }
     header .main-menu .navbar-nav {
       width: 100%; }
+      header .main-menu .navbar-nav .dropdown:hover ul.dropdown-menu {
+        opacity: 1;
+        margin-top: 0px;
+        visibility: visible;
+        -moz-transition: margin-top .2s ease-out;
+        -webkit-transition: margin-top  .2s ease-out;
+        transition: margin-top  .2s ease-out; }
       header .main-menu .navbar-nav li {
         width: 20%;
         text-transform: uppercase;
@@ -173,11 +179,32 @@ header {
           font-size: 15px;
           font-weight: bold;
           color: #fff; }
+          header .main-menu .navbar-nav li a:hover {
+            color: #fff; }
     header .main-menu .dropdown-menu {
-      width: 100%; }
+      padding: 15px;
+      margin-top: 30px;
+      display: block;
+      visibility: hidden;
+      opacity: 0;
+      -moz-transition: margin-top .15s ease-out;
+      -webkit-transition: margin-top  .15s ease-out;
+      transition: margin-top  .15s ease-out;
+      -moz-transition: opacity .05s ease-out;
+      -webkit-transition: opacity  .05s ease-out;
+      transition: opacity  .05s ease-out; }
       header .main-menu .dropdown-menu li {
         width: 100%;
         text-align: left; }
+        header .main-menu .dropdown-menu li a {
+          color: #0C0C0C; }
+          header .main-menu .dropdown-menu li a:hover {
+            background: #0C0C0C;
+            color: #fff;
+            padding-left: 30px;
+            -moz-transition: padding-left .3s ease-in;
+            -webkit-transition: padding-left  .3s ease-in;
+            transition: padding-left  .3s ease-in; }
 
 .header-container {
   position: absolute;
@@ -195,9 +222,28 @@ header {
     width: 100%; }
 
 .slider .slick-prev, .slider .slick-next {
-  height: 50px;
+  height: 80px;
   width: 30px;
-  background: rgba(0, 0, 0, 0.6); }
+  opacity: 0;
+  background: rgba(89, 167, 185, 0.8);
+  top: calc(50% + 80px);
+  -moz-transition: 0.2s ease-out;
+  -webkit-transition: 0.2s ease-out;
+  transition: 0.2s ease-out; }
+
+.slider:hover .slick-prev {
+  opacity: 1;
+  left: 20px;
+  -moz-transition: all 0.2s ease-out;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out; }
+
+.slider:hover .slick-next {
+  opacity: 1;
+  right: 20px;
+  -moz-transition: 0.2s ease-out;
+  -webkit-transition: 0.2s ease-out;
+  transition: 0.2s ease-out; }
 
 .slider .slick-prev::before, .slider .slick-next::before {
   font-family: FontAwesome;
@@ -252,12 +298,14 @@ footer {
     footer .ebook-row .title {
       margin: 5px 0 14px 0;
       color: #fff; }
-    footer .ebook-row .register-form .email-input {
+    footer .ebook-row .register-form .email-input, footer .ebook-row .register-form .name-input {
       border: none;
       height: 20px;
       width: 195px;
       padding: 0 10px;
       line-height: 20px; }
+    footer .ebook-row .register-form .name-input {
+      margin-top: 10px; }
     footer .ebook-row .register-form .ebook-submit {
       height: 28px;
       margin-left: 15px;
@@ -265,7 +313,8 @@ footer {
       padding: 0 38px;
       text-transform: uppercase;
       line-height: 28px;
-      color: #fff; }
+      color: #fff;
+      vertical-align: middle; }
     footer .ebook-row .tag-col {
       float: left;
       width: 113px;

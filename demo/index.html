@@ -93,7 +93,7 @@
                                 <!-- Collect the nav links, forms, and other content for toggling -->
                                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                     <ul class="nav navbar-nav">
-                                        <li class="active"><a href="#">Trang chủ<span class="sr-only">(current)</span></a></li>
+                                        <li><a href="#">Trang chủ<span class="sr-only">(current)</span></a></li>
                                         <li><a href="#">Dịch vụ</a></li>
                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -251,10 +251,10 @@
                 </div>
             </div>
 
-            <div class="widget bordered-widget subscribe">
-                <h3 class="title-lg">Theo dõi</h3>
+            <div class="widget subscribe" style="background: url(./static/img/f.png); background-size: 100%;">
+                <!-- <h3 class="title-lg">Theo dõi</h3>
                 <h3 class="title-sm">Kênh của tôi</h3>
-                <p>Lorem ipsum dolor sit amet, lpa qui officia deserunt mollit an lpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, lpa qui officia deserunt mollit an lpa qui officia deserunt mollit anim id est laborum.</p> -->
                 <div class="btn-group-absolute">
                     <a href="#" class="btn btn-primary btn-em" style="padding: 3px 32px;">Gửi</a>
                 </div>
@@ -412,9 +412,14 @@
                     <div class="col-md-6 col-xs-12">
                         <h3 class="title">nhận e-book miễn phí</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        <div class="register-form">
-                            <input type="text"  class="email-input" name="email" placeholder="E-mail của bạn">
-                            <button class="btn btn-primary btn-em ebook-submit">GỬI</button>
+                        <div class="register-form clearfix">
+                            <div style="float: left;">
+                                <input type="text"  class="email-input" name="email" placeholder="E-mail của bạn"><br/>
+                                <input type="text"  class="name-input" name="email" placeholder="Tên của bạn">
+                            </div>
+                            <div style="padding: 14px; float: left;">
+                                <button class="btn btn-primary btn-em ebook-submit">GỬI</button>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-xs-12" style="padding-left:0;">
