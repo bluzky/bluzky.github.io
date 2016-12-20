@@ -1,0 +1,57 @@
+.redlink {
+  color: #bb3914; }
+  .redlink:hover {
+    color: #3a4276; }
+
+.content-column {
+  padding-right: 0; }
+
+.feature-posts {
+  background-color: #ffd737;
+  padding: 20px 0; }
+  .feature-posts .big-post {
+    border-right: solid 1px #f9af00; }
+    .feature-posts .big-post .title {
+      color: #bb3914;
+      display: block;
+      margin-bottom: 15px;
+      font-size: 20px;
+      line-height: 1em;
+      font-weight: bold; }
+      .feature-posts .big-post .title:hover {
+        color: #3a4276; }
+    .feature-posts .big-post .post-photo {
+      display: inline-block;
+      padding: 7px;
+      background: #fff; }
+  .feature-posts .small-post:not(:last-child) {
+    margin-bottom: 15px; }
+  .feature-posts .small-post .post-photo {
+    padding: 3px;
+    background: #fff; }
+  .feature-posts .small-post .title {
+    display: block;
+    color: #bb3914;
+    font-weight: bold;
+    margin-top: 10px; }
+    .feature-posts .small-post .title:hover {
+      color: #3a4276; }
+
+.post-list {
+  border: solid 1px #ddd;
+  border-top: 0;
+  margin-right: -15px;
+  padding-bottom: 15px; }
+  .post-list .post {
+    padding: 15px 0; }
+    .post-list .post:not(:last-child) {
+      border-bottom: solid 1px #ddd; }
+    .post-list .post .post-photo {
+      width: 25%;
+      padding: 3px;
+      border: solid 1px #ddd; }
+    .post-list .post .post-details {
+      width: 75%;
+      padding-left: 20px; }
+      .post-list .post .post-details .short-text {
+        margin-top: 7px; }
