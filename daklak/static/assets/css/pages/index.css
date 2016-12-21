@@ -62,48 +62,40 @@
     .notice-column .new-notices .angle-list li a:hover {
       color: #4E92DF; }
 
-.topnews-column {
-  padding: 0;
-  border: solid 1px #ddd; }
-  .topnews-column .pinned-post .post-desc {
-    padding: 10px; }
-    .topnews-column .pinned-post .post-desc .title a {
+.feature-posts {
+  box-shadow: 0 0 5px #888;
+  background-color: #f8f8f8;
+  padding: 20px 0; }
+  .feature-posts .big-post {
+    border-right: solid 1px #f9af00; }
+    .feature-posts .big-post .title {
       color: #bb3914;
-      font-size: 20px;
-      font-weight: bold;
-      line-height: 1em; }
-      .topnews-column .pinned-post .post-desc .title a:hover {
-        color: #3a4276; }
-    .topnews-column .pinned-post .post-desc .short-text {
-      margin: 10px 0 0; }
-  .topnews-column .top-news-list {
-    padding: 10px; }
-  .topnews-column .news-item {
-    width: 31.5%;
-    float: left;
-    margin: 0 5px; }
-    .topnews-column .news-item:nth-child(3n+1) {
-      margin-left: 0; }
-    .topnews-column .news-item:nth-child(3n+3) {
-      margin-right: 0; }
-    .topnews-column .news-item .feature-image {
-      border: solid 1px #ddd;
-      padding: 3px;
-      background-color: #fff; }
-      .topnews-column .news-item .feature-image img {
-        max-height: 75px;
-        width: 100%; }
-    .topnews-column .news-item .title {
       display: block;
-      font-size: 12px;
-      font-weight: bold;
+      margin-bottom: 15px;
+      font-size: 20px;
       line-height: 1em;
-      margin: 7px 0;
-      color: #666; }
-      .topnews-column .news-item .title:hover {
+      font-weight: bold; }
+      .feature-posts .big-post .title:hover {
         color: #3a4276; }
+    .feature-posts .big-post .post-photo {
+      display: inline-block;
+      padding: 7px;
+      background: #fff; }
+  .feature-posts .small-post:not(:last-child) {
+    margin-bottom: 15px; }
+  .feature-posts .small-post .post-photo {
+    padding: 3px;
+    background: #fff; }
+  .feature-posts .small-post .title {
+    display: block;
+    color: #bb3914;
+    font-weight: bold;
+    margin-top: 10px; }
+    .feature-posts .small-post .title:hover {
+      color: #3a4276; }
 
-.bottom-part {
+.post-groups {
+  margin-right: 0;
   margin-top: 20px; }
 
 .post-widget {
@@ -114,7 +106,6 @@
     font-size: 18px; }
   .post-widget .widget-body {
     padding: 10px 0;
-    border: solid 1px #ddd;
     border-top: 0; }
   .post-widget .feature-post {
     background-color: #f8f8f8;

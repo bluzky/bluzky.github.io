@@ -225,13 +225,14 @@ hr.sep {
       width: 10px; }
 
 .widget {
-  border: solid 1px #ddd;
+  box-shadow: 0 0 3px #888;
   margin-bottom: 15px; }
   .widget .widget-header {
     font-weight: bold;
     text-transform: uppercase;
     color: #f9af00;
     border-left: solid 3px #f9af00;
-    padding: 7px 15px; }
+    padding: 7px 15px;
+    background-color: #efefef; }
   .widget .widget-body {
     padding: 15px; }
