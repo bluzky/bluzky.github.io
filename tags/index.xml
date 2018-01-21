@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on The 54 tribes</title>
-    <link>http://example.org/tags/</link>
+    <link>http://bluzky.github.io/tags/</link>
     <description>Recent content in Tags on The 54 tribes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,60 +10,60 @@
     <webMaster>bluesky.1289@gmail.com (Dũng Nguyễn)</webMaster>
     <lastBuildDate>Sun, 21 Jan 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://bluzky.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Oauth2</title>
-      <link>http://example.org/tags/oauth2/</link>
+      <link>http://bluzky.github.io/tags/oauth2/</link>
       <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
       <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
-      <guid>http://example.org/tags/oauth2/</guid>
+      <guid>http://bluzky.github.io/tags/oauth2/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Others</title>
-      <link>http://example.org/tags/others/</link>
+      <link>http://bluzky.github.io/tags/others/</link>
       <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
       <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
-      <guid>http://example.org/tags/others/</guid>
+      <guid>http://bluzky.github.io/tags/others/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Protocol</title>
-      <link>http://example.org/tags/protocol/</link>
+      <link>http://bluzky.github.io/tags/protocol/</link>
       <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
       <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
-      <guid>http://example.org/tags/protocol/</guid>
+      <guid>http://bluzky.github.io/tags/protocol/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python</title>
-      <link>http://example.org/tags/python/</link>
+      <link>http://bluzky.github.io/tags/python/</link>
       <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
       <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
-      <guid>http://example.org/tags/python/</guid>
+      <guid>http://bluzky.github.io/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python Basic</title>
-      <link>http://example.org/tags/python-basic/</link>
+      <link>http://bluzky.github.io/tags/python-basic/</link>
       <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
       <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
-      <guid>http://example.org/tags/python-basic/</guid>
+      <guid>http://bluzky.github.io/tags/python-basic/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tech</title>
-      <link>http://example.org/tags/tech/</link>
+      <link>http://bluzky.github.io/tags/tech/</link>
       <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
       <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
-      <guid>http://example.org/tags/tech/</guid>
+      <guid>http://bluzky.github.io/tags/tech/</guid>
       <description></description>
     </item>
     

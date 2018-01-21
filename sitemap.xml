@@ -3,93 +3,93 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://example.org/post/2018-01-21-python-xu-ly-mang-voi-filter-reduce/</loc>
+    <loc>http://bluzky.github.io/post/2018-01-21-python-xu-ly-mang-voi-filter-reduce/</loc>
     <lastmod>2018-01-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/post/2018-01-21-python-decorator/</loc>
+    <loc>http://bluzky.github.io/post/2018-01-21-python-decorator/</loc>
     <lastmod>2018-01-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/post/2018-01-21-truyen-tham-so-dong-python/</loc>
+    <loc>http://bluzky.github.io/post/2018-01-21-truyen-tham-so-dong-python/</loc>
     <lastmod>2018-01-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/post/2018-01-21-tim-hieu-oauth/</loc>
+    <loc>http://bluzky.github.io/post/2018-01-21-tim-hieu-oauth/</loc>
     <lastmod>2018-01-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/post/2018-01-21-what-is-rabbit-mq/</loc>
+    <loc>http://bluzky.github.io/post/2018-01-21-what-is-rabbit-mq/</loc>
     <lastmod>2018-01-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/</loc>
+    <loc>http://bluzky.github.io/</loc>
     <lastmod>2018-01-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/page/about/</loc>
+    <loc>http://bluzky.github.io/page/about/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/categories/</loc>
+    <loc>http://bluzky.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://example.org/tags/oauth2/</loc>
-    <lastmod>2018-01-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.org/tags/others/</loc>
+    <loc>http://bluzky.github.io/tags/oauth2/</loc>
     <lastmod>2018-01-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://example.org/page/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.org/post/</loc>
+    <loc>http://bluzky.github.io/tags/others/</loc>
     <lastmod>2018-01-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://example.org/tags/protocol/</loc>
+    <loc>http://bluzky.github.io/page/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://bluzky.github.io/post/</loc>
     <lastmod>2018-01-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://example.org/tags/python/</loc>
+    <loc>http://bluzky.github.io/tags/protocol/</loc>
     <lastmod>2018-01-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://example.org/tags/python-basic/</loc>
+    <loc>http://bluzky.github.io/tags/python/</loc>
     <lastmod>2018-01-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://example.org/tags/</loc>
+    <loc>http://bluzky.github.io/tags/python-basic/</loc>
     <lastmod>2018-01-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://example.org/tags/tech/</loc>
+    <loc>http://bluzky.github.io/tags/</loc>
+    <lastmod>2018-01-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://bluzky.github.io/tags/tech/</loc>
     <lastmod>2018-01-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

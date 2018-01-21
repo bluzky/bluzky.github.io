@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Others on The 54 tribes</title>
-    <link>http://example.org/tags/others/</link>
+    <link>http://bluzky.github.io/tags/others/</link>
     <description>Recent content in Others on The 54 tribes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -10,25 +10,25 @@
     <webMaster>bluesky.1289@gmail.com (Dũng Nguyễn)</webMaster>
     <lastBuildDate>Sun, 21 Jan 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://example.org/tags/others/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://bluzky.github.io/tags/others/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Tìm hiểu về Oauth / Oauth hoạt động như thế nào?</title>
-      <link>http://example.org/post/2018-01-21-tim-hieu-oauth/</link>
+      <link>http://bluzky.github.io/post/2018-01-21-tim-hieu-oauth/</link>
       <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
       <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
-      <guid>http://example.org/post/2018-01-21-tim-hieu-oauth/</guid>
+      <guid>http://bluzky.github.io/post/2018-01-21-tim-hieu-oauth/</guid>
       <description>1. Oauthh 2 và các khái niệm 1.1 Oauth 2 là gì: Oauth 2 là bản nâng cấp của giao thức chứng thực Oauth 1.0
 1.2 Các Role (vai trò) trong mô hình oauth  resource owner là đối tượng có khả năng cấp quyền truy cập tới tài nguyên (resource) được bảo vệ Resource server là một server lưu trữ các tài nguyên, có khả năng xử lý các yêu cầu truy cập tới tài nguyên được bảo vệ.</description>
     </item>
     
     <item>
       <title>What is Rabbit MQ?</title>
-      <link>http://example.org/post/2018-01-21-what-is-rabbit-mq/</link>
+      <link>http://bluzky.github.io/post/2018-01-21-what-is-rabbit-mq/</link>
       <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
       <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
-      <guid>http://example.org/post/2018-01-21-what-is-rabbit-mq/</guid>
+      <guid>http://bluzky.github.io/post/2018-01-21-what-is-rabbit-mq/</guid>
       <description>1. What is Rabbit MQ?  Rabbit MQ is an server application, it is a message broker which implement AMQP (Advanced Message Queue Protocol). It works like a post service, which take the message from sender and dispatch that message to the receiver.
  Some terminologies:
  Producer: send message to queue Queue: hold all message added by producer and dispatch those message to a consumer Consumer: receive message from  2.</description>
