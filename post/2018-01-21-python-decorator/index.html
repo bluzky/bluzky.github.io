@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  
+  <title>Python decorator là gì? dùng khi nào</title>
+  <meta property="og:title" content="Python decorator là gì? dùng khi nào" />
+  <meta name="twitter:title" content="Python decorator là gì? dùng khi nào" />
+  <meta name="description" content="1. Decorator là gì?  Decorator là một mẫu thiết kế (Design pattern) thường được dùng để thay đổi hành vi, chức năng của hàm(function) hoặc lớp (class) mà không cần phải thay đổi code của hàm hoặc lớp. Tham khảo Python hỗ trợ cú pháp (syntax) cho Decorator từ version 2.4 Về cơ bản Decorator giống như một lớp vỏ bọc (wrapper), nó thay đổi hành vi(behavior) của code trước và sau khi gọi hàm chính (hàm được decorate).">
+  <meta property="og:description" content="1. Decorator là gì?  Decorator là một mẫu thiết kế (Design pattern) thường được dùng để thay đổi hành vi, chức năng của hàm(function) hoặc lớp (class) mà không cần phải thay đổi code của hàm hoặc lớp. Tham khảo Python hỗ trợ cú pháp (syntax) cho Decorator từ version 2.4 Về cơ bản Decorator giống như một lớp vỏ bọc (wrapper), nó thay đổi hành vi(behavior) của code trước và sau khi gọi hàm chính (hàm được decorate).">
+  <meta name="twitter:description" content="1. Decorator là gì?  Decorator là một mẫu thiết kế (Design pattern) thường được dùng để thay đổi hành vi, chức năng của hàm(function) hoặc lớp (class) mà không cần phải thay đổi code của hàm hoặc lớp. …">
+  <meta name="author" content="Dũng Nguyễn" />
+  <link href='http://example.org/img/favicon.ico' rel='icon' type='image/x-icon' />
+  <meta property="og:image" content="http://example.org/img/avatar-icon.png" />
+  <meta name="twitter:image" content="http://example.org/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="http://example.org/post/2018-01-21-python-decorator/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="The 54 tribes" />
+  
+  <meta name="generator" content="Hugo 0.32.4" />
+  <link rel="canonical" href="http://example.org/post/2018-01-21-python-decorator/" />
+  <link rel="alternate" href="http://example.org/index.xml" type="application/rss+xml" title="The 54 tribes">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="http://example.org/css/main.css" />
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:400,700" rel="stylesheet">
+
+  <link rel="stylesheet" href="http://example.org/css/codeblock.css" />
+  <link rel="stylesheet" href="http://example.org/css/prism.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div> 
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://example.org/">The 54 tribes</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">#tags</a>
+              <div class="navlinks-children">
+                
+                  <a href="/tags/python">#python</a>
+                
+                  <a href="/tags/elixir">#elixir</a>
+                
+                  <a href="/tags/javascript">#js</a>
+                
+                  <a href="/tags/golang">#go</a>
+                
+                  <a href="/tags/til">#til</a>
+                
+                  <a href="/tags">All tags</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="The 54 tribes" href="http://example.org/">
+            <img class="avatar-img" src="http://example.org/img/avatar-icon.png" alt="The 54 tribes" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h2 class="text-center">Python decorator là gì? dùng khi nào</h2>
+                
+                  <div class="text-center">
+                    <span class="post-meta">
+  
+  <i class="fa fa-clock-o"></i> 5 min (963 words)
+  
+  
+</span>
+
+                    
+                    <span class="post-meta" style="margin-left: 15px;"> <i class="fa fa-tag"></i> 
+                          
+                            #<a href="http://example.org//tags/python/">python</a>&nbsp;
+                          
+                            #<a href="http://example.org//tags/python-basic/">python-basic</a>&nbsp;
+                          
+                    </span> 
+                  </div>
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<h2 id="1-decorator-là-gì">1. Decorator là gì?</h2>
+
+<ul>
+<li>Decorator là một mẫu thiết kế (Design pattern) thường được dùng để thay đổi hành vi, chức năng của hàm(function) hoặc lớp (class) mà không cần phải thay đổi code của hàm hoặc lớp.
+<a href="https://sourcemaking.com/design_patterns/decorator">Tham khảo</a></li>
+<li>Python hỗ trợ cú pháp (syntax) cho Decorator từ version 2.4</li>
+<li>Về cơ bản Decorator giống như một lớp vỏ bọc (wrapper), nó thay đổi hành vi(behavior) của code trước và sau khi gọi hàm chính (hàm được decorate).</li>
+</ul>
+
+<h2 id="2-decorator-được-dùng-làm-gì">2. Decorator được dùng làm gì?</h2>
+
+<p>Tại sao chúng ta cần Decorator?</p>
+
+<ul>
+<li>Cho phép tái sử dụng code.</li>
+<li>Mở rộng các hàm, hoặc lớp mà không cần phải thay đổi code có sẵn &ndash;&gt; không cần test lại.</li>
+</ul>
+
+<p>Ví dụ trong chương trình của bạn bạn cần kiểm tra quyền (permission) của người dùng trước khi thực hiện hàm. Bạn có thể phải thêm code vào tất cả các hàm đã có để kiểm tra. Thay vào đó với decorator, bạn chỉ cần định nghĩa một decorator và khai báo nó trước hàm.</p>
+
+<h2 id="3-làm-sao-để-định-nghĩa-một-decorator">3. Làm sao để định nghĩa một decorator?</h2>
+
+<ul>
+<li>Decorator cũng là một hàm chỉ khác là hàm decorator nhận vào một hàm và kết quả trả về của nó là hàm sau khi được decorate.</li>
+<li>Như vậy để định nghĩa một decorator chỉ đơn giản là định nghĩa một hàm nhận vào một hàm khác và trả về một hàm mới có prototype tương đương với hàm nhận vào.</li>
+<li><strong>Ví dụ 1:</strong></li>
+</ul>
+
+<pre><code class="language-python">  def ten_decorator(f):
+      def wrapper(ten):
+          chuoi_moi = &quot;Ten tui la %s&quot; % ten
+          return f(chuoi_moi)
+      return wrapper
+
+  def xuat_ten( ten ):
+      print ten
+</code></pre>
+
+<ul>
+<li><strong>CHÚ Ý QUAN TRỌNG</strong>: hàm <code>wrapper</code> và hàm f phải có tham số phù hợp với nhau. Ví dụ như hàm f nhận vào chỉ 2 tham số thì hàm <code>decorator</code> không thể nhận vào 3 tham số hoặc 1 tham số.</li>
+</ul>
+
+<h2 id="4-sử-dụng-decorator-như-thế-nào">4. Sử dụng decorator như thế nào?</h2>
+
+<ul>
+<li>Sử dụng Decorator hết sức đơn giản. Sử dụng decorator trong ví dụ trên cho hàm <code>xuat_ten</code> như sau:</li>
+</ul>
+
+<pre><code class="language-python">@ten_decorator
+def xuat_ten(ten):
+	print ten
+</code></pre>
+
+<ul>
+<li>Dùng dấu @ để thông báo đó là một decorator. Một hàm có thể dùng nhiều decorator cùng lúc:</li>
+</ul>
+
+<pre><code class="language-python">@ten_decorator1
+@ten_decorator2
+@ten_decorator3
+def xuat_ten(ten):
+	print ten
+</code></pre>
+
+<h2 id="5-decorator-hoạt-động-như-thế-nào">5. Decorator hoạt động như thế nào?</h2>
+
+<p>Như trong ví dụ ở trên:</p>
+
+<ul>
+<li><code>ten_decorator</code> nhận vào hàm f, sau đó bọc hàm f trong hàm <code>wrapper</code> của nó và trả về hàm <code>wrapper</code>. Hàm <code>wrapper</code> có nhiệm vụ gắn thêm thông tin vào tên rồi mới gọi thực hiện hàm f với chuỗi mới.</li>
+<li>Việc sử dụng:</li>
+</ul>
+
+<pre><code class="language-python">  @ten_decorator
+  def xuat_ten(ten):
+      print ten
+  xuat_ten('coulson')
+</code></pre>
+
+<p>Tương đương với:</p>
+
+<pre><code class="language-python">  def xuat_ten(ten):
+  print ten
+  ham_xuat_ten_moi = ten_decorator(xuat_ten)
+  ham_xuat_ten_moi('coulson')
+</code></pre>
+
+<ul>
+<li>Rõ ràng với việc sử dụng cú pháp decorator thì code sẽ ngắn gọn và đơn giản hơn. Developer không phải gọi decorator mỗi lần sử dụng mà trình thông dịch sẽ làm việc đó.</li>
+</ul>
+
+<p><strong>Đối với hàm sử dụng nhiều decorator</strong></p>
+
+<p><strong>Ví dụ 2</strong></p>
+
+<pre><code class="language-python">@ten_decorator1
+@ten_decorator2
+@ten_decorator3
+def xuat_ten(ten):
+	print ten
+</code></pre>
+
+<ul>
+<li>Decorator nào càng ở trên, xa function thì sẽ bọc lớp ngoài Giống như khi bạn bọc trái xoài vào trong bị, rồi lại lấy cái bị khác để bọc bên ngoài nữa.</li>
+<li>Thứ tự thực thi code: - Code của decorator được thực thi ngay lúc file nguồn Python được load lên. Ngoại trừ code trong hàm wrapper của decorator trong cùng sẽ được thực thi lúc gọi hàm. - Decorator được gọi thực thi theo thứ tự từ trong (gần hàm nhất) ra ngoài.</li>
+</ul>
+
+<h2 id="6-truyền-tham-số-cho-decorator">6 Truyền tham số cho decorator</h2>
+
+<blockquote>
+<p>Ở trên, để cho đơn giản, và dễ hiểu thì decorator là một hàm có tham số là một hàm khác. Nhưng điều đó không bắt buộc, decorator cũng có thể là một hàm nhận vào tham số bất kỳ và trả về một hàm và hàm trả về này nhận vào tham số là một hàm khác.</p>
+</blockquote>
+
+<p><strong>Ví dụ 3</strong>: thêm chức danh vào chuỗi xuất ra mình có thể định nghĩa decorator như sau:</p>
+
+<pre><code class="language-python">def chuc_danh_decorator(ten_chuc_danh):
+    def ten_decorator(f):
+        def wrapper(ten):
+            chuoi_moi = &quot;Xin gioi thieu %s %s&quot; % (ten_chuc_danh, ten)
+            return f(chuoi_moi)
+        return wrapper
+    return ten_decorator
+
+@chuc_danh_decorator(&quot;Giao su&quot;)
+def gioi_thieu(ten):
+	print ten
+
+@chuc_danh_decorator(&quot;Tien si&quot;)
+def gioi_thieu_2(ten):
+	print ten
+
+gioi_thieu(&quot;Teo&quot;)
+gioi_thieu_2(&quot;Ti&quot;)
+
+&gt;&gt; Xin gioi thieu Giao su Teo
+&gt;&gt; Xin gioi thieu Tien si Ti
+</code></pre>
+
+<p><strong>Sự khác biệt:</strong></p>
+
+<ul>
+<li>Hàm decorator bây giờ không phải nhận vào tham số là một hàm mà có thể là tham số bất kỳ.</li>
+<li>Hàm trả về từ decorator nhận vào một hàm và chính nó mới trả về hàm wrapper</li>
+<li>Cách sử dụng decorator cũng khác một chút. Decorator được gọi chạy ( dùng dấu () ) và truyền vào tham số.</li>
+</ul>
+
+<p><strong>Nó chạy như thế nào:</strong></p>
+
+<ul>
+<li>Trong ví dụ 3 decorator được sử dụng <code>@chuc_danh_decorator(&quot;Giao su&quot;)</code>. Chú ý dấu (&hellip;), decorator được gọi thực thi và nó trả về hàm <code>ten_decorator</code> và chính nó sẽ bọc hàm được decorate.</li>
+<li>Hàm <code>chuc_danh_decorator</code> chỉ có tác dụng là dùng để truyền tham số vào decorator.</li>
+</ul>
+
+<h2 id="7-debug-hàm-decorator">7. Debug hàm decorator.</h2>
+
+<p>Khi sử dụng decorator thì hàm thực sự được gọi là hàm wrapper của trả về từ decorator. Nên các thuộc tính <code>__name__</code>, <code>__doc__</code>, <code>__module__</code> không còn là của hàm được decorate nữa mà là của wrapper</p>
+
+<p>Sử dụng lại code trong ví dụ 1:</p>
+
+<pre><code class="language-python">print xuat_ten.__name__
+
+&gt;&gt; wrapper
+</code></pre>
+
+<p><strong>Khắc phục:</strong> sử dụng thư viện <code>functools</code>
+<strong>Ví dụ 4:</strong></p>
+
+<pre><code class="language-python">from functools import wraps
+
+def ten_decorator(f):
+   @wraps(f)
+   def wrapper(ten):
+       chuoi_moi = &quot;Ten tui la %s&quot; % ten
+       return f(chuoi_moi)
+   return wrapper
+
+def xuat_ten( ten ):
+   print ten
+
+print xuat_ten.__name__
+
+&gt;&gt; xuat_ten
+</code></pre>
+
+<p>Decorator <code>wraps</code> sẽ lấy các thuộc tính <code>__name__</code>, <code>__doc__</code>, <code>__module__</code> của hàm được decorate và gán cho hàm wrapper nên khi lấy những thuộc tính này sẽ trả về thông tin đúng.</p>
+
+<h2 id="8-khi-nào-nên-sử-dụng-decorator">8. Khi nào nên sử dụng decorator?</h2>
+
+<p>Tham khảo trang <a href="https://wiki.python.org/moin/PythonDecoratorLibrary">Wiki</a> của Python</p>
+
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="http://example.org/post/2018-01-21-truyen-tham-so-dong-python/" data-toggle="tooltip" data-placement="top" title="Truyền tham số động trong python (*args | **kwargs)?">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="http://example.org/post/2018-01-21-python-xu-ly-mang-voi-filter-reduce/" data-toggle="tooltip" data-placement="top" title="Dùng MAP, FILTER và REDUCE để xử lý danh sách / list trong Python">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          <li>
+            <a href="mailto:bluesky.1289@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/username" title="Facebook">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+          </li>
+          <li>
+            <a href="https://plus.google.com/&#43;username" title="Google&#43;">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+          </li>
+          <li>
+            <a href="https://github.com/bluzky" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+          </li>
+          <li>
+            <a href="https://gitlab.com/username" title="GitLab">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-gitlab fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/username" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+          </li>
+          <li>
+            <a href="https://reddit.com/u/username" title="Reddit">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-reddit-alien fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+          </li>
+          <li>
+            <a href="https://linkedin.com/in/username" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+          </li> 
+          <li>
+            
+            <a href="http://example.org/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+           
+          <a href="yourwebsite.com">Dũng Nguyễn</a>   &nbsp;&bull;&nbsp; 2018  &nbsp;&bull;&nbsp;
+          <a href="http://example.org/%20">The 54 tribes</a> 
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.32.4</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> 
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="http://example.org/js/main.js"></script>
+
+<script src="http://example.org/js/prism.js"></script>
+
+<script>
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="http://example.org/js/load-photoswipe.js"></script>
+
+ 
+
+
+  </body>
+</html>
+

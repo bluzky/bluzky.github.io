@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tech on The 54 tribes</title>
+    <link>http://example.org/tags/tech/</link>
+    <description>Recent content in Tech on The 54 tribes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>bluesky.1289@gmail.com (Dũng Nguyễn)</managingEditor>
+    <webMaster>bluesky.1289@gmail.com (Dũng Nguyễn)</webMaster>
+    <lastBuildDate>Sun, 21 Jan 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://example.org/tags/tech/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>What is Rabbit MQ?</title>
+      <link>http://example.org/post/2018-01-21-what-is-rabbit-mq/</link>
+      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
+      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
+      <guid>http://example.org/post/2018-01-21-what-is-rabbit-mq/</guid>
+      <description>1. What is Rabbit MQ?  Rabbit MQ is an server application, it is a message broker which implement AMQP (Advanced Message Queue Protocol). It works like a post service, which take the message from sender and dispatch that message to the receiver.
+ Some terminologies:
+ Producer: send message to queue Queue: hold all message added by producer and dispatch those message to a consumer Consumer: receive message from  2.</description>
+    </item>
+    
+  </channel>
+</rss>
