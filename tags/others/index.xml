@@ -8,10 +8,19 @@
     <language>en-us</language>
     <managingEditor>bluesky.1289@gmail.com (Dũng Nguyễn)</managingEditor>
     <webMaster>bluesky.1289@gmail.com (Dũng Nguyễn)</webMaster>
-    <lastBuildDate>Sun, 21 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 09 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://bluzky.github.io/tags/others/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Thiết lập và quản lý mục tiêu theo phương pháp OKR</title>
+      <link>http://bluzky.github.io/post/2018-02-09-tim-hieu-okr/</link>
+      <pubDate>Fri, 09 Feb 2018 00:00:00 +0000</pubDate>
+      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
+      <guid>http://bluzky.github.io/post/2018-02-09-tim-hieu-okr/</guid>
+      <description>Vừa mới hoàn thành các chức năng cơ bản cho hệ thống OKR nội bộ công ty. Sau quá trình tìm hiểu các phương pháp áp dụng OKR vào trong một tổ chức, mình thấy nó rất là hay và đơn giản, dễ áp dụng. Ngoài việc áp dụng cho công ty, có thể áp dụng các nguyên tắc của OKR để thiết lập kế hoạch cá nhân.</description>
+    </item>
     
     <item>
       <title>Tìm hiểu về Oauth / Oauth hoạt động như thế nào?</title>

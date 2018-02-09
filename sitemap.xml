@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://bluzky.github.io/post/2018-02-09-tim-hieu-okr/</loc>
+    <lastmod>2018-02-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://bluzky.github.io/post/2018-01-21-python-xu-ly-mang-voi-filter-reduce/</loc>
     <lastmod>2018-01-21T00:00:00+00:00</lastmod>
   </url>
@@ -29,7 +34,7 @@
   
   <url>
     <loc>http://bluzky.github.io/</loc>
-    <lastmod>2018-01-21T00:00:00+00:00</lastmod>
+    <lastmod>2018-02-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -42,6 +47,12 @@
   </url>
   
   <url>
+    <loc>http://bluzky.github.io/tags/management/</loc>
+    <lastmod>2018-02-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://bluzky.github.io/tags/oauth2/</loc>
     <lastmod>2018-01-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -49,7 +60,7 @@
   
   <url>
     <loc>http://bluzky.github.io/tags/others/</loc>
-    <lastmod>2018-01-21T00:00:00+00:00</lastmod>
+    <lastmod>2018-02-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -60,7 +71,7 @@
   
   <url>
     <loc>http://bluzky.github.io/post/</loc>
-    <lastmod>2018-01-21T00:00:00+00:00</lastmod>
+    <lastmod>2018-02-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -84,7 +95,7 @@
   
   <url>
     <loc>http://bluzky.github.io/tags/</loc>
-    <lastmod>2018-01-21T00:00:00+00:00</lastmod>
+    <lastmod>2018-02-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
