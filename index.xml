@@ -8,10 +8,20 @@
     <language>en-us</language>
     <managingEditor>bluesky.1289@gmail.com (Dũng Nguyễn)</managingEditor>
     <webMaster>bluesky.1289@gmail.com (Dũng Nguyễn)</webMaster>
-    <lastBuildDate>Wed, 11 Apr 2018 20:53:06 +0700</lastBuildDate>
+    <lastBuildDate>Fri, 13 Apr 2018 22:32:22 +0700</lastBuildDate>
     
 	<atom:link href="http://bluzky.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Finite state machine trong lập trình</title>
+      <link>http://bluzky.github.io/post/2018-04-13-finite-state-machine-web-development/</link>
+      <pubDate>Fri, 13 Apr 2018 22:32:22 +0700</pubDate>
+      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
+      <guid>http://bluzky.github.io/post/2018-04-13-finite-state-machine-web-development/</guid>
+      <description>1. Tìm hiểu về FSM  FSM(Finite state machine) - Máy trạng thái hữu hạn là một mô hình toán học biểu diễn trạng thái của hệ, trong đó số trạng thái là hữu hạn. Từ mỗi trạng thái, máy có thể chuyển đổi qua 1 số trạng thái cố định khác, dựa trên các sự kiện, input.
+ Fsm được biểu diễn như 1 đồ thị có hướng.</description>
+    </item>
     
     <item>
       <title>Tìm hiểu về công nghệ Blockchain</title>

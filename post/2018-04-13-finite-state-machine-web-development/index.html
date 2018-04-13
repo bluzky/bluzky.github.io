@@ -5,15 +5,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   
-  <title>The 54 tribes</title>
-  <meta property="og:title" content="The 54 tribes" />
-  <meta name="twitter:title" content="The 54 tribes" />
-  <meta name="description" content=" Xin chào! Đây là trang blog của tui, một vài thứ tui tìm hiểu được, vài thứ tui học được và vài kinh nghiệm đau thương mà tui đã nếm trải. Chúc bạn tìm được điều gì đó hữu ích.
- ">
-  <meta property="og:description" content=" Xin chào! Đây là trang blog của tui, một vài thứ tui tìm hiểu được, vài thứ tui học được và vài kinh nghiệm đau thương mà tui đã nếm trải. Chúc bạn tìm được điều gì đó hữu ích.
- ">
-  <meta name="twitter:description" content=" Xin chào! Đây là trang blog của tui, một vài thứ tui tìm hiểu được, vài thứ tui học được và vài kinh nghiệm đau thương mà tui đã nếm trải. Chúc bạn tìm được điều gì đó hữu ích.
- ">
+  <title>Finite state machine trong lập trình</title>
+  <meta property="og:title" content="Finite state machine trong lập trình" />
+  <meta name="twitter:title" content="Finite state machine trong lập trình" />
+  <meta name="description" content="1. Tìm hiểu về FSM  FSM(Finite state machine) - Máy trạng thái hữu hạn là một mô hình toán học biểu diễn trạng thái của hệ, trong đó số trạng thái là hữu hạn. Từ mỗi trạng thái, máy có thể chuyển đổi qua 1 số trạng thái cố định khác, dựa trên các sự kiện, input.
+ Fsm được biểu diễn như 1 đồ thị có hướng.">
+  <meta property="og:description" content="1. Tìm hiểu về FSM  FSM(Finite state machine) - Máy trạng thái hữu hạn là một mô hình toán học biểu diễn trạng thái của hệ, trong đó số trạng thái là hữu hạn. Từ mỗi trạng thái, máy có thể chuyển đổi qua 1 số trạng thái cố định khác, dựa trên các sự kiện, input.
+ Fsm được biểu diễn như 1 đồ thị có hướng.">
+  <meta name="twitter:description" content="1. Tìm hiểu về FSM  FSM(Finite state machine) - Máy trạng thái hữu hạn là một mô hình toán học biểu diễn trạng thái của hệ, trong đó số trạng thái là hữu hạn. Từ mỗi trạng thái, máy có thể chuyển đổi …">
   <meta name="author" content="Dũng Nguyễn" />
   <link href='http://bluzky.github.io/img/favicon.ico' rel='icon' type='image/x-icon' />
   <meta property="og:image" content="http://bluzky.github.io/img/avatar-icon.png" />
@@ -21,12 +20,12 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@username" />
   <meta name="twitter:creator" content="@username" />
-  <meta property="og:url" content="http://bluzky.github.io/" />
+  <meta property="og:url" content="http://bluzky.github.io/post/2018-04-13-finite-state-machine-web-development/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="The 54 tribes" />
   
   <meta name="generator" content="Hugo 0.32.4" />
-  <link rel="canonical" href="http://bluzky.github.io/" />
+  <link rel="canonical" href="http://bluzky.github.io/post/2018-04-13-finite-state-machine-web-development/" />
   <link rel="alternate" href="http://bluzky.github.io/index.xml" type="application/rss+xml" title="The 54 tribes">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -178,8 +177,26 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="page-heading">
-              <h2 class="text-center">The 54 tribes</h2>
+            <div class="post-heading">
+              <h2 class="text-center">Finite state machine trong lập trình</h2>
+                
+                  <div class="text-center">
+                    <span class="post-meta">
+  
+  <i class="fa fa-clock-o"></i> 4 min (800 words)
+  
+  
+</span>
+
+                    
+                    <span class="post-meta" style="margin-left: 15px;"> <i class="fa fa-tag"></i> 
+                          
+                            #<a href="http://bluzky.github.io/tags/elixir/">elixir</a>&nbsp;
+                          
+                            #<a href="http://bluzky.github.io/tags/tech/">tech</a>&nbsp;
+                          
+                    </span> 
+                  </div>
                 
             </div>
           </div>
@@ -190,219 +207,216 @@
 
 
     
-<div role="main" class="container">
+<div class="container" role="main">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      
-      <div class="">
-        <blockquote>
-<p>Xin chào! Đây là trang blog của tui, một vài thứ tui tìm hiểu được, vài thứ tui học được và vài kinh nghiệm đau thương mà tui đã nếm trải. Chúc bạn tìm được điều gì đó hữu ích.</p>
+      <article role="main" class="blog-post">
+        
+
+<h2 id="1-tìm-hiểu-về-fsm">1. Tìm hiểu về FSM</h2>
+
+<blockquote>
+<p><a href="https://vi.wikipedia.org/wiki/M%C3%A1y_tr%E1%BA%A1ng_th%C3%A1i_h%E1%BB%AFu_h%E1%BA%A1n">FSM(Finite state machine)</a> - Máy trạng thái hữu hạn là một mô hình toán học biểu diễn trạng thái của hệ, trong đó số trạng thái là hữu hạn. Từ mỗi trạng thái, máy có thể chuyển đổi qua 1 số trạng thái cố định khác, dựa trên các sự kiện, input.</p>
 </blockquote>
 
-      </div>
-      
+<p>Fsm được biểu diễn như 1 đồ thị có hướng.</p>
 
-      <div class="posts-list">
-         
-        <article class="post-preview">
-          <a href="http://bluzky.github.io/post/2018-04-13-finite-state-machine-web-development/">
-            <h3 class="post-title">Finite state machine trong lập trình</h3> 
-          </a>
+<p><strong>Ví dụ</strong>:</p>
 
-          <span class="post-meta">
-  
-  <i class="fa fa-clock-o"></i> 4 min (800 words)
-  
-  
-</span>
+<p>Máy trạng thái thể hiện trạng thái của 1 bài báo trên trang tin tức</p>
 
-          
+<p><img src="/img/fsm_post.png" alt="fsm" /></p>
 
-          
-           in <span class="post-meta">
-                
-                  #<a href="http://bluzky.github.io/tags/elixir/">elixir</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/tech/">tech</a>&nbsp;
-                
-          </span> 
-        </article>
-        
-        <article class="post-preview">
-          <a href="http://bluzky.github.io/post/2018-04-11-blockchain/">
-            <h3 class="post-title">Tìm hiểu về công nghệ Blockchain</h3> 
-          </a>
+<ul>
+<li><code>draft</code>, <code>in review</code> <code>published</code> là các trạng thái của bài viết</li>
+<li><code>review</code>, <code>approve</code>, <code>reject</code>, <code>unpublish</code> là các sự kiện( event ). Các sự kiện này phát sinh khi nhận các input như click lên button, … Các sự kiện này gây ra việc chuyển trạng thái (ví dụ từ Draft -&gt; In review), gọi là quá trình chuyển đổi (<code>transition</code>)</li>
+</ul>
 
-          <span class="post-meta">
-  
-  <i class="fa fa-clock-o"></i> 13 min (2635 words)
-  
-  
-</span>
+<p><strong>Đặc điểm</strong></p>
 
-          
+<p>Trong mô hình sử dụng <code>DFS</code> máy  trạng thái đơn định.</p>
 
-          
-           in <span class="post-meta">
-                
-                  #<a href="http://bluzky.github.io/tags/others/">others</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/tech/">tech</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/blockchain/">blockchain</a>&nbsp;
-                
-          </span> 
-        </article>
-        
-        <article class="post-preview">
-          <a href="http://bluzky.github.io/post/2018-02-09-tim-hieu-okr/">
-            <h3 class="post-title">Thiết lập và quản lý mục tiêu theo phương pháp OKR</h3> 
-          </a>
+<ul>
+<li>Tại mỗi thời điểm  máy chỉ ở 1 trạng thái duy nhất</li>
+<li>Tại mỗi trạng thái, chỉ có thể chuyển qua những trạng thái được cho phép</li>
+<li>Từ trạng thái hiện tại, có thể biết được những trạng thái kế tiếp mà máy có thể chuyển qua</li>
+</ul>
 
-          <span class="post-meta">
-  
-  <i class="fa fa-clock-o"></i> 6 min (1214 words)
-  
-  
-</span>
+<h2 id="2-ứng-dụng-của-fsm-trong-lập-trình">2. Ứng dụng của FSM trong lập trình</h2>
 
-          
+<ul>
+<li><p>FSM mô tả các trạng thái, sự kiện và quá trình chuyển đổi giữa các trạng thái, nên FSM có thể được sử dụng để quản lý trạng thái của object, hoặc workflow.</p></li>
 
-          
-           in <span class="post-meta">
-                
-                  #<a href="http://bluzky.github.io/tags/others/">others</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/management/">management</a>&nbsp;
-                
-          </span> 
-        </article>
-        
-        <article class="post-preview">
-          <a href="http://bluzky.github.io/post/2018-01-21-python-xu-ly-mang-voi-filter-reduce/">
-            <h3 class="post-title">Dùng MAP, FILTER và REDUCE để xử lý danh sách / list trong Python</h3> 
-          </a>
+<li><p>Ví dụ: Quản lý trạng thái đơn hàng, quản lý trạng thái của ticket, quản lý trạng thái của nhân vật trong game, &hellip;</p></li>
+</ul>
 
-          <span class="post-meta">
-  
-  <i class="fa fa-clock-o"></i> 3 min (526 words)
-  
-  
-</span>
+<p>​</p>
 
-          
+<p>Trong ví dụ trên, mỗi bài viết, chỉ có thể có một trạng thái tại một thời điểm, và từ 1 trạng thái chỉ có thể chuyển đổi qua một số trạng thái được quy định trước:</p>
 
-          
-           in <span class="post-meta">
-                
-                  #<a href="http://bluzky.github.io/tags/python/">python</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/python-basic/">python-basic</a>&nbsp;
-                
-          </span> 
-        </article>
-        
-        <article class="post-preview">
-          <a href="http://bluzky.github.io/post/2018-01-21-python-decorator/">
-            <h3 class="post-title">Python decorator là gì? dùng khi nào</h3> 
-          </a>
+<ul>
+<li>Từ <code>draft</code> chỉ có thể chuyển qua <code>in review</code></li>
+<li>Từ <code>draft</code> không thể chuyển qua <code>published</code></li>
+</ul>
 
-          <span class="post-meta">
-  
-  <i class="fa fa-clock-o"></i> 5 min (963 words)
-  
-  
-</span>
+<h3 id="2-1-khi-không-dùng-fsm">2.1 Khi không dùng FSM</h3>
 
-          
+<p>Khi không sử dụng FSM thì code sẽ phải dùng tới rất nhiều điều kiện <code>if … else…</code> hoặc <code>case</code> (<code>switch ... case …</code> trong các ngôn ngữ khác)</p>
 
-          
-           in <span class="post-meta">
-                
-                  #<a href="http://bluzky.github.io/tags/python/">python</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/python-basic/">python-basic</a>&nbsp;
-                
-          </span> 
-        </article>
-        
-        <article class="post-preview">
-          <a href="http://bluzky.github.io/post/2018-01-21-truyen-tham-so-dong-python/">
-            <h3 class="post-title">Truyền tham số động trong python (*args | **kwargs)?</h3> 
-          </a>
+<pre><code class="language-elixir">defmodule Post do
+	defstruct content: &quot;sample content&quot;, status: &quot;draft&quot;
+	
+	def all_status, do: [&quot;draft&quot;, &quot;in_review&quot;, &quot;published&quot;]
+    
+    def update_status(%{status: &quot;draft&quot;} = post, status) do
+    	if status == &quot;in_review&quot; do
+        	IO.put(&quot;Update post status to in_review&quot;)
+        	Map.put(post, :status, &quot;in_review&quot;)
+        else
+        	IO.put(&quot;Cannot update to #{status} from draft&quot;)
+        	post
+        end
+    end
+    
+    def update_status(%{status: &quot;in_review&quot;} = post, status) do
+    	case status do
+			&quot;draft&quot; -&gt;
+	    		IO.put(&quot;Reject the post&quot;)
+    	    	Map.put(post, :status, &quot;draft&quot;)
+    	    
+    	    &quot;published&quot;
+    	   		IO.put(&quot;Publish the post&quot;)
+    	    	Map.put(post, :status, &quot;published&quot;)
+        	true -&gt;
+        		IO.put(&quot;Cannot update to #{status} from in_review&quot;)
+        		post
+        end
+    end
+    
+    def update_status(%{status: &quot;published&quot;} = post, status) do
+    	if status == &quot;draft&quot; do
+        	IO.put(&quot;Unpublish the post&quot;)
+        	Map.put(post, :status, &quot;draft&quot;)
+        else
+        	IO.put(&quot;Cannot update to #{status} from published&quot;)
+        	post
+        end
+    end
+end
+</code></pre>
 
-          <span class="post-meta">
-  
-  <i class="fa fa-clock-o"></i> 2 min (374 words)
-  
-  
-</span>
+<p>**Vấn đề: **</p>
 
-          
+<ul>
+<li><p>Code dài, khó mở rộng, dễ xảy ra lỗi</p></li>
 
-          
-           in <span class="post-meta">
-                
-                  #<a href="http://bluzky.github.io/tags/python/">python</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/python-basic/">python-basic</a>&nbsp;
-                
-          </span> 
-        </article>
-        
-        <article class="post-preview">
-          <a href="http://bluzky.github.io/post/2018-01-21-tim-hieu-oauth/">
-            <h3 class="post-title">Tìm hiểu về Oauth / Oauth hoạt động như thế nào?</h3> 
-          </a>
+<li><p>Nếu thêm nhiều trạng thái khác cho post, phải update toàn bộ các hàm <code>update_status</code></p></li>
 
-          <span class="post-meta">
-  
-  <i class="fa fa-clock-o"></i> 33 min (6915 words)
-  
-  
-</span>
+<li><p>Nếu có nhiều cách chuyển đổi giữa các trạng thái, phải update toàn bộ</p></li>
 
-          
+<li><p>Làm sao biết từ trạng thái hiện tại có thể chuyển qua trạng thái nào khác?</p></li>
 
-          
-           in <span class="post-meta">
-                
-                  #<a href="http://bluzky.github.io/tags/others/">others</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/protocol/">protocol</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/oauth2/">oauth2</a>&nbsp;
-                
-          </span> 
-        </article>
-        
-        <article class="post-preview">
-          <a href="http://bluzky.github.io/post/2018-01-21-what-is-rabbit-mq/">
-            <h3 class="post-title">What is Rabbit MQ?</h3> 
-          </a>
+<li><p>Làm sao đảm bảo luồng dữ liệu/ logic chạy đúng</p></li>
+</ul>
 
-          <span class="post-meta">
-  
-  <i class="fa fa-clock-o"></i> 4 min (774 words)
-  
-  
-</span>
+<h3 id="2-2-sử-dụng-fsm">2.2 Sử dụng FSM</h3>
 
-          
+<p>Trong ví dụ này sử dụng thư viện <a href="https://github.com/bluzky/as_fsm">as_fsm</a> hỗ trợ việc implement máy trạng thái trên ngôn ngữ elixir</p>
 
-          
-           in <span class="post-meta">
-                
-                  #<a href="http://bluzky.github.io/tags/others/">others</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/tech/">tech</a>&nbsp;
-                
-          </span> 
-        </article>
-        
-      </div>
+<pre><code class="language-elixir">defmodule Post do
+  # define state, event and transition 
+  use AsFsm,
+    states: [:draft, :in_review, :published],
+    events: [
+      review: [
+        name:     &quot;In review&quot;,
+        from:     [:draft],
+        to:       :in_review,
+        on_transition: fn(post, params) -&gt; 
+        	# thực ra việc gán trạng thái mới được tự động thực hiện bởi thư viện
+        	# code này chỉ để mục đích cho dễ hiểu
+        	post = Map.put(post, :status, :in_review)
+        	{:ok, post}
+        end
+      ], 
+      approve: [
+        name:     &quot;Approve&quot;,
+        from:     [:in_review],
+        to:       :published
+        on_transition: fn(post, params) -&gt; 
+        	post = Map.put(post, :status, :published)
+        	{:ok, post}
+        end
+      ], 
+      reject: [
+        name:     &quot;Reject&quot;,
+        from:     [:in_review],
+        to:       :draft,
+        on_transition: fn(post, params) -&gt; 
+        	post = Map.put(post, :status, :draft)
+        	{:ok, post}
+        end
+      ],
+      unpublish: [
+        name:     &quot;Unpublish&quot;,
+        from:     [:published],
+        to:       :draft,
+        on_transition: fn(post, params) -&gt; 
+        	post = Map.put(post, :status, :draft)
+        	{:ok, post}
+        end
+      ]
+    ]
+    
+    defstruct content: &quot;sample content&quot;, status: &quot;draft&quot;
+end
+
+# gọi thực hiện 
+iex &gt; post = %Post{content: &quot;test content&quot;, status: &quot;draft&quot;}
+iex &gt; post = Post.review(post)
+# hoac
+iex &gt; post = Post.trigger(post, :review)
+</code></pre>
+
+<ul>
+<li>Việc implement FSM cũng không quá phức tạp nhưng có thể tái sử dụng được nhiều lần</li>
+<li>Việc thêm mới các trạng thái (state) hoặc các bước chuyển tiếp (transition) không cần thay đổi quá nhiều code</li>
+<li>các luồng xử lý, event được thể hiện rõ trên cấu hình trạng thái</li>
+</ul>
+
+<h2 id="3-tham-khảo">3. Tham khảo</h2>
+
+<ul>
+<li><p>Học thêm về <a href="https://brilliant.org/wiki/finite-state-machines/">FSM trên Brilliant</a></p></li>
+
+<li><p><a href="https://blog.4xxi.com/finite-state-machine-in-web-development-dc1dc6f67d7c">Finite-state machine in web-development</a></p></li>
+
+<li><p>Thư viện FSM cho ecto model <a href="https://github.com/asiniy/ecto_state_machine">ecto_state_machine</a></p></li>
+
+<li><p>Slide <a href="https://www.slideshare.net/EuropeanSharePointCommunity/th11-fitzmauricestate-machine-workflows?next_slideshow=1">State Machine Workflow: Esoteric Techniques &amp; Patterns</a></p></li>
+</ul>
+
+<p>​</p>
+
+      </article>
 
       
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="http://bluzky.github.io/post/2018-04-11-blockchain/" data-toggle="tooltip" data-placement="top" title="Tìm hiểu về công nghệ Blockchain">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
     </div>
   </div>
 </div>
