@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Terminal on The 54 tribes</title>
+    <link>http://bluzky.github.io/tags/terminal/</link>
+    <description>Recent content in Terminal on The 54 tribes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>bluesky.1289@gmail.com (Dũng Nguyễn)</managingEditor>
+    <webMaster>bluesky.1289@gmail.com (Dũng Nguyễn)</webMaster>
+    <lastBuildDate>Tue, 24 Apr 2018 21:43:25 +0700</lastBuildDate>
+    
+	<atom:link href="http://bluzky.github.io/tags/terminal/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Terminal tips - Một số command hay dùng</title>
+      <link>http://bluzky.github.io/post/2018-04-24-terminal-tips/</link>
+      <pubDate>Tue, 24 Apr 2018 21:43:25 +0700</pubDate>
+      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
+      <guid>http://bluzky.github.io/post/2018-04-24-terminal-tips/</guid>
+      <description>Khi chuyển qua dùng các hệ điều hành Unix và Mac, việc sử dụng các command line là một phần không thể thiếu, đặc biệt là các công việc liên quan tới Web dev và devops.
+Tuy nhiên phần lớn là đụng tới đâu cần thì mới search, hoặc là do xài quen rồi nên cũng lười tìm cách làm khác. Chỉ cần dành 1 phút để đọc qua bài viết này, các bạn sẽ thực sự bất ngờ vì có những thứ cool đến không ngờ.</description>
+    </item>
+    
+  </channel>
+</rss>
