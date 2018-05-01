@@ -8,10 +8,20 @@
     <language>en-us</language>
     <managingEditor>bluesky.1289@gmail.com (Dũng Nguyễn)</managingEditor>
     <webMaster>bluesky.1289@gmail.com (Dũng Nguyễn)</webMaster>
-    <lastBuildDate>Tue, 24 Apr 2018 21:43:25 +0700</lastBuildDate>
+    <lastBuildDate>Tue, 01 May 2018 23:05:10 +0700</lastBuildDate>
     
 	<atom:link href="http://bluzky.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Memcache là gì?</title>
+      <link>http://bluzky.github.io/post/2018-05-01-what-is-mem-cache/</link>
+      <pubDate>Tue, 01 May 2018 23:05:10 +0700</pubDate>
+      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
+      <guid>http://bluzky.github.io/post/2018-05-01-what-is-mem-cache/</guid>
+      <description>1. Memcache  Memcache là một cơ sở dữ liệu dạng key-value, các dữ liệu đuợc ghi nhớ trên RAM giúp tối ưu thời gian truy xuất.
+ 2. Đặc điểm  Dữ liệu lưu trữ dạng key-value Value là dữ liệu dạng string Kích thuớc của Value giới hạn là 1MB Dữ liệu sẽ bị mất khi tắt máy/ tắt memcache Truy xuất dữ liệu nhanh  3. Ứng dụng Memcache thường đuợc dùng đễ cache dữ liệu trên các web server giúp giảm thời gian xử lý các request giống nhau, thay vào đó chỉ cần đọc dữ liệu từ bộ nhớ và trả về ngay lập tức.</description>
+    </item>
     
     <item>
       <title>Terminal tips - Một số command hay dùng</title>
