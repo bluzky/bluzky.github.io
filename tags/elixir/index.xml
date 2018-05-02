@@ -8,10 +8,23 @@
     <language>en-us</language>
     <managingEditor>bluesky.1289@gmail.com (Dũng Nguyễn)</managingEditor>
     <webMaster>bluesky.1289@gmail.com (Dũng Nguyễn)</webMaster>
-    <lastBuildDate>Fri, 13 Apr 2018 22:32:22 +0700</lastBuildDate>
+    <lastBuildDate>Wed, 02 May 2018 22:42:14 +0700</lastBuildDate>
     
 	<atom:link href="http://bluzky.github.io/tags/elixir/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Chạy server Phoenix với SSL trên localhost</title>
+      <link>http://bluzky.github.io/post/2018-05-02-phoenix-local-ssl/</link>
+      <pubDate>Wed, 02 May 2018 22:42:14 +0700</pubDate>
+      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
+      <guid>http://bluzky.github.io/post/2018-05-02-phoenix-local-ssl/</guid>
+      <description>Từ tháng 04/2018 tất cả các app mới tạo trên Facebook chỉ chấp nhận callback url có sử dụng SSL. Đây là những bước đơn giản để có thể sử dụng giao thức https trên localhost đối với Phoenix
+ 1. Tạo chứng chỉ
+Run command
+openssl genrsa 1024 &amp;gt; app.key &amp;amp;&amp;amp; openssl req -new -x509 -nodes -sha1 -days 365 -key ~/app.key &amp;gt; ~/app.cert  2. Copy file
+app.key and app.</description>
+    </item>
     
     <item>
       <title>Finite state machine trong lập trình</title>

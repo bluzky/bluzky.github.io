@@ -5,15 +5,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   
-  <title>The 54 tribes</title>
-  <meta property="og:title" content="The 54 tribes" />
-  <meta name="twitter:title" content="The 54 tribes" />
-  <meta name="description" content=" Xin chào! Đây là trang blog của tui, một vài thứ tui tìm hiểu được, vài thứ tui học được và vài kinh nghiệm đau thương mà tui đã nếm trải. Chúc bạn tìm được điều gì đó hữu ích.
- ">
-  <meta property="og:description" content=" Xin chào! Đây là trang blog của tui, một vài thứ tui tìm hiểu được, vài thứ tui học được và vài kinh nghiệm đau thương mà tui đã nếm trải. Chúc bạn tìm được điều gì đó hữu ích.
- ">
-  <meta name="twitter:description" content=" Xin chào! Đây là trang blog của tui, một vài thứ tui tìm hiểu được, vài thứ tui học được và vài kinh nghiệm đau thương mà tui đã nếm trải. Chúc bạn tìm được điều gì đó hữu ích.
- ">
+  <title>Chạy server Phoenix với SSL trên localhost</title>
+  <meta property="og:title" content="Chạy server Phoenix với SSL trên localhost" />
+  <meta name="twitter:title" content="Chạy server Phoenix với SSL trên localhost" />
+  <meta name="description" content="Từ tháng 04/2018 tất cả các app mới tạo trên Facebook chỉ chấp nhận callback url có sử dụng SSL. Đây là những bước đơn giản để có thể sử dụng giao thức https trên localhost đối với Phoenix
+ 1. Tạo chứng chỉ
+Run command
+openssl genrsa 1024 &gt; app.key &amp;&amp; openssl req -new -x509 -nodes -sha1 -days 365 -key ~/app.key &gt; ~/app.cert  2. Copy file
+app.key and app.">
+  <meta property="og:description" content="Từ tháng 04/2018 tất cả các app mới tạo trên Facebook chỉ chấp nhận callback url có sử dụng SSL. Đây là những bước đơn giản để có thể sử dụng giao thức https trên localhost đối với Phoenix
+ 1. Tạo chứng chỉ
+Run command
+openssl genrsa 1024 &gt; app.key &amp;&amp; openssl req -new -x509 -nodes -sha1 -days 365 -key ~/app.key &gt; ~/app.cert  2. Copy file
+app.key and app.">
+  <meta name="twitter:description" content="Từ tháng 04/2018 tất cả các app mới tạo trên Facebook chỉ chấp nhận callback url có sử dụng SSL. Đây là những bước đơn giản để có thể sử dụng giao thức https trên localhost đối với Phoenix
+ 1. Tạo …">
   <meta name="author" content="Dũng Nguyễn" />
   <link href='http://bluzky.github.io/img/favicon.ico' rel='icon' type='image/x-icon' />
   <meta property="og:image" content="http://bluzky.github.io/img/avatar-icon.png" />
@@ -21,12 +27,12 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@username" />
   <meta name="twitter:creator" content="@username" />
-  <meta property="og:url" content="http://bluzky.github.io/" />
+  <meta property="og:url" content="http://bluzky.github.io/post/2018-05-02-phoenix-local-ssl/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="The 54 tribes" />
   
   <meta name="generator" content="Hugo 0.39" />
-  <link rel="canonical" href="http://bluzky.github.io/" />
+  <link rel="canonical" href="http://bluzky.github.io/post/2018-05-02-phoenix-local-ssl/" />
   <link rel="alternate" href="http://bluzky.github.io/index.xml" type="application/rss+xml" title="The 54 tribes">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -178,8 +184,26 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="page-heading">
-              <h2 class="text-center">The 54 tribes</h2>
+            <div class="post-heading">
+              <h2 class="text-center">Chạy server Phoenix với SSL trên localhost</h2>
+                
+                  <div class="text-center">
+                    <span class="post-meta">
+  
+  <i class="fa fa-clock-o"></i> 1 min (98 words)
+  
+  
+</span>
+
+                    
+                    <span class="post-meta" style="margin-left: 15px;"> <i class="fa fa-tag"></i> 
+                          
+                            #<a href="http://bluzky.github.io/tags/elixir/">elixir</a>&nbsp;
+                          
+                            #<a href="http://bluzky.github.io/tags/til/">til</a>&nbsp;
+                          
+                    </span> 
+                  </div>
                 
             </div>
           </div>
@@ -190,277 +214,54 @@
 
 
     
-<div role="main" class="container">
+<div class="container" role="main">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      
-      <div class="">
+      <article role="main" class="blog-post">
         <blockquote>
-<p>Xin chào! Đây là trang blog của tui, một vài thứ tui tìm hiểu được, vài thứ tui học được và vài kinh nghiệm đau thương mà tui đã nếm trải. Chúc bạn tìm được điều gì đó hữu ích.</p>
+<p>Từ tháng 04/2018 tất cả các app mới tạo trên Facebook chỉ chấp nhận callback url có sử dụng SSL.
+Đây là những bước đơn giản để có thể sử dụng giao thức <code>https</code> trên localhost đối với <code>Phoenix</code></p>
 </blockquote>
 
-      </div>
-      
+<p><strong>1. Tạo chứng chỉ</strong><br />
+Run command</p>
 
-      <div class="posts-list">
-         
-        <article class="post-preview">
-          <a href="http://bluzky.github.io/post/2018-05-02-phoenix-local-ssl/">
-            <h3 class="post-title">Chạy server Phoenix với SSL trên localhost</h3> 
-          </a>
+<pre><code class="language-shell">openssl genrsa 1024 &gt; app.key &amp;&amp;
+openssl req -new -x509 -nodes -sha1 -days 365 -key ~/app.key &gt; ~/app.cert
+</code></pre>
 
-          <span class="post-meta">
-  
-  <i class="fa fa-clock-o"></i> 1 min (98 words)
-  
-  
-</span>
+<p><strong>2. Copy file</strong><br />
+<code>app.key</code> and <code>app.cert</code> file to <code>priv/keys</code></p>
 
-          
+<p><strong>3. Chỉnh sửa cấu hình</strong><br />
+file <code>dev.exs</code></p>
 
-          
-           in <span class="post-meta">
-                
-                  #<a href="http://bluzky.github.io/tags/elixir/">elixir</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/til/">til</a>&nbsp;
-                
-          </span> 
-        </article>
-        
-        <article class="post-preview">
-          <a href="http://bluzky.github.io/post/2018-05-01-what-is-mem-cache/">
-            <h3 class="post-title">Memcache là gì?</h3> 
-          </a>
+<pre><code class="language-elixir">config :my_app, MyAppWeb.Endpoint,
+  http: [port: 4000],
+  https: [port: 4443, keyfile: &quot;priv/keys/app.key&quot;, certfile: &quot;priv/keys/app.cert&quot;],
+</code></pre>
 
-          <span class="post-meta">
-  
-  <i class="fa fa-clock-o"></i> 2 min (235 words)
-  
-  
-</span>
+<p>Access <a href="https://localhost:4443">https://localhost:4443</a> to use SSL connection</p>
 
-          
-
-          
-           in <span class="post-meta">
-                
-                  #<a href="http://bluzky.github.io/tags/tech/">tech</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/til/">til</a>&nbsp;
-                
-          </span> 
-        </article>
-        
-        <article class="post-preview">
-          <a href="http://bluzky.github.io/post/2018-04-24-terminal-tips/">
-            <h3 class="post-title">Terminal tips - Một số command hay dùng</h3> 
-          </a>
-
-          <span class="post-meta">
-  
-  <i class="fa fa-clock-o"></i> 1 min (89 words)
-  
-  
-</span>
-
-          
-
-          
-           in <span class="post-meta">
-                
-                  #<a href="http://bluzky.github.io/tags/tips/">tips</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/til/">til</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/terminal/">terminal</a>&nbsp;
-                
-          </span> 
-        </article>
-        
-        <article class="post-preview">
-          <a href="http://bluzky.github.io/post/2018-04-13-finite-state-machine-web-development/">
-            <h3 class="post-title">Finite state machine trong lập trình</h3> 
-          </a>
-
-          <span class="post-meta">
-  
-  <i class="fa fa-clock-o"></i> 4 min (800 words)
-  
-  
-</span>
-
-          
-
-          
-           in <span class="post-meta">
-                
-                  #<a href="http://bluzky.github.io/tags/elixir/">elixir</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/tech/">tech</a>&nbsp;
-                
-          </span> 
-        </article>
-        
-        <article class="post-preview">
-          <a href="http://bluzky.github.io/post/2018-04-11-blockchain/">
-            <h3 class="post-title">Tìm hiểu về công nghệ Blockchain</h3> 
-          </a>
-
-          <span class="post-meta">
-  
-  <i class="fa fa-clock-o"></i> 13 min (2635 words)
-  
-  
-</span>
-
-          
-
-          
-           in <span class="post-meta">
-                
-                  #<a href="http://bluzky.github.io/tags/others/">others</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/tech/">tech</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/blockchain/">blockchain</a>&nbsp;
-                
-          </span> 
-        </article>
-        
-        <article class="post-preview">
-          <a href="http://bluzky.github.io/post/2018-02-09-tim-hieu-okr/">
-            <h3 class="post-title">Thiết lập và quản lý mục tiêu theo phương pháp OKR</h3> 
-          </a>
-
-          <span class="post-meta">
-  
-  <i class="fa fa-clock-o"></i> 6 min (1214 words)
-  
-  
-</span>
-
-          
-
-          
-           in <span class="post-meta">
-                
-                  #<a href="http://bluzky.github.io/tags/others/">others</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/management/">management</a>&nbsp;
-                
-          </span> 
-        </article>
-        
-        <article class="post-preview">
-          <a href="http://bluzky.github.io/post/2018-01-21-python-xu-ly-mang-voi-filter-reduce/">
-            <h3 class="post-title">Dùng MAP, FILTER và REDUCE để xử lý danh sách / list trong Python</h3> 
-          </a>
-
-          <span class="post-meta">
-  
-  <i class="fa fa-clock-o"></i> 3 min (526 words)
-  
-  
-</span>
-
-          
-
-          
-           in <span class="post-meta">
-                
-                  #<a href="http://bluzky.github.io/tags/python/">python</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/python-basic/">python-basic</a>&nbsp;
-                
-          </span> 
-        </article>
-        
-        <article class="post-preview">
-          <a href="http://bluzky.github.io/post/2018-01-21-python-decorator/">
-            <h3 class="post-title">Python decorator là gì? dùng khi nào</h3> 
-          </a>
-
-          <span class="post-meta">
-  
-  <i class="fa fa-clock-o"></i> 5 min (963 words)
-  
-  
-</span>
-
-          
-
-          
-           in <span class="post-meta">
-                
-                  #<a href="http://bluzky.github.io/tags/python/">python</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/python-basic/">python-basic</a>&nbsp;
-                
-          </span> 
-        </article>
-        
-        <article class="post-preview">
-          <a href="http://bluzky.github.io/post/2018-01-21-truyen-tham-so-dong-python/">
-            <h3 class="post-title">Truyền tham số động trong python (*args | **kwargs)?</h3> 
-          </a>
-
-          <span class="post-meta">
-  
-  <i class="fa fa-clock-o"></i> 2 min (374 words)
-  
-  
-</span>
-
-          
-
-          
-           in <span class="post-meta">
-                
-                  #<a href="http://bluzky.github.io/tags/python/">python</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/python-basic/">python-basic</a>&nbsp;
-                
-          </span> 
-        </article>
-        
-        <article class="post-preview">
-          <a href="http://bluzky.github.io/post/2018-01-21-tim-hieu-oauth/">
-            <h3 class="post-title">Tìm hiểu về Oauth / Oauth hoạt động như thế nào?</h3> 
-          </a>
-
-          <span class="post-meta">
-  
-  <i class="fa fa-clock-o"></i> 33 min (6915 words)
-  
-  
-</span>
-
-          
-
-          
-           in <span class="post-meta">
-                
-                  #<a href="http://bluzky.github.io/tags/others/">others</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/protocol/">protocol</a>&nbsp;
-                
-                  #<a href="http://bluzky.github.io/tags/oauth2/">oauth2</a>&nbsp;
-                
-          </span> 
-        </article>
-        
-      </div>
+      </article>
 
       
-      <ul class="pager main-pager">
-         
-        <li class="next">
-          <a href="/page/2/">Older Posts &rarr;</a>
-        </li>
-        
-      </ul>
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="http://bluzky.github.io/post/2018-05-01-what-is-mem-cache/" data-toggle="tooltip" data-placement="top" title="Memcache là gì?">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
       
+
+
+      
+        
+        
+      
+
     </div>
   </div>
 </div>
