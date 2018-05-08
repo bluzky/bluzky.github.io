@@ -506,6 +506,9 @@ footer .theme-by {
 .blog-post ul,
 .blog-post pre[class*='language-'] {
     margin-bottom: 34px;
+}
+
+.blog-post pre[class*='language-'] {
     word-break: break-all;
     white-space: pre-wrap;
 }
