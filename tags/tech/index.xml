@@ -8,10 +8,20 @@
     <language>en-us</language>
     <managingEditor>bluesky.1289@gmail.com (Dũng Nguyễn)</managingEditor>
     <webMaster>bluesky.1289@gmail.com (Dũng Nguyễn)</webMaster>
-    <lastBuildDate>Tue, 01 May 2018 23:05:10 +0700</lastBuildDate>
+    <lastBuildDate>Tue, 08 May 2018 20:56:31 +0700</lastBuildDate>
     
 	<atom:link href="http://bluzky.github.io/tags/tech/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Test Facebook bot trên localhost với ngrok</title>
+      <link>http://bluzky.github.io/post/2018-05-08-test-fb-bot-localhost/</link>
+      <pubDate>Tue, 08 May 2018 20:56:31 +0700</pubDate>
+      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
+      <guid>http://bluzky.github.io/post/2018-05-08-test-fb-bot-localhost/</guid>
+      <description>Trong quá trình tìm hiểu về lập trình chat bot sử dụng các API của Facebook Messenger thì việt test chat bot trên localhost là một trở ngại.
+Khi tạo một subscription cho app chat bot, Facebook sẽ gửi một request đến server mà chat bot đang chạy để xác nhận có đúng là chat bot của bạn không. Cũng như sau đó, tất cả những tin nhắn của nguời dùng sẽ đuợc gửi tới chat bot thông qua callback url.</description>
+    </item>
     
     <item>
       <title>Memcache là gì?</title>
