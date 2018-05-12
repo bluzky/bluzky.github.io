@@ -5,15 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   
-  <title>The 54 tribes</title>
-  <meta property="og:title" content="The 54 tribes" />
-  <meta name="twitter:title" content="The 54 tribes" />
-  <meta name="description" content=" Xin chào! Đây là trang blog của tui, một vài thứ tui tìm hiểu được, vài thứ tui học được và vài kinh nghiệm đau thương mà tui đã nếm trải. Chúc bạn tìm được điều gì đó hữu ích.
- ">
-  <meta property="og:description" content=" Xin chào! Đây là trang blog của tui, một vài thứ tui tìm hiểu được, vài thứ tui học được và vài kinh nghiệm đau thương mà tui đã nếm trải. Chúc bạn tìm được điều gì đó hữu ích.
- ">
-  <meta name="twitter:description" content=" Xin chào! Đây là trang blog của tui, một vài thứ tui tìm hiểu được, vài thứ tui học được và vài kinh nghiệm đau thương mà tui đã nếm trải. Chúc bạn tìm được điều gì đó hữu ích.
- ">
+  <title>Elixir - Lưu trữ dữ liệu trên RAM với ETS</title>
+  <meta property="og:title" content="Elixir - Lưu trữ dữ liệu trên RAM với ETS" />
+  <meta name="twitter:title" content="Elixir - Lưu trữ dữ liệu trên RAM với ETS" />
+  <meta name="description" content="ETS là gì? Có lẽ các bạn đã nghe qua về redis hoặc memcache, hoặc là cả hai. Còn nếu bạn chưa nghe tới bao giờ thì đó là những cơ sở dữ liệu lưu trữ trên RAM với ưu điểm là tốc độ truy xuất cực kỳ nhanh. ETS - Erlang Term Service - cũng là một CSDL lưu trữ trên RAM (in-ram DB) nhưng khác ở chỗ là ETS có sẵn khi cài Elixir/Erlang và bạn chẳng phải mất công cài đặt, cấu hình như 2 anh trên kia, nhà trồng được việc gì phải ngại.">
+  <meta property="og:description" content="ETS là gì? Có lẽ các bạn đã nghe qua về redis hoặc memcache, hoặc là cả hai. Còn nếu bạn chưa nghe tới bao giờ thì đó là những cơ sở dữ liệu lưu trữ trên RAM với ưu điểm là tốc độ truy xuất cực kỳ nhanh. ETS - Erlang Term Service - cũng là một CSDL lưu trữ trên RAM (in-ram DB) nhưng khác ở chỗ là ETS có sẵn khi cài Elixir/Erlang và bạn chẳng phải mất công cài đặt, cấu hình như 2 anh trên kia, nhà trồng được việc gì phải ngại.">
+  <meta name="twitter:description" content="ETS là gì? Có lẽ các bạn đã nghe qua về redis hoặc memcache, hoặc là cả hai. Còn nếu bạn chưa nghe tới bao giờ thì đó là những cơ sở dữ liệu lưu trữ trên RAM với ưu điểm là tốc độ truy xuất cực kỳ …">
   <meta name="author" content="Dũng Nguyễn" />
   <link href='http://bluzky.github.io/img/favicon.ico' rel='icon' type='image/x-icon' />
   <meta property="og:image" content="http://bluzky.github.io/img/avatar-icon.png" />
@@ -21,12 +18,12 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@username" />
   <meta name="twitter:creator" content="@username" />
-  <meta property="og:url" content="http://bluzky.github.io/" />
+  <meta property="og:url" content="http://bluzky.github.io/post/2018-05-12-erlang-term-storage/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="The 54 tribes" />
   
   <meta name="generator" content="Hugo 0.39" />
-  <link rel="canonical" href="http://bluzky.github.io/" />
+  <link rel="canonical" href="http://bluzky.github.io/post/2018-05-12-erlang-term-storage/" />
   <link rel="alternate" href="http://bluzky.github.io/index.xml" type="application/rss+xml" title="The 54 tribes">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -189,8 +186,26 @@ ga('send', 'pageview');
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <div class="page-heading">
-              <h1 class="text-center">The 54 tribes</h1>
+            <div class="post-heading">
+              <h1 class="text-center">Elixir - Lưu trữ dữ liệu trên RAM với ETS</h1>
+                
+                  <div class="text-center">
+                    <span class="post-meta">
+  
+  <i class="fa fa-clock-o"></i> 4 min (834 words)
+  
+  
+</span>
+
+                    
+                    <span class="post-meta" style="margin-left: 15px;"> <i class="fa fa-tag"></i> 
+                          
+                            #<a href="http://bluzky.github.io/tags/elixir/">elixir</a>&nbsp;
+                          
+                            #<a href="http://bluzky.github.io/tags/erlang/">erlang</a>&nbsp;
+                          
+                    </span> 
+                  </div>
                 
             </div>
           </div>
@@ -201,65 +216,185 @@ ga('send', 'pageview');
 
 
     
-<div role="main" class="container">
+<div class="container" role="main">
   <div class="row">
     <div class="col-md-12">
-      
-      <div class="">
-        <blockquote>
-<p>Xin chào! Đây là trang blog của tui, một vài thứ tui tìm hiểu được, vài thứ tui học được và vài kinh nghiệm đau thương mà tui đã nếm trải. Chúc bạn tìm được điều gì đó hữu ích.</p>
-</blockquote>
+      <article role="main" class="blog-post">
+        
 
-      </div>
+<h2 id="ets-là-gì">ETS là gì?</h2>
+
+<p>Có lẽ các bạn đã nghe qua về <code>redis</code> hoặc <code>memcache</code>, hoặc là cả hai. Còn nếu bạn chưa nghe tới bao giờ thì đó là những cơ sở dữ liệu lưu trữ trên RAM với ưu điểm là tốc độ truy xuất cực kỳ nhanh. ETS - Erlang Term Service - cũng là một CSDL lưu trữ trên RAM (in-ram DB) nhưng khác ở chỗ là ETS có sẵn khi cài Elixir/Erlang và bạn chẳng phải mất công cài đặt, cấu hình như 2 anh trên kia, nhà trồng được việc gì phải ngại.</p>
+
+<p><strong>Đặc điểm</strong> của em nó là:</p>
+
+<ul>
+<li>Không cần cài đặt</li>
+<li>Dữ liệu lưu trữ trên RAM và mất đi khi process kết thúc</li>
+<li>Dữ liệu lưu trữ dạng <code>key-value</code></li>
+<li><code>value</code> có thể là <code>set</code>, <code>ordered_set</code>, <code>bag</code>, <code>duplicated_bag</code></li>
+<li>Kiểu dữ liệu của <code>value</code> trên cùng 1 bảng là giống nhau và đuợc khai báo khi tạo bảng.</li>
+</ul>
+
+<h2 id="các-thao-tác-trong-ets">Các thao tác trong ETS</h2>
+
+<h3 id="1-tạo-bảng">1. Tạo bảng</h3>
+
+<pre><code class="language-elixir">iex&gt; :ets.new(:cache, [:set, :protected, :named_table])
+</code></pre>
+
+<p>**Syntax: ** <code>:ets.new(ten_bang, [type, access, name_table])</code></p>
+
+<ul>
+<li><code>type</code> là kiểu dữ liệu của <code>value</code> lưu trong bảng
+
+<ul>
+<li><code>set</code> là kiểu dữ liệu, chú này chung thuỷ chỉ có 1 value cho 1 key và key là duy nhất, không bị trùng.</li>
+<li><code>ordered_set</code> thằng em nghiêm túc của <code>set</code>, khác thằng anh ở chỗ đuợc tự động order khi thêm data vào.</li>
+<li><code>bag</code> khác với <code>set</code> ở chỗ chú này chơi harem, cho phép nhiều value cho cùng 1 key, tuy nhiên các value không đuợc trùng nhau.</li>
+<li><code>duplicated_bag</code> thằng này ăn tạp giống <code>bag</code> nhưng cho phép value trùng nhau</li>
+</ul></li>
+<li><code>access</code>  giới hạn khả năng truy xuất dữ liệu từ bảng, cũng khá dễ nhớ
+
+<ul>
+<li><code>public</code>: hàng công cộng, chú process nào thích nhìn (đọc), sờ (ghi) gì anh cho hết</li>
+<li><code>protected</code>: các chú chỉ đuợc nhìn thôi, anh sở hữu thì anh đuợc sờ</li>
+<li><code>private</code>: anh giấu hết, chỉ có anh mới đuợc nhìn và sờ, các chú đi ra chỗ khác</li>
+</ul></li>
+<li><code>named_table</code> Cái này tuỳ chọn, bình thuờng thì sẽ trả về 1 id dùng để truy xuất vào table. Nếu thêm option này vào thì có thể dùng <code>ten_bang</code> để truy xuất vào table.</li>
+</ul>
+
+<p>Đã xong phần khởi tạo, giờ phần hay ho nhất đây.</p>
+
+<h3 id="2-insert-và-update-dữ-liệu">2. Insert và update dữ liệu</h3>
+
+<ul>
+<li><p>Insert dữ liệu nếu <code>key</code> đã có chủ thì ghi đè (đập chậu cuớp bông)</p>
+
+<pre><code class="language-elixir">iex&gt; :ets.insert(:cache, {&quot;post-1&quot;, &quot;world!&quot;, %{view: 1}})
+true
+</code></pre></li>
+
+<li><p>Insert dữ liệu, nếu <code>key</code> đã có chủ thì bỏ qua.</p>
+
+<pre><code class="language-elixir">iex&gt; :ets.insert_new(:cache, {&quot;post-1&quot;, &quot;Lao!&quot;, %{view: 2}})
+false
+iex&gt; :ets.insert_new(:cache, {&quot;post-2&quot;, &quot;Vietnam!&quot;, %{view: 999}})
+true
+</code></pre></li>
+</ul>
+
+<p>Dữ liệu cho hàm <code>insert/2</code> và <code>insert_new/2</code> là 1 <code>tuple</code>, phần tử đầu tiên của <code>tuple</code> mặc định được dùng làm <code>key</code>.</p>
+
+<h3 id="3-query-dữ-liệu">3. Query dữ liệu</h3>
+
+<p><strong>3.1 Query đơn giản</strong>: tìm kiếm dữ liệu theo key dùng hàm <code>lookup/2</code></p>
+
+<pre><code class="language-elixir">iex&gt; :ets.lookup(:cache, &quot;post-1&quot;)
+[{&quot;post-1&quot;, &quot;world!&quot;, %{view: 1}}]
+</code></pre>
+
+<p><strong>3.2 Query với nhiều trường dữ liệu</strong> với hàm <code>match_object/2</code></p>
+
+<pre><code class="language-elixir">iex&gt; :ets.match_object(:cache, {:&quot;_&quot;, &quot;Vietnam!&quot;, :&quot;_&quot;})
+[{&quot;post-2&quot;, &quot;Vietnam!&quot;, %{view: 999}}]
+</code></pre>
+
+<ul>
+<li><strong>Note</strong> <code>:&quot;_&quot;</code> đánh dấu tại vị trí này sẽ không xài để match dữ liệu, truờng này chứa dữ liệu gì cũng đuợc, anh không quan tâm</li>
+</ul>
+
+<p><strong>3.3 Select trường dữ liệu nào sẽ trả về</strong> với <code>match/2</code></p>
+
+<pre><code class="language-elixir">iex&gt; :ets.match_object(:cache, {:&quot;$1&quot;, :&quot;$2&quot;, :&quot;_&quot;})
+[{&quot;post-1&quot;, &quot;world!&quot;}, {&quot;post-2&quot;, &quot;Vietnam!&quot;}]
+</code></pre>
+
+<ul>
+<li><strong>Note</strong> <code>:&quot;$N&quot;</code>  dùng để <code>select</code> kết quả trả về,  <code>N</code> là một số nguyên dùng để xác định vị trí của dữ liệu trong kết quả.</li>
+</ul>
+
+<pre><code class="language-elixir">iex&gt; :ets.match_object(:cache, {:&quot;$30&quot;, :&quot;$2&quot;, :&quot;_&quot;})
+[{&quot;world!&quot;, &quot;post-1&quot;}, {&quot;Vietnam!&quot;, &quot;post-2&quot;}]
+</code></pre>
+
+<p><strong>3.4 Giới hạn kết quả tra về</strong></p>
+
+<p>Sử dụng hàm <code>match/3</code> hoặc <code>match_object/3</code> tương tự như <code>match/2</code> và <code>match_object/2</code>, trong đó tham số thứ 3 là số lượng phần tử sẽ trả về.</p>
+
+<pre><code class="language-elixir"># them 1 phan tu
+iex&gt; :ets.insert_new(:cache, {&quot;post-3&quot;, &quot;Vietnam!&quot;, %{view: 1000}})
+true
+
+# khong limit
+iex&gt; :ets.match_object(:cache, {:&quot;_&quot;, &quot;Vietnam!&quot;, :&quot;_&quot;})
+[{&quot;post-2&quot;, &quot;Vietnam!&quot;, %{view: 999}}, {&quot;post-3&quot;, &quot;Vietnam!&quot;, %{view: 1000}}]
+
+# co limit
+iex&gt; :ets.match_object(:cache, {:&quot;_&quot;, &quot;Vietnam!&quot;, :&quot;_&quot;}, 1)
+[{&quot;post-2&quot;, &quot;Vietnam!&quot;, %{view: 999}}]
+</code></pre>
+
+<h3 id="4-xoá-dữ-liệu">4. Xoá dữ liệu</h3>
+
+<p><strong>Xoá theo key</strong></p>
+
+<pre><code class="language-elixir">iex&gt; :ets.delete(:cache, &quot;post-1&quot;)
+true
+</code></pre>
+
+<p><strong>Match dữ liệu và xoá</strong>. Cách match giống như trong <strong>query dữ liệu</strong></p>
+
+<pre><code class="language-elixir">iex&gt; :ets.match_delete(:cache, {:&quot;_&quot;, &quot;Vietnam!&quot;, :&quot;_&quot;})
+true
+</code></pre>
+
+<h3 id="5-xoá-bảng">5. Xoá bảng</h3>
+
+<pre><code class="language-elixir">iex&gt; :ets.delete(:cache)
+true
+</code></pre>
+
+<p>Nếu không xoá thì dữ liệu sẽ tồn tại cho đến khi process kết thúc mới bị mất đi.</p>
+
+<h3 id="6-các-hàm-hay-xài">6. Các hàm hay xài</h3>
+
+<ul>
+<li><code>member/2</code> kiểm tra xem key đã tồn taị trong bảng hay chưa</li>
+<li><code>tab2list</code>: đọc tất cả dữ liệu của bảng vào 1 list</li>
+<li><code>tab2file</code>: lưu tất cả dữ liệu trên bảng vào 1 file, bạn có thể lưu dữ liệu lại <strong>truớc khi process kết thúc</strong> và có thể xài lại dữ liệu sau.</li>
+<li><code>file2tab</code> : đọc 1 file đuợc lưu bởi <code>tab2file</code> và tạo lại bảng tương ứng</li>
+<li><code>to_dest/2</code>: copy toàn bộ dữ liệu từ bảng ETS qua bảng DETS (lưu dữ liệu trên ổ cứng)</li>
+<li><code>from_dest/2</code>: copy toàn bộ dữ liệu từ bảng DETS qua bảng ETS</li>
+</ul>
+
+<h2 id="tham-khảo">Tham khảo</h2>
+
+<ol>
+<li><a href="http://erlang.org/doc/man/ets.html">http://erlang.org/doc/man/ets.html</a> xem nhiều trò hay</li>
+<li><a href="http://learnyousomeerlang.com/ets">http://learnyousomeerlang.com/ets</a></li>
+<li>Ngoài ra Erlang còn hỗ trợ <code>DETS</code> (disk-based term storage) lưu trên ổ cứng với API tương tự <a href="http://erlang.org/doc/man/dets.html">http://erlang.org/doc/man/dets.html</a></li>
+</ol>
+
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="http://bluzky.github.io/post/2018-05-08-test-fb-bot-localhost/" data-toggle="tooltip" data-placement="top" title="Test Facebook bot trên localhost với ngrok">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
       
 
-      <div class="posts-list">
-        <article class="post-preview ">
-      <div class="book-toc col-md-12">
-         
-        <div class="line">
-          <div class="cell title"><a href="http://bluzky.github.io/post/2018-01-21-truyen-tham-so-dong-python/">
-              Truyền tham số động trong python (*args | **kwargs)?</a>
-            </div>
-          <div class="cell" style="width: 130px; font-style: italic; text-align: right;">
-              Jan 21, 2018
-          </div>
-        </div>
-        
-        
-        <div class="line">
-          <div class="cell title"><a href="http://bluzky.github.io/post/2018-01-21-tim-hieu-oauth/">
-              Tìm hiểu về Oauth / Oauth hoạt động như thế nào?</a>
-            </div>
-          <div class="cell" style="width: 130px; font-style: italic; text-align: right;">
-              Jan 21, 2018
-          </div>
-        </div>
-        
-        
-        <div class="line">
-          <div class="cell title"><a href="http://bluzky.github.io/post/2018-01-21-what-is-rabbit-mq/">
-              What is Rabbit MQ?</a>
-            </div>
-          <div class="cell" style="width: 130px; font-style: italic; text-align: right;">
-              Jan 21, 2018
-          </div>
-        </div>
-        
-        
-      </div>
-    </article>
-      </div>
 
       
-      <ul class="pager main-pager">
         
-        <li class="previous">
-          <a href="/page/1/">&larr; Newer Posts</a>
-        </li>
-         
-      </ul>
+        
       
+
     </div>
   </div>
 </div>

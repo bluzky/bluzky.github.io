@@ -5,7 +5,7 @@ body {
   /* font-family: georgia, serif; */
   /* font-family: 'Merriweather', serif; */
   font-family: 'IBM Plex Serif', serif;
-  font-size: 20px;
+  font-size: 18px;
   /* font-weight: 400; */
   color: #404040;
   position: relative;
@@ -27,7 +27,7 @@ p {
 }
 
 p + p {
-  margin: 24px 0 6px 0;
+  margin: 24px 0 0 0;
 }
 
 p a {
@@ -502,11 +502,21 @@ footer .theme-by {
   margin: 34px 0;
 }
 
-.blog-post p + p,
 .blog-post ul,
 .blog-post pre[class*='language-'] {
     margin-bottom: 34px;
 }
+
+.blog-post ul li > p{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.blog-post h2, .blog-post h3, .blog-post h4{
+    margin-top: 48px;
+}
+
+.b
 
 .blog-post pre[class*='language-'] {
     word-break: break-all;
