@@ -834,7 +834,6 @@ input.gsc-input,
   position: relative;
   overflow: hidden;
   padding-right: 15px;
-  text-transform: capitalize;
 }
 
 .cell.title::after {
