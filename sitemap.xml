@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://bluzky.github.io/post/2018-05-17-ets-as-cache-phoenix/</loc>
+    <lastmod>2018-05-18T01:05:50+07:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://bluzky.github.io/post/2018-05-12-erlang-term-storage/</loc>
     <lastmod>2018-05-12T14:28:22+07:00</lastmod>
   </url>
@@ -69,7 +74,7 @@
   
   <url>
     <loc>http://bluzky.github.io/</loc>
-    <lastmod>2018-05-12T14:28:22+07:00</lastmod>
+    <lastmod>2018-05-18T01:05:50+07:00</lastmod>
   </url>
   
   <url>
@@ -89,13 +94,19 @@
   
   <url>
     <loc>http://bluzky.github.io/tags/elixir/</loc>
-    <lastmod>2018-05-12T14:28:22+07:00</lastmod>
+    <lastmod>2018-05-18T01:05:50+07:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://bluzky.github.io/tags/erlang/</loc>
     <lastmod>2018-05-12T14:28:22+07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://bluzky.github.io/tags/ets/</loc>
+    <lastmod>2018-05-18T01:05:50+07:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -123,8 +134,14 @@
   </url>
   
   <url>
+    <loc>http://bluzky.github.io/tags/phoenix/</loc>
+    <lastmod>2018-05-18T01:05:50+07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://bluzky.github.io/post/</loc>
-    <lastmod>2018-05-12T14:28:22+07:00</lastmod>
+    <lastmod>2018-05-18T01:05:50+07:00</lastmod>
     <priority>0</priority>
   </url>
   

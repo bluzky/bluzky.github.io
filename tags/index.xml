@@ -25,7 +25,7 @@
     <item>
       <title>Elixir</title>
       <link>http://bluzky.github.io/tags/elixir/</link>
-      <pubDate>Sat, 12 May 2018 14:28:22 +0700</pubDate>
+      <pubDate>Fri, 18 May 2018 01:05:50 +0700</pubDate>
       <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
       <guid>http://bluzky.github.io/tags/elixir/</guid>
       <description></description>
@@ -37,6 +37,15 @@
       <pubDate>Sat, 12 May 2018 14:28:22 +0700</pubDate>
       <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
       <guid>http://bluzky.github.io/tags/erlang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ets</title>
+      <link>http://bluzky.github.io/tags/ets/</link>
+      <pubDate>Fri, 18 May 2018 01:05:50 +0700</pubDate>
+      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
+      <guid>http://bluzky.github.io/tags/ets/</guid>
       <description></description>
     </item>
     
@@ -64,6 +73,15 @@
       <pubDate>Wed, 11 Apr 2018 20:53:06 +0700</pubDate>
       <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
       <guid>http://bluzky.github.io/tags/others/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Phoenix</title>
+      <link>http://bluzky.github.io/tags/phoenix/</link>
+      <pubDate>Fri, 18 May 2018 01:05:50 +0700</pubDate>
+      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
+      <guid>http://bluzky.github.io/tags/phoenix/</guid>
       <description></description>
     </item>
     
