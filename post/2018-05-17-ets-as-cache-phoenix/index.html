@@ -198,7 +198,7 @@ ga('send', 'pageview');
                   <div class="text-center">
                     <span class="post-meta">
   
-  <i class="fa fa-clock-o"></i> 8 min (1518 words)
+  <i class="fa fa-clock-o"></i> 7 min (1393 words)
   
   
 </span>
@@ -353,31 +353,28 @@ end
 <p>Có vào thì phải có lấy ra chứ nhỉ, bây giờ ta sẽ thêm code để truy xuất data từ cache.</p>
 
 <pre><code class="language-elixir">  def get(key) do
-    GenServer.call(__MODULE__, {:get, key})
-  end
-  
-  def handle_call({:get, key}, _from, state) do
-  	# lấy giá trị đầu tiên tìm đuợc
+	# lấy giá trị đầu tiên tìm đuợc
     rs = Ets.lookup(:simple_cache, key) |&gt; List.first()
-	
-	# Nếu không tìm thấy thì trả về lỗi
+
+		# Nếu không tìm thấy thì trả về lỗi
     if rs == nil do
-      {:reply, {:error, :not_found}, state}
+      {:error, :not_found}
     else
       expired_at = elem(rs, 2)
-
-	  # So sánh thời điểm hết hạn với hiện tại, nếu hết hạn thì trả về lỗi
+			
+			# So sánh thời điểm hết hạn với hiện tại, nếu hết hạn thì trả về lỗi
       cond do
         NaiveDateTime.diff(NaiveDateTime.utc_now(), expired_at) &gt; 0 -&gt;
-          {:reply, {:error, :expired}, state}
+          {:error, :expired}
 
         true -&gt;
-          # do data nằm ở vị trí thứ 2 trong tuple nên dùng elem(rs, 1)
-          {:reply, {:ok, elem(rs, 1)}, state}
+          {:ok, elem(rs, 1)}
       end
     end
   end
 </code></pre>
+
+<p><strong>Note</strong>: Nhờ feedback của bác @HQC, chỗ này mình đọc trực tiếp từ table, thay vì dùng <code>GenServer.call</code> như trước vì khi send request vào GenServer thì code sẽ được chạy <code>sync</code>/đồng bộ. Do vậy sẽ tạo nên ngẽn cổ chai. Mình sửa lại ở phần tạo table thêm <code>read_concurrency: true</code> và đưa phần code query dữ liệu ra ngoài GenServer</p>
 
 <h4 id="2-6-xoá-dữ-liệu-khỏi-cache">2.6 Xoá dữ liệu khỏi cache</h4>
 
@@ -416,7 +413,21 @@ end
   end
 
   def get(key) do
-    GenServer.call(__MODULE__, {:get, key})
+    rs = Ets.lookup(:simple_cache, key) |&gt; List.first()
+
+    if rs == nil do
+      {:error, :not_found}
+    else
+      expired_at = elem(rs, 2)
+
+      cond do
+        NaiveDateTime.diff(NaiveDateTime.utc_now(), expired_at) &gt; 0 -&gt;
+          {:error, :expired}
+
+        true -&gt;
+          {:ok, elem(rs, 1)}
+      end
+    end
   end
 
   def delete(key) do
@@ -428,26 +439,8 @@ end
 
   @impl true
   def init(state) do
-    Ets.new(:simple_cache, [:set, :protected, :named_table])
+    Ets.new(:simple_cache, [:set, :protected, :named_table, read_concurrency: true])
     {:ok, state}
-  end
-
-  def handle_call({:get, key}, _from, state) do
-    rs = Ets.lookup(:simple_cache, key) |&gt; List.first()
-
-    if rs == nil do
-      {:reply, {:error, :not_found}, state}
-    else
-      expired_at = elem(rs, 2)
-
-      cond do
-        NaiveDateTime.diff(NaiveDateTime.utc_now(), expired_at) &gt; 0 -&gt;
-          {:reply, {:error, :expired}, state}
-
-        true -&gt;
-          {:reply, {:ok, elem(rs, 1)}, state}
-      end
-    end
   end
 
   @doc &quot;&quot;&quot;
@@ -482,17 +475,6 @@ end
 end
 
 </code></pre>
-
-<h4 id="2-8-giải-thích-thêm">2.8 Giải thích thêm</h4>
-
-<p>Nếu bạn để ý sẽ thấy với <code>set</code> và <code>delete</code> đuợc xử lý trong <code>handle_cast</code>, còn <code>get</code> được xử lý trong <code>handle_call</code>. Tại sao lại có sự khác nhau này? Để hiểu hơn thì cần phải biết về cách <code>GenServer</code> xử lý message:</p>
-
-<ul>
-<li><code>handle_call</code> là đồng bộ <code>sync</code>  nghĩa là sau khi gọi <code>GenServer.call</code> thì process sẽ đợi đến khi nhận được kết quả mới thực hiện tiếp.</li>
-<li><code>handle_cash</code> là bất đồng bộ <code>async</code> là sau khi gọi <code>GenServer.cast</code> thì process sẽ tiếp tục thực thi mà không quan tâm kết quả trả về.</li>
-</ul>
-
-<p>Đối với <code>set</code> và <code>delete</code> ít khi ta quan tâm đến kết quả trả về nên coi như khỏi cần quan tâm, tui dùng <code>handle_cast</code>. Còn <code>get</code> thì hiển nhiên là cần phải biết là có dữ liệu hay không nên dùng <code>handle_call</code></p>
 
 <h3 id="3-setup-cache">3. Setup cache</h3>
 
@@ -550,7 +532,7 @@ HIT
 
 <p>Lần request đầu tiên, bài viết chưa được cache nên phải truy xuất database và cache lại, lần thứ 2 thì đã có trong cache nên không cần phải đọc từ database nữa.</p>
 
-<p>Ở ví dụ này có thể bạn sẽ chưa thấy sự khác biệt lắm về tốc độ respone, nhưng nếu như thay vì load 1 bài viết bằng việc xử lý thống kê dữ liệu thì sự khác biệt sẽ rất lớn.</p>
+<p>Ở ví dụ này có thể bạn sẽ chưa thấy sự khác biệt lắm về tốc độ response, nhưng nếu như thay vì load 1 bài viết bằng việc xử lý thống kê dữ liệu thì sự khác biệt sẽ rất lớn.</p>
 
 <h3 id="5-plug-cache">5. Plug cache</h3>
 
