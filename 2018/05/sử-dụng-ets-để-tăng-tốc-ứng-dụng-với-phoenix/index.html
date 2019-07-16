@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.55.6 with theme Tranquilpeak 0.4.3-SNAPSHOT">
+<meta name="author" content="Dũng Nguyễn">
+<meta name="keywords" content="">
+<meta name="description" content="Bài viết này sẽ hướng dẫn các bạn sử dụng ETS như là bộ nhớ cache để tăng tốc các ứng dụng web Phoenix
+ Dành cho các bạn chưa biết:
+ ETS (Erlang Term Storage) là cơ sở dữ liệu dạng key-value lưu trữ trên RAM, tương tự như Memcache và Redis, với ưu điểm là tốc độ truy xuất cực nhanh. Đọc thêm về ETS Cache là việc lưu lại các kết quả xử lý của request vào bộ nhớ và trả về cho các request sau mà không cần phải tính toán lại -&gt; giảm response time.">
+
+
+<meta property="og:description" content="Bài viết này sẽ hướng dẫn các bạn sử dụng ETS như là bộ nhớ cache để tăng tốc các ứng dụng web Phoenix
+ Dành cho các bạn chưa biết:
+ ETS (Erlang Term Storage) là cơ sở dữ liệu dạng key-value lưu trữ trên RAM, tương tự như Memcache và Redis, với ưu điểm là tốc độ truy xuất cực nhanh. Đọc thêm về ETS Cache là việc lưu lại các kết quả xử lý của request vào bộ nhớ và trả về cho các request sau mà không cần phải tính toán lại -&gt; giảm response time.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sử dụng ETS để tăng tốc ứng dụng với Phoenix">
+<meta name="twitter:title" content="Sử dụng ETS để tăng tốc ứng dụng với Phoenix">
+<meta property="og:url" content="http://bluzky.github.io/2018/05/s%E1%BB%AD-d%E1%BB%A5ng-ets-%C4%91%E1%BB%83-t%C4%83ng-t%E1%BB%91c-%E1%BB%A9ng-d%E1%BB%A5ng-v%E1%BB%9Bi-phoenix/">
+<meta property="twitter:url" content="http://bluzky.github.io/2018/05/s%E1%BB%AD-d%E1%BB%A5ng-ets-%C4%91%E1%BB%83-t%C4%83ng-t%E1%BB%91c-%E1%BB%A9ng-d%E1%BB%A5ng-v%E1%BB%9Bi-phoenix/">
+<meta property="og:site_name" content="The 54 tribes">
+<meta property="og:description" content="Bài viết này sẽ hướng dẫn các bạn sử dụng ETS như là bộ nhớ cache để tăng tốc các ứng dụng web Phoenix
+ Dành cho các bạn chưa biết:
+ ETS (Erlang Term Storage) là cơ sở dữ liệu dạng key-value lưu trữ trên RAM, tương tự như Memcache và Redis, với ưu điểm là tốc độ truy xuất cực nhanh. Đọc thêm về ETS Cache là việc lưu lại các kết quả xử lý của request vào bộ nhớ và trả về cho các request sau mà không cần phải tính toán lại -&gt; giảm response time.">
+<meta name="twitter:description" content="Bài viết này sẽ hướng dẫn các bạn sử dụng ETS như là bộ nhớ cache để tăng tốc các ứng dụng web Phoenix
+ Dành cho các bạn chưa biết:
+ ETS (Erlang Term Storage) là cơ sở dữ liệu dạng key-value lưu trữ trên RAM, tương tự như Memcache và Redis, với ưu điểm là tốc độ truy xuất cực nhanh. Đọc thêm về ETS Cache là việc lưu lại các kết quả xử lý của request vào bộ nhớ và trả về cho các request sau mà không cần phải tính toán lại -&gt; giảm response time.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2018-05-18T01:05:50">
+  
+  
+    <meta property="article:modified_time" content="2018-05-18T01:05:50">
+  
+  
+  
+  
+    
+      <meta property="article:tag" content="elixir">
+    
+      <meta property="article:tag" content="phoenix">
+    
+      <meta property="article:tag" content="ETS">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://avatars3.githubusercontent.com/u/6194779?s=460&v=4">
+  <meta property="twitter:image" content="https://avatars3.githubusercontent.com/u/6194779?s=460&v=4">
+
+
+    <title>Sử dụng ETS để tăng tốc ứng dụng với Phoenix</title>
+
+    <link rel="icon" href="http://bluzky.github.io/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="http://bluzky.github.io/2018/05/s%E1%BB%AD-d%E1%BB%A5ng-ets-%C4%91%E1%BB%83-t%C4%83ng-t%E1%BB%91c-%E1%BB%A9ng-d%E1%BB%A5ng-v%E1%BB%9Bi-phoenix/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="http://bluzky.github.io/css/tranquilpeak.css" />
+    
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-40665301-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="http://bluzky.github.io/">The 54 tribes</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="http://bluzky.github.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://avatars3.githubusercontent.com/u/6194779?s=460&amp;v=4" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="http://bluzky.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://avatars3.githubusercontent.com/u/6194779?s=460&amp;v=4" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Dũng Nguyễn</h4>
+        
+          <h5 class="sidebar-profile-bio">Super hero</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://bluzky.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">#blog</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://bluzky.github.io/tags/elixir">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tag"></i>
+      
+      <span class="sidebar-button-desc">#elixir</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://bluzky.github.io/tags/til">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tag"></i>
+      
+      <span class="sidebar-button-desc">#til</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://bluzky.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">#all-tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://bluzky.github.io/page/about/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">#about</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://bluzky.github.io/page/projects/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">#projects</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/bluzky" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Sử dụng ETS để tăng tốc ứng dụng với Phoenix
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-05-18T01:05:50&#43;07:00">
+        
+  May 18, 2018
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+
+<blockquote>
+<p>Bài viết này sẽ hướng dẫn các bạn sử dụng ETS như là bộ nhớ cache để tăng tốc các ứng dụng web Phoenix</p>
+</blockquote>
+
+<p>Dành cho các bạn chưa biết:</p>
+
+<ul>
+<li>ETS (Erlang Term Storage) là cơ sở dữ liệu dạng <code>key-value</code> lưu trữ trên RAM, tương tự như <strong>Memcache</strong> và <strong>Redis</strong>, với ưu điểm là tốc độ truy xuất cực nhanh. Đọc thêm về <a href="http://bluzky.github.io/post/2018-05-12-erlang-term-storage/">ETS</a></li>
+<li>Cache là việc lưu lại các kết quả xử lý của request vào bộ nhớ và trả về cho các request sau mà không cần phải tính toán lại -&gt; giảm response time.</li>
+</ul>
+
+<h3 id="1-setup-project">1. Setup project</h3>
+
+<ul>
+<li><p>Tạo 1 project mới</p>
+
+<pre><code class="language-shell">mix phx.new phoenix_cache
+mix deps.get
+</code></pre>
+
+<ul>
+<li>Thêm chức năng tạo/xoá/sửa bài viết
+<code>shell
+mix phx.gen.html Posts Post posts title:string summary:text content:text
+mix ecto.create
+mix ecto.migrate
+</code></li>
+</ul></li>
+
+<li><p>Vào <a href="http://0.0.0.0:4000/posts">http://0.0.0.0:4000/posts</a> để xem chức năng bài viết. Thêm vài bài viết để có dữ liệu test
+<img src="http://bluzky.github.io/img/ets-phoenix.png" alt="img" /></p></li>
+</ul>
+
+<h3 id="2-tạo-một-module-để-quản-lý-cache">2. Tạo một module để quản lý cache</h3>
+
+<p>Do table trong ETS sẽ bị huỷ khi process khởi tạo table kết thúc, nên cần phải có 1 process luôn luôn chạy để table không bị xoá. Sử dụng <code>GenServer</code> để quản lý Cache là tiện nhất vì nó được cung cấp sẵn bởi Elixir.
+Đọc thêm về <a href="https://hexdocs.pm/elixir/GenServer.html">GenServer</a></p>
+
+<h4 id="2-1-tạo-module">2.1 Tạo module</h4>
+
+<p>Tạo một file mới <code>phoenix_cache/lib/phoenix_cache/bucket.ex</code></p>
+
+<pre><code class="language-elixir">defmodule PhoenixCache.Bucket do
+  use GenServer
+  alias :ets, as: Ets
+
+  # thời gian sống của 1 entry mặc định là 6 phút
+  @expired_after 6 * 60
+
+  def start_link(args \\ []) do
+    GenServer.start_link(__MODULE__, args, name: __MODULE__)
+  end
+end
+</code></pre>
+
+<h4 id="2-2-khởi-tạo-cache-table-khi-bắt-đầu-chạy-genserver">2.2 Khởi tạo cache table khi bắt đầu chạy <code>GenServer</code></h4>
+
+<pre><code class="language-elixir">def init(state) do
+    Ets.new(:simple_cache, [:set, :protected, :named_table, read_concurrency: true])
+    {:ok, state}
+end
+</code></pre>
+
+<p><strong>Module cache sẽ hỗ trợ 3 thao tác:</strong></p>
+
+<ul>
+<li><code>set</code>: lưu data vào bộ nhớ cache</li>
+<li><code>get</code>: lấy data từ bộ nhớ cache</li>
+<li><code>delete</code>: xoá data khỏi cache (cái này có vẻ không cần lắm thì phải)</li>
+</ul>
+
+<h4 id="2-3-thêm-data-vào-cache">2.3 Thêm data vào cache</h4>
+
+<pre><code class="language-elixir">
+  def set(key, value) do
+    GenServer.cast(__MODULE__, {:set, key, value})
+  end
+
+  @doc &quot;&quot;&quot;
+  Default TTL 
+  &quot;&quot;&quot;
+  def handle_cast({:set, key, val}, state) do
+    expired_at =
+      NaiveDateTime.utc_now()
+      |&gt; NaiveDateTime.add(@expired_after, :second)
+
+    Ets.insert(:simple_cache, {key, val, expired_at})
+    {:noreply, state}
+  end
+</code></pre>
+
+<p>Ở đây chúng ta sẽ tạo tính toán thời điểm expire/hết hạn của giá trị cache, tính từ thời điểm hiện tại, sử dụng giá trị <code>TTL</code>(thời gian sống) mặc định là 6phút. Bạn có thể cấu hình lưu <code>TTL</code> mặc định vào config hoặc biến môi trường. Mình lưu vào thuộc tính module cho tiện.</p>
+
+<h4 id="2-4-thêm-data-vào-cache-và-thiết-lập-thời-gian-sống-của-data">2.4 Thêm data vào cache và thiết lập thời gian sống của data</h4>
+
+<p>Để có thể thoải mái thiết lập <code>TTL</code>, ta thêm 1 hàm cho phép truyền vào tham số <code>TTL</code></p>
+
+<pre><code class="language-elixir">@doc &quot;&quot;&quot;
+  Custom TTL for cache entry
+  ttl: Time to live in second
+  &quot;&quot;&quot;
+  def set(key, value, ttl) do
+    GenServer.cast(__MODULE__, {:set, key, value, ttl})
+  end
+  
+  @doc &quot;&quot;&quot;
+  Custom TTL
+  &quot;&quot;&quot;
+  def handle_cast({:set, key, val, ttl}, state) do
+    inserted_at =
+      NaiveDateTime.utc_now()
+      |&gt; NaiveDateTime.add(ttl, :second)
+
+    Ets.insert(:simple_cache, {key, val, inserted_at})
+    {:noreply, state}
+  end
+</code></pre>
+
+<p>Cũng tương tự như trên nhưng hàm <code>set</code> sẽ nhận thêm tham số thứ 3 là <code>TTL</code> thay vì xài giá trị mặc định.</p>
+
+<h4 id="2-5-truy-xuất-dữ-liệu-từ-cache">2.5 Truy xuất dữ liệu từ cache</h4>
+
+<p>Có vào thì phải có lấy ra chứ nhỉ, bây giờ ta sẽ thêm code để truy xuất data từ cache.</p>
+
+<pre><code class="language-elixir">  def get(key) do
+	# lấy giá trị đầu tiên tìm đuợc
+    rs = Ets.lookup(:simple_cache, key) |&gt; List.first()
+
+		# Nếu không tìm thấy thì trả về lỗi
+    if rs == nil do
+      {:error, :not_found}
+    else
+      expired_at = elem(rs, 2)
+			
+			# So sánh thời điểm hết hạn với hiện tại, nếu hết hạn thì trả về lỗi
+      cond do
+        NaiveDateTime.diff(NaiveDateTime.utc_now(), expired_at) &gt; 0 -&gt;
+          {:error, :expired}
+
+        true -&gt;
+          {:ok, elem(rs, 1)}
+      end
+    end
+  end
+</code></pre>
+
+<p><strong>Note</strong>: Nhờ feedback của bác @HQC, chỗ này mình đọc trực tiếp từ table, thay vì dùng <code>GenServer.call</code> như trước vì khi send request vào GenServer thì code sẽ được chạy <code>sync</code>/đồng bộ. Do vậy sẽ tạo nên ngẽn cổ chai. Mình sửa lại ở phần tạo table thêm <code>read_concurrency: true</code> và đưa phần code query dữ liệu ra ngoài GenServer</p>
+
+<h4 id="2-6-xoá-dữ-liệu-khỏi-cache">2.6 Xoá dữ liệu khỏi cache</h4>
+
+<pre><code class="language-elixir">  def delete(key) do
+    GenServer.cast(__MODULE__, {:delete, key})
+  end
+  
+  def handle_cast({:delete, key}, state) do
+    Ets.delete(:simple_cache, key)
+    {:noreply, state}
+  end
+</code></pre>
+
+<h4 id="2-7-module-hoàn-chỉnh">2.7 Module hoàn chỉnh</h4>
+
+<pre><code class="language-elixir">defmodule PhoenixCache.Bucket do
+  use GenServer
+  alias :ets, as: Ets
+
+  @expired_after 6 * 60
+
+  def start_link(args \\ []) do
+    GenServer.start_link(__MODULE__, args, name: __MODULE__)
+  end
+
+  def set(key, value) do
+    GenServer.cast(__MODULE__, {:set, key, value})
+  end
+
+  @doc &quot;&quot;&quot;
+  Custom TTL for cache entry
+  ttl: Time to live in second
+  &quot;&quot;&quot;
+  def set(key, value, ttl) do
+    GenServer.cast(__MODULE__, {:set, key, value, ttl})
+  end
+
+  def get(key) do
+    rs = Ets.lookup(:simple_cache, key) |&gt; List.first()
+
+    if rs == nil do
+      {:error, :not_found}
+    else
+      expired_at = elem(rs, 2)
+
+      cond do
+        NaiveDateTime.diff(NaiveDateTime.utc_now(), expired_at) &gt; 0 -&gt;
+          {:error, :expired}
+
+        true -&gt;
+          {:ok, elem(rs, 1)}
+      end
+    end
+  end
+
+  def delete(key) do
+    GenServer.cast(__MODULE__, {:delete, key})
+  end
+
+  # Server callbacks
+  # Server (callbacks)
+
+  @impl true
+  def init(state) do
+    Ets.new(:simple_cache, [:set, :protected, :named_table, read_concurrency: true])
+    {:ok, state}
+  end
+
+  @doc &quot;&quot;&quot;
+  Default TTL 
+  &quot;&quot;&quot;
+  def handle_cast({:set, key, val}, state) do
+    expired_at =
+      NaiveDateTime.utc_now()
+      |&gt; NaiveDateTime.add(@expired_after, :second)
+
+    Ets.insert(:simple_cache, {key, val, expired_at})
+    {:noreply, state}
+  end
+
+  @doc &quot;&quot;&quot;
+  Custom TTL
+  &quot;&quot;&quot;
+  def handle_cast({:set, key, val, ttl}, state) do
+    inserted_at =
+      NaiveDateTime.utc_now()
+      |&gt; NaiveDateTime.add(ttl, :second)
+
+    Ets.insert(:simple_cache, {key, val, inserted_at})
+    {:noreply, state}
+  end
+
+  @impl true
+  def handle_cast({:delete, key}, state) do
+    Ets.delete(:simple_cache, key)
+    {:noreply, state}
+  end
+end
+
+</code></pre>
+
+<h3 id="3-setup-cache">3. Setup cache</h3>
+
+<p>Ta đã tạo xong module cache rồi, nhưng làm sao để cache tự động chạy khi chạy server?</p>
+
+<p>Thêm worker vào file <code>phoenix_cache/lib/phoenix_cache/application.ex</code></p>
+
+<pre><code class="language-elixir">children = [
+      ...
+      worker(PhoenixCache.Bucket, [])
+    ]
+</code></pre>
+
+<p>Khi <code>Supervisor</code> khởi chạy, nó sẽ start các <code>children</code> và quản lý chúng. Để hiểu rõ hơn, đọc thêm tại <a href="https://hexdocs.pm/elixir/Supervisor.html">https://hexdocs.pm/elixir/Supervisor.html</a></p>
+
+<h3 id="4-xài-cache">4. Xài cache</h3>
+
+<p>Olala, ta đã tạo module cache và thiết lập để chạy cùng với server, bây giờ tới lúc xài nó rồi.</p>
+
+<p>Thử dùng cache cho chức năng xem bài viết:</p>
+
+<pre><code class="language-elixir">def show(conn, %{&quot;id&quot; =&gt; id}) do
+    post =
+      # lấy nội dung post từ cache
+      case PhoenixCache.Bucket.get(&quot;posts-#{id}&quot;) do
+      	# Nếu có ròi thì khỏi cần đọc DB
+        {:ok, post} -&gt;
+          IO.puts(&quot;HIT&quot;)
+          post
+
+        {:error, _} -&gt;
+          IO.puts(&quot;MISS&quot;)
+          # Chưa cache thì đọc từ DB
+          post = Posts.get_post!(id)
+
+          # cache bài viết 60s
+          PhoenixCache.Bucket.set(&quot;posts-#{id}&quot;, post, 60)
+          post
+      end
+
+    render(conn, &quot;show.html&quot;, post: post)
+  end
+
+</code></pre>
+
+<p>Kết quả request:</p>
+
+<pre><code class="language-shell">[info] GET /posts/1
+MISS
+...
+[info] GET /posts/1
+HIT
+...
+</code></pre>
+
+<p>Lần request đầu tiên, bài viết chưa được cache nên phải truy xuất database và cache lại, lần thứ 2 thì đã có trong cache nên không cần phải đọc từ database nữa.</p>
+
+<p>Ở ví dụ này có thể bạn sẽ chưa thấy sự khác biệt lắm về tốc độ response, nhưng nếu như thay vì load 1 bài viết bằng việc xử lý thống kê dữ liệu thì sự khác biệt sẽ rất lớn.</p>
+
+<h3 id="5-plug-cache">5. Plug cache</h3>
+
+<p>Nếu cứ mỗi chức năng đều phải thêm code để kiểm tra cache  thì sẽ lặp lại rất nhiều. Để phát huy cái sự lười biếng thì ta sẽ tạo một plug đơn giản để khỏi phải code nhiều lần.</p>
+
+<pre><code class="language-elixir">defmodule PhoenixCache.Plug.Cache do
+  import Plug.Conn
+
+  # 6 minute
+  @default_ttl 6 * 60
+
+  def init(ttl \\ nil), do: ttl
+
+  def call(conn, ttl \\ nil) do
+    ttl = ttl || @default_ttl
+
+    # Chỉ cache với GET request
+    if conn.method == &quot;GET&quot; do
+      # tạo key từ request path và query param, thông thường
+      # thì cùng path và cùng param thì kết quả là giống nhau
+      key = &quot;#{conn.request_path}-#{conn.query_string}&quot;
+
+      case PhoenixCache.Bucket.get(key) do
+        {:ok, body} -&gt;
+          IO.puts(&quot;PLUG HIT&quot;)
+		  
+		  # nếu đã cache thì trả về ngay
+          conn
+          |&gt; send_resp(200, body)
+          |&gt; halt
+
+        _ -&gt;
+          IO.puts(&quot;PLUG MISS&quot;)
+		  # nếu chưa cache thì xử lý như bình thường
+          conn
+          |&gt; assign(:ttl, ttl)
+          |&gt; register_before_send(&amp;cache_before_send/1) # gọi hàm này trước khi trả về
+      end
+    else
+      conn
+    end
+  end
+
+  def cache_before_send(conn) do
+    # nếu request đuợc xử lý thành công thì cache
+    if conn.status == 200 do
+      key = &quot;#{conn.request_path}-#{conn.query_string}&quot;
+      data = conn.resp_body
+      PhoenixCache.Bucket.set(key, data, conn.assigns[:ttl] || @default_ttl)
+      conn
+      
+    else
+      # không thì kệ chúng mày
+      conn
+    end
+  end
+end
+
+</code></pre>
+
+<p>Đây chỉ là một plug đơn giản, bạn có thể viết lại theo nhu cầu.</p>
+
+<p>Sử dụng Plug: <code>plug(PhoenixCache.Plug.Cache, TTL )</code></p>
+
+<pre><code class="language-elixir">pipeline :browser do
+    ...
+    plug(PhoenixCache.Plug.Cache, 100) # cache 100s
+ end
+</code></pre>
+
+<h3 id="6-kết-luận">6. Kết luận</h3>
+
+<p>Vậy là bạn đã có thể sử dụng ETS như là bộ nhớ cache cho ứng dụng Phoenix của mình mà không cần phải cài thêm phần mềm/dịch vụ khác.</p>
+
+<p>Hi vọng sẽ giúp ích cho các bạn</p>
+
+<p>Source code project <a href="https://github.com/bluzky/phoenix_ets_cache_example">https://github.com/bluzky/phoenix_ets_cache_example</a></p>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="http://bluzky.github.io/tags/elixir/">elixir</a>
+
+  <a class="tag tag--primary tag--small" href="http://bluzky.github.io/tags/phoenix/">phoenix</a>
+
+  <a class="tag tag--primary tag--small" href="http://bluzky.github.io/tags/ets/">ETS</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://bluzky.github.io/2018/05/elixir-l%C6%B0u-tr%E1%BB%AF-d%E1%BB%AF-li%E1%BB%87u-tr%C3%AAn-ram-v%E1%BB%9Bi-ets/" data-tooltip="Elixir - Lưu trữ dữ liệu trên RAM với ETS">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://bluzky.github.io/2018/05/s%E1%BB%AD-d%E1%BB%A5ng-ets-%C4%91%E1%BB%83-t%C4%83ng-t%E1%BB%91c-%E1%BB%A9ng-d%E1%BB%A5ng-v%E1%BB%9Bi-phoenix/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://bluzky.github.io/2018/05/s%E1%BB%AD-d%E1%BB%A5ng-ets-%C4%91%E1%BB%83-t%C4%83ng-t%E1%BB%91c-%E1%BB%A9ng-d%E1%BB%A5ng-v%E1%BB%9Bi-phoenix/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://bluzky.github.io/2018/05/s%E1%BB%AD-d%E1%BB%A5ng-ets-%C4%91%E1%BB%83-t%C4%83ng-t%E1%BB%91c-%E1%BB%A9ng-d%E1%BB%A5ng-v%E1%BB%9Bi-phoenix/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Dũng Nguyễn. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="http://bluzky.github.io/2018/05/elixir-l%C6%B0u-tr%E1%BB%AF-d%E1%BB%AF-li%E1%BB%87u-tr%C3%AAn-ram-v%E1%BB%9Bi-ets/" data-tooltip="Elixir - Lưu trữ dữ liệu trên RAM với ETS">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://bluzky.github.io/2018/05/s%E1%BB%AD-d%E1%BB%A5ng-ets-%C4%91%E1%BB%83-t%C4%83ng-t%E1%BB%91c-%E1%BB%A9ng-d%E1%BB%A5ng-v%E1%BB%9Bi-phoenix/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://bluzky.github.io/2018/05/s%E1%BB%AD-d%E1%BB%A5ng-ets-%C4%91%E1%BB%83-t%C4%83ng-t%E1%BB%91c-%E1%BB%A9ng-d%E1%BB%A5ng-v%E1%BB%9Bi-phoenix/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://bluzky.github.io/2018/05/s%E1%BB%AD-d%E1%BB%A5ng-ets-%C4%91%E1%BB%83-t%C4%83ng-t%E1%BB%91c-%E1%BB%A9ng-d%E1%BB%A5ng-v%E1%BB%9Bi-phoenix/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fbluzky.github.io%2F2018%2F05%2Fs%25E1%25BB%25AD-d%25E1%25BB%25A5ng-ets-%25C4%2591%25E1%25BB%2583-t%25C4%2583ng-t%25E1%25BB%2591c-%25E1%25BB%25A9ng-d%25E1%25BB%25A5ng-v%25E1%25BB%259Bi-phoenix%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http%3A%2F%2Fbluzky.github.io%2F2018%2F05%2Fs%25E1%25BB%25AD-d%25E1%25BB%25A5ng-ets-%25C4%2591%25E1%25BB%2583-t%25C4%2583ng-t%25E1%25BB%2591c-%25E1%25BB%25A9ng-d%25E1%25BB%25A5ng-v%25E1%25BB%259Bi-phoenix%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http%3A%2F%2Fbluzky.github.io%2F2018%2F05%2Fs%25E1%25BB%25AD-d%25E1%25BB%25A5ng-ets-%25C4%2591%25E1%25BB%2583-t%25C4%2583ng-t%25E1%25BB%2591c-%25E1%25BB%25A9ng-d%25E1%25BB%25A5ng-v%25E1%25BB%259Bi-phoenix%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://avatars3.githubusercontent.com/u/6194779?s=460&amp;v=4" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Dũng Nguyễn</h4>
+    
+      <div id="about-card-bio">Super hero</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Web developer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Hồ Chí Minh, Việt Nam
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://bluzky.github.io/2018/05/s%E1%BB%AD-d%E1%BB%A5ng-ets-%C4%91%E1%BB%83-t%C4%83ng-t%E1%BB%91c-%E1%BB%A9ng-d%E1%BB%A5ng-v%E1%BB%9Bi-phoenix/">
+                <h3 class="media-heading">Sử dụng ETS để tăng tốc ứng dụng với Phoenix</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Bài viết này sẽ hướng dẫn các bạn sử dụng ETS như là bộ nhớ cache để tăng tốc các ứng dụng web Phoenix
+ Dành cho các bạn chưa biết:
+ ETS (Erlang Term Storage) là cơ sở dữ liệu dạng key-value lưu trữ trên RAM, tương tự như Memcache và Redis, với ưu điểm là tốc độ truy xuất cực nhanh. Đọc thêm về ETS Cache là việc lưu lại các kết quả xử lý của request vào bộ nhớ và trả về cho các request sau mà không cần phải tính toán lại -&gt; giảm response time.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://bluzky.github.io/2018/05/elixir-l%C6%B0u-tr%E1%BB%AF-d%E1%BB%AF-li%E1%BB%87u-tr%C3%AAn-ram-v%E1%BB%9Bi-ets/">
+                <h3 class="media-heading">Elixir - Lưu trữ dữ liệu trên RAM với ETS</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">ETS là gì? Có lẽ các bạn đã nghe qua về redis hoặc memcache, hoặc là cả hai. Còn nếu bạn chưa nghe tới bao giờ thì đó là những cơ sở dữ liệu lưu trữ trên RAM với ưu điểm là tốc độ truy xuất cực kỳ nhanh. ETS - Erlang Term Service - cũng là một CSDL lưu trữ trên RAM (in-ram DB) nhưng khác ở chỗ là ETS có sẵn khi cài Elixir/Erlang và bạn chẳng phải mất công cài đặt, cấu hình như 2 anh trên kia, nhà trồng được việc gì phải ngại.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://bluzky.github.io/2018/05/test-facebook-bot-tr%C3%AAn-localhost-v%E1%BB%9Bi-ngrok/">
+                <h3 class="media-heading">Test Facebook bot trên localhost với ngrok</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Trong quá trình tìm hiểu về lập trình chat bot sử dụng các API của Facebook Messenger thì việt test chat bot trên localhost là một trở ngại.
+Khi tạo một subscription cho app chat bot, Facebook sẽ gửi một request đến server mà chat bot đang chạy để xác nhận có đúng là chat bot của bạn không. Cũng như sau đó, tất cả những tin nhắn của nguời dùng sẽ đuợc gửi tới chat bot thông qua callback url.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://bluzky.github.io/2018/05/ch%E1%BA%A1y-server-phoenix-v%E1%BB%9Bi-ssl-tr%C3%AAn-localhost/">
+                <h3 class="media-heading">Chạy server Phoenix với SSL trên localhost</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Từ tháng 04/2018 tất cả các app mới tạo trên Facebook chỉ chấp nhận callback url có sử dụng SSL. Đây là những bước đơn giản để có thể sử dụng giao thức https trên localhost đối với Phoenix
+ 1. Tạo chứng chỉ
+Run command
+openssl genrsa 1024 &gt; app.key &amp;&amp; openssl req -new -x509 -nodes -sha1 -days 365 -key ~/app.key &gt; ~/app.cert  2. Copy file
+app.key and app.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://bluzky.github.io/2018/05/memcache-l%C3%A0-g%C3%AC/">
+                <h3 class="media-heading">Memcache là gì?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">1. Memcache  Memcache là một cơ sở dữ liệu dạng key-value, các dữ liệu đuợc ghi nhớ trên RAM giúp tối ưu thời gian truy xuất.
+ 2. Đặc điểm  Dữ liệu lưu trữ dạng key-value Value là dữ liệu dạng string Kích thuớc của Value giới hạn là 1MB Dữ liệu sẽ bị mất khi tắt máy/ tắt memcache Truy xuất dữ liệu nhanh  3. Ứng dụng Memcache thường đuợc dùng đễ cache dữ liệu trên các web server giúp giảm thời gian xử lý các request giống nhau, thay vào đó chỉ cần đọc dữ liệu từ bộ nhớ và trả về ngay lập tức.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://bluzky.github.io/2018/04/terminal-tips-m%E1%BB%99t-s%E1%BB%91-command-hay-d%C3%B9ng/">
+                <h3 class="media-heading">Terminal tips - Một số command hay dùng</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Khi chuyển qua dùng các hệ điều hành Unix và Mac, việc sử dụng các command line là một phần không thể thiếu, đặc biệt là các công việc liên quan tới Web dev và devops.
+Tuy nhiên phần lớn là đụng tới đâu cần thì mới search, hoặc là do xài quen rồi nên cũng lười tìm cách làm khác. Chỉ cần dành 1 phút để đọc qua bài viết này, các bạn sẽ thực sự bất ngờ vì có những thứ cool đến không ngờ.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://bluzky.github.io/2018/04/finite-state-machine-trong-l%E1%BA%ADp-tr%C3%ACnh/">
+                <h3 class="media-heading">Finite state machine trong lập trình</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">1. Tìm hiểu về FSM  FSM(Finite state machine) - Máy trạng thái hữu hạn là một mô hình toán học biểu diễn trạng thái của hệ, trong đó số trạng thái là hữu hạn. Từ mỗi trạng thái, máy có thể chuyển đổi qua 1 số trạng thái cố định khác, dựa trên các sự kiện, input.
+ Fsm được biểu diễn như 1 đồ thị có hướng.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://bluzky.github.io/2018/04/t%C3%ACm-hi%E1%BB%83u-v%E1%BB%81-c%C3%B4ng-ngh%E1%BB%87-blockchain/">
+                <h3 class="media-heading">Tìm hiểu về công nghệ Blockchain</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Từ cơn sốt tiền ảo, công nghệ Blockchain được tung hô và được xem như là công nghệ sẽ làm thay đổi tương lại, thậm chí đến cả công ty thực phẩm thêm chữ Blockchain vào tên sản phẩm cũng đủ làm giá cổ phiếu tăng mấy chục lần. Vậy Blockchain là gì và nó có thực sự là thứ sẽ làm thay đổi tương lai công nghệ? Để trả lời thắc mắc của chính mình, tôi đã dành thời gian để tìm hiểu về Blockchain.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://bluzky.github.io/2018/02/thi%E1%BA%BFt-l%E1%BA%ADp-v%C3%A0-qu%E1%BA%A3n-l%C3%BD-m%E1%BB%A5c-ti%C3%AAu-theo-ph%C6%B0%C6%A1ng-ph%C3%A1p-okr/">
+                <h3 class="media-heading">Thiết lập và quản lý mục tiêu theo phương pháp OKR</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Vừa mới hoàn thành các chức năng cơ bản cho hệ thống OKR nội bộ công ty. Sau quá trình tìm hiểu các phương pháp áp dụng OKR vào trong một tổ chức, mình thấy nó rất là hay và đơn giản, dễ áp dụng. Ngoài việc áp dụng cho công ty, có thể áp dụng các nguyên tắc của OKR để thiết lập kế hoạch cá nhân.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://bluzky.github.io/2018/01/d%C3%B9ng-map-filter-v%C3%A0-reduce-%C4%91%E1%BB%83-x%E1%BB%AD-l%C3%BD-danh-s%C3%A1ch-/-list-trong-python/">
+                <h3 class="media-heading">Dùng MAP, FILTER và REDUCE để xử lý danh sách / list trong Python</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">1. Giới thiệu  List là một trong những kiểu dữ liệu được sử dụng rất nhiều trong python. Các thao tác thường được thực hiện trên list: xử lý từng phần tử trong list, lọc lấy một số phần tử thỏa điều kiện, tính toán dựa trên tất cả các phần tử của list( vd tính tổng) và trả về kết quả. Để đơn giản việc xử lý List, Python hỗ trợ một số hàm có sẵn để thực hiện các tác vụ trên gồm map(), filter(), reduce()  2.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         14 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('http://bluzky.github.io/images/cover.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="http://bluzky.github.io/js/tranquilpeak.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'http:\/\/bluzky.github.io\/2018\/05\/s%E1%BB%AD-d%E1%BB%A5ng-ets-%C4%91%E1%BB%83-t%C4%83ng-t%E1%BB%91c-%E1%BB%A9ng-d%E1%BB%A5ng-v%E1%BB%9Bi-phoenix\/';
+          
+            this.page.identifier = '\/2018\/05\/s%E1%BB%AD-d%E1%BB%A5ng-ets-%C4%91%E1%BB%83-t%C4%83ng-t%E1%BB%91c-%E1%BB%A9ng-d%E1%BB%A5ng-v%E1%BB%9Bi-phoenix\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'dan-van-phong-4.0';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

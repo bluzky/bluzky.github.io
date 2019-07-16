@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Blockchain on The 54 tribes</title>
+    <title>blockchain on The 54 tribes</title>
     <link>http://bluzky.github.io/tags/blockchain/</link>
-    <description>Recent content in Blockchain on The 54 tribes</description>
+    <description>Recent content in blockchain on The 54 tribes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>bluesky.1289@gmail.com (Dũng Nguyễn)</managingEditor>
-    <webMaster>bluesky.1289@gmail.com (Dũng Nguyễn)</webMaster>
     <lastBuildDate>Wed, 11 Apr 2018 20:53:06 +0700</lastBuildDate>
     
 	<atom:link href="http://bluzky.github.io/tags/blockchain/index.xml" rel="self" type="application/rss+xml" />
@@ -15,10 +13,10 @@
     
     <item>
       <title>Tìm hiểu về công nghệ Blockchain</title>
-      <link>http://bluzky.github.io/post/2018-04-11-blockchain/</link>
+      <link>http://bluzky.github.io/2018/04/t%C3%ACm-hi%E1%BB%83u-v%E1%BB%81-c%C3%B4ng-ngh%E1%BB%87-blockchain/</link>
       <pubDate>Wed, 11 Apr 2018 20:53:06 +0700</pubDate>
-      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
-      <guid>http://bluzky.github.io/post/2018-04-11-blockchain/</guid>
+      
+      <guid>http://bluzky.github.io/2018/04/t%C3%ACm-hi%E1%BB%83u-v%E1%BB%81-c%C3%B4ng-ngh%E1%BB%87-blockchain/</guid>
       <description>Từ cơn sốt tiền ảo, công nghệ Blockchain được tung hô và được xem như là công nghệ sẽ làm thay đổi tương lại, thậm chí đến cả công ty thực phẩm thêm chữ Blockchain vào tên sản phẩm cũng đủ làm giá cổ phiếu tăng mấy chục lần. Vậy Blockchain là gì và nó có thực sự là thứ sẽ làm thay đổi tương lai công nghệ? Để trả lời thắc mắc của chính mình, tôi đã dành thời gian để tìm hiểu về Blockchain.</description>
     </item>
     

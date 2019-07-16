@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ets on The 54 tribes</title>
+    <title>ETS on The 54 tribes</title>
     <link>http://bluzky.github.io/tags/ets/</link>
-    <description>Recent content in Ets on The 54 tribes</description>
+    <description>Recent content in ETS on The 54 tribes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>bluesky.1289@gmail.com (Dũng Nguyễn)</managingEditor>
-    <webMaster>bluesky.1289@gmail.com (Dũng Nguyễn)</webMaster>
     <lastBuildDate>Fri, 18 May 2018 01:05:50 +0700</lastBuildDate>
     
 	<atom:link href="http://bluzky.github.io/tags/ets/index.xml" rel="self" type="application/rss+xml" />
@@ -15,10 +13,10 @@
     
     <item>
       <title>Sử dụng ETS để tăng tốc ứng dụng với Phoenix</title>
-      <link>http://bluzky.github.io/post/2018-05-17-ets-as-cache-phoenix/</link>
+      <link>http://bluzky.github.io/2018/05/s%E1%BB%AD-d%E1%BB%A5ng-ets-%C4%91%E1%BB%83-t%C4%83ng-t%E1%BB%91c-%E1%BB%A9ng-d%E1%BB%A5ng-v%E1%BB%9Bi-phoenix/</link>
       <pubDate>Fri, 18 May 2018 01:05:50 +0700</pubDate>
-      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
-      <guid>http://bluzky.github.io/post/2018-05-17-ets-as-cache-phoenix/</guid>
+      
+      <guid>http://bluzky.github.io/2018/05/s%E1%BB%AD-d%E1%BB%A5ng-ets-%C4%91%E1%BB%83-t%C4%83ng-t%E1%BB%91c-%E1%BB%A9ng-d%E1%BB%A5ng-v%E1%BB%9Bi-phoenix/</guid>
       <description>Bài viết này sẽ hướng dẫn các bạn sử dụng ETS như là bộ nhớ cache để tăng tốc các ứng dụng web Phoenix
  Dành cho các bạn chưa biết:
  ETS (Erlang Term Storage) là cơ sở dữ liệu dạng key-value lưu trữ trên RAM, tương tự như Memcache và Redis, với ưu điểm là tốc độ truy xuất cực nhanh. Đọc thêm về ETS Cache là việc lưu lại các kết quả xử lý của request vào bộ nhớ và trả về cho các request sau mà không cần phải tính toán lại -&amp;gt; giảm response time.</description>

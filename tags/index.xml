@@ -6,145 +6,143 @@
     <description>Recent content in Tags on The 54 tribes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>bluesky.1289@gmail.com (Dũng Nguyễn)</managingEditor>
-    <webMaster>bluesky.1289@gmail.com (Dũng Nguyễn)</webMaster>
-    <lastBuildDate>Wed, 11 Apr 2018 20:53:06 +0700</lastBuildDate>
+    <lastBuildDate>Fri, 18 May 2018 01:05:50 +0700</lastBuildDate>
     
 	<atom:link href="http://bluzky.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Blockchain</title>
-      <link>http://bluzky.github.io/tags/blockchain/</link>
-      <pubDate>Wed, 11 Apr 2018 20:53:06 +0700</pubDate>
-      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
-      <guid>http://bluzky.github.io/tags/blockchain/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Elixir</title>
-      <link>http://bluzky.github.io/tags/elixir/</link>
-      <pubDate>Fri, 18 May 2018 01:05:50 +0700</pubDate>
-      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
-      <guid>http://bluzky.github.io/tags/elixir/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Erlang</title>
-      <link>http://bluzky.github.io/tags/erlang/</link>
-      <pubDate>Sat, 12 May 2018 14:28:22 +0700</pubDate>
-      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
-      <guid>http://bluzky.github.io/tags/erlang/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ets</title>
+      <title>ETS</title>
       <link>http://bluzky.github.io/tags/ets/</link>
       <pubDate>Fri, 18 May 2018 01:05:50 +0700</pubDate>
-      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
+      
       <guid>http://bluzky.github.io/tags/ets/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Management</title>
-      <link>http://bluzky.github.io/tags/management/</link>
-      <pubDate>Fri, 09 Feb 2018 00:00:00 +0000</pubDate>
-      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
-      <guid>http://bluzky.github.io/tags/management/</guid>
+      <title>elixir</title>
+      <link>http://bluzky.github.io/tags/elixir/</link>
+      <pubDate>Fri, 18 May 2018 01:05:50 +0700</pubDate>
+      
+      <guid>http://bluzky.github.io/tags/elixir/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Oauth2</title>
-      <link>http://bluzky.github.io/tags/oauth2/</link>
-      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
-      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
-      <guid>http://bluzky.github.io/tags/oauth2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Others</title>
-      <link>http://bluzky.github.io/tags/others/</link>
-      <pubDate>Wed, 11 Apr 2018 20:53:06 +0700</pubDate>
-      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
-      <guid>http://bluzky.github.io/tags/others/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Phoenix</title>
+      <title>phoenix</title>
       <link>http://bluzky.github.io/tags/phoenix/</link>
       <pubDate>Fri, 18 May 2018 01:05:50 +0700</pubDate>
-      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
+      
       <guid>http://bluzky.github.io/tags/phoenix/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Protocol</title>
-      <link>http://bluzky.github.io/tags/protocol/</link>
-      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
-      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
-      <guid>http://bluzky.github.io/tags/protocol/</guid>
+      <title>erlang</title>
+      <link>http://bluzky.github.io/tags/erlang/</link>
+      <pubDate>Sat, 12 May 2018 14:28:22 +0700</pubDate>
+      
+      <guid>http://bluzky.github.io/tags/erlang/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Python</title>
-      <link>http://bluzky.github.io/tags/python/</link>
-      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
-      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
-      <guid>http://bluzky.github.io/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python Basic</title>
-      <link>http://bluzky.github.io/tags/python-basic/</link>
-      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
-      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
-      <guid>http://bluzky.github.io/tags/python-basic/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tech</title>
+      <title>tech</title>
       <link>http://bluzky.github.io/tags/tech/</link>
       <pubDate>Tue, 08 May 2018 20:56:31 +0700</pubDate>
-      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
+      
       <guid>http://bluzky.github.io/tags/tech/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Terminal</title>
-      <link>http://bluzky.github.io/tags/terminal/</link>
-      <pubDate>Tue, 24 Apr 2018 21:43:25 +0700</pubDate>
-      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
-      <guid>http://bluzky.github.io/tags/terminal/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Til</title>
+      <title>til</title>
       <link>http://bluzky.github.io/tags/til/</link>
       <pubDate>Tue, 08 May 2018 20:56:31 +0700</pubDate>
-      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
+      
       <guid>http://bluzky.github.io/tags/til/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Tips</title>
+      <title>terminal</title>
+      <link>http://bluzky.github.io/tags/terminal/</link>
+      <pubDate>Tue, 24 Apr 2018 21:43:25 +0700</pubDate>
+      
+      <guid>http://bluzky.github.io/tags/terminal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tips</title>
       <link>http://bluzky.github.io/tags/tips/</link>
       <pubDate>Tue, 24 Apr 2018 21:43:25 +0700</pubDate>
-      <author>bluesky.1289@gmail.com (Dũng Nguyễn)</author>
+      
       <guid>http://bluzky.github.io/tags/tips/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>blockchain</title>
+      <link>http://bluzky.github.io/tags/blockchain/</link>
+      <pubDate>Wed, 11 Apr 2018 20:53:06 +0700</pubDate>
+      
+      <guid>http://bluzky.github.io/tags/blockchain/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>others</title>
+      <link>http://bluzky.github.io/tags/others/</link>
+      <pubDate>Wed, 11 Apr 2018 20:53:06 +0700</pubDate>
+      
+      <guid>http://bluzky.github.io/tags/others/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>management</title>
+      <link>http://bluzky.github.io/tags/management/</link>
+      <pubDate>Fri, 09 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://bluzky.github.io/tags/management/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>oauth2</title>
+      <link>http://bluzky.github.io/tags/oauth2/</link>
+      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://bluzky.github.io/tags/oauth2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>protocol</title>
+      <link>http://bluzky.github.io/tags/protocol/</link>
+      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://bluzky.github.io/tags/protocol/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>http://bluzky.github.io/tags/python/</link>
+      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://bluzky.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python-basic</title>
+      <link>http://bluzky.github.io/tags/python-basic/</link>
+      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://bluzky.github.io/tags/python-basic/</guid>
       <description></description>
     </item>
     
