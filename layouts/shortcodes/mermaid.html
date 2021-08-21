@@ -1,0 +1,5 @@
+<script defer src="{{"/js/mermaid.min.js" | relURL}}">
+// mermaid.initialize({ startOnLoad: true, theme: 'forest' })
+mermaid.initialize({ theme: 'forest' })
+</script>
+<div class="mermaid" align="{{ if .Get "align" }}{{ .Get "align" }}{{ else }}center{{ end }}" >{{ safeHTML .Inner }}</div>
