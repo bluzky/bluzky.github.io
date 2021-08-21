@@ -4,7 +4,7 @@ date: 2020-09-26
 tags: ["elixir", "ecto", "phoenix"]
 author: Dung Nguyen
 draft: false
-image: "/images/parse-ecto-phoenix.webp"
+image: "/img/parse-ecto-phoenix.png"
 ---
 
 
