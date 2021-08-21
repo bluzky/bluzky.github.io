@@ -1,0 +1,489 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<title>What is Rabbit MQ?</title>
+<meta name=author content="Dung Nguyen">
+<meta name=description content="  Drinking orange juice is good for your health. Reading some orange code is good too :D  ">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=5">
+<link rel=icon href=http://bluzky.github.io/images/favicon.png type=image/x-icon>
+<link rel=preconnect href=https://fonts.gstatic.com>
+<link rel=stylesheet href=https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css>
+<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Noto%20Serif:wght@400;600;700&display=swap">
+<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap">
+<link rel=stylesheet href=http://bluzky.github.io/css/vendor.min.f1fadd374499730cae93f0bb139129fe90d49ff275d512d21e163fe3e3d2d0d38ec6ea13a533a725958fbc57c6635e9afcc691235645566c26c5714c93cea279.css integrity="sha512-8frdN0SZcwyuk/C7E5Ep/pDUn/J11RLSHhY/4+PS0NOOxuoTpTOnJZWPvFfGY16a/MaRI1ZFVmwmxXFMk86ieQ==" media=screen>
+</head>
+<body>
+<div class=header-height-fix></div>
+<header class=header-nav>
+<div class=container>
+<div class=row>
+<div class=col-12>
+<nav class="navbar navbar-expand-lg navbar-light p-0">
+<a class="navbar-brand font-weight-bold mr-0" href=http://bluzky.github.io/>
+<img loading=lazy src=http://bluzky.github.io/images/logo.png alt="The Organge+" height=35px>
+</a>
+<button class="search-toggle d-inline-block d-lg-none ml-auto mr-3" data-toggle=search aria-label="Search Toggle">
+<i class="las la-search"></i>
+</button>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navHeader aria-controls=navHeader aria-expanded=false aria-label="Toggle navigation">
+<i class="d-inline lab la-buromobelexperte"></i>
+<i class="d-none las la-times"></i>
+</button>
+<div class="collapse navbar-collapse" id=navHeader>
+<ul class="navbar-nav mx-auto">
+<li class=nav-item>
+<a class=nav-link href=http://bluzky.github.io/>Blog</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=http://bluzky.github.io/tags/>Tags</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=http://bluzky.github.io/about>About me</a>
+</li>
+</ul>
+<div class="navbar-right d-none d-lg-inline-block">
+<ul class="social-links list-unstyled list-inline">
+<li class="list-inline-item ml-4 d-none d-lg-inline-block">
+<button class=search-toggle data-toggle=search aria-label="Search Toggle">
+<i class="las la-search"></i>
+</button>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+</div>
+</div>
+</div>
+</header>
+<div class=search-block>
+<div data-toggle=search-close>
+<i class="las la-times text-primary"></i>
+</div>
+<form action=/search>
+<input id=search-query name=s type=search placeholder="Type words & hit enter" class=text-center aria-label=search-query>
+</form>
+</div>
+<section class=section-sm>
+<div class=container>
+<div class="row justify-content-center">
+<div class=col-lg-10>
+<div class="text-center mb-5">
+<h3 class="h2 mb-4 post-title">What is Rabbit MQ?</h3>
+<ul class="card-meta list-inline">
+<li class=list-inline-item>
+<a href=#! class=card-meta-author>
+<a href=http://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
+<img loading=lazy src=http://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
+<span>Dung Nguyen</span>
+</a>
+</a>
+</li>
+<li class=list-inline-item>|</li>
+<li class=list-inline-item>
+<span>21 January 2018</span>
+</li>
+</ul>
+</div>
+<div class=content><h2 id=1-what-is-rabbit-mq>1. What is Rabbit MQ?</h2>
+<blockquote>
+<p>Rabbit MQ is an server application, it is a message broker which implement AMQP (Advanced Message Queue Protocol).
+It works like a post service, which take the message from sender and dispatch that message to the receiver.</p>
+</blockquote>
+<p><strong>Some terminologies:</strong></p>
+<ul>
+<li><code>Producer</code>: send message to queue</li>
+<li><code>Queue</code>: hold all message added by producer and dispatch those message to a consumer</li>
+<li><code>Consumer</code>: receive message from</li>
+</ul>
+<h2 id=2-what-is-rabbit-mq-used-for>2. What is Rabbit MQ used for?</h2>
+<p>RabbitMQ is a message broker server that receive and dispatch/distribute messages to back end services that handle/process heavy tasks. It helps to build a big system can handle large amount of request</p>
+<h2 id=3-features-list>3. Features list</h2>
+<p><strong>Reliability</strong><br>
+RabbitMQ offers a variety of features to let you trade off performance with reliability, including persistence, delivery acknowledgements, publisher confirms, and high availability.</p>
+<p><strong>Flexible Routing</strong><br>
+Messages are routed through exchanges before arriving at queues. RabbitMQ features several built-in exchange types for typical routing logic. For more complex routing you can bind exchanges together or even write your own exchange type as a plugin.</p>
+<p><strong>Clustering</strong><br>
+Several RabbitMQ servers on a local network can be clustered together, forming a single logical broker.</p>
+<p><strong>Federation</strong><br>
+For servers that need to be more loosely and unreliably connected than clustering allows, RabbitMQ offers a federation model.</p>
+<p><strong>Highly Available Queues</strong><br>
+Queues can be mirrored across several machines in a cluster, ensuring that even in the event of hardware failure your messages are safe.</p>
+<p><strong>Multi-protocol</strong><br>
+RabbitMQ supports messaging over a variety of messaging protocols.</p>
+<p><strong>Many Clients</strong><br>
+There are RabbitMQ clients for almost any language you can think of.</p>
+<p><strong>Management UI</strong><br>
+RabbitMQ ships with an easy-to use management UI that allows you to monitor and control every aspect of your message broker.</p>
+<p><strong>Tracing</strong><br>
+If your messaging system is misbehaving, RabbitMQ offers tracing support to let you find out what&rsquo;s going on.</p>
+<h2 id=3bis-implement-models>3.Bis. Implement models</h2>
+<h3 id=1-supported-model>1. <strong>Supported Model</strong></h3>
+<ul>
+<li>
+<p><strong>Default exchange</strong><br>
+Message from Producer will be pushed directly to message queue and Consumber will receive message on the same queue.
+Producer and Consumer must know the name of the queue</p>
+</li>
+<li>
+<p><strong>Fanout exchange</strong><br>
+Every message is pushed to Fanout exchange,it will be pushed to all all queues which subscribe this Exchange</p>
+</li>
+<li>
+<p><strong>Direct exachange</strong><br>
+If a Consumer only want to filter received message, it will bind to one or many routing_key. When Exchange have new message, it will append that message to all queue which subscribe same routing_key with message. If message&rsquo;s routing key does not match any subscriber, it will be discarded</p>
+</li>
+<li>
+<p><strong>Topic exchange</strong><br>
+This type of exchange allow more complicated filter, it use pattern to filter topic. Topic string format contains many words and separate by dot [.]
+# to replace 0 or many words * to replace exactly one word
+<strong>Example</strong>:<br>
+publish topic: kern.logs.error, security.log.warning
+pattern: *.*.error, kern.#</p>
+</li>
+<li>
+<p><strong>Headers exchange</strong></p>
+</li>
+</ul>
+<h3 id=2-direct-message>2. <strong>Direct message:</strong></h3>
+<blockquote>
+<p>Producer send message directy to message queue
+To send message direct to queue, set exchange name to empty string
+Many consumer can subcribe same queue. Message will be dispatched using FIFO rule</p>
+</blockquote>
+<p><strong>Producer</strong></p>
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>channel<span style=color:#ff79c6>.</span>basic_publish(exchange<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;&#39;</span>,
+					  routing_key<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;routing_name&#39;</span>,
+                      body<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;message_content&#39;</span>)
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Consumer</strong></p>
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>channel<span style=color:#ff79c6>.</span>basic_consume(callback, <span style=color:#6272a4># callback function to handle message</span>
+						queue<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;queue_name&#39;</span>
+                        no_ack<span style=color:#ff79c6>=</span><span style=color:#ff79c6>True</span>)
+</code></pre></td></tr></table>
+</div>
+</div><script defer src=/js/mermaid.min.js>mermaid.initialize({theme:'forest'})</script>
+<div class=mermaid align=center>
+graph LR;
+A((Producer))-->Q[queue];
+Q --> C((Consumer 1));
+Q --> C2((Consumer 2));
+Q --> C3(( ......));
+</div>
+<h3 id=3-publish-message-via-exchangepublishsubcribe>3. <strong>Publish message via Exchange</strong>(publish/subcribe)</h3>
+<p><strong>Exchange</strong>: acts like an agent, it receives messages from Producer and pushes them to appropriate queue.
+The idea of exchange is to separate Producer from queues. Producers do not need to know about queues, it simply sends message to exchange, and Exchanges will know how/ which queue to append message to or discard them.</p>
+<blockquote>
+<p>Routing key comes with publish and subscribe. Instead of knowing name of queue, producer now only need know routing key, it sends messages to Exchange with routing key. Each time Exchange receives a message, it will check message&rsquo;s routing key and push that message to all Consumer which subscribe that routing key.</p>
+</blockquote>
+<script defer src=/js/mermaid.min.js>mermaid.initialize({theme:'forest'})</script>
+<div class=mermaid align=center>
+graph LR;
+P1((P1))-->E(Exchange);
+P2((P2))-->E;
+E-->|Black|Q1[Queue1];
+E-->|Green|Q2[Queue2];
+E-->|Blue|Q2[Queue2];
+Q1-->C1((C1));
+Q2-->C2((C2));
+</div>
+<p><strong>Producer</strong></p>
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#6272a4># firs we need to declare an exchange</span>
+<span style=color:#6272a4># four types of exchange: fanout, headers, topic, direct</span>
+channel<span style=color:#ff79c6>.</span>exchange_declare(exchange<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;exchange_name&#39;</span>,
+						<span style=color:#8be9fd;font-style:italic>type</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;exchange_type&#39;</span>)
+<span style=color:#ff79c6>....</span>
+channel<span style=color:#ff79c6>.</span>basic_publish(exchange<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;exchange_name&#39;</span>,
+						routing_key<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;channel_name&#39;</span>,
+                        body<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;message_content&#39;</span>)
+<span style=color:#ff79c6>....</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Consumer</strong></p>
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>channel<span style=color:#ff79c6>.</span>exchange_declare(exchange<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;exchange_name&#39;</span>,
+						<span style=color:#8be9fd;font-style:italic>type</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;exchange_type&#39;</span>)
+<span style=color:#ff79c6>....</span>
+<span style=color:#6272a4># need to bind queue to a specific exchange</span>
+channel<span style=color:#ff79c6>.</span>queue_bind(exchange<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;exchange_name&#39;</span>,
+					queue<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;queue_name&#39;</span>)
+<span style=color:#ff79c6>....</span>
+channel<span style=color:#ff79c6>.</span>basic_consume(callback,
+					queue<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;queue_name&#39;</span>,
+                    no_ack<span style=color:#ff79c6>=</span><span style=color:#ff79c6>True</span>)
+</code></pre></td></tr></table>
+</div>
+</div><ol start=4>
+<li>
+<p><strong>RPC</strong></p>
+<blockquote>
+<p>Client send request to Server, Method is defined at server and Client should know exactly which function server has.
+Client push request to a queue and server subscribe this queue
+Server push result to another queue and clien subscribe this queue</p>
+</blockquote>
+<script defer src=/js/mermaid.min.js>mermaid.initialize({theme:'forest'})</script>
+<div class=mermaid align=center>
+graph LR
+C((Client))-->Q1[request queue]
+Q1--> S((Server))
+Q2[result queue] -->C
+S--> Q2
+style C fill:orange
+style S fill:pink
+</div>
+</li>
+</ol>
+<p>##4. Use case</p>
+<ul>
+<li><a href=https://developers.soundcloud.com/blog/building-products-at-soundcloud-part-1-dealing-with-the-monolith>Sound cloud</a></li>
+</ul>
+<p>##5. References</p>
+<ul>
+<li><a href=http://www.rabbitmq.com/download.html>Install instruction</a></li>
+<li>Tutorial <a href=http://www.rabbitmq.com/tutorials/tutorial-one-python.html>page</a></li>
+<li>==<strong><a href=https://www.rabbitmq.com/tutorials/amqp-concepts.html>AMQP concept</a></strong>==
+##6. Conclusion</li>
+</ul>
+</div>
+</div>
+</div>
+<div class=single-post-meta>
+<div class="row justify-content-center">
+<div class="col-lg-5 col-md-6 text-center text-md-left">
+<ul class="post-meta-tags list-unstyled list-inline">
+<li class=list-inline-item>
+<a href=http://bluzky.github.io/tags/others>#others</a>
+</li>
+<li class=list-inline-item>
+<a href=http://bluzky.github.io/tags/tech>#tech</a>
+</li>
+</ul>
+</div>
+<div class="col-lg-5 col-md-6 text-center text-md-right mt-4 mt-md-0">
+<ul class="social-links has-bg-color list-unstyled list-inline" style=line-height:0>
+<li class=list-inline-item>
+<a class="resp-sharing-button__link d-block" href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2fbluzky.github.io%2fblog%2f2018-01-21-what-is-rabbit-mq%2f" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small">
+<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+<i class="lab la-facebook-f text-dark"></i>
+</div>
+</div>
+</a>
+</li>
+<li class=list-inline-item>
+<a class="resp-sharing-button__link d-block" href="https://twitter.com/intent/tweet/?text=What%20is%20Rabbit%20MQ%3f&url=http%3a%2f%2fbluzky.github.io%2fblog%2f2018-01-21-what-is-rabbit-mq%2f" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
+<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+<i class="lab la-twitter text-dark"></i>
+</div>
+</div>
+</a>
+</li>
+<li class=list-inline-item>
+<a class="resp-sharing-button__link d-block" href="https://plus.google.com/share?url=http%3a%2f%2fbluzky.github.io%2fblog%2f2018-01-21-what-is-rabbit-mq%2f" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--google resp-sharing-button--small">
+<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+<i class="lab la-google-plus-g text-dark"></i>
+</div>
+</div>
+</a>
+</li>
+<li class=list-inline-item>
+<a class="resp-sharing-button__link d-block" href="mailto:?subject=What%20is%20Rabbit%20MQ%3f&body=http%3a%2f%2fbluzky.github.io%2fblog%2f2018-01-21-what-is-rabbit-mq%2f" target=_self rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small">
+<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+<i class="las la-envelope text-dark"></i>
+</div>
+</div>
+</a>
+</li>
+<li class=list-inline-item>
+<a class="resp-sharing-button__link d-block" href="whatsapp://send?text=What%20is%20Rabbit%20MQ%3f%20http%3a%2f%2fbluzky.github.io%2fblog%2f2018-01-21-what-is-rabbit-mq%2f" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--small">
+<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+<i class="lab la-whatsapp text-dark"></i>
+</div>
+</div>
+</a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class=single-post-author>
+<div class="row justify-content-center">
+<div class=col-lg-10>
+<div class="media d-block d-sm-flex text-center text-sm-left">
+<a href=http://bluzky.github.io/author/dung-nguyen/><img loading=lazy class="img-fluid rounded-circle mr-0 mr-sm-4 mb-4" src=http://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen"></a>
+<div class=media-body>
+<p class="font-primary mb-1">Written By</p>
+<h4>
+<a href=http://bluzky.github.io/author/dung-nguyen/ class="text-dark font-weight-700">Dung Nguyen</a>
+</h4>
+<p class=font-primary>Hi! I&rsquo;m Dung Nguyen. I&rsquo;m an Elixir developer at OnPoint Vietnam.</p>
+<ul class="social-links list-unstyled list-inline ml-0 ml-sm-n2">
+<li class=list-inline-item>
+<a href=https://linkedin.com>
+<i class="lab la-linkedin-in"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=single-post-similer>
+<div class="row justify-content-center">
+<div class=col-lg-10>
+<div class="row mt-3">
+<div class=col-12>
+<h3 class="text-dark font-weight-800 mb-4 pb-2">
+You May Also Like
+</h3>
+</div>
+<div class=col-md-6><article class="card post-card">
+<div class=card-body>
+<ul class="card-meta list-inline mb-2">
+<li class="list-inline-item mb-2">
+<a href=http://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
+<img loading=lazy src=http://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
+<span>Dung Nguyen</span>
+</a>
+</li>
+<li class="list-inline-item mb-2">
+<span>21 Jan, 2018</span>
+</li>
+</ul>
+<h3 class=mb-3>
+<a class=post-title href=http://bluzky.github.io/blog/2018-01-21-tim-hieu-oauth/>Tìm hiểu về Oauth / Oauth hoạt động như thế nào?</a>
+</h3>
+<p>1. Oauthh 2 và các khái niệm 1.1 Oauth 2 là gì: Oauth 2 là bản nâng cấp của giao thức chứng thực Oauth 1.0
+1.2 Các Role (vai trò) trong mô hình oauth …</p>
+<ul class="card-meta list-inline">
+<li class="list-inline-item mb-2">
+<ul class="card-meta-tag list-inline">
+<li class="list-inline-item tag">
+<a href=http://bluzky.github.io/tags/others>others</a>
+</li>
+<li class="list-inline-item tag">
+<a href=http://bluzky.github.io/tags/protocol>protocol</a>
+</li>
+<li class="list-inline-item tag">
+<a href=http://bluzky.github.io/tags/oauth2>oauth2</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</article>
+</div>
+<div class=col-md-6><article class="card post-card">
+<div class=card-body>
+<ul class="card-meta list-inline mb-2">
+<li class="list-inline-item mb-2">
+<a href=http://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
+<img loading=lazy src=http://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
+<span>Dung Nguyen</span>
+</a>
+</li>
+<li class="list-inline-item mb-2">
+<span>18 May, 2018</span>
+</li>
+</ul>
+<h3 class=mb-3>
+<a class=post-title href=http://bluzky.github.io/blog/2018-05-17-ets-as-cache-phoenix/>Sử dụng ETS để tăng tốc ứng dụng với Phoenix</a>
+</h3>
+<p> Bài viết này sẽ hướng dẫn các bạn sử dụng ETS như là bộ nhớ cache để tăng tốc các ứng dụng web Phoenix
+Dành cho các bạn chưa biết:
+ETS (Erlang Term …</p>
+<ul class="card-meta list-inline">
+<li class="list-inline-item mb-2">
+<ul class="card-meta-tag list-inline">
+<li class="list-inline-item tag">
+<a href=http://bluzky.github.io/tags/elixir>elixir</a>
+</li>
+<li class="list-inline-item tag">
+<a href=http://bluzky.github.io/tags/phoenix>phoenix</a>
+</li>
+<li class="list-inline-item tag">
+<a href=http://bluzky.github.io/tags/ets>ETS</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<footer class=section-sm>
+<div class=container>
+<div class="row justify-content-center align-items-center">
+<div class=col-lg-5>
+</div>
+<div class="col-lg-12 text-center mt-5">
+<ul class="list-inline footer-menu mb-4">
+<li class="list-inline-item mx-3">
+<a href=http://bluzky.github.io/about/>About me</a>
+</li>
+<li class="list-inline-item mx-3">
+<a href=http://bluzky.github.io/author/>Authors</a>
+</li>
+</ul>
+<ul class="social-links icon-box list-unstyled list-inline font-weight-500 mb-3">
+</ul>
+<p class="mb-0 font-weight-500 copyright-text content">
+Designed & Developed By <a href=https://gethugothemes.com/>Gethugothemes</a>
+</p>
+</div>
+</div>
+</div>
+</footer>
+<script data-turbolinks-suppress-warning src=/js/vendor.min.49673e8e4f1ec34c98ef397e87de1845044dfbe687dedef74307932de0a45e95ffa823c3a19942eced3b82a4622fee79a33f9d2ca2adab559232efa452b0de45.js integrity="sha512-SWc+jk8ew0yY7zl+h94YRQRN++aH3t73QweTLeCkXpX/qCPDoZlC7O07gqRiL+55oz+dLKKtq1WSMu+kUrDeRQ=="></script>
+</body>
+</html>

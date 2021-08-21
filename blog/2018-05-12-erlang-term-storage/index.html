@@ -1,0 +1,488 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<title>Elixir - Lưu trữ dữ liệu trên RAM với ETS</title>
+<meta name=author content="Dung Nguyen">
+<meta name=description content="  Drinking orange juice is good for your health. Reading some orange code is good too :D  ">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=5">
+<link rel=icon href=http://bluzky.github.io/images/favicon.png type=image/x-icon>
+<link rel=preconnect href=https://fonts.gstatic.com>
+<link rel=stylesheet href=https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css>
+<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Noto%20Serif:wght@400;600;700&display=swap">
+<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap">
+<link rel=stylesheet href=http://bluzky.github.io/css/vendor.min.f1fadd374499730cae93f0bb139129fe90d49ff275d512d21e163fe3e3d2d0d38ec6ea13a533a725958fbc57c6635e9afcc691235645566c26c5714c93cea279.css integrity="sha512-8frdN0SZcwyuk/C7E5Ep/pDUn/J11RLSHhY/4+PS0NOOxuoTpTOnJZWPvFfGY16a/MaRI1ZFVmwmxXFMk86ieQ==" media=screen>
+</head>
+<body>
+<div class=header-height-fix></div>
+<header class=header-nav>
+<div class=container>
+<div class=row>
+<div class=col-12>
+<nav class="navbar navbar-expand-lg navbar-light p-0">
+<a class="navbar-brand font-weight-bold mr-0" href=http://bluzky.github.io/>
+<img loading=lazy src=http://bluzky.github.io/images/logo.png alt="The Organge+" height=35px>
+</a>
+<button class="search-toggle d-inline-block d-lg-none ml-auto mr-3" data-toggle=search aria-label="Search Toggle">
+<i class="las la-search"></i>
+</button>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navHeader aria-controls=navHeader aria-expanded=false aria-label="Toggle navigation">
+<i class="d-inline lab la-buromobelexperte"></i>
+<i class="d-none las la-times"></i>
+</button>
+<div class="collapse navbar-collapse" id=navHeader>
+<ul class="navbar-nav mx-auto">
+<li class=nav-item>
+<a class=nav-link href=http://bluzky.github.io/>Blog</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=http://bluzky.github.io/tags/>Tags</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=http://bluzky.github.io/about>About me</a>
+</li>
+</ul>
+<div class="navbar-right d-none d-lg-inline-block">
+<ul class="social-links list-unstyled list-inline">
+<li class="list-inline-item ml-4 d-none d-lg-inline-block">
+<button class=search-toggle data-toggle=search aria-label="Search Toggle">
+<i class="las la-search"></i>
+</button>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+</div>
+</div>
+</div>
+</header>
+<div class=search-block>
+<div data-toggle=search-close>
+<i class="las la-times text-primary"></i>
+</div>
+<form action=/search>
+<input id=search-query name=s type=search placeholder="Type words & hit enter" class=text-center aria-label=search-query>
+</form>
+</div>
+<section class=section-sm>
+<div class=container>
+<div class="row justify-content-center">
+<div class=col-lg-10>
+<div class="text-center mb-5">
+<h3 class="h2 mb-4 post-title">Elixir - Lưu trữ dữ liệu trên RAM với ETS</h3>
+<ul class="card-meta list-inline">
+<li class=list-inline-item>
+<a href=#! class=card-meta-author>
+<a href=http://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
+<img loading=lazy src=http://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
+<span>Dung Nguyen</span>
+</a>
+</a>
+</li>
+<li class=list-inline-item>|</li>
+<li class=list-inline-item>
+<span>12 May 2018</span>
+</li>
+</ul>
+</div>
+<div class=content><h2 id=ets-là-gì>ETS là gì?</h2>
+<p>Có lẽ các bạn đã nghe qua về <code>redis</code> hoặc <code>memcache</code>, hoặc là cả hai. Còn nếu bạn chưa nghe tới bao giờ thì đó là những cơ sở dữ liệu lưu trữ trên RAM với ưu điểm là tốc độ truy xuất cực kỳ nhanh. ETS - Erlang Term Service - cũng là một CSDL lưu trữ trên RAM (in-ram DB) nhưng khác ở chỗ là ETS có sẵn khi cài Elixir/Erlang và bạn chẳng phải mất công cài đặt, cấu hình như 2 anh trên kia, nhà trồng được việc gì phải ngại.</p>
+<p><strong>Đặc điểm</strong> của em nó là:</p>
+<ul>
+<li>Không cần cài đặt</li>
+<li>Dữ liệu lưu trữ trên RAM và mất đi khi process kết thúc</li>
+<li>Dữ liệu lưu trữ dạng <code>key-value</code></li>
+<li><code>value</code> có thể là <code>set</code>, <code>ordered_set</code>, <code>bag</code>, <code>duplicated_bag</code></li>
+<li>Kiểu dữ liệu của <code>value</code> trên cùng 1 bảng là giống nhau và đuợc khai báo khi tạo bảng.</li>
+</ul>
+<h2 id=các-thao-tác-trong-ets>Các thao tác trong ETS</h2>
+<h3 id=1-tạo-bảng>1. Tạo bảng</h3>
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir>iex<span style=color:#ff79c6>&gt;</span> <span style=color:#f1fa8c>:ets</span><span style=color:#ff79c6>.</span>new(<span style=color:#f1fa8c>:cache</span>, [<span style=color:#f1fa8c>:set</span>, <span style=color:#f1fa8c>:protected</span>, <span style=color:#f1fa8c>:named_table</span>])
+</code></pre></td></tr></table>
+</div>
+</div><p>**Syntax: ** <code>:ets.new(ten_bang, [type, access, name_table])</code></p>
+<ul>
+<li><code>type</code> là kiểu dữ liệu của <code>value</code> lưu trong bảng
+<ul>
+<li><code>set</code> là kiểu dữ liệu, chú này chung thuỷ chỉ có 1 value cho 1 key và key là duy nhất, không bị trùng.</li>
+<li><code>ordered_set</code> thằng em nghiêm túc của <code>set</code>, khác thằng anh ở chỗ đuợc tự động order khi thêm data vào.</li>
+<li><code>bag</code> khác với <code>set</code> ở chỗ chú này chơi harem, cho phép nhiều value cho cùng 1 key, tuy nhiên các value không đuợc trùng nhau.</li>
+<li><code>duplicated_bag</code> thằng này ăn tạp giống <code>bag</code> nhưng cho phép value trùng nhau</li>
+</ul>
+</li>
+<li><code>access</code> giới hạn khả năng truy xuất dữ liệu từ bảng, cũng khá dễ nhớ
+<ul>
+<li><code>public</code>: hàng công cộng, chú process nào thích nhìn (đọc), sờ (ghi) gì anh cho hết</li>
+<li><code>protected</code>: các chú chỉ đuợc nhìn thôi, anh sở hữu thì anh đuợc sờ</li>
+<li><code>private</code>: anh giấu hết, chỉ có anh mới đuợc nhìn và sờ, các chú đi ra chỗ khác</li>
+</ul>
+</li>
+<li><code>named_table</code> Cái này tuỳ chọn, bình thuờng thì sẽ trả về 1 id dùng để truy xuất vào table. Nếu thêm option này vào thì có thể dùng <code>ten_bang</code> để truy xuất vào table.</li>
+</ul>
+<p>Đã xong phần khởi tạo, giờ phần hay ho nhất đây.</p>
+<h3 id=2-insert-và-update-dữ-liệu>2. Insert và update dữ liệu</h3>
+<ul>
+<li>
+<p>Insert dữ liệu nếu <code>key</code> đã có chủ thì ghi đè (đập chậu cuớp bông)</p>
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir>iex<span style=color:#ff79c6>&gt;</span> <span style=color:#f1fa8c>:ets</span><span style=color:#ff79c6>.</span>insert(<span style=color:#f1fa8c>:cache</span>, {<span style=color:#f1fa8c>&#34;post-1&#34;</span>, <span style=color:#f1fa8c>&#34;world!&#34;</span>, %{<span style=color:#f1fa8c>view</span>: <span style=color:#bd93f9>1</span>}})
+true
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>
+</code></pre></li>
+<li>
+<p>Insert dữ liệu, nếu <code>key</code> đã có chủ thì bỏ qua.</p>
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir>iex<span style=color:#ff79c6>&gt;</span> <span style=color:#f1fa8c>:ets</span><span style=color:#ff79c6>.</span>insert_new(<span style=color:#f1fa8c>:cache</span>, {<span style=color:#f1fa8c>&#34;post-1&#34;</span>, <span style=color:#f1fa8c>&#34;Lao!&#34;</span>, %{<span style=color:#f1fa8c>view</span>: <span style=color:#bd93f9>2</span>}})
+false
+iex<span style=color:#ff79c6>&gt;</span> <span style=color:#f1fa8c>:ets</span><span style=color:#ff79c6>.</span>insert_new(<span style=color:#f1fa8c>:cache</span>, {<span style=color:#f1fa8c>&#34;post-2&#34;</span>, <span style=color:#f1fa8c>&#34;Vietnam!&#34;</span>, %{<span style=color:#f1fa8c>view</span>: <span style=color:#bd93f9>999</span>}})
+true
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>
+
+
+</code></pre></li>
+</ul>
+<p>Dữ liệu cho hàm <code>insert/2</code> và <code>insert_new/2</code> là 1 <code>tuple</code>, phần tử đầu tiên của <code>tuple</code> mặc định được dùng làm <code>key</code>.</p>
+<h3 id=3-query-dữ-liệu>3. Query dữ liệu</h3>
+<p><strong>3.1 Query đơn giản</strong>: tìm kiếm dữ liệu theo key dùng hàm <code>lookup/2</code></p>
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir>iex<span style=color:#ff79c6>&gt;</span> <span style=color:#f1fa8c>:ets</span><span style=color:#ff79c6>.</span>lookup(<span style=color:#f1fa8c>:cache</span>, <span style=color:#f1fa8c>&#34;post-1&#34;</span>)
+[{<span style=color:#f1fa8c>&#34;post-1&#34;</span>, <span style=color:#f1fa8c>&#34;world!&#34;</span>, %{<span style=color:#f1fa8c>view</span>: <span style=color:#bd93f9>1</span>}}]
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>3.2 Query với nhiều trường dữ liệu</strong> với hàm <code>match_object/2</code></p>
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir>iex<span style=color:#ff79c6>&gt;</span> <span style=color:#f1fa8c>:ets</span><span style=color:#ff79c6>.</span>match_object(<span style=color:#f1fa8c>:cache</span>, {<span style=color:#f1fa8c>:&#34;_&#34;</span>, <span style=color:#f1fa8c>&#34;Vietnam!&#34;</span>, <span style=color:#f1fa8c>:&#34;_&#34;</span>})
+[{<span style=color:#f1fa8c>&#34;post-2&#34;</span>, <span style=color:#f1fa8c>&#34;Vietnam!&#34;</span>, %{<span style=color:#f1fa8c>view</span>: <span style=color:#bd93f9>999</span>}}]
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>Note</strong> <code>:"_"</code> đánh dấu tại vị trí này sẽ không xài để match dữ liệu, truờng này chứa dữ liệu gì cũng đuợc, anh không quan tâm</li>
+</ul>
+<p><strong>3.3 Select trường dữ liệu nào sẽ trả về</strong> với <code>match/2</code></p>
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir>iex<span style=color:#ff79c6>&gt;</span> <span style=color:#f1fa8c>:ets</span><span style=color:#ff79c6>.</span>match_object(<span style=color:#f1fa8c>:cache</span>, {<span style=color:#f1fa8c>:&#34;$1&#34;</span>, <span style=color:#f1fa8c>:&#34;$2&#34;</span>, <span style=color:#f1fa8c>:&#34;_&#34;</span>})
+[{<span style=color:#f1fa8c>&#34;post-1&#34;</span>, <span style=color:#f1fa8c>&#34;world!&#34;</span>}, {<span style=color:#f1fa8c>&#34;post-2&#34;</span>, <span style=color:#f1fa8c>&#34;Vietnam!&#34;</span>}]
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>Note</strong> <code>:"$N"</code> dùng để <code>select</code> kết quả trả về, <code>N</code> là một số nguyên dùng để xác định vị trí của dữ liệu trong kết quả.</li>
+</ul>
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir>iex<span style=color:#ff79c6>&gt;</span> <span style=color:#f1fa8c>:ets</span><span style=color:#ff79c6>.</span>match_object(<span style=color:#f1fa8c>:cache</span>, {<span style=color:#f1fa8c>:&#34;$30&#34;</span>, <span style=color:#f1fa8c>:&#34;$2&#34;</span>, <span style=color:#f1fa8c>:&#34;_&#34;</span>})
+[{<span style=color:#f1fa8c>&#34;world!&#34;</span>, <span style=color:#f1fa8c>&#34;post-1&#34;</span>}, {<span style=color:#f1fa8c>&#34;Vietnam!&#34;</span>, <span style=color:#f1fa8c>&#34;post-2&#34;</span>}]
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>3.4 Giới hạn kết quả tra về</strong></p>
+<p>Sử dụng hàm <code>match/3</code> hoặc <code>match_object/3</code> tương tự như <code>match/2</code> và <code>match_object/2</code>, trong đó tham số thứ 3 là số lượng phần tử sẽ trả về.</p>
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style=color:#6272a4># them 1 phan tu</span>
+iex<span style=color:#ff79c6>&gt;</span> <span style=color:#f1fa8c>:ets</span><span style=color:#ff79c6>.</span>insert_new(<span style=color:#f1fa8c>:cache</span>, {<span style=color:#f1fa8c>&#34;post-3&#34;</span>, <span style=color:#f1fa8c>&#34;Vietnam!&#34;</span>, %{<span style=color:#f1fa8c>view</span>: <span style=color:#bd93f9>1000</span>}})
+true
+
+<span style=color:#6272a4># khong limit</span>
+iex<span style=color:#ff79c6>&gt;</span> <span style=color:#f1fa8c>:ets</span><span style=color:#ff79c6>.</span>match_object(<span style=color:#f1fa8c>:cache</span>, {<span style=color:#f1fa8c>:&#34;_&#34;</span>, <span style=color:#f1fa8c>&#34;Vietnam!&#34;</span>, <span style=color:#f1fa8c>:&#34;_&#34;</span>})
+[{<span style=color:#f1fa8c>&#34;post-2&#34;</span>, <span style=color:#f1fa8c>&#34;Vietnam!&#34;</span>, %{<span style=color:#f1fa8c>view</span>: <span style=color:#bd93f9>999</span>}}, {<span style=color:#f1fa8c>&#34;post-3&#34;</span>, <span style=color:#f1fa8c>&#34;Vietnam!&#34;</span>, %{<span style=color:#f1fa8c>view</span>: <span style=color:#bd93f9>1000</span>}}]
+
+<span style=color:#6272a4># co limit</span>
+iex<span style=color:#ff79c6>&gt;</span> <span style=color:#f1fa8c>:ets</span><span style=color:#ff79c6>.</span>match_object(<span style=color:#f1fa8c>:cache</span>, {<span style=color:#f1fa8c>:&#34;_&#34;</span>, <span style=color:#f1fa8c>&#34;Vietnam!&#34;</span>, <span style=color:#f1fa8c>:&#34;_&#34;</span>}, <span style=color:#bd93f9>1</span>)
+[{<span style=color:#f1fa8c>&#34;post-2&#34;</span>, <span style=color:#f1fa8c>&#34;Vietnam!&#34;</span>, %{<span style=color:#f1fa8c>view</span>: <span style=color:#bd93f9>999</span>}}]
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=4-xoá-dữ-liệu>4. Xoá dữ liệu</h3>
+<p><strong>Xoá theo key</strong></p>
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir>iex<span style=color:#ff79c6>&gt;</span> <span style=color:#f1fa8c>:ets</span><span style=color:#ff79c6>.</span>delete(<span style=color:#f1fa8c>:cache</span>, <span style=color:#f1fa8c>&#34;post-1&#34;</span>)
+true
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Match dữ liệu và xoá</strong>. Cách match giống như trong <strong>query dữ liệu</strong></p>
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir>iex<span style=color:#ff79c6>&gt;</span> <span style=color:#f1fa8c>:ets</span><span style=color:#ff79c6>.</span>match_delete(<span style=color:#f1fa8c>:cache</span>, {<span style=color:#f1fa8c>:&#34;_&#34;</span>, <span style=color:#f1fa8c>&#34;Vietnam!&#34;</span>, <span style=color:#f1fa8c>:&#34;_&#34;</span>})
+true
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=5-xoá-bảng>5. Xoá bảng</h3>
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir>iex<span style=color:#ff79c6>&gt;</span> <span style=color:#f1fa8c>:ets</span><span style=color:#ff79c6>.</span>delete(<span style=color:#f1fa8c>:cache</span>)
+true
+</code></pre></td></tr></table>
+</div>
+</div><p>Nếu không xoá thì dữ liệu sẽ tồn tại cho đến khi process kết thúc mới bị mất đi.</p>
+<h3 id=6-các-hàm-hay-xài>6. Các hàm hay xài</h3>
+<ul>
+<li><code>member/2</code> kiểm tra xem key đã tồn taị trong bảng hay chưa</li>
+<li><code>tab2list</code>: đọc tất cả dữ liệu của bảng vào 1 list</li>
+<li><code>tab2file</code>: lưu tất cả dữ liệu trên bảng vào 1 file, bạn có thể lưu dữ liệu lại <strong>truớc khi process kết thúc</strong> và có thể xài lại dữ liệu sau.</li>
+<li><code>file2tab</code> : đọc 1 file đuợc lưu bởi <code>tab2file</code> và tạo lại bảng tương ứng</li>
+<li><code>to_dest/2</code>: copy toàn bộ dữ liệu từ bảng ETS qua bảng DETS (lưu dữ liệu trên ổ cứng)</li>
+<li><code>from_dest/2</code>: copy toàn bộ dữ liệu từ bảng DETS qua bảng ETS</li>
+</ul>
+<h2 id=tham-khảo>Tham khảo</h2>
+<ol>
+<li><a href=http://erlang.org/doc/man/ets.html>http://erlang.org/doc/man/ets.html</a> xem nhiều trò hay</li>
+<li><a href=http://learnyousomeerlang.com/ets>http://learnyousomeerlang.com/ets</a></li>
+<li>Ngoài ra Erlang còn hỗ trợ <code>DETS</code> (disk-based term storage) lưu trên ổ cứng với API tương tự <a href=http://erlang.org/doc/man/dets.html>http://erlang.org/doc/man/dets.html</a></li>
+</ol>
+</div>
+</div>
+</div>
+<div class=single-post-meta>
+<div class="row justify-content-center">
+<div class="col-lg-5 col-md-6 text-center text-md-left">
+<ul class="post-meta-tags list-unstyled list-inline">
+<li class=list-inline-item>
+<a href=http://bluzky.github.io/tags/elixir>#elixir</a>
+</li>
+<li class=list-inline-item>
+<a href=http://bluzky.github.io/tags/erlang>#erlang</a>
+</li>
+</ul>
+</div>
+<div class="col-lg-5 col-md-6 text-center text-md-right mt-4 mt-md-0">
+<ul class="social-links has-bg-color list-unstyled list-inline" style=line-height:0>
+<li class=list-inline-item>
+<a class="resp-sharing-button__link d-block" href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2fbluzky.github.io%2fblog%2f2018-05-12-erlang-term-storage%2f" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small">
+<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+<i class="lab la-facebook-f text-dark"></i>
+</div>
+</div>
+</a>
+</li>
+<li class=list-inline-item>
+<a class="resp-sharing-button__link d-block" href="https://twitter.com/intent/tweet/?text=Elixir%20-%20L%c6%b0u%20tr%e1%bb%af%20d%e1%bb%af%20li%e1%bb%87u%20tr%c3%aan%20RAM%20v%e1%bb%9bi%20ETS&url=http%3a%2f%2fbluzky.github.io%2fblog%2f2018-05-12-erlang-term-storage%2f" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
+<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+<i class="lab la-twitter text-dark"></i>
+</div>
+</div>
+</a>
+</li>
+<li class=list-inline-item>
+<a class="resp-sharing-button__link d-block" href="https://plus.google.com/share?url=http%3a%2f%2fbluzky.github.io%2fblog%2f2018-05-12-erlang-term-storage%2f" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--google resp-sharing-button--small">
+<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+<i class="lab la-google-plus-g text-dark"></i>
+</div>
+</div>
+</a>
+</li>
+<li class=list-inline-item>
+<a class="resp-sharing-button__link d-block" href="mailto:?subject=Elixir%20-%20L%c6%b0u%20tr%e1%bb%af%20d%e1%bb%af%20li%e1%bb%87u%20tr%c3%aan%20RAM%20v%e1%bb%9bi%20ETS&body=http%3a%2f%2fbluzky.github.io%2fblog%2f2018-05-12-erlang-term-storage%2f" target=_self rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small">
+<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+<i class="las la-envelope text-dark"></i>
+</div>
+</div>
+</a>
+</li>
+<li class=list-inline-item>
+<a class="resp-sharing-button__link d-block" href="whatsapp://send?text=Elixir%20-%20L%c6%b0u%20tr%e1%bb%af%20d%e1%bb%af%20li%e1%bb%87u%20tr%c3%aan%20RAM%20v%e1%bb%9bi%20ETS%20http%3a%2f%2fbluzky.github.io%2fblog%2f2018-05-12-erlang-term-storage%2f" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--small">
+<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+<i class="lab la-whatsapp text-dark"></i>
+</div>
+</div>
+</a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class=single-post-author>
+<div class="row justify-content-center">
+<div class=col-lg-10>
+<div class="media d-block d-sm-flex text-center text-sm-left">
+<a href=http://bluzky.github.io/author/dung-nguyen/><img loading=lazy class="img-fluid rounded-circle mr-0 mr-sm-4 mb-4" src=http://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen"></a>
+<div class=media-body>
+<p class="font-primary mb-1">Written By</p>
+<h4>
+<a href=http://bluzky.github.io/author/dung-nguyen/ class="text-dark font-weight-700">Dung Nguyen</a>
+</h4>
+<p class=font-primary>Hi! I&rsquo;m Dung Nguyen. I&rsquo;m an Elixir developer at OnPoint Vietnam.</p>
+<ul class="social-links list-unstyled list-inline ml-0 ml-sm-n2">
+<li class=list-inline-item>
+<a href=https://linkedin.com>
+<i class="lab la-linkedin-in"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=single-post-similer>
+<div class="row justify-content-center">
+<div class=col-lg-10>
+<div class="row mt-3">
+<div class=col-12>
+<h3 class="text-dark font-weight-800 mb-4 pb-2">
+You May Also Like
+</h3>
+</div>
+<div class=col-md-6><article class="card post-card">
+<div class=card-body>
+<ul class="card-meta list-inline mb-2">
+<li class="list-inline-item mb-2">
+<a href=http://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
+<img loading=lazy src=http://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
+<span>Dung Nguyen</span>
+</a>
+</li>
+<li class="list-inline-item mb-2">
+<span>02 May, 2018</span>
+</li>
+</ul>
+<h3 class=mb-3>
+<a class=post-title href=http://bluzky.github.io/blog/2018-05-02-phoenix-local-ssl/>Chạy server Phoenix với SSL trên localhost</a>
+</h3>
+<p> Từ tháng 04/2018 tất cả các app mới tạo trên Facebook chỉ chấp nhận callback url có sử dụng SSL. Đây là những bước đơn giản để có thể sử dụng giao …</p>
+<ul class="card-meta list-inline">
+<li class="list-inline-item mb-2">
+<ul class="card-meta-tag list-inline">
+<li class="list-inline-item tag">
+<a href=http://bluzky.github.io/tags/elixir>elixir</a>
+</li>
+<li class="list-inline-item tag">
+<a href=http://bluzky.github.io/tags/til>til</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</article>
+</div>
+<div class=col-md-6><article class="card post-card">
+<div class=card-body>
+<ul class="card-meta list-inline mb-2">
+<li class="list-inline-item mb-2">
+<a href=http://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
+<img loading=lazy src=http://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
+<span>Dung Nguyen</span>
+</a>
+</li>
+<li class="list-inline-item mb-2">
+<span>13 Apr, 2018</span>
+</li>
+</ul>
+<h3 class=mb-3>
+<a class=post-title href=http://bluzky.github.io/blog/2018-04-13-finite-state-machine-web-development/>Finite state machine trong lập trình</a>
+</h3>
+<p>1. Tìm hiểu về FSM FSM(Finite state machine) - Máy trạng thái hữu hạn là một mô hình toán học biểu diễn trạng thái của hệ, trong đó số trạng thái là …</p>
+<ul class="card-meta list-inline">
+<li class="list-inline-item mb-2">
+<ul class="card-meta-tag list-inline">
+<li class="list-inline-item tag">
+<a href=http://bluzky.github.io/tags/elixir>elixir</a>
+</li>
+<li class="list-inline-item tag">
+<a href=http://bluzky.github.io/tags/tech>tech</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<footer class=section-sm>
+<div class=container>
+<div class="row justify-content-center align-items-center">
+<div class=col-lg-5>
+</div>
+<div class="col-lg-12 text-center mt-5">
+<ul class="list-inline footer-menu mb-4">
+<li class="list-inline-item mx-3">
+<a href=http://bluzky.github.io/about/>About me</a>
+</li>
+<li class="list-inline-item mx-3">
+<a href=http://bluzky.github.io/author/>Authors</a>
+</li>
+</ul>
+<ul class="social-links icon-box list-unstyled list-inline font-weight-500 mb-3">
+</ul>
+<p class="mb-0 font-weight-500 copyright-text content">
+Designed & Developed By <a href=https://gethugothemes.com/>Gethugothemes</a>
+</p>
+</div>
+</div>
+</div>
+</footer>
+<script data-turbolinks-suppress-warning src=/js/vendor.min.49673e8e4f1ec34c98ef397e87de1845044dfbe687dedef74307932de0a45e95ffa823c3a19942eced3b82a4622fee79a33f9d2ca2adab559232efa452b0de45.js integrity="sha512-SWc+jk8ew0yY7zl+h94YRQRN++aH3t73QweTLeCkXpX/qCPDoZlC7O07gqRiL+55oz+dLKKtq1WSMu+kUrDeRQ=="></script>
+</body>
+</html>
