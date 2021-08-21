@@ -31,8 +31,8 @@ unsafe= true
 link = "plugins/bootstrap/bootstrap.min.css"
 [[params.plugins.css]]
 link = "https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css"
-[[params.plugins.css]]
-link = "https://fonts.googleapis.com/css2?family=Noto Serif:wght@400;600;700&display=swap"
+# [[params.plugins.css]]
+# link = "https://fonts.googleapis.com/css2?family=Noto Serif:wght@400;600;700&display=swap"
 [[params.plugins.css]]
 link = "https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap"
 
@@ -50,8 +50,8 @@ link = "plugins/search/search.js"
 
 # site variables
 [params.variables]
-font_primary = "Noto Serif"
-font_header = "Mulish"
+font_content = "Mulish"
+font_primary = "Mulish"
 h1 = "64px"
 h1_lg = "52px"
 h1_md = "42px"
@@ -62,7 +62,7 @@ h3_md = "24px"
 h4 = "24px"
 h5 = "18px"
 h6 = "16px"
-white = "#ffffff"
+white = "#f9f9f9"
 black = "#000000"
 dark = "#152035"
 gray = "#313b3f"
@@ -100,8 +100,8 @@ enable = false
 [params.subscription]
 enable = false
 # mailchimp subsciption
-mailchimp_form_action = "https://gmail.us4.list-manage.com/subscribe/post?u=463ee871f45d2d93748e77cad&amp;id=a0a2c6d074" # replace this url with yours
-mailchimp_form_name = "b_463ee871f45d2d93748e77cad_a0a2c6d074" # replace this code with yours
+mailchimp_form_action = "#" # replace this url with yours
+mailchimp_form_name = "#" # replace this code with yours
 title = "Subscribe for our monthly newsletter."
 input_placeholder = "Enter your email"
 
