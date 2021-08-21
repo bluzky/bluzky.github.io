@@ -1,7 +1,7 @@
 <!doctype html><html lang=en-us>
 <head>
 <meta charset=utf-8>
-<title>Parse và validate request param trong Phoenix với Ecto</title>
+<title>Compose Ecto Query From Client</title>
 <meta name=author content="Dung Nguyen">
 <meta name=description content="  Drinking orange juice is good for your health. Reading some orange code is good too :D  ">
 <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=5">
@@ -69,7 +69,7 @@
 <div class="row justify-content-center">
 <div class=col-lg-10>
 <div class="text-center mb-5">
-<h3 class="h2 mb-4 post-title">Parse và validate request param trong Phoenix với Ecto</h3>
+<h3 class="h2 mb-4 post-title">Compose Ecto Query From Client</h3>
 <ul class="card-meta list-inline">
 <li class=list-inline-item>
 <a href=#! class=card-meta-author>
@@ -81,87 +81,34 @@
 </li>
 <li class=list-inline-item>|</li>
 <li class=list-inline-item>
-<span>26 September 2020</span>
+<span>30 October 2020</span>
 </li>
 </ul>
 </div>
 <div class="mb-5 text-center">
-<img loading=lazy class="img-fluid rounded" src=http://bluzky.github.io/img/parse-ecto-phoenix.png alt="Image not Found">
+<img loading=lazy class="img-fluid rounded" src=http://bluzky.github.io/img/request-to-query.png alt="Image not Found">
 </div>
-<div class=content><p>Khi viết các API hoặc cả các endpoint thì thông thường chúng ta sẽ có một số nhu cầu:</p>
+<div class=content><h2 id=the-story>The story</h2>
+<p>At our company, <a href=https://www.onpoint.vn/>OnPoint</a>, we are building an ecommerce website using Phoenix Framework. And I am working on admin to manage product, orders &mldr; All the listing pages need a filter and this filter change frequently, operation team wants to add this field, order by that field. And each time they change their requirements I have to update query code.</p>
+<p>My team use Django Admin before, they support an easy way to compose query directly from the URL. You don&rsquo;t have to change code on the back-end. It&rsquo;ll be great if I can do it with Phoenix.</p>
+<p>What it should have:</p>
 <ul>
-<li>Chỉ cho phép một số các tham số xác định được truyền vào.</li>
-<li>Chuyển các tham số về kiểu dữ liệu mong muốn</li>
-<li>Validate các tham số theo yêu cầu</li>
+<li>Support basic query operator: <code>>, >=, &lt;, &lt;=, =, !=, like, ilike, in</code></li>
+<li>Query join table</li>
+<li>Can sort result</li>
 </ul>
-<p>Bài viết này sẽ hướng dẫn các bạn giải quyết các vấn đề trên sử dụng <code>Ecto.Changeset</code></p>
-<p>Thư viện <code>Ecto</code> đã cung cấp sẵn cho chúng ta module <code>Changeset</code>. Nó hỗ trợ việc cast các tham số về đúng kiểu dữ liệu mong muốn, nó cũng hỗ trợ các phương thức để validate các tham số yêu cầu, và nó cũng cho phép bạn giới hạn tham số nào được truyền vào.</p>
-<p>Và sau đây là một ví dụ sử dụng <code>Chageset</code> để validate các tham số khi filter các đơn hàng.</p>
-<h2 id=1-đầu-tiên-bạn-phải-định-nghĩa-một-schema>1. Đầu tiên bạn phải định nghĩa một schema</h2>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.OrderFilterParams</span> <span style=color:#ff79c6>do</span>
-    <span style=color:#ff79c6>use</span> <span style=color:#50fa7b>Ecto.Schema</span>
-    <span style=color:#ff79c6>import</span> <span style=color:#50fa7b>Ecto.Changeset</span>
-
-    schema <span style=color:#f1fa8c>&#34;order_filter_params&#34;</span> <span style=color:#ff79c6>do</span>
-        field <span style=color:#f1fa8c>:keyword</span>, <span style=color:#f1fa8c>:string</span>
-        field <span style=color:#f1fa8c>:category_id</span>,  <span style=color:#f1fa8c>:integer</span>
-        field <span style=color:#f1fa8c>:status</span>, <span style=color:#f1fa8c>:string</span>
-        field <span style=color:#f1fa8c>:start_date</span>, <span style=color:#f1fa8c>:utc_datetime</span>
-        field <span style=color:#f1fa8c>:end_date</span>, <span style=color:#f1fa8c>:utc_datetime</span>
-    <span style=color:#ff79c6>end</span>
-<span style=color:#ff79c6>end</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=2-cast-và-validate>2. Cast và validate</h2>
-<p>Sau đó phải định nghĩa một hàm để thực hiện việc cast tham số và validate <code>changeset</code>.</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.OrderFilterParams</span> <span style=color:#ff79c6>do</span>
-
-    ...
-
-    <span style=color:#50fa7b>@required</span> <span style=color:#f1fa8c>~w(category_id start_date)</span>
-    <span style=color:#50fa7b>@optional</span> <span style=color:#f1fa8c>~w(keyword status end_date)</span>
-
-    <span style=color:#8be9fd;font-style:italic>def</span> changeset(changeset_or_model, params) <span style=color:#ff79c6>do</span>
-         cast(changeset_or_model, params, <span style=color:#50fa7b>@required</span> <span style=color:#ff79c6>++</span> <span style=color:#50fa7b>@optional</span>)
-        <span style=color:#ff79c6>|&gt;</span> validate_required(<span style=color:#50fa7b>@required</span>)
-    <span style=color:#ff79c6>end</span>
-<span style=color:#ff79c6>end</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=3-set-giá-trị-default-động>3. Set giá trị default động</h2>
-<p>Nếu bạn muốn sử dụng các giá trị default động, ví dụ như mặc định ngày kết thúc là ngày hiện tại, các bạn phải định nghĩa một function để set giá trị mong muốn.</p>
+<p>This is the result after some night of work:</p>
+<p><a href=https://github.com/bluzky/querie>https://github.com/bluzky/querie</a></p>
+<h2 id=how-it-work>How it work</h2>
+<ul>
+<li>I define a simple rule for passing parameter from client side. The key must follow format <code>[column]__[operator]=[value]</code>.</li>
+<li>On the server side, it is parsed to <code>{operator, {column, value}}</code> with appropriate data type</li>
+<li>Then it is passed to a filter function to build Ecto query dynamically</li>
+</ul>
+<p>You can try with <a href=https://github.com/bluzky/querie/tree/main/example>example project</a> to see how it works.</p>
+<h2 id=how-to-use-it>How to use it</h2>
+<h3 id=1-define-a-filter-schema>1. Define a filter schema</h3>
+<p>For example you have a Post schema:</p>
 <div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
 <table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
 <pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
@@ -179,34 +126,43 @@
 </span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
 </span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
 </span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
 </span></code></pre></td>
 <td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.OrderFilterParams</span> <span style=color:#ff79c6>do</span>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>Example.Content.Post</span> <span style=color:#ff79c6>do</span>
+  <span style=color:#ff79c6>use</span> <span style=color:#50fa7b>Ecto.Schema</span>
+  <span style=color:#ff79c6>import</span> <span style=color:#50fa7b>Ecto.Changeset</span>
 
-    ...
+  <span style=color:#8be9fd;font-style:italic>def</span> state_enum(), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>~w(draft published archived trash)</span>
 
-    <span style=color:#8be9fd;font-style:italic>def</span> changeset(changeset_or_model, params) <span style=color:#ff79c6>do</span>
-         cast(changeset_or_model, params, <span style=color:#50fa7b>@required</span> <span style=color:#ff79c6>++</span> <span style=color:#50fa7b>@optional</span>)
-        <span style=color:#ff79c6>|&gt;</span> validate_required(<span style=color:#50fa7b>@required</span>)
-        <span style=color:#ff79c6>|&gt;</span> set_default_end_date()
-    <span style=color:#ff79c6>end</span>
-
-    <span style=color:#8be9fd;font-style:italic>defp</span> set_defaut_end_date(changeset) <span style=color:#ff79c6>do</span>
-        end_date <span style=color:#ff79c6>=</span> get_change(changeset, <span style=color:#f1fa8c>:end_date</span>)
-        <span style=color:#ff79c6>if</span> is_nil(end_date) <span style=color:#ff79c6>do</span>
-            put_change(changeset, <span style=color:#f1fa8c>:end_date</span>, <span style=color:#50fa7b>Timex</span><span style=color:#ff79c6>.</span>today())
-        <span style=color:#ff79c6>else</span>
-            changeset
-        <span style=color:#ff79c6>end</span>
-    <span style=color:#ff79c6>end</span>
+  schema <span style=color:#f1fa8c>&#34;posts&#34;</span> <span style=color:#ff79c6>do</span>
+    field(<span style=color:#f1fa8c>:content</span>, <span style=color:#f1fa8c>:string</span>)
+    field(<span style=color:#f1fa8c>:state</span>, <span style=color:#f1fa8c>:string</span>, <span style=color:#f1fa8c>default</span>: <span style=color:#f1fa8c>&#34;draft&#34;</span>)
+    field(<span style=color:#f1fa8c>:title</span>, <span style=color:#f1fa8c>:string</span>)
+    field(<span style=color:#f1fa8c>:view_count</span>, <span style=color:#f1fa8c>:integer</span>, <span style=color:#f1fa8c>default</span>: <span style=color:#bd93f9>0</span>)
+    belongs_to(<span style=color:#f1fa8c>:category</span>, <span style=color:#50fa7b>Example.PostMeta.Category</span>)
+    belongs_to(<span style=color:#f1fa8c>:author</span>, <span style=color:#50fa7b>Example.Account.User</span>)
+  <span style=color:#ff79c6>end</span>
 <span style=color:#ff79c6>end</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=4-sử-dụng-params-schema>4. Sử dụng Params schema</h2>
+</div><p>And you want to filter the Post by title, state, view_count. This is the filter schema:</p>
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style=color:#50fa7b>@schema</span> %{
+    <span style=color:#f1fa8c>title</span>: <span style=color:#f1fa8c>:string</span>,
+    <span style=color:#f1fa8c>state</span>: <span style=color:#f1fa8c>:string</span>, <span style=color:#6272a4># short form</span>
+    <span style=color:#f1fa8c>view_count</span>: [<span style=color:#f1fa8c>type</span>: <span style=color:#f1fa8c>:integer</span>] <span style=color:#6272a4># long form</span>
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=2-parse-request-parameters-and-build-the-query-use-querieparse2-to-parse-request-parameters-with-your-schema>2. Parse request parameters and build the query Use <code>Querie.parse/2</code> to parse request parameters with your schema</h3>
 <div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
 <table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
 <pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
@@ -228,38 +184,104 @@
 </span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
 </span></code></pre></td>
 <td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.OrderController</span> <span style=color:#ff79c6>do</span>
-    <span style=color:#ff79c6>use</span> <span style=color:#50fa7b>MyApp</span>, <span style=color:#f1fa8c>:controller</span>
-    <span style=color:#ff79c6>alias</span> <span style=color:#50fa7b>MyApp.OrderFilterParams</span>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style=color:#ff79c6>alias</span> <span style=color:#50fa7b>Example.Content.Post</span>
 
-    <span style=color:#8be9fd;font-style:italic>def</span> index(conn, params) <span style=color:#ff79c6>do</span>
-        changeset <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>OrderFilterParams</span><span style=color:#ff79c6>.</span>changeset(%<span style=color:#50fa7b>OrderFilterParams</span>{}, params)
-
-        <span style=color:#ff79c6>if</span> changeset<span style=color:#ff79c6>.</span>valid? <span style=color:#ff79c6>do</span>
-            strong_params <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>Ecto.Changeset</span><span style=color:#ff79c6>.</span>apply_changes(changeset)
-				<span style=color:#50fa7b>IO</span><span style=color:#ff79c6>.</span>put(strong_params<span style=color:#ff79c6>.</span>keyword)
-            <span style=color:#6272a4># Do something with your params</span>
-        <span style=color:#ff79c6>else</span>
-            <span style=color:#6272a4># handle error</span>
-        <span style=color:#ff79c6>end</span>
+<span style=color:#8be9fd;font-style:italic>def</span> index(conn, params) <span style=color:#ff79c6>do</span>
+    with {<span style=color:#f1fa8c>:ok</span>, filter} <span style=color:#ff79c6>&lt;-</span> <span style=color:#50fa7b>Querie</span><span style=color:#ff79c6>.</span>parse(<span style=color:#50fa7b>@schema</span>, params) <span style=color:#ff79c6>do</span>
+	 query <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>Querie</span><span style=color:#ff79c6>.</span>filter(<span style=color:#50fa7b>Post</span>, filter)
+	 <span style=color:#6272a4># Or you can pass a query like this</span>
+	 <span style=color:#6272a4># query = from(p in Post, where: ....)</span>
+	 <span style=color:#6272a4># query = Querie.filter(query, filter)</span>
+	 posts <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>Repo</span><span style=color:#ff79c6>.</span>all(query)
+	 <span style=color:#6272a4># do the rendering here</span>
+    <span style=color:#ff79c6>else</span>
+    {<span style=color:#f1fa8c>:error</span>, errors} <span style=color:#ff79c6>-&gt;</span>
+	 <span style=color:#50fa7b>IO</span><span style=color:#ff79c6>.</span>puts(inspect(errors)
+	 <span style=color:#6272a4># or do anything with error</span>
+	 <span style=color:#6272a4># error is a list of tuple {field, message}</span>
     <span style=color:#ff79c6>end</span>
 <span style=color:#ff79c6>end</span>
-
 </code></pre></td></tr></table>
 </div>
-</div><p>Rất đơn giản đúng không, nếu bạn đã sử dụng <code>Ecto</code> thì việc này chỉ là ruồi muỗi. Tuy nhiên đơn giản thì phải có thứ đánh đổi chứ.</p>
-<h2 id=vài-thứ-mà-bạn-sẽ-thấy-bất-tiện>Vài thứ mà bạn sẽ thấy bất tiện</h2>
-<h3 id=1-lượng-code-mà-bạn-phải-viết-quá-nhiều>1. Lượng code mà bạn phải viết quá nhiều.</h3>
-<p>Thử tưởng tượng mỗi API bạn lại phải định nghĩa thêm một Module params cho nó thì phức tạp vl.</p>
-<p>Bạn có thể sử dụng schemaless, nhưng mà function của bạn sẽ rối nùi lên vì code logic và code xử lý params nó không liên quan gì tới nhau cả. Và bạn thì kiểu như đổ sting vào cơm để ăn vậy.</p>
-<h3 id=2-thiếu-linh-hoạt>2. Thiếu linh hoạt.</h3>
-<p>Điều này cũng đúng vì mục đích chính của <code>Ecto</code> là phục vụ cho việc định nghĩa các schema cho database.</p>
-<p>Đơn giản như việc định nghĩa giá trị default động như trên, bạn phải viết luôn 1 hàm mới</p>
-<p><strong>Tuy nhiên nó cũng có một ưu điểm là bạn không phải sử dụng thêm thư viện của bên thứ ba.</strong></p>
-<h2 id=kết>Kết</h2>
-<p>Nếu bạn không cần phải xử lý nhiều ràng buộc liên quan đến tham số của request thì đơn giản là cứ dùng <code>Changeset</code> thôi.</p>
-<p>Nếu bạn muốn nhanh gọn hơn thì trên Hex có một số thư viện để hỗ trợ định nghĩa param đơn giản hơn, ví dụ như <a href=https://github.com/bluzky/tarams/>https://github.com/bluzky/tarams/</a></p>
-<p>Thư viện này cung cấp cách thức đơn giản và nhanh chóng hơn để định nghĩa param cho API. Mình sẽ viết bài hướng dẫn sau.</p>
+</div><h3 id=3-compose-url>3. Compose URL</h3>
+<p>Then from client side you can send a form:</p>
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html>&lt;<span style=color:#ff79c6>form</span> <span style=color:#50fa7b>action</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;/posts&#34;</span>&gt;
+    &lt;<span style=color:#ff79c6>label</span>&gt;Titlte&lt;/<span style=color:#ff79c6>label</span>&gt;
+    &lt;<span style=color:#ff79c6>input</span> <span style=color:#50fa7b>type</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;text&#34;</span> <span style=color:#50fa7b>name</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;title__icontains&#34;</span>&gt;
+    &lt;<span style=color:#ff79c6>label</span>&gt;State&lt;/<span style=color:#ff79c6>label</span>&gt;
+    &lt;<span style=color:#ff79c6>select</span> <span style=color:#50fa7b>name</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;state&#34;</span>&gt;
+        &lt;<span style=color:#ff79c6>option</span> <span style=color:#50fa7b>value</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;draft&#34;</span>&gt;&lt;/<span style=color:#ff79c6>option</span>&gt;
+        &lt;<span style=color:#ff79c6>option</span> <span style=color:#50fa7b>value</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;published&#34;</span>&gt;&lt;/<span style=color:#ff79c6>option</span>&gt;
+        &lt;<span style=color:#ff79c6>option</span> <span style=color:#50fa7b>value</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;trashed&#34;</span>&gt;&lt;/<span style=color:#ff79c6>option</span>&gt;
+    &lt;/<span style=color:#ff79c6>select</span>&gt;
+    &lt;<span style=color:#ff79c6>label</span>&gt;View count greater than&lt;/<span style=color:#ff79c6>label</span>&gt;
+    &lt;<span style=color:#ff79c6>input</span> <span style=color:#50fa7b>type</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;number&#34;</span> <span style=color:#50fa7b>name</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;view_count__ge&#34;</span>&gt;
+&lt;/<span style=color:#ff79c6>form</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>Or directly from URL with data like this:</p>
+<pre><code>http://localhost:4000/posts?title__icontains=elixir&amp;state=published&amp;view_count__ge=100
+</code></pre><p>Enter and see the result</p>
+<h2 id=query-joined-table>Query joined table</h2>
+<p>It quite simple to filter result with filter on joined tables.</p>
+<h3 id=1-update-your-query>1. Update your query</h3>
+<p>Querie support <code>ref</code> operator to join tables.
+For example you want to query Post by author whose email contains sam the query would be:</p>
+<pre><code>?author__ref[email__icontains]=sam
+</code></pre><h3 id=2-update-your-schema>2. Update your schema</h3>
+<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style=color:#ff79c6>alias</span> <span style=color:#50fa7b>Example.Account.User</span>
+
+<span style=color:#50fa7b>@schema</span> %{
+    <span style=color:#f1fa8c>title</span>: <span style=color:#f1fa8c>:string</span>,
+    <span style=color:#f1fa8c>state</span>: <span style=color:#f1fa8c>:string</span>,
+    <span style=color:#f1fa8c>view_count</span>: [<span style=color:#f1fa8c>type</span>: <span style=color:#f1fa8c>:integer</span>],
+    <span style=color:#f1fa8c>author</span>: [
+		<span style=color:#f1fa8c>type</span>: <span style=color:#f1fa8c>:ref</span>, <span style=color:#6272a4># this references to another schema</span>
+		<span style=color:#f1fa8c>model</span>: <span style=color:#50fa7b>User</span>, <span style=color:#6272a4># which schema to query</span>
+		<span style=color:#f1fa8c>schema</span>: %{ <span style=color:#6272a4># define filter schema for User</span>
+			<span style=color:#f1fa8c>email</span>: <span style=color:#f1fa8c>:string</span>
+		}
+	  ]
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>For more query options, please read <a href=https://github.com/bluzky/querie>document</a></p>
+<p>If you have any suggestion, please leave a comment or <a href=https://github.com/bluzky/querie/issues/new>open an issuse</a> on Github.</p>
+<p>Thanks for reading.</p>
 </div>
 </div>
 </div>
@@ -271,17 +293,23 @@
 <a href=http://bluzky.github.io/tags/elixir>#elixir</a>
 </li>
 <li class=list-inline-item>
+<a href=http://bluzky.github.io/tags/phoenix>#phoenix</a>
+</li>
+<li class=list-inline-item>
+<a href=http://bluzky.github.io/tags/query>#query</a>
+</li>
+<li class=list-inline-item>
 <a href=http://bluzky.github.io/tags/ecto>#ecto</a>
 </li>
 <li class=list-inline-item>
-<a href=http://bluzky.github.io/tags/phoenix>#phoenix</a>
+<a href=http://bluzky.github.io/tags/querie>#querie</a>
 </li>
 </ul>
 </div>
 <div class="col-lg-5 col-md-6 text-center text-md-right mt-4 mt-md-0">
 <ul class="social-links has-bg-color list-unstyled list-inline" style=line-height:0>
 <li class=list-inline-item>
-<a class="resp-sharing-button__link d-block" href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2fbluzky.github.io%2fblog%2fvalidate-request-params-phoenix-ecto%2f" target=_blank rel=noopener aria-label>
+<a class="resp-sharing-button__link d-block" href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2fbluzky.github.io%2fblog%2f2020-10-30-compose-ecto-query-from-client%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small">
 <div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
 <i class="lab la-facebook-f text-dark"></i>
@@ -290,7 +318,7 @@
 </a>
 </li>
 <li class=list-inline-item>
-<a class="resp-sharing-button__link d-block" href="https://twitter.com/intent/tweet/?text=Parse%20v%c3%a0%20validate%20request%20param%20trong%20Phoenix%20v%e1%bb%9bi%20Ecto&url=http%3a%2f%2fbluzky.github.io%2fblog%2fvalidate-request-params-phoenix-ecto%2f" target=_blank rel=noopener aria-label>
+<a class="resp-sharing-button__link d-block" href="https://twitter.com/intent/tweet/?text=Compose%20Ecto%20Query%20From%20Client&url=http%3a%2f%2fbluzky.github.io%2fblog%2f2020-10-30-compose-ecto-query-from-client%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
 <div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
 <i class="lab la-twitter text-dark"></i>
@@ -299,7 +327,7 @@
 </a>
 </li>
 <li class=list-inline-item>
-<a class="resp-sharing-button__link d-block" href="https://plus.google.com/share?url=http%3a%2f%2fbluzky.github.io%2fblog%2fvalidate-request-params-phoenix-ecto%2f" target=_blank rel=noopener aria-label>
+<a class="resp-sharing-button__link d-block" href="https://plus.google.com/share?url=http%3a%2f%2fbluzky.github.io%2fblog%2f2020-10-30-compose-ecto-query-from-client%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--google resp-sharing-button--small">
 <div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
 <i class="lab la-google-plus-g text-dark"></i>
@@ -308,7 +336,7 @@
 </a>
 </li>
 <li class=list-inline-item>
-<a class="resp-sharing-button__link d-block" href="mailto:?subject=Parse%20v%c3%a0%20validate%20request%20param%20trong%20Phoenix%20v%e1%bb%9bi%20Ecto&body=http%3a%2f%2fbluzky.github.io%2fblog%2fvalidate-request-params-phoenix-ecto%2f" target=_self rel=noopener aria-label>
+<a class="resp-sharing-button__link d-block" href="mailto:?subject=Compose%20Ecto%20Query%20From%20Client&body=http%3a%2f%2fbluzky.github.io%2fblog%2f2020-10-30-compose-ecto-query-from-client%2f" target=_self rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small">
 <div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
 <i class="las la-envelope text-dark"></i>
@@ -317,7 +345,7 @@
 </a>
 </li>
 <li class=list-inline-item>
-<a class="resp-sharing-button__link d-block" href="whatsapp://send?text=Parse%20v%c3%a0%20validate%20request%20param%20trong%20Phoenix%20v%e1%bb%9bi%20Ecto%20http%3a%2f%2fbluzky.github.io%2fblog%2fvalidate-request-params-phoenix-ecto%2f" target=_blank rel=noopener aria-label>
+<a class="resp-sharing-button__link d-block" href="whatsapp://send?text=Compose%20Ecto%20Query%20From%20Client%20http%3a%2f%2fbluzky.github.io%2fblog%2f2020-10-30-compose-ecto-query-from-client%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--small">
 <div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
 <i class="lab la-whatsapp text-dark"></i>
@@ -361,6 +389,9 @@ You May Also Like
 </h3>
 </div>
 <div class=col-md-6><article class="card post-card">
+<a href=http://bluzky.github.io/blog/2020-10-01parse-validate-data-with-tarams/>
+<img loading=lazy class="w-100 rounded" src=http://bluzky.github.io/img/tarams-parse.png alt="Chuẩn hoá và validate dữ liệu trong Phoenix với thư viện Tarams">
+</a>
 <div class=card-body>
 <ul class="card-meta list-inline mb-2">
 <li class="list-inline-item mb-2">
@@ -370,15 +401,13 @@ You May Also Like
 </a>
 </li>
 <li class="list-inline-item mb-2">
-<span>18 May, 2018</span>
+<span>01 Oct, 2020</span>
 </li>
 </ul>
 <h3 class=mb-3>
-<a class=post-title href=http://bluzky.github.io/blog/2018-05-17-ets-as-cache-phoenix/>Sử dụng ETS để tăng tốc ứng dụng với Phoenix</a>
+<a class=post-title href=http://bluzky.github.io/blog/2020-10-01parse-validate-data-with-tarams/>Chuẩn hoá và validate dữ liệu trong Phoenix với thư viện Tarams</a>
 </h3>
-<p> Bài viết này sẽ hướng dẫn các bạn sử dụng ETS như là bộ nhớ cache để tăng tốc các ứng dụng web Phoenix
-Dành cho các bạn chưa biết:
-ETS (Erlang Term …</p>
+<p>Yêu cầu chuẩn hoá và validate các tham số truyền lên từ client là yêu cầu cơ bản khi xây dựng API Web. Mình đã có một bài hướng dẫn sử dụng …</p>
 <ul class="card-meta list-inline">
 <li class="list-inline-item mb-2">
 <ul class="card-meta-tag list-inline">
@@ -386,10 +415,13 @@ ETS (Erlang Term …</p>
 <a href=http://bluzky.github.io/tags/elixir>elixir</a>
 </li>
 <li class="list-inline-item tag">
+<a href=http://bluzky.github.io/tags/ecto>ecto</a>
+</li>
+<li class="list-inline-item tag">
 <a href=http://bluzky.github.io/tags/phoenix>phoenix</a>
 </li>
 <li class="list-inline-item tag">
-<a href=http://bluzky.github.io/tags/ets>ETS</a>
+<a href=http://bluzky.github.io/tags/tarams>tarams</a>
 </li>
 </ul>
 </li>
@@ -398,6 +430,9 @@ ETS (Erlang Term …</p>
 </article>
 </div>
 <div class=col-md-6><article class="card post-card">
+<a href=http://bluzky.github.io/blog/validate-request-params-phoenix-ecto/>
+<img loading=lazy class="w-100 rounded" src=http://bluzky.github.io/img/parse-ecto-phoenix.png alt="Parse và validate request param trong Phoenix với Ecto">
+</a>
 <div class=card-body>
 <ul class="card-meta list-inline mb-2">
 <li class="list-inline-item mb-2">
@@ -407,13 +442,14 @@ ETS (Erlang Term …</p>
 </a>
 </li>
 <li class="list-inline-item mb-2">
-<span>12 May, 2018</span>
+<span>26 Sep, 2020</span>
 </li>
 </ul>
 <h3 class=mb-3>
-<a class=post-title href=http://bluzky.github.io/blog/2018-05-12-erlang-term-storage/>Elixir - Lưu trữ dữ liệu trên RAM với ETS</a>
+<a class=post-title href=http://bluzky.github.io/blog/validate-request-params-phoenix-ecto/>Parse và validate request param trong Phoenix với Ecto</a>
 </h3>
-<p>ETS là gì? Có lẽ các bạn đã nghe qua về redis hoặc memcache, hoặc là cả hai. Còn nếu bạn chưa nghe tới bao giờ thì đó là những cơ sở dữ liệu lưu trữ …</p>
+<p>Khi viết các API hoặc cả các endpoint thì thông thường chúng ta sẽ có một số nhu cầu:
+Chỉ cho phép một số các tham số xác định được truyền vào. …</p>
 <ul class="card-meta list-inline">
 <li class="list-inline-item mb-2">
 <ul class="card-meta-tag list-inline">
@@ -421,7 +457,10 @@ ETS (Erlang Term …</p>
 <a href=http://bluzky.github.io/tags/elixir>elixir</a>
 </li>
 <li class="list-inline-item tag">
-<a href=http://bluzky.github.io/tags/erlang>erlang</a>
+<a href=http://bluzky.github.io/tags/ecto>ecto</a>
+</li>
+<li class="list-inline-item tag">
+<a href=http://bluzky.github.io/tags/phoenix>phoenix</a>
 </li>
 </ul>
 </li>
