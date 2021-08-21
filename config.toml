@@ -1,4 +1,4 @@
-baseURL = 'http://bluzky.github.io/'
+baseURL = 'https://bluzky.github.io/'
 languageCode = 'en-us'
 title = 'The Organge+'
 theme = 'bookworm'
