@@ -4,13 +4,13 @@ title = 'The Organge+'
 theme = 'bookworm'
 
 # post pagination
-paginate = "5"
+paginate = "7"
 # post excerpt
 summaryLength = "20"
 # google analytics
-googleAnalytics = "" # example : UA-123-45
+googleAnalytics = "UA-40665301-3" # example : UA-123-45
 # disqus short name
-disqusShortname = "" # get your shortname form here : https://disqus.com
+disqusShortname = "the-orange-1" # get your shortname form here : https://disqus.com
 
 ############################# Modules ##############################
 [module.hugoVersion]
@@ -85,7 +85,7 @@ search = true
 # main section
 mainSections = ["blog"]
 # copyright
-copyright = "Designed & Developed By [Gethugothemes](https://gethugothemes.com/)"
+copyright = "Blog by Dung Nguyen.Theme by [Gethugothemes](https://gethugothemes.com/)"
 
 # Preloader
 [params.preloader]
