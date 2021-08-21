@@ -140,7 +140,7 @@
         </div>
       </div>
 
-      {{ if .Site.Params.showSidebar }}
+      {{ if .Site.Params.sidebar.enable }}
       <aside class="col-md-3 mt-5 mt-lg-0">
         {{- partial "sidebar.html" . -}}
       </aside>

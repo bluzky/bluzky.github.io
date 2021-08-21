@@ -96,6 +96,9 @@ preloader = "" # use jpg, png, svg or gif format.
 [params.instafeed]
 enable = false
 
+[params.sidebar]
+enable = false
+
 # Subscription
 [params.subscription]
 enable = false
