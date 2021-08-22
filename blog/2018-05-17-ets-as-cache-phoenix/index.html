@@ -8,7 +8,7 @@
 <link rel=icon href=https://bluzky.github.io/images/favicon.png type=image/x-icon>
 <link rel=preconnect href=https://fonts.gstatic.com>
 <link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap">
-<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.5f05ab8da5f953c9f87c520da529d85a9b1881e12e4c6097c7b10457964494188cb28a852d08cc91f31497e6608a87820a424e5719441bef77dc73aed346e813.css integrity="sha512-XwWrjaX5U8n4fFINpSnYWpsYgeEuTGCXx7EEV5ZElBiMsoqFLQjMkfMUl+ZgioeCCkJOVxlEG+933HOu00boEw==" media=screen>
+<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.a175996d51c7122a7871164dca713adc582e8df8a6b31ae1e7169ca0559953614b9378e577a3ce6d3e6bc8fa87b3e4f38305c3f1478fb0b4904d66b4caffe85a.css integrity="sha512-oXWZbVHHEip4cRZNynE63Fgujfimsxrh5xacoFWZU2FLk3jld6PObT5ryPqHs+TzgwXD8UePsLSQTWa0yv/oWg==" media=screen>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
 </head>
@@ -100,32 +100,15 @@
 <ul>
 <li>
 <p>Tạo 1 project mới</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>mix phx.new phoenix_cache
-mix deps.get
-</code></pre></td></tr></table>
-</div>
-</div></li>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>mix phx.new phoenix_cache
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>mix deps.get
+</code></pre></div></li>
 <li>
 <p>Thêm chức năng tạo/xoá/sửa bài viết</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>mix phx.gen.html Posts Post posts title:string summary:text content:text
-mix ecto.create
-mix ecto.migrate
-</code></pre></td></tr></table>
-</div>
-</div></li>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>mix phx.gen.html Posts Post posts title:string summary:text content:text
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>mix ecto.create
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>mix ecto.migrate
+</code></pre></div></li>
 <li>
 <p>Vào <a href=http://0.0.0.0:4000/posts>http://0.0.0.0:4000/posts</a> để xem chức năng bài viết. Thêm vài bài viết để có dữ liệu test
 <img src=/img/ets-phoenix.png alt=img></p>
@@ -136,612 +119,289 @@ mix ecto.migrate
 Đọc thêm về <a href=https://hexdocs.pm/elixir/GenServer.html>GenServer</a></p>
 <h4 id=21-tạo-module>2.1 Tạo module</h4>
 <p>Tạo một file mới <code>phoenix_cache/lib/phoenix_cache/bucket.ex</code></p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>PhoenixCache.Bucket</span> <span style=color:#ff79c6>do</span>
-  <span style=color:#ff79c6>use</span> <span style=color:#50fa7b>GenServer</span>
-  <span style=color:#ff79c6>alias</span> <span style=color:#f1fa8c>:ets</span>, <span style=color:#f1fa8c>as</span>: <span style=color:#50fa7b>Ets</span>
-
-  <span style=color:#6272a4># thời gian sống của 1 entry mặc định là 6 phút</span>
-  <span style=color:#50fa7b>@expired_after</span> <span style=color:#bd93f9>6</span> <span style=color:#ff79c6>*</span> <span style=color:#bd93f9>60</span>
-
-  <span style=color:#8be9fd;font-style:italic>def</span> start_link(args \\ []) <span style=color:#ff79c6>do</span>
-    <span style=color:#50fa7b>GenServer</span><span style=color:#ff79c6>.</span>start_link(__MODULE__, args, <span style=color:#f1fa8c>name</span>: __MODULE__)
-  <span style=color:#ff79c6>end</span>
-<span style=color:#ff79c6>end</span>
-</code></pre></td></tr></table>
-</div>
-</div><h4 id=22-khởi-tạo-cache-table-khi-bắt-đầu-chạy-genserver>2.2 Khởi tạo cache table khi bắt đầu chạy <code>GenServer</code></h4>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style=color:#8be9fd;font-style:italic>def</span> init(state) <span style=color:#ff79c6>do</span>
-    <span style=color:#50fa7b>Ets</span><span style=color:#ff79c6>.</span>new(<span style=color:#f1fa8c>:simple_cache</span>, [<span style=color:#f1fa8c>:set</span>, <span style=color:#f1fa8c>:protected</span>, <span style=color:#f1fa8c>:named_table</span>, <span style=color:#f1fa8c>read_concurrency</span>: true])
-    {<span style=color:#f1fa8c>:ok</span>, state}
-<span style=color:#ff79c6>end</span>
-</code></pre></td></tr></table>
-</div>
-</div><p><strong>Module cache sẽ hỗ trợ 3 thao tác:</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>PhoenixCache.Bucket</span> <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>  <span style=color:#ff79c6>use</span> <span style=color:#50fa7b>GenServer</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>  <span style=color:#ff79c6>alias</span> <span style=color:#f1fa8c>:ets</span>, <span style=color:#f1fa8c>as</span>: <span style=color:#50fa7b>Ets</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>  <span style=color:#6272a4># thời gian sống của 1 entry mặc định là 6 phút</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>  <span style=color:#50fa7b>@expired_after</span> <span style=color:#bd93f9>6</span> <span style=color:#ff79c6>*</span> <span style=color:#bd93f9>60</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>  <span style=color:#8be9fd;font-style:italic>def</span> start_link(args \\ []) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>    <span style=color:#50fa7b>GenServer</span><span style=color:#ff79c6>.</span>start_link(__MODULE__, args, <span style=color:#f1fa8c>name</span>: __MODULE__)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#ff79c6>end</span>
+</code></pre></div><h4 id=22-khởi-tạo-cache-table-khi-bắt-đầu-chạy-genserver>2.2 Khởi tạo cache table khi bắt đầu chạy <code>GenServer</code></h4>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#8be9fd;font-style:italic>def</span> init(state) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>    <span style=color:#50fa7b>Ets</span><span style=color:#ff79c6>.</span>new(<span style=color:#f1fa8c>:simple_cache</span>, [<span style=color:#f1fa8c>:set</span>, <span style=color:#f1fa8c>:protected</span>, <span style=color:#f1fa8c>:named_table</span>, <span style=color:#f1fa8c>read_concurrency</span>: true])
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>    {<span style=color:#f1fa8c>:ok</span>, state}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#ff79c6>end</span>
+</code></pre></div><p><strong>Module cache sẽ hỗ trợ 3 thao tác:</strong></p>
 <ul>
 <li><code>set</code>: lưu data vào bộ nhớ cache</li>
 <li><code>get</code>: lấy data từ bộ nhớ cache</li>
 <li><code>delete</code>: xoá data khỏi cache (cái này có vẻ không cần lắm thì phải)</li>
 </ul>
 <h4 id=23-thêm-data-vào-cache>2.3 Thêm data vào cache</h4>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir>
-  <span style=color:#8be9fd;font-style:italic>def</span> set(key, value) <span style=color:#ff79c6>do</span>
-    <span style=color:#50fa7b>GenServer</span><span style=color:#ff79c6>.</span>cast(__MODULE__, {<span style=color:#f1fa8c>:set</span>, key, value})
-  <span style=color:#ff79c6>end</span>
-
-  <span style=color:#50fa7b>@doc</span> <span style=color:#f1fa8c>&#34;&#34;&#34;
-</span><span style=color:#f1fa8c>  Default TTL 
-</span><span style=color:#f1fa8c>  &#34;&#34;&#34;</span>
-  <span style=color:#8be9fd;font-style:italic>def</span> handle_cast({<span style=color:#f1fa8c>:set</span>, key, val}, state) <span style=color:#ff79c6>do</span>
-    expired_at <span style=color:#ff79c6>=</span>
-      <span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>utc_now()
-      <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>add(<span style=color:#50fa7b>@expired_after</span>, <span style=color:#f1fa8c>:second</span>)
-
-    <span style=color:#50fa7b>Ets</span><span style=color:#ff79c6>.</span>insert(<span style=color:#f1fa8c>:simple_cache</span>, {key, val, expired_at})
-    {<span style=color:#f1fa8c>:noreply</span>, state}
-  <span style=color:#ff79c6>end</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>Ở đây chúng ta sẽ tạo tính toán thời điểm expire/hết hạn của giá trị cache, tính từ thời điểm hiện tại, sử dụng giá trị <code>TTL</code>(thời gian sống) mặc định là 6phút. Bạn có thể cấu hình lưu <code>TTL</code> mặc định vào config hoặc biến môi trường. Mình lưu vào thuộc tính module cho tiện.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>  <span style=color:#8be9fd;font-style:italic>def</span> set(key, value) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    <span style=color:#50fa7b>GenServer</span><span style=color:#ff79c6>.</span>cast(__MODULE__, {<span style=color:#f1fa8c>:set</span>, key, value})
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>  <span style=color:#50fa7b>@doc</span> <span style=color:#f1fa8c>&#34;&#34;&#34;
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#f1fa8c>  Default TTL 
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#f1fa8c>  &#34;&#34;&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>  <span style=color:#8be9fd;font-style:italic>def</span> handle_cast({<span style=color:#f1fa8c>:set</span>, key, val}, state) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>    expired_at <span style=color:#ff79c6>=</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>      <span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>utc_now()
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>      <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>add(<span style=color:#50fa7b>@expired_after</span>, <span style=color:#f1fa8c>:second</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>    <span style=color:#50fa7b>Ets</span><span style=color:#ff79c6>.</span>insert(<span style=color:#f1fa8c>:simple_cache</span>, {key, val, expired_at})
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>    {<span style=color:#f1fa8c>:noreply</span>, state}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>  <span style=color:#ff79c6>end</span>
+</code></pre></div><p>Ở đây chúng ta sẽ tạo tính toán thời điểm expire/hết hạn của giá trị cache, tính từ thời điểm hiện tại, sử dụng giá trị <code>TTL</code>(thời gian sống) mặc định là 6phút. Bạn có thể cấu hình lưu <code>TTL</code> mặc định vào config hoặc biến môi trường. Mình lưu vào thuộc tính module cho tiện.</p>
 <h4 id=24-thêm-data-vào-cache-và-thiết-lập-thời-gian-sống-của-data>2.4 Thêm data vào cache và thiết lập thời gian sống của data</h4>
 <p>Để có thể thoải mái thiết lập <code>TTL</code>, ta thêm 1 hàm cho phép truyền vào tham số <code>TTL</code></p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style=color:#50fa7b>@doc</span> <span style=color:#f1fa8c>&#34;&#34;&#34;
-</span><span style=color:#f1fa8c>  Custom TTL for cache entry
-</span><span style=color:#f1fa8c>  ttl: Time to live in second
-</span><span style=color:#f1fa8c>  &#34;&#34;&#34;</span>
-  <span style=color:#8be9fd;font-style:italic>def</span> set(key, value, ttl) <span style=color:#ff79c6>do</span>
-    <span style=color:#50fa7b>GenServer</span><span style=color:#ff79c6>.</span>cast(__MODULE__, {<span style=color:#f1fa8c>:set</span>, key, value, ttl})
-  <span style=color:#ff79c6>end</span>
-  
-  <span style=color:#50fa7b>@doc</span> <span style=color:#f1fa8c>&#34;&#34;&#34;
-</span><span style=color:#f1fa8c>  Custom TTL
-</span><span style=color:#f1fa8c>  &#34;&#34;&#34;</span>
-  <span style=color:#8be9fd;font-style:italic>def</span> handle_cast({<span style=color:#f1fa8c>:set</span>, key, val, ttl}, state) <span style=color:#ff79c6>do</span>
-    inserted_at <span style=color:#ff79c6>=</span>
-      <span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>utc_now()
-      <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>add(ttl, <span style=color:#f1fa8c>:second</span>)
-
-    <span style=color:#50fa7b>Ets</span><span style=color:#ff79c6>.</span>insert(<span style=color:#f1fa8c>:simple_cache</span>, {key, val, inserted_at})
-    {<span style=color:#f1fa8c>:noreply</span>, state}
-  <span style=color:#ff79c6>end</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>Cũng tương tự như trên nhưng hàm <code>set</code> sẽ nhận thêm tham số thứ 3 là <code>TTL</code> thay vì xài giá trị mặc định.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#50fa7b>@doc</span> <span style=color:#f1fa8c>&#34;&#34;&#34;
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#f1fa8c>  Custom TTL for cache entry
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#f1fa8c>  ttl: Time to live in second
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#f1fa8c>  &#34;&#34;&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>  <span style=color:#8be9fd;font-style:italic>def</span> set(key, value, ttl) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>    <span style=color:#50fa7b>GenServer</span><span style=color:#ff79c6>.</span>cast(__MODULE__, {<span style=color:#f1fa8c>:set</span>, key, value, ttl})
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>  
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>  <span style=color:#50fa7b>@doc</span> <span style=color:#f1fa8c>&#34;&#34;&#34;
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#f1fa8c>  Custom TTL
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#f1fa8c>  &#34;&#34;&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>  <span style=color:#8be9fd;font-style:italic>def</span> handle_cast({<span style=color:#f1fa8c>:set</span>, key, val, ttl}, state) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>    inserted_at <span style=color:#ff79c6>=</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>      <span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>utc_now()
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>      <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>add(ttl, <span style=color:#f1fa8c>:second</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>    <span style=color:#50fa7b>Ets</span><span style=color:#ff79c6>.</span>insert(<span style=color:#f1fa8c>:simple_cache</span>, {key, val, inserted_at})
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>    {<span style=color:#f1fa8c>:noreply</span>, state}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>  <span style=color:#ff79c6>end</span>
+</code></pre></div><p>Cũng tương tự như trên nhưng hàm <code>set</code> sẽ nhận thêm tham số thứ 3 là <code>TTL</code> thay vì xài giá trị mặc định.</p>
 <h4 id=25-truy-xuất-dữ-liệu-từ-cache>2.5 Truy xuất dữ liệu từ cache</h4>
 <p>Có vào thì phải có lấy ra chứ nhỉ, bây giờ ta sẽ thêm code để truy xuất data từ cache.</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir>  <span style=color:#8be9fd;font-style:italic>def</span> get(key) <span style=color:#ff79c6>do</span>
-	<span style=color:#6272a4># lấy giá trị đầu tiên tìm đuợc</span>
-    rs <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>Ets</span><span style=color:#ff79c6>.</span>lookup(<span style=color:#f1fa8c>:simple_cache</span>, key) <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>List</span><span style=color:#ff79c6>.</span>first()
-
-		<span style=color:#6272a4># Nếu không tìm thấy thì trả về lỗi</span>
-    <span style=color:#ff79c6>if</span> rs <span style=color:#ff79c6>==</span> nil <span style=color:#ff79c6>do</span>
-      {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>:not_found</span>}
-    <span style=color:#ff79c6>else</span>
-      expired_at <span style=color:#ff79c6>=</span> elem(rs, <span style=color:#bd93f9>2</span>)
-			
-			<span style=color:#6272a4># So sánh thời điểm hết hạn với hiện tại, nếu hết hạn thì trả về lỗi</span>
-      <span style=color:#ff79c6>cond</span> <span style=color:#ff79c6>do</span>
-        <span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>diff(<span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>utc_now(), expired_at) <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span> <span style=color:#ff79c6>-&gt;</span>
-          {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>:expired</span>}
-
-        true <span style=color:#ff79c6>-&gt;</span>
-          {<span style=color:#f1fa8c>:ok</span>, elem(rs, <span style=color:#bd93f9>1</span>)}
-      <span style=color:#ff79c6>end</span>
-    <span style=color:#ff79c6>end</span>
-  <span style=color:#ff79c6>end</span>
-</code></pre></td></tr></table>
-</div>
-</div><p><strong>Note</strong>: Nhờ feedback của bác @HQC, chỗ này mình đọc trực tiếp từ table, thay vì dùng <code>GenServer.call</code> như trước vì khi send request vào GenServer thì code sẽ được chạy <code>sync</code>/đồng bộ. Do vậy sẽ tạo nên ngẽn cổ chai. Mình sửa lại ở phần tạo table thêm <code>read_concurrency: true</code> và đưa phần code query dữ liệu ra ngoài GenServer</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>  <span style=color:#8be9fd;font-style:italic>def</span> get(key) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>	<span style=color:#6272a4># lấy giá trị đầu tiên tìm đuợc</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    rs <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>Ets</span><span style=color:#ff79c6>.</span>lookup(<span style=color:#f1fa8c>:simple_cache</span>, key) <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>List</span><span style=color:#ff79c6>.</span>first()
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>		<span style=color:#6272a4># Nếu không tìm thấy thì trả về lỗi</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>    <span style=color:#ff79c6>if</span> rs <span style=color:#ff79c6>==</span> nil <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>      {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>:not_found</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>    <span style=color:#ff79c6>else</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>      expired_at <span style=color:#ff79c6>=</span> elem(rs, <span style=color:#bd93f9>2</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>			
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>			<span style=color:#6272a4># So sánh thời điểm hết hạn với hiện tại, nếu hết hạn thì trả về lỗi</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>      <span style=color:#ff79c6>cond</span> <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>        <span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>diff(<span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>utc_now(), expired_at) <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span> <span style=color:#ff79c6>-&gt;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>          {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>:expired</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>        true <span style=color:#ff79c6>-&gt;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>          {<span style=color:#f1fa8c>:ok</span>, elem(rs, <span style=color:#bd93f9>1</span>)}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>      <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>  <span style=color:#ff79c6>end</span>
+</code></pre></div><p><strong>Note</strong>: Nhờ feedback của bác @HQC, chỗ này mình đọc trực tiếp từ table, thay vì dùng <code>GenServer.call</code> như trước vì khi send request vào GenServer thì code sẽ được chạy <code>sync</code>/đồng bộ. Do vậy sẽ tạo nên ngẽn cổ chai. Mình sửa lại ở phần tạo table thêm <code>read_concurrency: true</code> và đưa phần code query dữ liệu ra ngoài GenServer</p>
 <h4 id=26-xoá-dữ-liệu-khỏi-cache>2.6 Xoá dữ liệu khỏi cache</h4>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir>  <span style=color:#8be9fd;font-style:italic>def</span> delete(key) <span style=color:#ff79c6>do</span>
-    <span style=color:#50fa7b>GenServer</span><span style=color:#ff79c6>.</span>cast(__MODULE__, {<span style=color:#f1fa8c>:delete</span>, key})
-  <span style=color:#ff79c6>end</span>
-  
-  <span style=color:#8be9fd;font-style:italic>def</span> handle_cast({<span style=color:#f1fa8c>:delete</span>, key}, state) <span style=color:#ff79c6>do</span>
-    <span style=color:#50fa7b>Ets</span><span style=color:#ff79c6>.</span>delete(<span style=color:#f1fa8c>:simple_cache</span>, key)
-    {<span style=color:#f1fa8c>:noreply</span>, state}
-  <span style=color:#ff79c6>end</span>
-</code></pre></td></tr></table>
-</div>
-</div><h4 id=27-module-hoàn-chỉnh>2.7 Module hoàn chỉnh</h4>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">57
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">58
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">59
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">60
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">61
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">62
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">63
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">64
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">65
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">66
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">67
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">68
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">69
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">70
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">71
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">72
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">73
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">74
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">75
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">76
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">77
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">78
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">79
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">80
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">81
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">82
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">83
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">84
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>PhoenixCache.Bucket</span> <span style=color:#ff79c6>do</span>
-  <span style=color:#ff79c6>use</span> <span style=color:#50fa7b>GenServer</span>
-  <span style=color:#ff79c6>alias</span> <span style=color:#f1fa8c>:ets</span>, <span style=color:#f1fa8c>as</span>: <span style=color:#50fa7b>Ets</span>
-
-  <span style=color:#50fa7b>@expired_after</span> <span style=color:#bd93f9>6</span> <span style=color:#ff79c6>*</span> <span style=color:#bd93f9>60</span>
-
-  <span style=color:#8be9fd;font-style:italic>def</span> start_link(args \\ []) <span style=color:#ff79c6>do</span>
-    <span style=color:#50fa7b>GenServer</span><span style=color:#ff79c6>.</span>start_link(__MODULE__, args, <span style=color:#f1fa8c>name</span>: __MODULE__)
-  <span style=color:#ff79c6>end</span>
-
-  <span style=color:#8be9fd;font-style:italic>def</span> set(key, value) <span style=color:#ff79c6>do</span>
-    <span style=color:#50fa7b>GenServer</span><span style=color:#ff79c6>.</span>cast(__MODULE__, {<span style=color:#f1fa8c>:set</span>, key, value})
-  <span style=color:#ff79c6>end</span>
-
-  <span style=color:#50fa7b>@doc</span> <span style=color:#f1fa8c>&#34;&#34;&#34;
-</span><span style=color:#f1fa8c>  Custom TTL for cache entry
-</span><span style=color:#f1fa8c>  ttl: Time to live in second
-</span><span style=color:#f1fa8c>  &#34;&#34;&#34;</span>
-  <span style=color:#8be9fd;font-style:italic>def</span> set(key, value, ttl) <span style=color:#ff79c6>do</span>
-    <span style=color:#50fa7b>GenServer</span><span style=color:#ff79c6>.</span>cast(__MODULE__, {<span style=color:#f1fa8c>:set</span>, key, value, ttl})
-  <span style=color:#ff79c6>end</span>
-
-  <span style=color:#8be9fd;font-style:italic>def</span> get(key) <span style=color:#ff79c6>do</span>
-    rs <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>Ets</span><span style=color:#ff79c6>.</span>lookup(<span style=color:#f1fa8c>:simple_cache</span>, key) <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>List</span><span style=color:#ff79c6>.</span>first()
-
-    <span style=color:#ff79c6>if</span> rs <span style=color:#ff79c6>==</span> nil <span style=color:#ff79c6>do</span>
-      {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>:not_found</span>}
-    <span style=color:#ff79c6>else</span>
-      expired_at <span style=color:#ff79c6>=</span> elem(rs, <span style=color:#bd93f9>2</span>)
-
-      <span style=color:#ff79c6>cond</span> <span style=color:#ff79c6>do</span>
-        <span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>diff(<span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>utc_now(), expired_at) <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span> <span style=color:#ff79c6>-&gt;</span>
-          {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>:expired</span>}
-
-        true <span style=color:#ff79c6>-&gt;</span>
-          {<span style=color:#f1fa8c>:ok</span>, elem(rs, <span style=color:#bd93f9>1</span>)}
-      <span style=color:#ff79c6>end</span>
-    <span style=color:#ff79c6>end</span>
-  <span style=color:#ff79c6>end</span>
-
-  <span style=color:#8be9fd;font-style:italic>def</span> delete(key) <span style=color:#ff79c6>do</span>
-    <span style=color:#50fa7b>GenServer</span><span style=color:#ff79c6>.</span>cast(__MODULE__, {<span style=color:#f1fa8c>:delete</span>, key})
-  <span style=color:#ff79c6>end</span>
-
-  <span style=color:#6272a4># Server callbacks</span>
-  <span style=color:#6272a4># Server (callbacks)</span>
-
-  <span style=color:#50fa7b>@impl</span> true
-  <span style=color:#8be9fd;font-style:italic>def</span> init(state) <span style=color:#ff79c6>do</span>
-    <span style=color:#50fa7b>Ets</span><span style=color:#ff79c6>.</span>new(<span style=color:#f1fa8c>:simple_cache</span>, [<span style=color:#f1fa8c>:set</span>, <span style=color:#f1fa8c>:protected</span>, <span style=color:#f1fa8c>:named_table</span>, <span style=color:#f1fa8c>read_concurrency</span>: true])
-    {<span style=color:#f1fa8c>:ok</span>, state}
-  <span style=color:#ff79c6>end</span>
-
-  <span style=color:#50fa7b>@doc</span> <span style=color:#f1fa8c>&#34;&#34;&#34;
-</span><span style=color:#f1fa8c>  Default TTL 
-</span><span style=color:#f1fa8c>  &#34;&#34;&#34;</span>
-  <span style=color:#8be9fd;font-style:italic>def</span> handle_cast({<span style=color:#f1fa8c>:set</span>, key, val}, state) <span style=color:#ff79c6>do</span>
-    expired_at <span style=color:#ff79c6>=</span>
-      <span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>utc_now()
-      <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>add(<span style=color:#50fa7b>@expired_after</span>, <span style=color:#f1fa8c>:second</span>)
-
-    <span style=color:#50fa7b>Ets</span><span style=color:#ff79c6>.</span>insert(<span style=color:#f1fa8c>:simple_cache</span>, {key, val, expired_at})
-    {<span style=color:#f1fa8c>:noreply</span>, state}
-  <span style=color:#ff79c6>end</span>
-
-  <span style=color:#50fa7b>@doc</span> <span style=color:#f1fa8c>&#34;&#34;&#34;
-</span><span style=color:#f1fa8c>  Custom TTL
-</span><span style=color:#f1fa8c>  &#34;&#34;&#34;</span>
-  <span style=color:#8be9fd;font-style:italic>def</span> handle_cast({<span style=color:#f1fa8c>:set</span>, key, val, ttl}, state) <span style=color:#ff79c6>do</span>
-    inserted_at <span style=color:#ff79c6>=</span>
-      <span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>utc_now()
-      <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>add(ttl, <span style=color:#f1fa8c>:second</span>)
-
-    <span style=color:#50fa7b>Ets</span><span style=color:#ff79c6>.</span>insert(<span style=color:#f1fa8c>:simple_cache</span>, {key, val, inserted_at})
-    {<span style=color:#f1fa8c>:noreply</span>, state}
-  <span style=color:#ff79c6>end</span>
-
-  <span style=color:#50fa7b>@impl</span> true
-  <span style=color:#8be9fd;font-style:italic>def</span> handle_cast({<span style=color:#f1fa8c>:delete</span>, key}, state) <span style=color:#ff79c6>do</span>
-    <span style=color:#50fa7b>Ets</span><span style=color:#ff79c6>.</span>delete(<span style=color:#f1fa8c>:simple_cache</span>, key)
-    {<span style=color:#f1fa8c>:noreply</span>, state}
-  <span style=color:#ff79c6>end</span>
-<span style=color:#ff79c6>end</span>
-
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=3-setup-cache>3. Setup cache</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>  <span style=color:#8be9fd;font-style:italic>def</span> delete(key) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>    <span style=color:#50fa7b>GenServer</span><span style=color:#ff79c6>.</span>cast(__MODULE__, {<span style=color:#f1fa8c>:delete</span>, key})
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>  
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>  <span style=color:#8be9fd;font-style:italic>def</span> handle_cast({<span style=color:#f1fa8c>:delete</span>, key}, state) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span>    <span style=color:#50fa7b>Ets</span><span style=color:#ff79c6>.</span>delete(<span style=color:#f1fa8c>:simple_cache</span>, key)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7</span>    {<span style=color:#f1fa8c>:noreply</span>, state}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8</span>  <span style=color:#ff79c6>end</span>
+</code></pre></div><h4 id=27-module-hoàn-chỉnh>2.7 Module hoàn chỉnh</h4>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>PhoenixCache.Bucket</span> <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>  <span style=color:#ff79c6>use</span> <span style=color:#50fa7b>GenServer</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>  <span style=color:#ff79c6>alias</span> <span style=color:#f1fa8c>:ets</span>, <span style=color:#f1fa8c>as</span>: <span style=color:#50fa7b>Ets</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>  <span style=color:#50fa7b>@expired_after</span> <span style=color:#bd93f9>6</span> <span style=color:#ff79c6>*</span> <span style=color:#bd93f9>60</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>  <span style=color:#8be9fd;font-style:italic>def</span> start_link(args \\ []) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>    <span style=color:#50fa7b>GenServer</span><span style=color:#ff79c6>.</span>start_link(__MODULE__, args, <span style=color:#f1fa8c>name</span>: __MODULE__)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>  <span style=color:#8be9fd;font-style:italic>def</span> set(key, value) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>    <span style=color:#50fa7b>GenServer</span><span style=color:#ff79c6>.</span>cast(__MODULE__, {<span style=color:#f1fa8c>:set</span>, key, value})
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>  <span style=color:#50fa7b>@doc</span> <span style=color:#f1fa8c>&#34;&#34;&#34;
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#f1fa8c>  Custom TTL for cache entry
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#f1fa8c>  ttl: Time to live in second
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#f1fa8c>  &#34;&#34;&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>  <span style=color:#8be9fd;font-style:italic>def</span> set(key, value, ttl) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>    <span style=color:#50fa7b>GenServer</span><span style=color:#ff79c6>.</span>cast(__MODULE__, {<span style=color:#f1fa8c>:set</span>, key, value, ttl})
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>  <span style=color:#8be9fd;font-style:italic>def</span> get(key) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>    rs <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>Ets</span><span style=color:#ff79c6>.</span>lookup(<span style=color:#f1fa8c>:simple_cache</span>, key) <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>List</span><span style=color:#ff79c6>.</span>first()
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>    <span style=color:#ff79c6>if</span> rs <span style=color:#ff79c6>==</span> nil <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>      {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>:not_found</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>    <span style=color:#ff79c6>else</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span>      expired_at <span style=color:#ff79c6>=</span> elem(rs, <span style=color:#bd93f9>2</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span>      <span style=color:#ff79c6>cond</span> <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span>        <span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>diff(<span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>utc_now(), expired_at) <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span> <span style=color:#ff79c6>-&gt;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33</span>          {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>:expired</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35</span>        true <span style=color:#ff79c6>-&gt;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36</span>          {<span style=color:#f1fa8c>:ok</span>, elem(rs, <span style=color:#bd93f9>1</span>)}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37</span>      <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41</span>  <span style=color:#8be9fd;font-style:italic>def</span> delete(key) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42</span>    <span style=color:#50fa7b>GenServer</span><span style=color:#ff79c6>.</span>cast(__MODULE__, {<span style=color:#f1fa8c>:delete</span>, key})
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45</span>  <span style=color:#6272a4># Server callbacks</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46</span>  <span style=color:#6272a4># Server (callbacks)</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48</span>  <span style=color:#50fa7b>@impl</span> true
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49</span>  <span style=color:#8be9fd;font-style:italic>def</span> init(state) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50</span>    <span style=color:#50fa7b>Ets</span><span style=color:#ff79c6>.</span>new(<span style=color:#f1fa8c>:simple_cache</span>, [<span style=color:#f1fa8c>:set</span>, <span style=color:#f1fa8c>:protected</span>, <span style=color:#f1fa8c>:named_table</span>, <span style=color:#f1fa8c>read_concurrency</span>: true])
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51</span>    {<span style=color:#f1fa8c>:ok</span>, state}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">54</span>  <span style=color:#50fa7b>@doc</span> <span style=color:#f1fa8c>&#34;&#34;&#34;
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">55</span><span style=color:#f1fa8c>  Default TTL 
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">56</span><span style=color:#f1fa8c>  &#34;&#34;&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">57</span>  <span style=color:#8be9fd;font-style:italic>def</span> handle_cast({<span style=color:#f1fa8c>:set</span>, key, val}, state) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">58</span>    expired_at <span style=color:#ff79c6>=</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">59</span>      <span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>utc_now()
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">60</span>      <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>add(<span style=color:#50fa7b>@expired_after</span>, <span style=color:#f1fa8c>:second</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">61</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">62</span>    <span style=color:#50fa7b>Ets</span><span style=color:#ff79c6>.</span>insert(<span style=color:#f1fa8c>:simple_cache</span>, {key, val, expired_at})
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">63</span>    {<span style=color:#f1fa8c>:noreply</span>, state}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">64</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">65</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">66</span>  <span style=color:#50fa7b>@doc</span> <span style=color:#f1fa8c>&#34;&#34;&#34;
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">67</span><span style=color:#f1fa8c>  Custom TTL
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">68</span><span style=color:#f1fa8c>  &#34;&#34;&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">69</span>  <span style=color:#8be9fd;font-style:italic>def</span> handle_cast({<span style=color:#f1fa8c>:set</span>, key, val, ttl}, state) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">70</span>    inserted_at <span style=color:#ff79c6>=</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">71</span>      <span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>utc_now()
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">72</span>      <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>NaiveDateTime</span><span style=color:#ff79c6>.</span>add(ttl, <span style=color:#f1fa8c>:second</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">73</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">74</span>    <span style=color:#50fa7b>Ets</span><span style=color:#ff79c6>.</span>insert(<span style=color:#f1fa8c>:simple_cache</span>, {key, val, inserted_at})
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">75</span>    {<span style=color:#f1fa8c>:noreply</span>, state}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">76</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">77</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">78</span>  <span style=color:#50fa7b>@impl</span> true
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">79</span>  <span style=color:#8be9fd;font-style:italic>def</span> handle_cast({<span style=color:#f1fa8c>:delete</span>, key}, state) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">80</span>    <span style=color:#50fa7b>Ets</span><span style=color:#ff79c6>.</span>delete(<span style=color:#f1fa8c>:simple_cache</span>, key)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">81</span>    {<span style=color:#f1fa8c>:noreply</span>, state}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">82</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">83</span><span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">84</span>
+</code></pre></div><h3 id=3-setup-cache>3. Setup cache</h3>
 <p>Ta đã tạo xong module cache rồi, nhưng làm sao để cache tự động chạy khi chạy server?</p>
 <p>Thêm worker vào file <code>phoenix_cache/lib/phoenix_cache/application.ex</code></p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir>children <span style=color:#ff79c6>=</span> [
-      ...
-      worker(<span style=color:#50fa7b>PhoenixCache.Bucket</span>, [])
-    ]
-</code></pre></td></tr></table>
-</div>
-</div><p>Khi <code>Supervisor</code> khởi chạy, nó sẽ start các <code>children</code> và quản lý chúng. Để hiểu rõ hơn, đọc thêm tại <a href=https://hexdocs.pm/elixir/Supervisor.html>https://hexdocs.pm/elixir/Supervisor.html</a></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>children <span style=color:#ff79c6>=</span> [
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>      ...
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>      worker(<span style=color:#50fa7b>PhoenixCache.Bucket</span>, [])
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>    ]
+</code></pre></div><p>Khi <code>Supervisor</code> khởi chạy, nó sẽ start các <code>children</code> và quản lý chúng. Để hiểu rõ hơn, đọc thêm tại <a href=https://hexdocs.pm/elixir/Supervisor.html>https://hexdocs.pm/elixir/Supervisor.html</a></p>
 <h3 id=4-xài-cache>4. Xài cache</h3>
 <p>Olala, ta đã tạo module cache và thiết lập để chạy cùng với server, bây giờ tới lúc xài nó rồi.</p>
 <p>Thử dùng cache cho chức năng xem bài viết:</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style=color:#8be9fd;font-style:italic>def</span> show(conn, %{<span style=color:#f1fa8c>&#34;id&#34;</span> <span style=color:#ff79c6>=&gt;</span> id}) <span style=color:#ff79c6>do</span>
-    post <span style=color:#ff79c6>=</span>
-      <span style=color:#6272a4># lấy nội dung post từ cache</span>
-      <span style=color:#ff79c6>case</span> <span style=color:#50fa7b>PhoenixCache.Bucket</span><span style=color:#ff79c6>.</span>get(<span style=color:#f1fa8c>&#34;posts-</span><span style=color:#f1fa8c>#{</span>id<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#34;</span>) <span style=color:#ff79c6>do</span>
-      	<span style=color:#6272a4># Nếu có ròi thì khỏi cần đọc DB</span>
-        {<span style=color:#f1fa8c>:ok</span>, post} <span style=color:#ff79c6>-&gt;</span>
-          <span style=color:#50fa7b>IO</span><span style=color:#ff79c6>.</span>puts(<span style=color:#f1fa8c>&#34;HIT&#34;</span>)
-          post
-
-        {<span style=color:#f1fa8c>:error</span>, _} <span style=color:#ff79c6>-&gt;</span>
-          <span style=color:#50fa7b>IO</span><span style=color:#ff79c6>.</span>puts(<span style=color:#f1fa8c>&#34;MISS&#34;</span>)
-          <span style=color:#6272a4># Chưa cache thì đọc từ DB</span>
-          post <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>Posts</span><span style=color:#ff79c6>.</span>get_post!(id)
-
-          <span style=color:#6272a4># cache bài viết 60s</span>
-          <span style=color:#50fa7b>PhoenixCache.Bucket</span><span style=color:#ff79c6>.</span>set(<span style=color:#f1fa8c>&#34;posts-</span><span style=color:#f1fa8c>#{</span>id<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#34;</span>, post, <span style=color:#bd93f9>60</span>)
-          post
-      <span style=color:#ff79c6>end</span>
-
-    render(conn, <span style=color:#f1fa8c>&#34;show.html&#34;</span>, <span style=color:#f1fa8c>post</span>: post)
-  <span style=color:#ff79c6>end</span>
-
-</code></pre></td></tr></table>
-</div>
-</div><p>Kết quả request:</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#ff79c6>[</span>info<span style=color:#ff79c6>]</span> GET /posts/1
-MISS
-...
-<span style=color:#ff79c6>[</span>info<span style=color:#ff79c6>]</span> GET /posts/1
-HIT
-...
-</code></pre></td></tr></table>
-</div>
-</div><p>Lần request đầu tiên, bài viết chưa được cache nên phải truy xuất database và cache lại, lần thứ 2 thì đã có trong cache nên không cần phải đọc từ database nữa.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>def</span> show(conn, %{<span style=color:#f1fa8c>&#34;id&#34;</span> <span style=color:#ff79c6>=&gt;</span> id}) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>    post <span style=color:#ff79c6>=</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>      <span style=color:#6272a4># lấy nội dung post từ cache</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>      <span style=color:#ff79c6>case</span> <span style=color:#50fa7b>PhoenixCache.Bucket</span><span style=color:#ff79c6>.</span>get(<span style=color:#f1fa8c>&#34;posts-</span><span style=color:#f1fa8c>#{</span>id<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#34;</span>) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>      	<span style=color:#6272a4># Nếu có ròi thì khỏi cần đọc DB</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>        {<span style=color:#f1fa8c>:ok</span>, post} <span style=color:#ff79c6>-&gt;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>          <span style=color:#50fa7b>IO</span><span style=color:#ff79c6>.</span>puts(<span style=color:#f1fa8c>&#34;HIT&#34;</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>          post
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>        {<span style=color:#f1fa8c>:error</span>, _} <span style=color:#ff79c6>-&gt;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>          <span style=color:#50fa7b>IO</span><span style=color:#ff79c6>.</span>puts(<span style=color:#f1fa8c>&#34;MISS&#34;</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>          <span style=color:#6272a4># Chưa cache thì đọc từ DB</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>          post <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>Posts</span><span style=color:#ff79c6>.</span>get_post!(id)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>          <span style=color:#6272a4># cache bài viết 60s</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>          <span style=color:#50fa7b>PhoenixCache.Bucket</span><span style=color:#ff79c6>.</span>set(<span style=color:#f1fa8c>&#34;posts-</span><span style=color:#f1fa8c>#{</span>id<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#34;</span>, post, <span style=color:#bd93f9>60</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>          post
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>      <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>    render(conn, <span style=color:#f1fa8c>&#34;show.html&#34;</span>, <span style=color:#f1fa8c>post</span>: post)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>
+</code></pre></div><p>Kết quả request:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#ff79c6>[</span>info<span style=color:#ff79c6>]</span> GET /posts/1
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>MISS
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>...
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#ff79c6>[</span>info<span style=color:#ff79c6>]</span> GET /posts/1
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>HIT
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span>...
+</code></pre></div><p>Lần request đầu tiên, bài viết chưa được cache nên phải truy xuất database và cache lại, lần thứ 2 thì đã có trong cache nên không cần phải đọc từ database nữa.</p>
 <p>Ở ví dụ này có thể bạn sẽ chưa thấy sự khác biệt lắm về tốc độ response, nhưng nếu như thay vì load 1 bài viết bằng việc xử lý thống kê dữ liệu thì sự khác biệt sẽ rất lớn.</p>
 <h3 id=5-plug-cache>5. Plug cache</h3>
 <p>Nếu cứ mỗi chức năng đều phải thêm code để kiểm tra cache thì sẽ lặp lại rất nhiều. Để phát huy cái sự lười biếng thì ta sẽ tạo một plug đơn giản để khỏi phải code nhiều lần.</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>PhoenixCache.Plug.Cache</span> <span style=color:#ff79c6>do</span>
-  <span style=color:#ff79c6>import</span> <span style=color:#50fa7b>Plug.Conn</span>
-
-  <span style=color:#6272a4># 6 minute</span>
-  <span style=color:#50fa7b>@default_ttl</span> <span style=color:#bd93f9>6</span> <span style=color:#ff79c6>*</span> <span style=color:#bd93f9>60</span>
-
-  <span style=color:#8be9fd;font-style:italic>def</span> init(ttl \\ nil), <span style=color:#f1fa8c>do</span>: ttl
-
-  <span style=color:#8be9fd;font-style:italic>def</span> call(conn, ttl \\ nil) <span style=color:#ff79c6>do</span>
-    ttl <span style=color:#ff79c6>=</span> ttl <span style=color:#ff79c6>||</span> <span style=color:#50fa7b>@default_ttl</span>
-
-    <span style=color:#6272a4># Chỉ cache với GET request</span>
-    <span style=color:#ff79c6>if</span> conn<span style=color:#ff79c6>.</span>method <span style=color:#ff79c6>==</span> <span style=color:#f1fa8c>&#34;GET&#34;</span> <span style=color:#ff79c6>do</span>
-      <span style=color:#6272a4># tạo key từ request path và query param, thông thường</span>
-      <span style=color:#6272a4># thì cùng path và cùng param thì kết quả là giống nhau</span>
-      key <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;</span><span style=color:#f1fa8c>#{</span>conn<span style=color:#ff79c6>.</span>request_path<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>-</span><span style=color:#f1fa8c>#{</span>conn<span style=color:#ff79c6>.</span>query_string<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#34;</span>
-
-      <span style=color:#ff79c6>case</span> <span style=color:#50fa7b>PhoenixCache.Bucket</span><span style=color:#ff79c6>.</span>get(key) <span style=color:#ff79c6>do</span>
-        {<span style=color:#f1fa8c>:ok</span>, body} <span style=color:#ff79c6>-&gt;</span>
-          <span style=color:#50fa7b>IO</span><span style=color:#ff79c6>.</span>puts(<span style=color:#f1fa8c>&#34;PLUG HIT&#34;</span>)
-		  
-		  <span style=color:#6272a4># nếu đã cache thì trả về ngay</span>
-          conn
-          <span style=color:#ff79c6>|&gt;</span> send_resp(<span style=color:#bd93f9>200</span>, body)
-          <span style=color:#ff79c6>|&gt;</span> halt
-
-        _ <span style=color:#ff79c6>-&gt;</span>
-          <span style=color:#50fa7b>IO</span><span style=color:#ff79c6>.</span>puts(<span style=color:#f1fa8c>&#34;PLUG MISS&#34;</span>)
-		  <span style=color:#6272a4># nếu chưa cache thì xử lý như bình thường</span>
-          conn
-          <span style=color:#ff79c6>|&gt;</span> assign(<span style=color:#f1fa8c>:ttl</span>, ttl)
-          <span style=color:#ff79c6>|&gt;</span> register_before_send(<span style=color:#ff79c6>&amp;</span>cache_before_send<span style=color:#ff79c6>/</span><span style=color:#bd93f9>1</span>) <span style=color:#6272a4># gọi hàm này trước khi trả về</span>
-      <span style=color:#ff79c6>end</span>
-    <span style=color:#ff79c6>else</span>
-      conn
-    <span style=color:#ff79c6>end</span>
-  <span style=color:#ff79c6>end</span>
-
-  <span style=color:#8be9fd;font-style:italic>def</span> cache_before_send(conn) <span style=color:#ff79c6>do</span>
-    <span style=color:#6272a4># nếu request đuợc xử lý thành công thì cache</span>
-    <span style=color:#ff79c6>if</span> conn<span style=color:#ff79c6>.</span>status <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>200</span> <span style=color:#ff79c6>do</span>
-      key <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;</span><span style=color:#f1fa8c>#{</span>conn<span style=color:#ff79c6>.</span>request_path<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>-</span><span style=color:#f1fa8c>#{</span>conn<span style=color:#ff79c6>.</span>query_string<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#34;</span>
-      data <span style=color:#ff79c6>=</span> conn<span style=color:#ff79c6>.</span>resp_body
-      <span style=color:#50fa7b>PhoenixCache.Bucket</span><span style=color:#ff79c6>.</span>set(key, data, conn<span style=color:#ff79c6>.</span>assigns[<span style=color:#f1fa8c>:ttl</span>] <span style=color:#ff79c6>||</span> <span style=color:#50fa7b>@default_ttl</span>)
-      conn
-      
-    <span style=color:#ff79c6>else</span>
-      <span style=color:#6272a4># không thì kệ chúng mày</span>
-      conn
-    <span style=color:#ff79c6>end</span>
-  <span style=color:#ff79c6>end</span>
-<span style=color:#ff79c6>end</span>
-
-</code></pre></td></tr></table>
-</div>
-</div><p>Đây chỉ là một plug đơn giản, bạn có thể viết lại theo nhu cầu.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>PhoenixCache.Plug.Cache</span> <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>  <span style=color:#ff79c6>import</span> <span style=color:#50fa7b>Plug.Conn</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>  <span style=color:#6272a4># 6 minute</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>  <span style=color:#50fa7b>@default_ttl</span> <span style=color:#bd93f9>6</span> <span style=color:#ff79c6>*</span> <span style=color:#bd93f9>60</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>  <span style=color:#8be9fd;font-style:italic>def</span> init(ttl \\ nil), <span style=color:#f1fa8c>do</span>: ttl
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>  <span style=color:#8be9fd;font-style:italic>def</span> call(conn, ttl \\ nil) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>    ttl <span style=color:#ff79c6>=</span> ttl <span style=color:#ff79c6>||</span> <span style=color:#50fa7b>@default_ttl</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>    <span style=color:#6272a4># Chỉ cache với GET request</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>    <span style=color:#ff79c6>if</span> conn<span style=color:#ff79c6>.</span>method <span style=color:#ff79c6>==</span> <span style=color:#f1fa8c>&#34;GET&#34;</span> <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>      <span style=color:#6272a4># tạo key từ request path và query param, thông thường</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>      <span style=color:#6272a4># thì cùng path và cùng param thì kết quả là giống nhau</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>      key <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;</span><span style=color:#f1fa8c>#{</span>conn<span style=color:#ff79c6>.</span>request_path<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>-</span><span style=color:#f1fa8c>#{</span>conn<span style=color:#ff79c6>.</span>query_string<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>      <span style=color:#ff79c6>case</span> <span style=color:#50fa7b>PhoenixCache.Bucket</span><span style=color:#ff79c6>.</span>get(key) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>        {<span style=color:#f1fa8c>:ok</span>, body} <span style=color:#ff79c6>-&gt;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>          <span style=color:#50fa7b>IO</span><span style=color:#ff79c6>.</span>puts(<span style=color:#f1fa8c>&#34;PLUG HIT&#34;</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>		  
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>		  <span style=color:#6272a4># nếu đã cache thì trả về ngay</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>          conn
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>          <span style=color:#ff79c6>|&gt;</span> send_resp(<span style=color:#bd93f9>200</span>, body)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>          <span style=color:#ff79c6>|&gt;</span> halt
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>        _ <span style=color:#ff79c6>-&gt;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>          <span style=color:#50fa7b>IO</span><span style=color:#ff79c6>.</span>puts(<span style=color:#f1fa8c>&#34;PLUG MISS&#34;</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span>		  <span style=color:#6272a4># nếu chưa cache thì xử lý như bình thường</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span>          conn
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span>          <span style=color:#ff79c6>|&gt;</span> assign(<span style=color:#f1fa8c>:ttl</span>, ttl)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span>          <span style=color:#ff79c6>|&gt;</span> register_before_send(<span style=color:#ff79c6>&amp;</span>cache_before_send<span style=color:#ff79c6>/</span><span style=color:#bd93f9>1</span>) <span style=color:#6272a4># gọi hàm này trước khi trả về</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33</span>      <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34</span>    <span style=color:#ff79c6>else</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35</span>      conn
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39</span>  <span style=color:#8be9fd;font-style:italic>def</span> cache_before_send(conn) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40</span>    <span style=color:#6272a4># nếu request đuợc xử lý thành công thì cache</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41</span>    <span style=color:#ff79c6>if</span> conn<span style=color:#ff79c6>.</span>status <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>200</span> <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42</span>      key <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;</span><span style=color:#f1fa8c>#{</span>conn<span style=color:#ff79c6>.</span>request_path<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>-</span><span style=color:#f1fa8c>#{</span>conn<span style=color:#ff79c6>.</span>query_string<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43</span>      data <span style=color:#ff79c6>=</span> conn<span style=color:#ff79c6>.</span>resp_body
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44</span>      <span style=color:#50fa7b>PhoenixCache.Bucket</span><span style=color:#ff79c6>.</span>set(key, data, conn<span style=color:#ff79c6>.</span>assigns[<span style=color:#f1fa8c>:ttl</span>] <span style=color:#ff79c6>||</span> <span style=color:#50fa7b>@default_ttl</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45</span>      conn
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46</span>      
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47</span>    <span style=color:#ff79c6>else</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48</span>      <span style=color:#6272a4># không thì kệ chúng mày</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49</span>      conn
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52</span><span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53</span>
+</code></pre></div><p>Đây chỉ là một plug đơn giản, bạn có thể viết lại theo nhu cầu.</p>
 <p>Sử dụng Plug: <code>plug(PhoenixCache.Plug.Cache, TTL )</code></p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir>pipeline <span style=color:#f1fa8c>:browser</span> <span style=color:#ff79c6>do</span>
-    ...
-    plug(<span style=color:#50fa7b>PhoenixCache.Plug.Cache</span>, <span style=color:#bd93f9>100</span>) <span style=color:#6272a4># cache 100s</span>
- <span style=color:#ff79c6>end</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=6-kết-luận>6. Kết luận</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>pipeline <span style=color:#f1fa8c>:browser</span> <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>    ...
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>    plug(<span style=color:#50fa7b>PhoenixCache.Plug.Cache</span>, <span style=color:#bd93f9>100</span>) <span style=color:#6272a4># cache 100s</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span> <span style=color:#ff79c6>end</span>
+</code></pre></div><h3 id=6-kết-luận>6. Kết luận</h3>
 <p>Vậy là bạn đã có thể sử dụng ETS như là bộ nhớ cache cho ứng dụng Phoenix của mình mà không cần phải cài thêm phần mềm/dịch vụ khác.</p>
 <p>Hi vọng sẽ giúp ích cho các bạn</p>
 <p>Source code project <a href=https://github.com/bluzky/phoenix_ets_cache_example>https://github.com/bluzky/phoenix_ets_cache_example</a></p>

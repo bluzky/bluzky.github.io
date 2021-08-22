@@ -8,7 +8,7 @@
 <link rel=icon href=https://bluzky.github.io/images/favicon.png type=image/x-icon>
 <link rel=preconnect href=https://fonts.gstatic.com>
 <link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap">
-<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.5f05ab8da5f953c9f87c520da529d85a9b1881e12e4c6097c7b10457964494188cb28a852d08cc91f31497e6608a87820a424e5719441bef77dc73aed346e813.css integrity="sha512-XwWrjaX5U8n4fFINpSnYWpsYgeEuTGCXx7EEV5ZElBiMsoqFLQjMkfMUl+ZgioeCCkJOVxlEG+933HOu00boEw==" media=screen>
+<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.a175996d51c7122a7871164dca713adc582e8df8a6b31ae1e7169ca0559953614b9378e577a3ce6d3e6bc8fa87b3e4f38305c3f1478fb0b4904d66b4caffe85a.css integrity="sha512-oXWZbVHHEip4cRZNynE63Fgujfimsxrh5xacoFWZU2FLk3jld6PObT5ryPqHs+TzgwXD8UePsLSQTWa0yv/oWg==" media=screen>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
 </head>
@@ -101,156 +101,72 @@
 <p>Thư viện <code>Ecto</code> đã cung cấp sẵn cho chúng ta module <code>Changeset</code>. Nó hỗ trợ việc cast các tham số về đúng kiểu dữ liệu mong muốn, nó cũng hỗ trợ các phương thức để validate các tham số yêu cầu, và nó cũng cho phép bạn giới hạn tham số nào được truyền vào.</p>
 <p>Và sau đây là một ví dụ sử dụng <code>Chageset</code> để validate các tham số khi filter các đơn hàng.</p>
 <h2 id=1-đầu-tiên-bạn-phải-định-nghĩa-một-schema>1. Đầu tiên bạn phải định nghĩa một schema</h2>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.OrderFilterParams</span> <span style=color:#ff79c6>do</span>
-    <span style=color:#ff79c6>use</span> <span style=color:#50fa7b>Ecto.Schema</span>
-    <span style=color:#ff79c6>import</span> <span style=color:#50fa7b>Ecto.Changeset</span>
-
-    schema <span style=color:#f1fa8c>&#34;order_filter_params&#34;</span> <span style=color:#ff79c6>do</span>
-        field <span style=color:#f1fa8c>:keyword</span>, <span style=color:#f1fa8c>:string</span>
-        field <span style=color:#f1fa8c>:category_id</span>,  <span style=color:#f1fa8c>:integer</span>
-        field <span style=color:#f1fa8c>:status</span>, <span style=color:#f1fa8c>:string</span>
-        field <span style=color:#f1fa8c>:start_date</span>, <span style=color:#f1fa8c>:utc_datetime</span>
-        field <span style=color:#f1fa8c>:end_date</span>, <span style=color:#f1fa8c>:utc_datetime</span>
-    <span style=color:#ff79c6>end</span>
-<span style=color:#ff79c6>end</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=2-cast-và-validate>2. Cast và validate</h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.OrderFilterParams</span> <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>    <span style=color:#ff79c6>use</span> <span style=color:#50fa7b>Ecto.Schema</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    <span style=color:#ff79c6>import</span> <span style=color:#50fa7b>Ecto.Changeset</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>    schema <span style=color:#f1fa8c>&#34;order_filter_params&#34;</span> <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>        field <span style=color:#f1fa8c>:keyword</span>, <span style=color:#f1fa8c>:string</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>        field <span style=color:#f1fa8c>:category_id</span>,  <span style=color:#f1fa8c>:integer</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>        field <span style=color:#f1fa8c>:status</span>, <span style=color:#f1fa8c>:string</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>        field <span style=color:#f1fa8c>:start_date</span>, <span style=color:#f1fa8c>:utc_datetime</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>        field <span style=color:#f1fa8c>:end_date</span>, <span style=color:#f1fa8c>:utc_datetime</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#ff79c6>end</span>
+</code></pre></div><h2 id=2-cast-và-validate>2. Cast và validate</h2>
 <p>Sau đó phải định nghĩa một hàm để thực hiện việc cast tham số và validate <code>changeset</code>.</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.OrderFilterParams</span> <span style=color:#ff79c6>do</span>
-
-    ...
-
-    <span style=color:#50fa7b>@required</span> <span style=color:#f1fa8c>~w(category_id start_date)</span>
-    <span style=color:#50fa7b>@optional</span> <span style=color:#f1fa8c>~w(keyword status end_date)</span>
-
-    <span style=color:#8be9fd;font-style:italic>def</span> changeset(changeset_or_model, params) <span style=color:#ff79c6>do</span>
-         cast(changeset_or_model, params, <span style=color:#50fa7b>@required</span> <span style=color:#ff79c6>++</span> <span style=color:#50fa7b>@optional</span>)
-        <span style=color:#ff79c6>|&gt;</span> validate_required(<span style=color:#50fa7b>@required</span>)
-    <span style=color:#ff79c6>end</span>
-<span style=color:#ff79c6>end</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=3-set-giá-trị-default-động>3. Set giá trị default động</h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.OrderFilterParams</span> <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    ...
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>    <span style=color:#50fa7b>@required</span> <span style=color:#f1fa8c>~w(category_id start_date)</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>    <span style=color:#50fa7b>@optional</span> <span style=color:#f1fa8c>~w(keyword status end_date)</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>    <span style=color:#8be9fd;font-style:italic>def</span> changeset(changeset_or_model, params) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>         cast(changeset_or_model, params, <span style=color:#50fa7b>@required</span> <span style=color:#ff79c6>++</span> <span style=color:#50fa7b>@optional</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>        <span style=color:#ff79c6>|&gt;</span> validate_required(<span style=color:#50fa7b>@required</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#ff79c6>end</span>
+</code></pre></div><h2 id=3-set-giá-trị-default-động>3. Set giá trị default động</h2>
 <p>Nếu bạn muốn sử dụng các giá trị default động, ví dụ như mặc định ngày kết thúc là ngày hiện tại, các bạn phải định nghĩa một function để set giá trị mong muốn.</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.OrderFilterParams</span> <span style=color:#ff79c6>do</span>
-
-    ...
-
-    <span style=color:#8be9fd;font-style:italic>def</span> changeset(changeset_or_model, params) <span style=color:#ff79c6>do</span>
-         cast(changeset_or_model, params, <span style=color:#50fa7b>@required</span> <span style=color:#ff79c6>++</span> <span style=color:#50fa7b>@optional</span>)
-        <span style=color:#ff79c6>|&gt;</span> validate_required(<span style=color:#50fa7b>@required</span>)
-        <span style=color:#ff79c6>|&gt;</span> set_default_end_date()
-    <span style=color:#ff79c6>end</span>
-
-    <span style=color:#8be9fd;font-style:italic>defp</span> set_defaut_end_date(changeset) <span style=color:#ff79c6>do</span>
-        end_date <span style=color:#ff79c6>=</span> get_change(changeset, <span style=color:#f1fa8c>:end_date</span>)
-        <span style=color:#ff79c6>if</span> is_nil(end_date) <span style=color:#ff79c6>do</span>
-            put_change(changeset, <span style=color:#f1fa8c>:end_date</span>, <span style=color:#50fa7b>Timex</span><span style=color:#ff79c6>.</span>today())
-        <span style=color:#ff79c6>else</span>
-            changeset
-        <span style=color:#ff79c6>end</span>
-    <span style=color:#ff79c6>end</span>
-<span style=color:#ff79c6>end</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=4-sử-dụng-params-schema>4. Sử dụng Params schema</h2>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.OrderController</span> <span style=color:#ff79c6>do</span>
-    <span style=color:#ff79c6>use</span> <span style=color:#50fa7b>MyApp</span>, <span style=color:#f1fa8c>:controller</span>
-    <span style=color:#ff79c6>alias</span> <span style=color:#50fa7b>MyApp.OrderFilterParams</span>
-
-    <span style=color:#8be9fd;font-style:italic>def</span> index(conn, params) <span style=color:#ff79c6>do</span>
-        changeset <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>OrderFilterParams</span><span style=color:#ff79c6>.</span>changeset(%<span style=color:#50fa7b>OrderFilterParams</span>{}, params)
-
-        <span style=color:#ff79c6>if</span> changeset<span style=color:#ff79c6>.</span>valid? <span style=color:#ff79c6>do</span>
-            strong_params <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>Ecto.Changeset</span><span style=color:#ff79c6>.</span>apply_changes(changeset)
-				<span style=color:#50fa7b>IO</span><span style=color:#ff79c6>.</span>put(strong_params<span style=color:#ff79c6>.</span>keyword)
-            <span style=color:#6272a4># Do something with your params</span>
-        <span style=color:#ff79c6>else</span>
-            <span style=color:#6272a4># handle error</span>
-        <span style=color:#ff79c6>end</span>
-    <span style=color:#ff79c6>end</span>
-<span style=color:#ff79c6>end</span>
-
-</code></pre></td></tr></table>
-</div>
-</div><p>Rất đơn giản đúng không, nếu bạn đã sử dụng <code>Ecto</code> thì việc này chỉ là ruồi muỗi. Tuy nhiên đơn giản thì phải có thứ đánh đổi chứ.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.OrderFilterParams</span> <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    ...
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>    <span style=color:#8be9fd;font-style:italic>def</span> changeset(changeset_or_model, params) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>         cast(changeset_or_model, params, <span style=color:#50fa7b>@required</span> <span style=color:#ff79c6>++</span> <span style=color:#50fa7b>@optional</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>        <span style=color:#ff79c6>|&gt;</span> validate_required(<span style=color:#50fa7b>@required</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>        <span style=color:#ff79c6>|&gt;</span> set_default_end_date()
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>    <span style=color:#8be9fd;font-style:italic>defp</span> set_defaut_end_date(changeset) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>        end_date <span style=color:#ff79c6>=</span> get_change(changeset, <span style=color:#f1fa8c>:end_date</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>        <span style=color:#ff79c6>if</span> is_nil(end_date) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>            put_change(changeset, <span style=color:#f1fa8c>:end_date</span>, <span style=color:#50fa7b>Timex</span><span style=color:#ff79c6>.</span>today())
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>        <span style=color:#ff79c6>else</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>            changeset
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>        <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#ff79c6>end</span>
+</code></pre></div><h2 id=4-sử-dụng-params-schema>4. Sử dụng Params schema</h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.OrderController</span> <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>    <span style=color:#ff79c6>use</span> <span style=color:#50fa7b>MyApp</span>, <span style=color:#f1fa8c>:controller</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    <span style=color:#ff79c6>alias</span> <span style=color:#50fa7b>MyApp.OrderFilterParams</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>    <span style=color:#8be9fd;font-style:italic>def</span> index(conn, params) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>        changeset <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>OrderFilterParams</span><span style=color:#ff79c6>.</span>changeset(%<span style=color:#50fa7b>OrderFilterParams</span>{}, params)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>        <span style=color:#ff79c6>if</span> changeset<span style=color:#ff79c6>.</span>valid? <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>            strong_params <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>Ecto.Changeset</span><span style=color:#ff79c6>.</span>apply_changes(changeset)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>				<span style=color:#50fa7b>IO</span><span style=color:#ff79c6>.</span>put(strong_params<span style=color:#ff79c6>.</span>keyword)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>            <span style=color:#6272a4># Do something with your params</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>        <span style=color:#ff79c6>else</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>            <span style=color:#6272a4># handle error</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>        <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>
+</code></pre></div><p>Rất đơn giản đúng không, nếu bạn đã sử dụng <code>Ecto</code> thì việc này chỉ là ruồi muỗi. Tuy nhiên đơn giản thì phải có thứ đánh đổi chứ.</p>
 <h2 id=vài-thứ-mà-bạn-sẽ-thấy-bất-tiện>Vài thứ mà bạn sẽ thấy bất tiện</h2>
 <h3 id=1-lượng-code-mà-bạn-phải-viết-quá-nhiều>1. Lượng code mà bạn phải viết quá nhiều.</h3>
 <p>Thử tưởng tượng mỗi API bạn lại phải định nghĩa thêm một Module params cho nó thì phức tạp vl.</p>

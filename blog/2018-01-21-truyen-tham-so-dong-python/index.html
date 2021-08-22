@@ -8,7 +8,7 @@
 <link rel=icon href=https://bluzky.github.io/images/favicon.png type=image/x-icon>
 <link rel=preconnect href=https://fonts.gstatic.com>
 <link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap">
-<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.5f05ab8da5f953c9f87c520da529d85a9b1881e12e4c6097c7b10457964494188cb28a852d08cc91f31497e6608a87820a424e5719441bef77dc73aed346e813.css integrity="sha512-XwWrjaX5U8n4fFINpSnYWpsYgeEuTGCXx7EEV5ZElBiMsoqFLQjMkfMUl+ZgioeCCkJOVxlEG+933HOu00boEw==" media=screen>
+<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.a175996d51c7122a7871164dca713adc582e8df8a6b31ae1e7169ca0559953614b9378e577a3ce6d3e6bc8fa87b3e4f38305c3f1478fb0b4904d66b4caffe85a.css integrity="sha512-oXWZbVHHEip4cRZNynE63Fgujfimsxrh5xacoFWZU2FLk3jld6PObT5ryPqHs+TzgwXD8UePsLSQTWa0yv/oWg==" media=screen>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
 </head>
@@ -95,33 +95,17 @@ Nhưng để dễ hiểu thì nên dùng tên chuẩn là <code>*args</code> và
 <li>Khi khai báo 1 hàm, sử dụng <code>*args</code> và <code>**kwargs</code> cho phép bạn truyền vào bao nhiêu tham số cũng được mà không cần biết trước số lượng.
 <strong>Ví dụ</strong></li>
 </ul>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#6272a4># với giả sử các tham số truyền vào đều là số</span>
-<span style=color:#ff79c6>def</span> <span style=color:#50fa7b>sum</span>(<span style=color:#ff79c6>*</span>args):
-	total <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>
-	<span style=color:#ff79c6>for</span> number <span style=color:#ff79c6>in</span> args:
-  	total <span style=color:#ff79c6>+=</span> number
-  <span style=color:#ff79c6>return</span> total
-
-<span style=color:#6272a4># gọi hàm</span>
-<span style=color:#8be9fd;font-style:italic>sum</span>(<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>, <span style=color:#bd93f9>3</span>,<span style=color:#bd93f9>19</span>)
-<span style=color:#8be9fd;font-style:italic>sum</span>( <span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>100</span>)
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=2-args-và-kwargs-khác-gì-nhau>2. <code>*args</code> và <code>**kwargs</code> khác gì nhau?</h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#6272a4># với giả sử các tham số truyền vào đều là số</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>sum</span>(<span style=color:#ff79c6>*</span>args):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>	total <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>	<span style=color:#ff79c6>for</span> number <span style=color:#ff79c6>in</span> args:
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>  	total <span style=color:#ff79c6>+=</span> number
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>  <span style=color:#ff79c6>return</span> total
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#6272a4># gọi hàm</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#8be9fd;font-style:italic>sum</span>(<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>, <span style=color:#bd93f9>3</span>,<span style=color:#bd93f9>19</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#8be9fd;font-style:italic>sum</span>( <span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>100</span>)
+</code></pre></div><h2 id=2-args-và-kwargs-khác-gì-nhau>2. <code>*args</code> và <code>**kwargs</code> khác gì nhau?</h2>
 <ul>
 <li>Cho những bạn chưa biêt: Khi gọi hàm trong Python, có 2 kiểu truyền tham số:
 <ul>
@@ -129,66 +113,33 @@ Nhưng để dễ hiểu thì nên dùng tên chuẩn là <code>*args</code> và
 <li>Truyền tham số bình thường theo thứ tự khai báo đối số.
 <strong>Ví dụ</strong></li>
 </ul>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>register</span>(name, password):
-	<span style=color:#ff79c6>....</span>
-<span style=color:#6272a4># Truyền tham số theo kiểu thông thường, phải theo đúng thứ tự</span>
-register( <span style=color:#f1fa8c>&#39;Coulson&#39;</span>, <span style=color:#f1fa8c>&#39;hail_Hydra&#39;</span>)
-<span style=color:#6272a4># Truyền tham số theo tên, Không cần phải theo thứ tự khai báo thao số</span>
-register( password<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;cookHim&#39;</span>, name<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;Skye&#39;</span>)
-</code></pre></td></tr></table>
-</div>
-</div></li>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>register</span>(name, password):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>	<span style=color:#ff79c6>....</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#6272a4># Truyền tham số theo kiểu thông thường, phải theo đúng thứ tự</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>register( <span style=color:#f1fa8c>&#39;Coulson&#39;</span>, <span style=color:#f1fa8c>&#39;hail_Hydra&#39;</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span><span style=color:#6272a4># Truyền tham số theo tên, Không cần phải theo thứ tự khai báo thao số</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span>register( password<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;cookHim&#39;</span>, name<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;Skye&#39;</span>)
+</code></pre></div></li>
 <li><strong><code>*args</code></strong> nhận các tham số truyền bình thường. Sử dụng <strong>args</strong> như một list.</li>
 <li><strong><code>**kwargs</code></strong> nhận tham số truyền theo tên. Sử dụng **kwargs** như một. dictionary</li>
 </ul>
 <p><strong>Ví dụ</strong></p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>test_args</span>(<span style=color:#ff79c6>*</span>args):
-	<span style=color:#ff79c6>for</span> item <span style=color:#ff79c6>in</span> args:
-   	<span style=color:#8be9fd;font-style:italic>print</span> item
-
-<span style=color:#ff79c6>&gt;&gt;</span>test_args(<span style=color:#f1fa8c>&#39;Hello&#39;</span>, <span style=color:#f1fa8c>&#39;world!&#39;</span>)
-Hello
-world!
-
-<span style=color:#ff79c6>def</span> <span style=color:#50fa7b>test_kwargs</span>(<span style=color:#ff79c6>*</span>kwargs):
-	<span style=color:#ff79c6>for</span> key, value <span style=color:#ff79c6>in</span> kwargs<span style=color:#ff79c6>.</span>iteritems():
-   	<span style=color:#8be9fd;font-style:italic>print</span> <span style=color:#f1fa8c>&#39;</span><span style=color:#f1fa8c>{0}</span><span style=color:#f1fa8c> = </span><span style=color:#f1fa8c>{1}</span><span style=color:#f1fa8c>&#39;</span><span style=color:#ff79c6>.</span>format(key, value)
-
-<span style=color:#ff79c6>&gt;&gt;</span>test_kwargs(name<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;Dzung&#39;</span>, age<span style=color:#ff79c6>=</span><span style=color:#bd93f9>10</span>)
-age <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>10</span>
-name <span style=color:#ff79c6>=</span> Dzung
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=3-thứ-tự-sử-dụng-và-truyền-tham-số-args-kwargs-và-tham-số-bình-thường>3. Thứ tự sử dụng và truyền tham số <code>*args</code>, <code>**kwargs</code> và tham số bình thường</h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>test_args</span>(<span style=color:#ff79c6>*</span>args):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>	<span style=color:#ff79c6>for</span> item <span style=color:#ff79c6>in</span> args:
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>   	<span style=color:#8be9fd;font-style:italic>print</span> item
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#ff79c6>&gt;&gt;</span>test_args(<span style=color:#f1fa8c>&#39;Hello&#39;</span>, <span style=color:#f1fa8c>&#39;world!&#39;</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>Hello
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>world!
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>test_kwargs</span>(<span style=color:#ff79c6>*</span>kwargs):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>	<span style=color:#ff79c6>for</span> key, value <span style=color:#ff79c6>in</span> kwargs<span style=color:#ff79c6>.</span>iteritems():
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>   	<span style=color:#8be9fd;font-style:italic>print</span> <span style=color:#f1fa8c>&#39;</span><span style=color:#f1fa8c>{0}</span><span style=color:#f1fa8c> = </span><span style=color:#f1fa8c>{1}</span><span style=color:#f1fa8c>&#39;</span><span style=color:#ff79c6>.</span>format(key, value)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#ff79c6>&gt;&gt;</span>test_kwargs(name<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;Dzung&#39;</span>, age<span style=color:#ff79c6>=</span><span style=color:#bd93f9>10</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>age <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>10</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>name <span style=color:#ff79c6>=</span> Dzung
+</code></pre></div><h2 id=3-thứ-tự-sử-dụng-và-truyền-tham-số-args-kwargs-và-tham-số-bình-thường>3. Thứ tự sử dụng và truyền tham số <code>*args</code>, <code>**kwargs</code> và tham số bình thường</h2>
 <p>Khi sử dụng phải khai báo đối số theo thứ tự:</p>
 <blockquote>
 <p>**đối số xác đinh &ndash;> <code>*args</code> &ndash;> <code>**kwargs</code>**</p>
@@ -198,35 +149,18 @@ name <span style=color:#ff79c6>=</span> Dzung
 <p>Khi sử dụng đồng thời <code>*args</code> <code>**kwargs</code> thì không thể truyền tham số bình thường theo tên</p>
 </blockquote>
 <p><strong>Ví dụ</strong></p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>show_detail</span>(name, <span style=color:#ff79c6>*</span>args, <span style=color:#ff79c6>**</span>kwargs):
-	<span style=color:#ff79c6>.....</span>
-
-show_detail(name<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;Coulson&#39;</span>, <span style=color:#f1fa8c>&#39;agent&#39;</span>, age<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;40&#39;</span>, level<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;A&#39;</span>)
-<span style=color:#ff79c6>&gt;&gt;</span> Lỗi
-
-<span style=color:#ff79c6>def</span> <span style=color:#50fa7b>show_detail_2</span>(name, <span style=color:#ff79c6>**</span>kwargs):
-	<span style=color:#ff79c6>....</span>
-
-show_detail_2(name<span style=color:#ff79c6>=</span>Coulson<span style=color:#f1fa8c>&#39;, age=&#39;</span><span style=color:#bd93f9>40</span><span style=color:#f1fa8c>&#39;, level=&#39;</span>A<span style=color:#f1fa8c>&#39;)</span>
-<span style=color:#ff79c6>&gt;&gt;</span> Chạy Ok
-</code></pre></td></tr></table>
-</div>
-</div></div>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>show_detail</span>(name, <span style=color:#ff79c6>*</span>args, <span style=color:#ff79c6>**</span>kwargs):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>	<span style=color:#ff79c6>.....</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>show_detail(name<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;Coulson&#39;</span>, <span style=color:#f1fa8c>&#39;agent&#39;</span>, age<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;40&#39;</span>, level<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;A&#39;</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#ff79c6>&gt;&gt;</span> Lỗi
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>show_detail_2</span>(name, <span style=color:#ff79c6>**</span>kwargs):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>	<span style=color:#ff79c6>....</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>show_detail_2(name<span style=color:#ff79c6>=</span>Coulson<span style=color:#f1fa8c>&#39;, age=&#39;</span><span style=color:#bd93f9>40</span><span style=color:#f1fa8c>&#39;, level=&#39;</span>A<span style=color:#f1fa8c>&#39;)</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#ff79c6>&gt;&gt;</span> Chạy Ok
+</code></pre></div></div>
 </div>
 <div class=single-post-meta>
 <div class="row justify-content-center">

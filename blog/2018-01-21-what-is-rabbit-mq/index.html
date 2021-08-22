@@ -8,7 +8,7 @@
 <link rel=icon href=https://bluzky.github.io/images/favicon.png type=image/x-icon>
 <link rel=preconnect href=https://fonts.gstatic.com>
 <link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap">
-<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.5f05ab8da5f953c9f87c520da529d85a9b1881e12e4c6097c7b10457964494188cb28a852d08cc91f31497e6608a87820a424e5719441bef77dc73aed346e813.css integrity="sha512-XwWrjaX5U8n4fFINpSnYWpsYgeEuTGCXx7EEV5ZElBiMsoqFLQjMkfMUl+ZgioeCCkJOVxlEG+933HOu00boEw==" media=screen>
+<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.a175996d51c7122a7871164dca713adc582e8df8a6b31ae1e7169ca0559953614b9378e577a3ce6d3e6bc8fa87b3e4f38305c3f1478fb0b4904d66b4caffe85a.css integrity="sha512-oXWZbVHHEip4cRZNynE63Fgujfimsxrh5xacoFWZU2FLk3jld6PObT5ryPqHs+TzgwXD8UePsLSQTWa0yv/oWg==" media=screen>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
 </head>
@@ -155,32 +155,14 @@ To send message direct to queue, set exchange name to empty string
 Many consumer can subcribe same queue. Message will be dispatched using FIFO rule</p>
 </blockquote>
 <p><strong>Producer</strong></p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>channel<span style=color:#ff79c6>.</span>basic_publish(exchange<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;&#39;</span>,
-					  routing_key<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;routing_name&#39;</span>,
-                      body<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;message_content&#39;</span>)
-</code></pre></td></tr></table>
-</div>
-</div><p><strong>Consumer</strong></p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>channel<span style=color:#ff79c6>.</span>basic_consume(callback, <span style=color:#6272a4># callback function to handle message</span>
-						queue<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;queue_name&#39;</span>
-                        no_ack<span style=color:#ff79c6>=</span><span style=color:#ff79c6>True</span>)
-</code></pre></td></tr></table>
-</div>
-</div><script defer src=/js/mermaid.min.js>mermaid.initialize({theme:'forest'})</script>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>channel<span style=color:#ff79c6>.</span>basic_publish(exchange<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;&#39;</span>,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>					  routing_key<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;routing_name&#39;</span>,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>                      body<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;message_content&#39;</span>)
+</code></pre></div><p><strong>Consumer</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>channel<span style=color:#ff79c6>.</span>basic_consume(callback, <span style=color:#6272a4># callback function to handle message</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>						queue<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;queue_name&#39;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>                        no_ack<span style=color:#ff79c6>=</span><span style=color:#ff79c6>True</span>)
+</code></pre></div><script defer src=/js/mermaid.min.js>mermaid.initialize({theme:'forest'})</script>
 <div class=mermaid align=center>
 graph LR;
 A((Producer))-->Q[queue];
@@ -206,58 +188,27 @@ Q1-->C1((C1));
 Q2-->C2((C2));
 </div>
 <p><strong>Producer</strong></p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">9
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#6272a4># firs we need to declare an exchange</span>
-<span style=color:#6272a4># four types of exchange: fanout, headers, topic, direct</span>
-channel<span style=color:#ff79c6>.</span>exchange_declare(exchange<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;exchange_name&#39;</span>,
-						<span style=color:#8be9fd;font-style:italic>type</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;exchange_type&#39;</span>)
-<span style=color:#ff79c6>....</span>
-channel<span style=color:#ff79c6>.</span>basic_publish(exchange<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;exchange_name&#39;</span>,
-						routing_key<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;channel_name&#39;</span>,
-                        body<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;message_content&#39;</span>)
-<span style=color:#ff79c6>....</span>
-</code></pre></td></tr></table>
-</div>
-</div><p><strong>Consumer</strong></p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>channel<span style=color:#ff79c6>.</span>exchange_declare(exchange<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;exchange_name&#39;</span>,
-						<span style=color:#8be9fd;font-style:italic>type</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;exchange_type&#39;</span>)
-<span style=color:#ff79c6>....</span>
-<span style=color:#6272a4># need to bind queue to a specific exchange</span>
-channel<span style=color:#ff79c6>.</span>queue_bind(exchange<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;exchange_name&#39;</span>,
-					queue<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;queue_name&#39;</span>)
-<span style=color:#ff79c6>....</span>
-channel<span style=color:#ff79c6>.</span>basic_consume(callback,
-					queue<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;queue_name&#39;</span>,
-                    no_ack<span style=color:#ff79c6>=</span><span style=color:#ff79c6>True</span>)
-</code></pre></td></tr></table>
-</div>
-</div><ol start=4>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#6272a4># firs we need to declare an exchange</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#6272a4># four types of exchange: fanout, headers, topic, direct</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>channel<span style=color:#ff79c6>.</span>exchange_declare(exchange<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;exchange_name&#39;</span>,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>						<span style=color:#8be9fd;font-style:italic>type</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;exchange_type&#39;</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span><span style=color:#ff79c6>....</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span>channel<span style=color:#ff79c6>.</span>basic_publish(exchange<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;exchange_name&#39;</span>,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7</span>						routing_key<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;channel_name&#39;</span>,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8</span>                        body<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;message_content&#39;</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">9</span><span style=color:#ff79c6>....</span>
+</code></pre></div><p><strong>Consumer</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>channel<span style=color:#ff79c6>.</span>exchange_declare(exchange<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;exchange_name&#39;</span>,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>						<span style=color:#8be9fd;font-style:italic>type</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;exchange_type&#39;</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#ff79c6>....</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#6272a4># need to bind queue to a specific exchange</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>channel<span style=color:#ff79c6>.</span>queue_bind(exchange<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;exchange_name&#39;</span>,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>					queue<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;queue_name&#39;</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#ff79c6>....</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>channel<span style=color:#ff79c6>.</span>basic_consume(callback,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>					queue<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;queue_name&#39;</span>,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>                    no_ack<span style=color:#ff79c6>=</span><span style=color:#ff79c6>True</span>)
+</code></pre></div><ol start=4>
 <li>
 <p><strong>RPC</strong></p>
 <blockquote>
@@ -413,8 +364,8 @@ You May Also Like
 </article>
 </div>
 <div class=col-md-6><article class="card post-card">
-<a href=https://bluzky.github.io/blog/2020-10-30-compose-ecto-query-from-client/>
-<img loading=lazy class="w-100 rounded" src=https://bluzky.github.io/img/request-to-query.png alt="Compose Ecto Query From Client">
+<a href=https://bluzky.github.io/blog/2021-06-29-elixir-pattern-matching-in-a-nut-shell/>
+<img loading=lazy class="w-100 rounded" src=https://bluzky.github.io/img/pattern-matching.png alt="Elixir Pattern Matching in a nut shell">
 </a>
 <div class=card-body>
 <ul class="card-meta list-inline mb-2">
@@ -425,13 +376,13 @@ You May Also Like
 </a>
 </li>
 <li class="list-inline-item mb-2">
-<span>30 Oct, 2020</span>
+<span>29 Jun, 2021</span>
 </li>
 </ul>
 <h3 class=mb-3>
-<a class=post-title href=https://bluzky.github.io/blog/2020-10-30-compose-ecto-query-from-client/>Compose Ecto Query From Client</a>
+<a class=post-title href=https://bluzky.github.io/blog/2021-06-29-elixir-pattern-matching-in-a-nut-shell/>Elixir Pattern Matching in a nut shell</a>
 </h3>
-<p>The story At our company, OnPoint, we are building an ecommerce website using Phoenix Framework. And I am working on admin to manage product, orders …</p>
+<p>If you are new to Elixir, Pattern Matching may be something strange to you. When you get familiar with it, you will know how powerful it is. And …</p>
 <ul class="card-meta list-inline">
 <li class="list-inline-item mb-2">
 <ul class="card-meta-tag list-inline">
@@ -439,16 +390,7 @@ You May Also Like
 <a href=https://bluzky.github.io/tags/elixir>elixir</a>
 </li>
 <li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/phoenix>phoenix</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/query>query</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/ecto>ecto</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/querie>querie</a>
+<a href=https://bluzky.github.io/tags/elixir-beginning>elixir-beginning</a>
 </li>
 </ul>
 </li>

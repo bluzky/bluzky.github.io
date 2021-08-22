@@ -8,7 +8,7 @@
 <link rel=icon href=https://bluzky.github.io/images/favicon.png type=image/x-icon>
 <link rel=preconnect href=https://fonts.gstatic.com>
 <link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap">
-<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.5f05ab8da5f953c9f87c520da529d85a9b1881e12e4c6097c7b10457964494188cb28a852d08cc91f31497e6608a87820a424e5719441bef77dc73aed346e813.css integrity="sha512-XwWrjaX5U8n4fFINpSnYWpsYgeEuTGCXx7EEV5ZElBiMsoqFLQjMkfMUl+ZgioeCCkJOVxlEG+933HOu00boEw==" media=screen>
+<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.a175996d51c7122a7871164dca713adc582e8df8a6b31ae1e7169ca0559953614b9378e577a3ce6d3e6bc8fa87b3e4f38305c3f1478fb0b4904d66b4caffe85a.css integrity="sha512-oXWZbVHHEip4cRZNynE63Fgujfimsxrh5xacoFWZU2FLk3jld6PObT5ryPqHs+TzgwXD8UePsLSQTWa0yv/oWg==" media=screen>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
 </head>
@@ -112,29 +112,15 @@
 </li>
 <li>
 <p><strong>Ví dụ 1:</strong></p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>ten_decorator</span>(f):
-    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>wrapper</span>(ten):
-        chuoi_moi <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;Ten tui la </span><span style=color:#f1fa8c>%s</span><span style=color:#f1fa8c>&#34;</span> <span style=color:#ff79c6>%</span> ten
-        <span style=color:#ff79c6>return</span> f(chuoi_moi)
-    <span style=color:#ff79c6>return</span> wrapper
-
-<span style=color:#ff79c6>def</span> <span style=color:#50fa7b>xuat_ten</span>( ten ):
-    <span style=color:#8be9fd;font-style:italic>print</span> ten
-</code></pre></td></tr></table>
-</div>
-</div></li>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>ten_decorator</span>(f):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>wrapper</span>(ten):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>        chuoi_moi <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;Ten tui la </span><span style=color:#f1fa8c>%s</span><span style=color:#f1fa8c>&#34;</span> <span style=color:#ff79c6>%</span> ten
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>        <span style=color:#ff79c6>return</span> f(chuoi_moi)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>    <span style=color:#ff79c6>return</span> wrapper
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>xuat_ten</span>( ten ):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8</span>    <span style=color:#8be9fd;font-style:italic>print</span> ten
+</code></pre></div></li>
 <li>
 <p><strong>CHÚ Ý QUAN TRỌNG</strong>: hàm <code>wrapper</code> và hàm f phải có tham số phù hợp với nhau. Ví dụ như hàm f nhận vào chỉ 2 tham số thì hàm <code>decorator</code> không thể nhận vào 3 tham số hoặc 1 tham số.</p>
 </li>
@@ -143,38 +129,18 @@
 <ul>
 <li>Sử dụng Decorator hết sức đơn giản. Sử dụng decorator trong ví dụ trên cho hàm <code>xuat_ten</code> như sau:</li>
 </ul>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>@ten_decorator
-<span style=color:#ff79c6>def</span> <span style=color:#50fa7b>xuat_ten</span>(ten):
-	<span style=color:#8be9fd;font-style:italic>print</span> ten
-</code></pre></td></tr></table>
-</div>
-</div><ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>@ten_decorator
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>xuat_ten</span>(ten):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>	<span style=color:#8be9fd;font-style:italic>print</span> ten
+</code></pre></div><ul>
 <li>Dùng dấu @ để thông báo đó là một decorator. Một hàm có thể dùng nhiều decorator cùng lúc:</li>
 </ul>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>@ten_decorator1
-@ten_decorator2
-@ten_decorator3
-<span style=color:#ff79c6>def</span> <span style=color:#50fa7b>xuat_ten</span>(ten):
-	<span style=color:#8be9fd;font-style:italic>print</span> ten
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=5-decorator-hoạt-động-như-thế-nào>5. Decorator hoạt động như thế nào?</h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>@ten_decorator1
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>@ten_decorator2
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>@ten_decorator3
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>xuat_ten</span>(ten):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>	<span style=color:#8be9fd;font-style:italic>print</span> ten
+</code></pre></div><h2 id=5-decorator-hoạt-động-như-thế-nào>5. Decorator hoạt động như thế nào?</h2>
 <p>Như trong ví dụ ở trên:</p>
 <ul>
 <li>
@@ -182,59 +148,28 @@
 </li>
 <li>
 <p>Việc sử dụng:</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>@ten_decorator
-<span style=color:#ff79c6>def</span> <span style=color:#50fa7b>xuat_ten</span>(ten):
-    <span style=color:#8be9fd;font-style:italic>print</span> ten
-xuat_ten(<span style=color:#f1fa8c>&#39;coulson&#39;</span>)
-</code></pre></td></tr></table>
-</div>
-</div><p>Tương đương với:</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>xuat_ten</span>(ten):
-<span style=color:#8be9fd;font-style:italic>print</span> ten
-ham_xuat_ten_moi <span style=color:#ff79c6>=</span> ten_decorator(xuat_ten)
-ham_xuat_ten_moi(<span style=color:#f1fa8c>&#39;coulson&#39;</span>)
-</code></pre></td></tr></table>
-</div>
-</div></li>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>@ten_decorator
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>xuat_ten</span>(ten):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>    <span style=color:#8be9fd;font-style:italic>print</span> ten
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>xuat_ten(<span style=color:#f1fa8c>&#39;coulson&#39;</span>)
+</code></pre></div><p>Tương đương với:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>xuat_ten</span>(ten):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#8be9fd;font-style:italic>print</span> ten
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>ham_xuat_ten_moi <span style=color:#ff79c6>=</span> ten_decorator(xuat_ten)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>ham_xuat_ten_moi(<span style=color:#f1fa8c>&#39;coulson&#39;</span>)
+</code></pre></div></li>
 <li>
 <p>Rõ ràng với việc sử dụng cú pháp decorator thì code sẽ ngắn gọn và đơn giản hơn. Developer không phải gọi decorator mỗi lần sử dụng mà trình thông dịch sẽ làm việc đó.</p>
 </li>
 </ul>
 <p><strong>Đối với hàm sử dụng nhiều decorator</strong></p>
 <p><strong>Ví dụ 2</strong></p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>@ten_decorator1
-@ten_decorator2
-@ten_decorator3
-<span style=color:#ff79c6>def</span> <span style=color:#50fa7b>xuat_ten</span>(ten):
-	<span style=color:#8be9fd;font-style:italic>print</span> ten
-</code></pre></td></tr></table>
-</div>
-</div><ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>@ten_decorator1
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>@ten_decorator2
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>@ten_decorator3
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>xuat_ten</span>(ten):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>	<span style=color:#8be9fd;font-style:italic>print</span> ten
+</code></pre></div><ul>
 <li>Decorator nào càng ở trên, xa function thì sẽ bọc lớp ngoài Giống như khi bạn bọc trái xoài vào trong bị, rồi lại lấy cái bị khác để bọc bên ngoài nữa.</li>
 <li>Thứ tự thực thi code: - Code của decorator được thực thi ngay lúc file nguồn Python được load lên. Ngoại trừ code trong hàm wrapper của decorator trong cùng sẽ được thực thi lúc gọi hàm. - Decorator được gọi thực thi theo thứ tự từ trong (gần hàm nhất) ra ngoài.</li>
 </ul>
@@ -243,55 +178,28 @@ ham_xuat_ten_moi(<span style=color:#f1fa8c>&#39;coulson&#39;</span>)
 <p>Ở trên, để cho đơn giản, và dễ hiểu thì decorator là một hàm có tham số là một hàm khác. Nhưng điều đó không bắt buộc, decorator cũng có thể là một hàm nhận vào tham số bất kỳ và trả về một hàm và hàm trả về này nhận vào tham số là một hàm khác.</p>
 </blockquote>
 <p><strong>Ví dụ 3</strong>: thêm chức danh vào chuỗi xuất ra mình có thể định nghĩa decorator như sau:</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>chuc_danh_decorator</span>(ten_chuc_danh):
-    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>ten_decorator</span>(f):
-        <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>wrapper</span>(ten):
-            chuoi_moi <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;Xin gioi thieu </span><span style=color:#f1fa8c>%s</span><span style=color:#f1fa8c> </span><span style=color:#f1fa8c>%s</span><span style=color:#f1fa8c>&#34;</span> <span style=color:#ff79c6>%</span> (ten_chuc_danh, ten)
-            <span style=color:#ff79c6>return</span> f(chuoi_moi)
-        <span style=color:#ff79c6>return</span> wrapper
-    <span style=color:#ff79c6>return</span> ten_decorator
-
-@chuc_danh_decorator(<span style=color:#f1fa8c>&#34;Giao su&#34;</span>)
-<span style=color:#ff79c6>def</span> <span style=color:#50fa7b>gioi_thieu</span>(ten):
-	<span style=color:#8be9fd;font-style:italic>print</span> ten
-
-@chuc_danh_decorator(<span style=color:#f1fa8c>&#34;Tien si&#34;</span>)
-<span style=color:#ff79c6>def</span> <span style=color:#50fa7b>gioi_thieu_2</span>(ten):
-	<span style=color:#8be9fd;font-style:italic>print</span> ten
-
-gioi_thieu(<span style=color:#f1fa8c>&#34;Teo&#34;</span>)
-gioi_thieu_2(<span style=color:#f1fa8c>&#34;Ti&#34;</span>)
-
-<span style=color:#ff79c6>&gt;&gt;</span> Xin gioi thieu Giao su Teo
-<span style=color:#ff79c6>&gt;&gt;</span> Xin gioi thieu Tien si Ti
-</code></pre></td></tr></table>
-</div>
-</div><p><strong>Sự khác biệt:</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>chuc_danh_decorator</span>(ten_chuc_danh):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>ten_decorator</span>(f):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>        <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>wrapper</span>(ten):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>            chuoi_moi <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;Xin gioi thieu </span><span style=color:#f1fa8c>%s</span><span style=color:#f1fa8c> </span><span style=color:#f1fa8c>%s</span><span style=color:#f1fa8c>&#34;</span> <span style=color:#ff79c6>%</span> (ten_chuc_danh, ten)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>            <span style=color:#ff79c6>return</span> f(chuoi_moi)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>        <span style=color:#ff79c6>return</span> wrapper
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>    <span style=color:#ff79c6>return</span> ten_decorator
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>@chuc_danh_decorator(<span style=color:#f1fa8c>&#34;Giao su&#34;</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>gioi_thieu</span>(ten):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>	<span style=color:#8be9fd;font-style:italic>print</span> ten
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>@chuc_danh_decorator(<span style=color:#f1fa8c>&#34;Tien si&#34;</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>gioi_thieu_2</span>(ten):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>	<span style=color:#8be9fd;font-style:italic>print</span> ten
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>gioi_thieu(<span style=color:#f1fa8c>&#34;Teo&#34;</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>gioi_thieu_2(<span style=color:#f1fa8c>&#34;Ti&#34;</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#ff79c6>&gt;&gt;</span> Xin gioi thieu Giao su Teo
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span><span style=color:#ff79c6>&gt;&gt;</span> Xin gioi thieu Tien si Ti
+</code></pre></div><p><strong>Sự khác biệt:</strong></p>
 <ul>
 <li>Hàm decorator bây giờ không phải nhận vào tham số là một hàm mà có thể là tham số bất kỳ.</li>
 <li>Hàm trả về từ decorator nhận vào một hàm và chính nó mới trả về hàm wrapper</li>
@@ -305,57 +213,27 @@ gioi_thieu_2(<span style=color:#f1fa8c>&#34;Ti&#34;</span>)
 <h2 id=7-debug-hàm-decorator>7. Debug hàm decorator.</h2>
 <p>Khi sử dụng decorator thì hàm thực sự được gọi là hàm wrapper của trả về từ decorator. Nên các thuộc tính <code>__name__</code>, <code>__doc__</code>, <code>__module__</code> không còn là của hàm được decorate nữa mà là của wrapper</p>
 <p>Sử dụng lại code trong ví dụ 1:</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#8be9fd;font-style:italic>print</span> xuat_ten<span style=color:#ff79c6>.</span>__name__
-
-<span style=color:#ff79c6>&gt;&gt;</span> wrapper
-</code></pre></td></tr></table>
-</div>
-</div><p><strong>Khắc phục:</strong> sử dụng thư viện <code>functools</code>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#8be9fd;font-style:italic>print</span> xuat_ten<span style=color:#ff79c6>.</span>__name__
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#ff79c6>&gt;&gt;</span> wrapper
+</code></pre></div><p><strong>Khắc phục:</strong> sử dụng thư viện <code>functools</code>
 <strong>Ví dụ 4:</strong></p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#ff79c6>from</span> functools <span style=color:#ff79c6>import</span> wraps
-
-<span style=color:#ff79c6>def</span> <span style=color:#50fa7b>ten_decorator</span>(f):
-   @wraps(f)
-   <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>wrapper</span>(ten):
-       chuoi_moi <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;Ten tui la </span><span style=color:#f1fa8c>%s</span><span style=color:#f1fa8c>&#34;</span> <span style=color:#ff79c6>%</span> ten
-       <span style=color:#ff79c6>return</span> f(chuoi_moi)
-   <span style=color:#ff79c6>return</span> wrapper
-
-<span style=color:#ff79c6>def</span> <span style=color:#50fa7b>xuat_ten</span>( ten ):
-   <span style=color:#8be9fd;font-style:italic>print</span> ten
-
-<span style=color:#8be9fd;font-style:italic>print</span> xuat_ten<span style=color:#ff79c6>.</span>__name__
-
-<span style=color:#ff79c6>&gt;&gt;</span> xuat_ten
-</code></pre></td></tr></table>
-</div>
-</div><p>Decorator <code>wraps</code> sẽ lấy các thuộc tính <code>__name__</code>, <code>__doc__</code>, <code>__module__</code> của hàm được decorate và gán cho hàm wrapper nên khi lấy những thuộc tính này sẽ trả về thông tin đúng.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#ff79c6>from</span> functools <span style=color:#ff79c6>import</span> wraps
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>ten_decorator</span>(f):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>   @wraps(f)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>   <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>wrapper</span>(ten):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>       chuoi_moi <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;Ten tui la </span><span style=color:#f1fa8c>%s</span><span style=color:#f1fa8c>&#34;</span> <span style=color:#ff79c6>%</span> ten
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>       <span style=color:#ff79c6>return</span> f(chuoi_moi)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>   <span style=color:#ff79c6>return</span> wrapper
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>xuat_ten</span>( ten ):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>   <span style=color:#8be9fd;font-style:italic>print</span> ten
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#8be9fd;font-style:italic>print</span> xuat_ten<span style=color:#ff79c6>.</span>__name__
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#ff79c6>&gt;&gt;</span> xuat_ten
+</code></pre></div><p>Decorator <code>wraps</code> sẽ lấy các thuộc tính <code>__name__</code>, <code>__doc__</code>, <code>__module__</code> của hàm được decorate và gán cho hàm wrapper nên khi lấy những thuộc tính này sẽ trả về thông tin đúng.</p>
 <h2 id=8-khi-nào-nên-sử-dụng-decorator>8. Khi nào nên sử dụng decorator?</h2>
 <p>Tham khảo trang <a href=https://wiki.python.org/moin/PythonDecoratorLibrary>Wiki</a> của Python</p>
 </div>

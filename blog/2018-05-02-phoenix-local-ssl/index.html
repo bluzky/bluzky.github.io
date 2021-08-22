@@ -8,7 +8,7 @@
 <link rel=icon href=https://bluzky.github.io/images/favicon.png type=image/x-icon>
 <link rel=preconnect href=https://fonts.gstatic.com>
 <link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap">
-<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.5f05ab8da5f953c9f87c520da529d85a9b1881e12e4c6097c7b10457964494188cb28a852d08cc91f31497e6608a87820a424e5719441bef77dc73aed346e813.css integrity="sha512-XwWrjaX5U8n4fFINpSnYWpsYgeEuTGCXx7EEV5ZElBiMsoqFLQjMkfMUl+ZgioeCCkJOVxlEG+933HOu00boEw==" media=screen>
+<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.a175996d51c7122a7871164dca713adc582e8df8a6b31ae1e7169ca0559953614b9378e577a3ce6d3e6bc8fa87b3e4f38305c3f1478fb0b4904d66b4caffe85a.css integrity="sha512-oXWZbVHHEip4cRZNynE63Fgujfimsxrh5xacoFWZU2FLk3jld6PObT5ryPqHs+TzgwXD8UePsLSQTWa0yv/oWg==" media=screen>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
 </head>
@@ -94,33 +94,16 @@
 </blockquote>
 <p><strong>1. Tạo chứng chỉ</strong><br>
 Run command</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>openssl genrsa <span style=color:#bd93f9>1024</span> &gt; app.key <span style=color:#ff79c6>&amp;&amp;</span>
-openssl req -new -x509 -nodes -sha1 -days <span style=color:#bd93f9>365</span> -key ~/app.key &gt; ~/app.cert
-</code></pre></td></tr></table>
-</div>
-</div><p><strong>2. Copy file</strong><br>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>openssl genrsa <span style=color:#bd93f9>1024</span> &gt; app.key <span style=color:#ff79c6>&amp;&amp;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>openssl req -new -x509 -nodes -sha1 -days <span style=color:#bd93f9>365</span> -key ~/app.key &gt; ~/app.cert
+</code></pre></div><p><strong>2. Copy file</strong><br>
 <code>app.key</code> and <code>app.cert</code> file to <code>priv/keys</code></p>
 <p><strong>3. Chỉnh sửa cấu hình</strong><br>
 file <code>dev.exs</code></p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir>config <span style=color:#f1fa8c>:my_app</span>, <span style=color:#50fa7b>MyAppWeb.Endpoint</span>,
-  <span style=color:#f1fa8c>http</span>: [<span style=color:#f1fa8c>port</span>: <span style=color:#bd93f9>4000</span>],
-  <span style=color:#f1fa8c>https</span>: [<span style=color:#f1fa8c>port</span>: <span style=color:#bd93f9>4443</span>, <span style=color:#f1fa8c>keyfile</span>: <span style=color:#f1fa8c>&#34;priv/keys/app.key&#34;</span>, <span style=color:#f1fa8c>certfile</span>: <span style=color:#f1fa8c>&#34;priv/keys/app.cert&#34;</span>],
-</code></pre></td></tr></table>
-</div>
-</div><p>Access <a href=https://localhost:4443>https://localhost:4443</a> to use SSL connection</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>config <span style=color:#f1fa8c>:my_app</span>, <span style=color:#50fa7b>MyAppWeb.Endpoint</span>,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>  <span style=color:#f1fa8c>http</span>: [<span style=color:#f1fa8c>port</span>: <span style=color:#bd93f9>4000</span>],
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>  <span style=color:#f1fa8c>https</span>: [<span style=color:#f1fa8c>port</span>: <span style=color:#bd93f9>4443</span>, <span style=color:#f1fa8c>keyfile</span>: <span style=color:#f1fa8c>&#34;priv/keys/app.key&#34;</span>, <span style=color:#f1fa8c>certfile</span>: <span style=color:#f1fa8c>&#34;priv/keys/app.cert&#34;</span>],
+</code></pre></div><p>Access <a href=https://localhost:4443>https://localhost:4443</a> to use SSL connection</p>
 </div>
 </div>
 <div class=single-post-meta>
