@@ -1,4 +1,9 @@
 <div class="sticky-sidebar" style="position: sticky; top: 130px">
+  <div class="widget mb-5">
+    <h5 class="widget-title font-weight-700 mb-3">Table of Content</h5>
+    <div class="widget-body">{{ .TableOfContents }}</div>
+  </div>
+
   {{ if ne (len .Site.Taxonomies.categories) 0 }}
   <div class="widget mb-5">
     <h5 class="widget-title font-weight-700 mb-3">Categories</h5>

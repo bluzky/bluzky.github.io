@@ -34,5 +34,7 @@ $color-primary: {{.color_primary}};
 @import 'typography';
 @import 'buttons';
 @import 'common';
+
+@import 'single';
 @import 'templates/navigation';
 @import 'templates/main';

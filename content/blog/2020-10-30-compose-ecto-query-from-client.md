@@ -58,7 +58,9 @@ And you want to filter the Post by title, state, view_count. This is the filter 
 }
 ```
 
-### 2. Parse request parameters and build the query Use `Querie.parse/2` to parse request parameters with your schema
+### 2. Parse request parameters and build the query
+
+Use `Querie.parse/2` to parse request parameters with your schema
 
 ```elixir
 alias Example.Content.Post

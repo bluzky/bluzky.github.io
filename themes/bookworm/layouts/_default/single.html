@@ -9,7 +9,7 @@
   <div class="container">
     <div class="row justify-content-center">
       <div
-        class="{{ if .Site.Params.showSidebar}} col-lg-9 {{ else }} col-lg-10 {{ end }}"
+        class="{{ if .Site.Params.sidebar}} col-lg-9 {{ else }} col-lg-10 {{ end }}"
       >
         <div class="pr-lg-4">
           <div class="single-post">
@@ -140,7 +140,7 @@
         </div>
       </div>
 
-      {{ if .Site.Params.sidebar.enable }}
+      {{ if .Site.Params.sidebar}}
       <aside class="col-md-3 mt-5 mt-lg-0">
         {{- partial "sidebar.html" . -}}
       </aside>

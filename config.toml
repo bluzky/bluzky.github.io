@@ -87,6 +87,9 @@ mainSections = ["blog"]
 # copyright
 copyright = "Blog by Dung Nguyen.Theme by [Gethugothemes](https://gethugothemes.com/)"
 
+# sidebar
+sidebar = false
+
 # Preloader
 [params.preloader]
 enable = false
@@ -94,9 +97,6 @@ preloader = "" # use jpg, png, svg or gif format.
 
 # Instagram feed
 [params.instafeed]
-enable = false
-
-[params.sidebar]
 enable = false
 
 # Subscription
@@ -199,7 +199,8 @@ hl_Lines = ''
 lineAnchors = ''
 lineNoStart = 1
 lineNos = true
-lineNumbersInTable = true
+lineNumbersInTable = false
 noClasses = true
+# style = 'algol'
 style = 'dracula'
 tabWidth = 4
