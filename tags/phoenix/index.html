@@ -7,13 +7,13 @@
 <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=5">
 <link rel=icon href=https://bluzky.github.io/images/favicon.png type=image/x-icon>
 <link rel=preconnect href=https://fonts.gstatic.com>
-<link rel=stylesheet href=https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css>
 <link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap">
-<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.3c563b062fd3f20618d271f4119cb5696173cfbe5086a268db948c52a1b5423f938971924de589847df6958aa4f013d0901d8de8a4e20c26069ef65182711516.css integrity="sha512-PFY7Bi/T8gYY0nH0EZy1aWFzz75QhqJo25SMUqG1Qj+TiXGSTeWJhH32lYqk8BPQkB2N6KTiDCYGnvZRgnEVFg==" media=screen>
+<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.5f05ab8da5f953c9f87c520da529d85a9b1881e12e4c6097c7b10457964494188cb28a852d08cc91f31497e6608a87820a424e5719441bef77dc73aed346e813.css integrity="sha512-XwWrjaX5U8n4fFINpSnYWpsYgeEuTGCXx7EEV5ZElBiMsoqFLQjMkfMUl+ZgioeCCkJOVxlEG+933HOu00boEw==" media=screen>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
 </head>
 <body>
+<div style="min-height:calc(100vh - 65px)">
 <div class=header-height-fix></div>
 <header class=header-nav>
 <div class=container>
@@ -24,11 +24,11 @@
 <img loading=lazy src=https://bluzky.github.io/images/logo.png alt="The Organge+" height=35px>
 </a>
 <button class="search-toggle d-inline-block d-lg-none ml-auto mr-3" data-toggle=search aria-label="Search Toggle">
-<i class="las la-search"></i>
+<i data-eva=search-outline></i>
 </button>
 <button class=navbar-toggler type=button data-toggle=collapse data-target=#navHeader aria-controls=navHeader aria-expanded=false aria-label="Toggle navigation">
-<i class="d-inline lab la-buromobelexperte"></i>
-<i class="d-none las la-times"></i>
+<i data-eva=menu-outline></i>
+<i class=d-none data-eva=close-outline></i>
 </button>
 <div class="collapse navbar-collapse" id=navHeader>
 <ul class="navbar-nav mx-auto">
@@ -46,7 +46,7 @@
 <ul class="social-links list-unstyled list-inline">
 <li class="list-inline-item ml-4 d-none d-lg-inline-block">
 <button class=search-toggle data-toggle=search aria-label="Search Toggle">
-<i class="las la-search"></i>
+<i data-eva=search-outline></i>
 </button>
 </li>
 </ul>
@@ -59,7 +59,7 @@
 </header>
 <div class=search-block>
 <div data-toggle=search-close>
-<i class="las la-times text-primary"></i>
+<i data-eva=close-outline class=text-primary></i>
 </div>
 <form action=/search>
 <input id=search-query name=s type=search placeholder="Type words & hit enter" class=text-center aria-label=search-query>
@@ -254,20 +254,13 @@ ETS (Erlang Term …</p>
 </div>
 </div>
 </section>
-<footer class=section-sm>
+</div>
+<footer class="section-sm p-0">
 <div class=container>
 <div class="row justify-content-center align-items-center">
 <div class=col-lg-5>
 </div>
-<div class="col-lg-12 text-center mt-5">
-<ul class="list-inline footer-menu mb-4">
-<li class="list-inline-item mx-3">
-<a href=https://bluzky.github.io/about/>About me</a>
-</li>
-<li class="list-inline-item mx-3">
-<a href=https://bluzky.github.io/author/>Authors</a>
-</li>
-</ul>
+<div class="col-lg-12 text-center mb-3">
 <ul class="social-links icon-box list-unstyled list-inline font-weight-500 mb-3">
 </ul>
 <p class="mb-0 font-weight-500 copyright-text content">
@@ -277,7 +270,8 @@ Blog by Dung Nguyen.Theme by <a href=https://gethugothemes.com/>Gethugothemes</a
 </div>
 </div>
 </footer>
-<script data-turbolinks-suppress-warning src=/js/vendor.min.49673e8e4f1ec34c98ef397e87de1845044dfbe687dedef74307932de0a45e95ffa823c3a19942eced3b82a4622fee79a33f9d2ca2adab559232efa452b0de45.js integrity="sha512-SWc+jk8ew0yY7zl+h94YRQRN++aH3t73QweTLeCkXpX/qCPDoZlC7O07gqRiL+55oz+dLKKtq1WSMu+kUrDeRQ=="></script>
+<script src=https://unpkg.com/eva-icons></script>
+<script data-turbolinks-suppress-warning src=/js/vendor.min.e8b43a49809453b05c67c402f4ef9f014ea047b1e351a77943c2f08c978e06e6dd1eb7279560628d119926cab96a55a422c55b47fa351500c8c2fe5e59a26234.js integrity="sha512-6LQ6SYCUU7BcZ8QC9O+fAU6gR7HjUad5Q8LwjJeOBubdHrcnlWBijRGZJsq5alWkIsVbR/o1FQDIwv5eWaJiNA=="></script>
 <script>(function(){var a=document,b=a.createElement("script");b.src="https://the-orange-1.disqus.com/embed.js",b.setAttribute("data-timestamp",+new Date),(a.head||a.body).appendChild(b)})()</script>
 <noscript>Please enable JavaScript to view the
 <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
