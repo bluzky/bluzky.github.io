@@ -14,13 +14,13 @@ social:
   enable: true
   social_links:
   - link: "https://dev.to/bluzky"
-    icon: "lab la-facebook-f"
+    icon: "book-outline"
     
   - link: "https://www.linkedin.com/in/dung-nguyen-tien-695ba135/"
-    icon: "lab la-linkedin-in"
+    icon: "linkedin-outline"
     
   - link: "https://www.github.com/bluzky"
-    icon: "lab la-github"
+    icon: "github-outline"
 
 # what_i_do
 what_i_do:

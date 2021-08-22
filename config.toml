@@ -29,8 +29,6 @@ unsafe= true
 # CSS Plugins
 [[params.plugins.css]]
 link = "plugins/bootstrap/bootstrap.min.css"
-[[params.plugins.css]]
-link = "https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css"
 # [[params.plugins.css]]
 # link = "https://fonts.googleapis.com/css2?family=Noto Serif:wght@400;600;700&display=swap"
 [[params.plugins.css]]
@@ -47,6 +45,8 @@ link = "plugins/search/fuse.min.js"
 link = "plugins/search/mark.js"
 [[params.plugins.js]]
 link = "plugins/search/search.js"
+[[params.plugins.js]]
+link = "https://unpkg.com/eva-icons"
 
 # site variables
 [params.variables]

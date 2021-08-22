@@ -1,4 +1,4 @@
-<footer class="section-sm">
+<footer class="section-sm p-0">
   <div class="container">
     <div class="row justify-content-center align-items-center">
       <div class="col-lg-5">
@@ -31,7 +31,7 @@
                   class="input-group-text"
                   aria-label="Subscription Button"
                 >
-                  <i class="icon las la-paper-plane"></i>
+                  <i data-eva="paper-plane-outline" class="icon"></i>
                 </button>
               </div>
             </div>
@@ -46,14 +46,14 @@
         </div>
         {{ end }} {{ end }}
       </div>
-      <div class="col-lg-12 text-center mt-5">
-        <ul class="list-inline footer-menu mb-4">
-          {{ range site.Menus.footer }}
-          <li class="list-inline-item mx-3">
-            <a href="{{.URL | absURL}}">{{.Name}}</a>
-          </li>
-          {{ end }}
-        </ul>
+      <div class="col-lg-12 text-center mb-3">
+        <!-- <ul class="list-inline footer-menu mb-4">
+             {{ range site.Menus.footer }}
+             <li class="list-inline-item mx-3">
+             <a href="{{.URL | absURL}}">{{.Name}}</a>
+             </li>
+             {{ end }}
+             </ul> -->
         <ul
           class="social-links icon-box list-unstyled list-inline font-weight-500 mb-3"
         >

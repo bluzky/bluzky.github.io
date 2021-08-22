@@ -33,7 +33,7 @@
                   <!-- Previous page. -->
                   {{ if $paginator.HasPrev }}
                   <li class="page-item"><a class="page-link rounded" href="{{ $paginator.Prev.URL }}" aria-label="Pagination Arrow">
-                    <i class="las la-angle-left"></i>
+                    <i data-eva="chevron-left-outline"></i>
                   </a></li>
                   {{ end }}
                   <!-- Page numbers. -->
@@ -77,7 +77,7 @@
                   <!-- Next page. -->
                   {{ if $paginator.HasNext }}
                   <li class="page-item"><a class="page-link rounded" href="{{ $paginator.Next.URL }}" aria-label="Pagination Arrow">
-                    <i class="las la-angle-right"></i>
+                    <i data-eva="chevron-right-outline"></i>
                   </a></li>
                   {{ end }}
                 </ul>
