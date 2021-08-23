@@ -1,0 +1,332 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<title>Easy data validation with with Valdi in Elixir</title>
+<meta name=author content="Dung Nguyen">
+<meta name=description content="  Drinking orange juice is good for your health. Reading some orange code is good too :D  ">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=5">
+<link rel=icon href=https://bluzky.github.io/images/favicon.png type=image/x-icon>
+<link rel=preconnect href=https://fonts.gstatic.com>
+<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap">
+<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.a175996d51c7122a7871164dca713adc582e8df8a6b31ae1e7169ca0559953614b9378e577a3ce6d3e6bc8fa87b3e4f38305c3f1478fb0b4904d66b4caffe85a.css integrity="sha512-oXWZbVHHEip4cRZNynE63Fgujfimsxrh5xacoFWZU2FLk3jld6PObT5ryPqHs+TzgwXD8UePsLSQTWa0yv/oWg==" media=screen>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
+</head>
+<body>
+<div style="min-height:calc(100vh - 65px)">
+<div class=header-height-fix></div>
+<header class=header-nav>
+<div class=container>
+<div class=row>
+<div class=col-12>
+<nav class="navbar navbar-expand-lg navbar-light p-0">
+<a class="navbar-brand font-weight-bold mr-0" href=https://bluzky.github.io/>
+<img loading=lazy src=https://bluzky.github.io/images/logo.png alt="The Organge+" height=35px>
+</a>
+<button class="search-toggle d-inline-block d-lg-none ml-auto mr-3" data-toggle=search aria-label="Search Toggle">
+<i data-eva=search-outline></i>
+</button>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navHeader aria-controls=navHeader aria-expanded=false aria-label="Toggle navigation">
+<i data-eva=menu-outline></i>
+<i class=d-none data-eva=close-outline></i>
+</button>
+<div class="collapse navbar-collapse" id=navHeader>
+<ul class="navbar-nav mx-auto">
+<li class=nav-item>
+<a class=nav-link href=https://bluzky.github.io/>Blog</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://bluzky.github.io/tags/>Tags</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://bluzky.github.io/about>About me</a>
+</li>
+</ul>
+<div class="navbar-right d-none d-lg-inline-block">
+<ul class="social-links list-unstyled list-inline">
+<li class="list-inline-item ml-4 d-none d-lg-inline-block">
+<button class=search-toggle data-toggle=search aria-label="Search Toggle">
+<i data-eva=search-outline></i>
+</button>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+</div>
+</div>
+</div>
+</header>
+<div class=search-block>
+<div data-toggle=search-close>
+<i data-eva=close-outline class=text-primary></i>
+</div>
+<form action=/search>
+<input id=search-query name=s type=search placeholder="Type words & hit enter" class=text-center aria-label=search-query>
+</form>
+</div>
+<section class=section-sm>
+<div class=container>
+<div class="row justify-content-center">
+<div class=col-lg-10>
+<div class=pr-lg-4>
+<div class=single-post>
+<div class="text-center mb-5">
+<h1 class="mb-4 post-title">Easy data validation with with Valdi in Elixir</h1>
+<ul class="card-meta list-inline">
+<li class=list-inline-item>
+<a href=#! class=card-meta-author>
+<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
+<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
+<span>Dung Nguyen</span>
+</a>
+</a>
+</li>
+<li class=list-inline-item>|</li>
+<li class=list-inline-item>
+<span>06 August 2021</span>
+</li>
+</ul>
+</div>
+<div class="mb-5 text-center">
+<img loading=lazy class="img-fluid rounded" src=https://bluzky.github.io/img/valdi-data-validator.webp alt="Image not Found">
+</div>
+<div class=content><blockquote>
+<p>Credit: this icon is from <a href=https://www.flaticon.com/free-icon/parking-barrier_2983600>flaticon.com</a></p>
+</blockquote>
+<p>In previous article, I shown you how to implement you own validation module. I you haven&rsquo;t read it, you can find it here <a href=/blog/2021-07-31-build-elixir-validator-from-scratch>How to build an Elixir validator from scratch </a></p>
+<p>And I think some of you may want a ready to use library so I wrapped it up, added some useful api and published on <a href=https://hex.pm/packages/valdi>hex.pm</a> and <a href=https://github.com/bluzky/valdi>github repo here</a>.</p>
+<p>This post is just showcases of what it can do. (not too much fancy)
+First, add dependencies to your <code>mix.exs</code> and you are ready to go.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>{<span style=color:#f1fa8c>:valdi</span>, <span style=color:#f1fa8c>&#34;~&gt; 0.2.0&#34;</span>}
+</code></pre></div><p>And this is how it works.</p>
+<p><strong>Validate using a specific validation function</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>iex(<span style=color:#bd93f9>1</span>)<span style=color:#ff79c6>&gt;</span> age <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>20</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#bd93f9>20</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>iex(<span style=color:#bd93f9>2</span>)<span style=color:#ff79c6>&gt;</span> <span style=color:#50fa7b>Valdi</span><span style=color:#ff79c6>.</span>validate_number(age, <span style=color:#f1fa8c>min</span>: <span style=color:#bd93f9>18</span>, <span style=color:#f1fa8c>max</span>: <span style=color:#bd93f9>60</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#f1fa8c>:ok</span>
+</code></pre></div><p>But most of the time you don&rsquo;t do this, you will want to combine multiple validations at a time.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>iex(<span style=color:#bd93f9>4</span>)<span style=color:#ff79c6>&gt;</span> <span style=color:#50fa7b>Valdi</span><span style=color:#ff79c6>.</span>validate(<span style=color:#f1fa8c>&#34;20&#34;</span>, <span style=color:#f1fa8c>type</span>: <span style=color:#f1fa8c>:integer</span>,  <span style=color:#f1fa8c>number</span>: [<span style=color:#f1fa8c>min</span>: <span style=color:#bd93f9>18</span>, <span style=color:#f1fa8c>max</span>: <span style=color:#bd93f9>60</span>])
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>{<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>&#34;is not a integer&#34;</span>}
+</code></pre></div><p>And you may want to validate a list of value too:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>iex(<span style=color:#bd93f9>1</span>)<span style=color:#ff79c6>&gt;</span> <span style=color:#50fa7b>Valdi</span><span style=color:#ff79c6>.</span>validate_list([<span style=color:#f1fa8c>&#34;hi&#34;</span>, <span style=color:#f1fa8c>&#34;how&#34;</span>, <span style=color:#f1fa8c>&#34;are&#34;</span>, <span style=color:#f1fa8c>&#34;you&#34;</span>, <span style=color:#bd93f9>100</span>], <span style=color:#f1fa8c>type</span>: <span style=color:#f1fa8c>:string</span>,  <span style=color:#f1fa8c>length</span>: [<span style=color:#f1fa8c>min</span>: <span style=color:#bd93f9>3</span>])
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>{<span style=color:#f1fa8c>:error</span>,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span> [[<span style=color:#bd93f9>0</span>, <span style=color:#f1fa8c>&#34;length must be greater than or equal to 3&#34;</span>], [<span style=color:#bd93f9>4</span>, <span style=color:#f1fa8c>&#34;is not a string&#34;</span>]]}
+</code></pre></div><p>If validation failed, you got a list of error and index of error item.</p>
+<p><code>Valdi</code> supports you to validate a simple map with given specification:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>product_spec <span style=color:#ff79c6>=</span> %{
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>    <span style=color:#f1fa8c>name</span>: [<span style=color:#f1fa8c>type</span>: <span style=color:#f1fa8c>:string</span>, <span style=color:#f1fa8c>required</span>: true],
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    <span style=color:#f1fa8c>sku</span>: [<span style=color:#f1fa8c>type</span>: <span style=color:#f1fa8c>:string</span>, <span style=color:#f1fa8c>required</span>: true],
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>    <span style=color:#f1fa8c>price</span>: [<span style=color:#f1fa8c>type</span>: <span style=color:#f1fa8c>:integer</span>, <span style=color:#f1fa8c>number</span>: [<span style=color:#f1fa8c>min</span>: <span style=color:#bd93f9>0</span>]]
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#50fa7b>Valdi</span><span style=color:#ff79c6>.</span>validate_map(%{
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>    <span style=color:#f1fa8c>name</span>: <span style=color:#f1fa8c>&#34;A magic pen&#34;</span>,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>    <span style=color:#f1fa8c>sku</span>: nil,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>    <span style=color:#f1fa8c>price</span>: <span style=color:#ff79c6>-</span><span style=color:#bd93f9>1</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>}, product_spec)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#6272a4># {:error, %{price: &#34;must be greater than or equal to 0&#34;, sku: &#34;is required&#34;}}</span>
+</code></pre></div><p><strong>Valdi does not support nested map validation</strong>.</p>
+<p>You might want to take a look at <a href=https://github.com/bluzky/contrak>Contrak</a>, it extended <code>Valdi</code> by providing a simple way to define and validate nested schema.</p>
+<p>Why I didn&rsquo;t put those in just one library? I think data validation and schema validation are quite different, so I want to keep libraries simple and do its best thing.</p>
+<p><strong>Here you can define your own validation</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#50fa7b>Valdi</span><span style=color:#ff79c6>.</span>validate(<span style=color:#f1fa8c>&#34;as008x8234&#34;</span>, <span style=color:#f1fa8c>type</span>: <span style=color:#f1fa8c>:string</span>, <span style=color:#f1fa8c>func</span>: <span style=color:#ff79c6>fn</span> value <span style=color:#ff79c6>-&gt;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>   <span style=color:#ff79c6>if</span> <span style=color:#50fa7b>String</span><span style=color:#ff79c6>.</span>match?(value, <span style=color:#f1fa8c>~r/^</span><span style=color:#f1fa8c>\d</span><span style=color:#f1fa8c>{4}$/</span>), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:ok</span>, <span style=color:#f1fa8c>else</span>: {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>&#34;not a year string&#34;</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#ff79c6>end</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span><span style=color:#6272a4># {:error, &#34;not a year string&#34;}</span>
+</code></pre></div><p>Hope this small library can help. If you have any suggestion please comment.
+Thank you.</p>
+</div>
+</div>
+<div class=single-post-meta>
+<div class="row justify-content-center">
+<div class="col-md-6 text-center text-md-left">
+<ul class="post-meta-tags list-unstyled list-inline">
+<li class=list-inline-item>
+<a href=https://bluzky.github.io/tags/elixir>#elixir</a>
+</li>
+<li class=list-inline-item>
+<a href=https://bluzky.github.io/tags/validation>#validation</a>
+</li>
+</ul>
+</div>
+<div class="col-md-6 text-center text-md-right mt-4 mt-md-0">
+<ul class="social-links has-bg-color list-unstyled list-inline" style=line-height:0>
+<li class=list-inline-item>
+<a class="resp-sharing-button__link d-block" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fbluzky.github.io%2fblog%2f2021-08-06-valdi-elixir-validator%2f" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small">
+<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+<i data-eva=facebook-outline class=text-dark></i>
+</div>
+</div>
+</a>
+</li>
+<li class=list-inline-item>
+<a class="resp-sharing-button__link d-block" href="https://twitter.com/intent/tweet/?text=Easy%20data%20validation%20with%20with%20Valdi%20in%20Elixir&url=https%3a%2f%2fbluzky.github.io%2fblog%2f2021-08-06-valdi-elixir-validator%2f" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
+<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+<i data-eva=twitter-outline class=text-dark></i>
+</div>
+</div>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class=single-post-author>
+<div class="row justify-content-center">
+<div class=col-md-12>
+<div class="media d-block d-sm-flex text-center text-sm-left">
+<a href=https://bluzky.github.io/author/dung-nguyen/><img loading=lazy class="img-fluid rounded-circle mr-0 mr-sm-4 mb-4" src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen"></a>
+<div class=media-body>
+<h4>
+<a href=https://bluzky.github.io/author/dung-nguyen/ class="text-dark font-weight-700">Dung Nguyen</a>
+</h4>
+<p class=font-primary>Hi! I&rsquo;m Dung Nguyen. I&rsquo;m an Elixir developer at OnPoint Vietnam.</p>
+<ul class="social-links list-unstyled list-inline ml-0 ml-sm-n2">
+<li class=list-inline-item>
+<a href=https://www.linkedin.com/in/dung-nguyen-tien-695ba135/>
+<i class="lab linkedin-outline"></i>
+</a>
+</li>
+<li class=list-inline-item>
+<a href=https://www.github.com/bluzky>
+<i class="lab github-outline"></i>
+</a>
+</li>
+<li class=list-inline-item>
+<a href=https://dev.to/bluzky>
+<i class="lab book-outline"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=single-post-similer>
+<div class="row justify-content-center">
+<div class=col-md-12>
+<div class="row mt-3">
+<div id=disqus_thread class=w-100></div>
+</div>
+</div>
+</div>
+</div>
+<div class=single-post-similer>
+<div class="row justify-content-center">
+<div class=col-md-12>
+<div class="row mt-3">
+<div class=col-12>
+<h3 class="text-dark font-weight-800 mb-4 pb-2">
+You May Also Like
+</h3>
+</div>
+<div class=col-md-6><article class="card post-card">
+<a href=https://bluzky.github.io/blog/2021-07-31-build-elixir-validator-from-scratch/>
+<img loading=lazy class="w-100 rounded" src=https://bluzky.github.io/img/build-json-validator.webp alt="How to build an Elixir validator from scratch">
+</a>
+<div class=card-body>
+<ul class="card-meta list-inline mb-2">
+<li class="list-inline-item mb-2">
+<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
+<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
+<span>Dung Nguyen</span>
+</a>
+</li>
+<li class="list-inline-item mb-2">
+<span>31 Jul, 2021</span>
+</li>
+</ul>
+<h3 class=mb-3>
+<a class=post-title href=https://bluzky.github.io/blog/2021-07-31-build-elixir-validator-from-scratch/>How to build an Elixir validator from scratch</a>
+</h3>
+<p>Validation is a must have part of web application. You have to validate request parameter before processing, you validate data before inserting to …</p>
+<ul class="card-meta list-inline">
+<li class="list-inline-item mb-2">
+<ul class="card-meta-tag list-inline">
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/elixir>elixir</a>
+</li>
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/validation>validation</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</article>
+</div>
+<div class=col-md-6><article class="card post-card">
+<a href=https://bluzky.github.io/blog/2021-07-23-build-a-json-view-yourself/>
+<img loading=lazy class="w-100 rounded" src=https://bluzky.github.io/img/build-a-json-view.png alt="Build your own library to render json response in Phoenix">
+</a>
+<div class=card-body>
+<ul class="card-meta list-inline mb-2">
+<li class="list-inline-item mb-2">
+<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
+<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
+<span>Dung Nguyen</span>
+</a>
+</li>
+<li class="list-inline-item mb-2">
+<span>23 Jul, 2021</span>
+</li>
+</ul>
+<h3 class=mb-3>
+<a class=post-title href=https://bluzky.github.io/blog/2021-07-23-build-a-json-view-yourself/>Build your own library to render json response in Phoenix</a>
+</h3>
+<p>In my previous article, I introduced my library call JsonView to render json response easier. You can read it here: Render Ecto schema to json with …</p>
+<ul class="card-meta list-inline">
+<li class="list-inline-item mb-2">
+<ul class="card-meta-tag list-inline">
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/elixir>elixir</a>
+</li>
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/phoenix>phoenix</a>
+</li>
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/json-view>json view</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<footer class="section-sm p-0">
+<div class=container>
+<div class="row justify-content-center align-items-center">
+<div class=col-lg-5>
+</div>
+<div class="col-lg-12 text-center mb-3">
+<ul class="social-links icon-box list-unstyled list-inline font-weight-500 mb-3">
+</ul>
+<p class="mb-0 font-weight-500 copyright-text content">
+Blog by Dung Nguyen.Theme by <a href=https://gethugothemes.com/>Gethugothemes</a>
+</p>
+</div>
+</div>
+</div>
+</footer>
+<script src=https://unpkg.com/eva-icons></script>
+<script data-turbolinks-suppress-warning src=/js/vendor.min.e8b43a49809453b05c67c402f4ef9f014ea047b1e351a77943c2f08c978e06e6dd1eb7279560628d119926cab96a55a422c55b47fa351500c8c2fe5e59a26234.js integrity="sha512-6LQ6SYCUU7BcZ8QC9O+fAU6gR7HjUad5Q8LwjJeOBubdHrcnlWBijRGZJsq5alWkIsVbR/o1FQDIwv5eWaJiNA=="></script>
+<script>(function(){var a=document,b=a.createElement("script");b.src="https://the-orange-1.disqus.com/embed.js",b.setAttribute("data-timestamp",+new Date),(a.head||a.body).appendChild(b)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+</body>
+</html>

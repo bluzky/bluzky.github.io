@@ -1,0 +1,388 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<title>How to validate request params in Phoenix</title>
+<meta name=author content="Dung Nguyen">
+<meta name=description content="  Drinking orange juice is good for your health. Reading some orange code is good too :D  ">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=5">
+<link rel=icon href=https://bluzky.github.io/images/favicon.png type=image/x-icon>
+<link rel=preconnect href=https://fonts.gstatic.com>
+<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap">
+<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.a175996d51c7122a7871164dca713adc582e8df8a6b31ae1e7169ca0559953614b9378e577a3ce6d3e6bc8fa87b3e4f38305c3f1478fb0b4904d66b4caffe85a.css integrity="sha512-oXWZbVHHEip4cRZNynE63Fgujfimsxrh5xacoFWZU2FLk3jld6PObT5ryPqHs+TzgwXD8UePsLSQTWa0yv/oWg==" media=screen>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
+</head>
+<body>
+<div style="min-height:calc(100vh - 65px)">
+<div class=header-height-fix></div>
+<header class=header-nav>
+<div class=container>
+<div class=row>
+<div class=col-12>
+<nav class="navbar navbar-expand-lg navbar-light p-0">
+<a class="navbar-brand font-weight-bold mr-0" href=https://bluzky.github.io/>
+<img loading=lazy src=https://bluzky.github.io/images/logo.png alt="The Organge+" height=35px>
+</a>
+<button class="search-toggle d-inline-block d-lg-none ml-auto mr-3" data-toggle=search aria-label="Search Toggle">
+<i data-eva=search-outline></i>
+</button>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navHeader aria-controls=navHeader aria-expanded=false aria-label="Toggle navigation">
+<i data-eva=menu-outline></i>
+<i class=d-none data-eva=close-outline></i>
+</button>
+<div class="collapse navbar-collapse" id=navHeader>
+<ul class="navbar-nav mx-auto">
+<li class=nav-item>
+<a class=nav-link href=https://bluzky.github.io/>Blog</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://bluzky.github.io/tags/>Tags</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://bluzky.github.io/about>About me</a>
+</li>
+</ul>
+<div class="navbar-right d-none d-lg-inline-block">
+<ul class="social-links list-unstyled list-inline">
+<li class="list-inline-item ml-4 d-none d-lg-inline-block">
+<button class=search-toggle data-toggle=search aria-label="Search Toggle">
+<i data-eva=search-outline></i>
+</button>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+</div>
+</div>
+</div>
+</header>
+<div class=search-block>
+<div data-toggle=search-close>
+<i data-eva=close-outline class=text-primary></i>
+</div>
+<form action=/search>
+<input id=search-query name=s type=search placeholder="Type words & hit enter" class=text-center aria-label=search-query>
+</form>
+</div>
+<section class=section-sm>
+<div class=container>
+<div class="row justify-content-center">
+<div class=col-lg-10>
+<div class=pr-lg-4>
+<div class=single-post>
+<div class="text-center mb-5">
+<h1 class="mb-4 post-title">How to validate request params in Phoenix</h1>
+<ul class="card-meta list-inline">
+<li class=list-inline-item>
+<a href=#! class=card-meta-author>
+<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
+<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
+<span>Dung Nguyen</span>
+</a>
+</a>
+</li>
+<li class=list-inline-item>|</li>
+<li class=list-inline-item>
+<span>14 August 2021</span>
+</li>
+</ul>
+</div>
+<div class="mb-5 text-center">
+<img loading=lazy class="img-fluid rounded" src=https://bluzky.github.io/img/validate-request-params.png alt="Image not Found">
+</div>
+<div class=content><blockquote>
+<p>Credit: filter image taken from <a href=https://www.svgrepo.com/svg/231531/filter>svgrepo.com</a></p>
+</blockquote>
+<p>In web developments, server receives lots of request data from client side. And when working with request params from client, my first rule is:</p>
+<blockquote>
+<p>Don&rsquo;t believe the client</p>
+</blockquote>
+<p>Imagine that you provide API to list all post using the filter from client, and user may add <code>user_id</code> which point to other user, and you don&rsquo;t remove that unexpected field from request params. If you don&rsquo;t handle your logic carefully, you may accidentally leak data.</p>
+<p>So every request should be cleaned from unexpected params, casted to the proper data type, and validated before passing to business layer.</p>
+<p>You can achieve this by:</p>
+<h2 id=using-ecto>Using Ecto</h2>
+<p>If you are building a web server using Phoenix, I guess <code>Ecto</code> is already in your dependencies. Just use it.</p>
+<p>Thank to Ecto schemaless, you can build changeset from a dynamic schema:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.PostController</span> <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>    ...
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    <span style=color:#8be9fd;font-style:italic>defp</span> index_params(params) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>        default <span style=color:#ff79c6>=</span> %{
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>      <span style=color:#f1fa8c>status</span>: nil,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>      <span style=color:#f1fa8c>q</span>: nil,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>      <span style=color:#f1fa8c>is_published</span>: true
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>    }
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>    types <span style=color:#ff79c6>=</span> %{
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>      <span style=color:#f1fa8c>status</span>: <span style=color:#f1fa8c>:string</span>,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>      <span style=color:#f1fa8c>q</span>: <span style=color:#f1fa8c>:string</span>,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>      <span style=color:#f1fa8c>is_published</span>: <span style=color:#f1fa8c>:boolean</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>    }
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>    changeset <span style=color:#ff79c6>=</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>      {default, types}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>      <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Ecto.Changeset</span><span style=color:#ff79c6>.</span>cast(params, <span style=color:#50fa7b>Map</span><span style=color:#ff79c6>.</span>keys(types))
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>    
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>    <span style=color:#ff79c6>if</span> changeset<span style=color:#ff79c6>.</span>valid? <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>        {<span style=color:#f1fa8c>:ok</span>, <span style=color:#50fa7b>Ecto.Changeset</span><span style=color:#ff79c6>.</span>apply_changes(changeset)}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>    <span style=color:#ff79c6>else</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>        {<span style=color:#f1fa8c>:error</span>, changeset}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>    
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>    <span style=color:#8be9fd;font-style:italic>def</span> index(conn, params) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>        with {<span style=color:#f1fa8c>:ok</span>, valid_params} <span style=color:#ff79c6>&lt;-</span> index_params(params) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span>            <span style=color:#6272a4># do your logic</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span>        <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span>    ...
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33</span><span style=color:#ff79c6>end</span>
+</code></pre></div><p>With Ecto you can do validation on your params as you do with your schema changeset.</p>
+<p>This way is simple and most of you are familiar with it. But you have to write much code and cannot cast and validate nested params.</p>
+<h2 id=use-library-tarams>Use library <code>Tarams</code></h2>
+<p>This library provide a simple way to define schema. Let&rsquo;s rewrite example above using <code>tarams</code>.</p>
+<p>First add this to your dependency list:</p>
+<pre><code>{:tarams, &quot;~&gt; 1.0.0&quot;}
+</code></pre><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.PostController</span> <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>    ...
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    <span style=color:#50fa7b>@index_params</span> %{
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>        <span style=color:#f1fa8c>status</span>: <span style=color:#f1fa8c>:string</span>,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>        <span style=color:#f1fa8c>q</span>: <span style=color:#f1fa8c>:string</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>        <span style=color:#f1fa8c>is_published</span>: [<span style=color:#f1fa8c>type</span>: <span style=color:#f1fa8c>:boolean</span>, <span style=color:#f1fa8c>default</span>: true],
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>        <span style=color:#f1fa8c>page</span>: [<span style=color:#f1fa8c>type</span>: <span style=color:#f1fa8c>:integer</span>, <span style=color:#f1fa8c>number</span>: [<span style=color:#f1fa8c>min</span>: <span style=color:#bd93f9>1</span>]],
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>        <span style=color:#f1fa8c>size</span>: [<span style=color:#f1fa8c>type</span>: <span style=color:#f1fa8c>:integer</span>, <span style=color:#f1fa8c>number</span>: [<span style=color:#f1fa8c>min</span>: <span style=color:#bd93f9>10</span>, <span style=color:#f1fa8c>max</span>: <span style=color:#bd93f9>100</span>]]
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>    }
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>    <span style=color:#8be9fd;font-style:italic>def</span> index(conn, params) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>        with {<span style=color:#f1fa8c>:ok</span>, valid_params} <span style=color:#ff79c6>&lt;-</span> <span style=color:#50fa7b>Tarams</span><span style=color:#ff79c6>.</span>cast(params, <span style=color:#50fa7b>@index_params</span>) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>            <span style=color:#6272a4># do your logic</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>        <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>    ...
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#ff79c6>end</span>
+</code></pre></div><p>And it support nested params too</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.PostController</span> <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>    ...
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    <span style=color:#50fa7b>@create_params</span> %{
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>        <span style=color:#f1fa8c>title</span>: [<span style=color:#f1fa8c>type</span>: <span style=color:#f1fa8c>:string</span>, <span style=color:#f1fa8c>required</span>: true],
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>        <span style=color:#f1fa8c>content</span>: [<span style=color:#f1fa8c>type</span>: <span style=color:#f1fa8c>:string</span>, <span style=color:#f1fa8c>required</span>: true],
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>        <span style=color:#f1fa8c>tags</span>: [<span style=color:#f1fa8c>type</span>: {<span style=color:#f1fa8c>:array</span>, <span style=color:#f1fa8c>:string</span>}],
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>        <span style=color:#f1fa8c>published_at</span>: <span style=color:#f1fa8c>:naive_datetime</span>,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>        <span style=color:#f1fa8c>meta</span>: %{
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>            <span style=color:#f1fa8c>tile</span>: <span style=color:#f1fa8c>:string</span>,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>            <span style=color:#f1fa8c>description</span>: <span style=color:#f1fa8c>:string</span>,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>            <span style=color:#f1fa8c>image</span>: <span style=color:#f1fa8c>:string</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>        }
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>    }
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>    <span style=color:#8be9fd;font-style:italic>def</span> create(conn, params) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>        with {<span style=color:#f1fa8c>:ok</span>, valid_params} <span style=color:#ff79c6>&lt;-</span> <span style=color:#50fa7b>Tarams</span><span style=color:#ff79c6>.</span>cast(params, <span style=color:#50fa7b>@create_params</span>) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>            <span style=color:#50fa7b>MyApp.Content</span><span style=color:#ff79c6>.</span>create_post(valid_params)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>        <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>    ...
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#ff79c6>end</span>
+</code></pre></div><h2 id=conclusion>Conclusion</h2>
+<p>All request params should be casted and validated at controller. Then you only work with data that you know what it is, and you don&rsquo;t have to worry about unexpected parameters.</p>
+<p>Thanks for reading, hope it can helps.</p>
+</div>
+</div>
+<div class=single-post-meta>
+<div class="row justify-content-center">
+<div class="col-md-6 text-center text-md-left">
+<ul class="post-meta-tags list-unstyled list-inline">
+<li class=list-inline-item>
+<a href=https://bluzky.github.io/tags/elixir>#elixir</a>
+</li>
+<li class=list-inline-item>
+<a href=https://bluzky.github.io/tags/phoenix>#phoenix</a>
+</li>
+<li class=list-inline-item>
+<a href=https://bluzky.github.io/tags/param-validation>#param validation</a>
+</li>
+</ul>
+</div>
+<div class="col-md-6 text-center text-md-right mt-4 mt-md-0">
+<ul class="social-links has-bg-color list-unstyled list-inline" style=line-height:0>
+<li class=list-inline-item>
+<a class="resp-sharing-button__link d-block" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fbluzky.github.io%2fblog%2f2021-08-14-validate-request-params-with-phoenix%2f" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small">
+<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+<i data-eva=facebook-outline class=text-dark></i>
+</div>
+</div>
+</a>
+</li>
+<li class=list-inline-item>
+<a class="resp-sharing-button__link d-block" href="https://twitter.com/intent/tweet/?text=How%20to%20validate%20request%20params%20in%20Phoenix&url=https%3a%2f%2fbluzky.github.io%2fblog%2f2021-08-14-validate-request-params-with-phoenix%2f" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
+<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+<i data-eva=twitter-outline class=text-dark></i>
+</div>
+</div>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class=single-post-author>
+<div class="row justify-content-center">
+<div class=col-md-12>
+<div class="media d-block d-sm-flex text-center text-sm-left">
+<a href=https://bluzky.github.io/author/dung-nguyen/><img loading=lazy class="img-fluid rounded-circle mr-0 mr-sm-4 mb-4" src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen"></a>
+<div class=media-body>
+<h4>
+<a href=https://bluzky.github.io/author/dung-nguyen/ class="text-dark font-weight-700">Dung Nguyen</a>
+</h4>
+<p class=font-primary>Hi! I&rsquo;m Dung Nguyen. I&rsquo;m an Elixir developer at OnPoint Vietnam.</p>
+<ul class="social-links list-unstyled list-inline ml-0 ml-sm-n2">
+<li class=list-inline-item>
+<a href=https://www.linkedin.com/in/dung-nguyen-tien-695ba135/>
+<i class="lab linkedin-outline"></i>
+</a>
+</li>
+<li class=list-inline-item>
+<a href=https://www.github.com/bluzky>
+<i class="lab github-outline"></i>
+</a>
+</li>
+<li class=list-inline-item>
+<a href=https://dev.to/bluzky>
+<i class="lab book-outline"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=single-post-similer>
+<div class="row justify-content-center">
+<div class=col-md-12>
+<div class="row mt-3">
+<div id=disqus_thread class=w-100></div>
+</div>
+</div>
+</div>
+</div>
+<div class=single-post-similer>
+<div class="row justify-content-center">
+<div class=col-md-12>
+<div class="row mt-3">
+<div class=col-12>
+<h3 class="text-dark font-weight-800 mb-4 pb-2">
+You May Also Like
+</h3>
+</div>
+<div class=col-md-6><article class="card post-card">
+<a href=https://bluzky.github.io/blog/2021-07-23-build-a-json-view-yourself/>
+<img loading=lazy class="w-100 rounded" src=https://bluzky.github.io/img/build-a-json-view.png alt="Build your own library to render json response in Phoenix">
+</a>
+<div class=card-body>
+<ul class="card-meta list-inline mb-2">
+<li class="list-inline-item mb-2">
+<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
+<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
+<span>Dung Nguyen</span>
+</a>
+</li>
+<li class="list-inline-item mb-2">
+<span>23 Jul, 2021</span>
+</li>
+</ul>
+<h3 class=mb-3>
+<a class=post-title href=https://bluzky.github.io/blog/2021-07-23-build-a-json-view-yourself/>Build your own library to render json response in Phoenix</a>
+</h3>
+<p>In my previous article, I introduced my library call JsonView to render json response easier. You can read it here: Render Ecto schema to json with …</p>
+<ul class="card-meta list-inline">
+<li class="list-inline-item mb-2">
+<ul class="card-meta-tag list-inline">
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/elixir>elixir</a>
+</li>
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/phoenix>phoenix</a>
+</li>
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/json-view>json view</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</article>
+</div>
+<div class=col-md-6><article class="card post-card">
+<a href=https://bluzky.github.io/blog/2021-07-10-render-response-json-view/>
+<img loading=lazy class="w-100 rounded" src=https://bluzky.github.io/img/json-view.png alt="Elixir phoenix - Render Ecto schema to json with relationships">
+</a>
+<div class=card-body>
+<ul class="card-meta list-inline mb-2">
+<li class="list-inline-item mb-2">
+<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
+<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
+<span>Dung Nguyen</span>
+</a>
+</li>
+<li class="list-inline-item mb-2">
+<span>10 Jul, 2021</span>
+</li>
+</ul>
+<h3 class=mb-3>
+<a class=post-title href=https://bluzky.github.io/blog/2021-07-10-render-response-json-view/>Elixir phoenix - Render Ecto schema to json with relationships</a>
+</h3>
+<p>When writing API with Phoenix and render json to client,
+For some fields I want to keep it original value. For some fields, I want to do some …</p>
+<ul class="card-meta list-inline">
+<li class="list-inline-item mb-2">
+<ul class="card-meta-tag list-inline">
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/elixir>elixir</a>
+</li>
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/phoenix>phoenix</a>
+</li>
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/json-view>json view</a>
+</li>
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/ecto>ecto</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<footer class="section-sm p-0">
+<div class=container>
+<div class="row justify-content-center align-items-center">
+<div class=col-lg-5>
+</div>
+<div class="col-lg-12 text-center mb-3">
+<ul class="social-links icon-box list-unstyled list-inline font-weight-500 mb-3">
+</ul>
+<p class="mb-0 font-weight-500 copyright-text content">
+Blog by Dung Nguyen.Theme by <a href=https://gethugothemes.com/>Gethugothemes</a>
+</p>
+</div>
+</div>
+</div>
+</footer>
+<script src=https://unpkg.com/eva-icons></script>
+<script data-turbolinks-suppress-warning src=/js/vendor.min.e8b43a49809453b05c67c402f4ef9f014ea047b1e351a77943c2f08c978e06e6dd1eb7279560628d119926cab96a55a422c55b47fa351500c8c2fe5e59a26234.js integrity="sha512-6LQ6SYCUU7BcZ8QC9O+fAU6gR7HjUad5Q8LwjJeOBubdHrcnlWBijRGZJsq5alWkIsVbR/o1FQDIwv5eWaJiNA=="></script>
+<script>(function(){var a=document,b=a.createElement("script");b.src="https://the-orange-1.disqus.com/embed.js",b.setAttribute("data-timestamp",+new Date),(a.head||a.body).appendChild(b)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+</body>
+</html>

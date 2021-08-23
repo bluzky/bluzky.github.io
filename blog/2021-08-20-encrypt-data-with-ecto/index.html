@@ -1,0 +1,468 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<title>How to encrypt your data with Ecto</title>
+<meta name=author content="Dung Nguyen">
+<meta name=description content="  Drinking orange juice is good for your health. Reading some orange code is good too :D  ">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=5">
+<link rel=icon href=https://bluzky.github.io/images/favicon.png type=image/x-icon>
+<link rel=preconnect href=https://fonts.gstatic.com>
+<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap">
+<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.a175996d51c7122a7871164dca713adc582e8df8a6b31ae1e7169ca0559953614b9378e577a3ce6d3e6bc8fa87b3e4f38305c3f1478fb0b4904d66b4caffe85a.css integrity="sha512-oXWZbVHHEip4cRZNynE63Fgujfimsxrh5xacoFWZU2FLk3jld6PObT5ryPqHs+TzgwXD8UePsLSQTWa0yv/oWg==" media=screen>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
+</head>
+<body>
+<div style="min-height:calc(100vh - 65px)">
+<div class=header-height-fix></div>
+<header class=header-nav>
+<div class=container>
+<div class=row>
+<div class=col-12>
+<nav class="navbar navbar-expand-lg navbar-light p-0">
+<a class="navbar-brand font-weight-bold mr-0" href=https://bluzky.github.io/>
+<img loading=lazy src=https://bluzky.github.io/images/logo.png alt="The Organge+" height=35px>
+</a>
+<button class="search-toggle d-inline-block d-lg-none ml-auto mr-3" data-toggle=search aria-label="Search Toggle">
+<i data-eva=search-outline></i>
+</button>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navHeader aria-controls=navHeader aria-expanded=false aria-label="Toggle navigation">
+<i data-eva=menu-outline></i>
+<i class=d-none data-eva=close-outline></i>
+</button>
+<div class="collapse navbar-collapse" id=navHeader>
+<ul class="navbar-nav mx-auto">
+<li class=nav-item>
+<a class=nav-link href=https://bluzky.github.io/>Blog</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://bluzky.github.io/tags/>Tags</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://bluzky.github.io/about>About me</a>
+</li>
+</ul>
+<div class="navbar-right d-none d-lg-inline-block">
+<ul class="social-links list-unstyled list-inline">
+<li class="list-inline-item ml-4 d-none d-lg-inline-block">
+<button class=search-toggle data-toggle=search aria-label="Search Toggle">
+<i data-eva=search-outline></i>
+</button>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+</div>
+</div>
+</div>
+</header>
+<div class=search-block>
+<div data-toggle=search-close>
+<i data-eva=close-outline class=text-primary></i>
+</div>
+<form action=/search>
+<input id=search-query name=s type=search placeholder="Type words & hit enter" class=text-center aria-label=search-query>
+</form>
+</div>
+<section class=section-sm>
+<div class=container>
+<div class="row justify-content-center">
+<div class=col-lg-10>
+<div class=pr-lg-4>
+<div class=single-post>
+<div class="text-center mb-5">
+<h1 class="mb-4 post-title">How to encrypt your data with Ecto</h1>
+<ul class="card-meta list-inline">
+<li class=list-inline-item>
+<a href=#! class=card-meta-author>
+<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
+<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
+<span>Dung Nguyen</span>
+</a>
+</a>
+</li>
+<li class=list-inline-item>|</li>
+<li class=list-inline-item>
+<span>20 August 2021</span>
+</li>
+</ul>
+</div>
+<div class="mb-5 text-center">
+<img loading=lazy class="img-fluid rounded" src=https://bluzky.github.io/img/encrypt-data-ecto.png alt="Image not Found">
+</div>
+<div class=content><p>If your data is encrypted, even if it&rsquo;s leaked, no one know what is the data. That&rsquo;s great.</p>
+<p>In this post, I&rsquo;m going to show you how to encrypt data with Ecto. <code>Ecto</code> allows developer to define their own types. And we will define a type called <code>EncryptedText</code> which encrypts data before persiting to database and decrypts data after loading.</p>
+<h2 id=1-define-encryptdecrypt-methods>1. Define encrypt/decrypt methods</h2>
+<p>This is a simple version of crypto module:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>Crypto</span> <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>  <span style=color:#50fa7b>@block_size</span> <span style=color:#bd93f9>16</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>  <span style=color:#8be9fd;font-style:italic>def</span> generate_secret <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>    <span style=color:#f1fa8c>:crypto</span><span style=color:#ff79c6>.</span>strong_rand_bytes(<span style=color:#50fa7b>@block_size</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>    <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Base</span><span style=color:#ff79c6>.</span>encode64()
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>  <span style=color:#8be9fd;font-style:italic>def</span> encrypt(plaintext, secret_key) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>    with {<span style=color:#f1fa8c>:ok</span>, secret_key} <span style=color:#ff79c6>&lt;-</span> decode_key(secret_key) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>      iv <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>:crypto</span><span style=color:#ff79c6>.</span>strong_rand_bytes(<span style=color:#50fa7b>@block_size</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>      plaintext <span style=color:#ff79c6>=</span> pad(plaintext, <span style=color:#50fa7b>@block_size</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>      ciphertext <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>:crypto</span><span style=color:#ff79c6>.</span>crypto_one_time(<span style=color:#f1fa8c>:aes_128_cbc</span>, secret_key, iv, plaintext, true)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>      {<span style=color:#f1fa8c>:ok</span>, <span style=color:#50fa7b>Base</span><span style=color:#ff79c6>.</span>encode64(iv <span style=color:#ff79c6>&lt;&gt;</span> ciphertext)}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>  <span style=color:#8be9fd;font-style:italic>def</span> decrypt(ciphertext, secret_key) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>    with {<span style=color:#f1fa8c>:ok</span>, secret_key} <span style=color:#ff79c6>&lt;-</span> decode_key(secret_key),
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>         {<span style=color:#f1fa8c>:ok</span>, &lt;&lt;iv<span style=color:#ff79c6>::</span>binary<span style=color:#ff79c6>-</span><span style=color:#50fa7b>@block_size</span>, ciphertext<span style=color:#ff79c6>::</span>binary&gt;&gt;} <span style=color:#ff79c6>&lt;-</span> <span style=color:#50fa7b>Base</span><span style=color:#ff79c6>.</span>decode64(ciphertext) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>      plaintext <span style=color:#ff79c6>=</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>        <span style=color:#f1fa8c>:crypto</span><span style=color:#ff79c6>.</span>crypto_one_time(<span style=color:#f1fa8c>:aes_128_cbc</span>, secret_key, iv, ciphertext, false)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>        <span style=color:#ff79c6>|&gt;</span> unpad
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>      {<span style=color:#f1fa8c>:ok</span>, plaintext}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>    <span style=color:#ff79c6>else</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>      {<span style=color:#f1fa8c>:error</span>, _} <span style=color:#ff79c6>=</span> err <span style=color:#ff79c6>-&gt;</span> err
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span>      _ <span style=color:#ff79c6>-&gt;</span> {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>&#34;Bad encrypted data&#34;</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33</span>  <span style=color:#8be9fd;font-style:italic>defp</span> pad(data, block_size) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34</span>    to_add <span style=color:#ff79c6>=</span> block_size <span style=color:#ff79c6>-</span> rem(byte_size(data), block_size)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35</span>    data <span style=color:#ff79c6>&lt;&gt;</span> <span style=color:#f1fa8c>:binary</span><span style=color:#ff79c6>.</span>copy(&lt;&lt;to_add&gt;&gt;, to_add)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38</span>  <span style=color:#8be9fd;font-style:italic>defp</span> unpad(data) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39</span>    to_remove <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>:binary</span><span style=color:#ff79c6>.</span>last(data)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40</span>    <span style=color:#f1fa8c>:binary</span><span style=color:#ff79c6>.</span>part(data, <span style=color:#bd93f9>0</span>, byte_size(data) <span style=color:#ff79c6>-</span> to_remove)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42</span><span style=color:#ff79c6>end</span>
+</code></pre></div><p>Let go through the code</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>  <span style=color:#8be9fd;font-style:italic>def</span> generate_secret <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>    <span style=color:#f1fa8c>:crypto</span><span style=color:#ff79c6>.</span>strong_rand_bytes(<span style=color:#50fa7b>@block_size</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>    <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Base</span><span style=color:#ff79c6>.</span>encode64()
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>  <span style=color:#ff79c6>end</span>
+</code></pre></div><p>This function generate a 16 bytes secret key and encode base 64 string so you can add it to config.</p>
+<ul>
+<li><code>encrypt/2</code> function</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span> <span style=color:#8be9fd;font-style:italic>def</span> encrypt(plaintext, secret_key) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>    <span style=color:#6272a4># check the key size</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    with {<span style=color:#f1fa8c>:ok</span>, secret_key} <span style=color:#ff79c6>&lt;-</span> decode_key(secret_key) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>      
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>      <span style=color:#6272a4># random initial vector</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>      iv <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>:crypto</span><span style=color:#ff79c6>.</span>strong_rand_bytes(<span style=color:#50fa7b>@block_size</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>      <span style=color:#6272a4># if length of text is not multiple of @block_size</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>      <span style=color:#6272a4># we add more data until it meets condition</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>      plaintext <span style=color:#ff79c6>=</span> pad(plaintext, <span style=color:#50fa7b>@block_size</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>      <span style=color:#6272a4># encrypt here</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>      ciphertext <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>:crypto</span><span style=color:#ff79c6>.</span>crypto_one_time(<span style=color:#f1fa8c>:aes_128_cbc</span>, secret_key, iv, plaintext, true)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>      {<span style=color:#f1fa8c>:ok</span>, <span style=color:#50fa7b>Base</span><span style=color:#ff79c6>.</span>encode64(iv <span style=color:#ff79c6>&lt;&gt;</span> ciphertext)}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>  <span style=color:#ff79c6>end</span>
+</code></pre></div><p>This is the most important line</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>ciphertext <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>:crypto</span><span style=color:#ff79c6>.</span>crypto_one_time(<span style=color:#f1fa8c>:aes_128_cbc</span>, secret_key, iv, plaintext, true)
+</code></pre></div><ul>
+<li><code>iv</code> is initial vector. AES-128 algorithms encrypts data by block of 16 bytes, so we need initial vector to make sure that the output of blocks with same data are different from each other.</li>
+<li>The last parameter is set to <code>true</code> to encrypt, set to <code>false</code> to decrypt data</li>
+</ul>
+<p>And then we encode output to base 64 string. Here we concatenate <code>iv</code> and <code>ciphertext</code> so that we can extract <code>iv</code> to use for decrypting</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>{<span style=color:#f1fa8c>:ok</span>, <span style=color:#50fa7b>Base</span><span style=color:#ff79c6>.</span>encode64(iv <span style=color:#ff79c6>&lt;&gt;</span> ciphertext)}
+</code></pre></div><ul>
+<li><code>decrypt/2</code> function</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>def</span> decrypt(ciphertext, secret_key) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>    <span style=color:#6272a4># check the key</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    with {<span style=color:#f1fa8c>:ok</span>, secret_key} <span style=color:#ff79c6>&lt;-</span> decode_key(secret_key),
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>         {<span style=color:#f1fa8c>:ok</span>, &lt;&lt;iv<span style=color:#ff79c6>::</span>binary<span style=color:#ff79c6>-</span><span style=color:#50fa7b>@block_size</span>, ciphertext<span style=color:#ff79c6>::</span>binary&gt;&gt;} <span style=color:#ff79c6>&lt;-</span> <span style=color:#50fa7b>Base</span><span style=color:#ff79c6>.</span>decode64(ciphertext) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>      plaintext <span style=color:#ff79c6>=</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>        <span style=color:#f1fa8c>:crypto</span><span style=color:#ff79c6>.</span>crypto_one_time(<span style=color:#f1fa8c>:aes_128_cbc</span>, secret_key, iv, ciphertext, false)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>        <span style=color:#ff79c6>|&gt;</span> unpad
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>      {<span style=color:#f1fa8c>:ok</span>, plaintext}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>    <span style=color:#ff79c6>else</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>      {<span style=color:#f1fa8c>:error</span>, _} <span style=color:#ff79c6>=</span> err <span style=color:#ff79c6>-&gt;</span> err
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>      _ <span style=color:#ff79c6>-&gt;</span> {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>&#34;Bad encrypted data&#34;</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>  <span style=color:#ff79c6>end</span>
+</code></pre></div><p>We extract <code>iv</code> and encrypted data from input</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>{<span style=color:#f1fa8c>:ok</span>, &lt;&lt;iv<span style=color:#ff79c6>::</span>binary<span style=color:#ff79c6>-</span><span style=color:#50fa7b>@block_size</span>, ciphertext<span style=color:#ff79c6>::</span>binary&gt;&gt;} <span style=color:#ff79c6>&lt;-</span> <span style=color:#50fa7b>Base</span><span style=color:#ff79c6>.</span>decode64(ciphertext)
+</code></pre></div><p>We use pattern matching to extract first 16 byte and assign to <code>iv</code> and assign remaining data to <code>ciphertext</code>. Then decrypting data</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>plaintext <span style=color:#ff79c6>=</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>    <span style=color:#f1fa8c>:crypto</span><span style=color:#ff79c6>.</span>crypto_one_time(<span style=color:#f1fa8c>:aes_128_cbc</span>, secret_key, iv, ciphertext, false)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>    <span style=color:#ff79c6>|&gt;</span> unpad
+</code></pre></div><p>This line is similar to the line which encrypts data, the difference is here we replace <code>plaintext</code> by <code>ciphertext</code> and last parameter is set to <code>false</code>. After data is decrypted, we need to remove padding to get the original data.</p>
+<h2 id=2-build-encryptedtext-type>2. Build <code>EncryptedText</code> type</h2>
+<p>I define a type to store binary data, you can define a <code>EncryptedMap</code> to store map data. The most important function are <code>dump</code> and <code>load</code> where we encrypt before persisting and decrypt after loading.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>EncryptedText</span> <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>  <span style=color:#ff79c6>use</span> <span style=color:#50fa7b>Ecto.Type</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>  <span style=color:#6272a4># we store data as string</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>  <span style=color:#8be9fd;font-style:italic>def</span> type, <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:string</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>  <span style=color:#8be9fd;font-style:italic>def</span> cast(value) <span style=color:#ff79c6>when</span> is_binary(value) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>    {<span style=color:#f1fa8c>:ok</span>, value}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>  <span style=color:#8be9fd;font-style:italic>def</span> cast(_), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:error</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>  <span style=color:#8be9fd;font-style:italic>def</span> dump(nil), <span style=color:#f1fa8c>do</span>: nil
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>  <span style=color:#6272a4># encrypt data before persist to database</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>  <span style=color:#8be9fd;font-style:italic>def</span> dump(data) <span style=color:#ff79c6>when</span> is_binary(data) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>    with {<span style=color:#f1fa8c>:ok</span>, secret_key} <span style=color:#ff79c6>&lt;-</span> <span style=color:#50fa7b>Application</span><span style=color:#ff79c6>.</span>fetch_env(<span style=color:#f1fa8c>:myapp</span>, <span style=color:#f1fa8c>:ecto_secret_key</span>),
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>         {<span style=color:#f1fa8c>:ok</span>, data} <span style=color:#ff79c6>&lt;-</span> <span style=color:#50fa7b>Crypto</span><span style=color:#ff79c6>.</span>encrypt(data, secret_key) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>      {<span style=color:#f1fa8c>:ok</span>, data}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>    <span style=color:#ff79c6>else</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>      _ <span style=color:#ff79c6>-&gt;</span> <span style=color:#f1fa8c>:error</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>  <span style=color:#8be9fd;font-style:italic>def</span> dump(_), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:error</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>  <span style=color:#8be9fd;font-style:italic>def</span> load(nil), <span style=color:#f1fa8c>do</span>: nil
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>  <span style=color:#6272a4># decrypt data after loaded from database</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>  <span style=color:#8be9fd;font-style:italic>def</span> load(data) <span style=color:#ff79c6>when</span> is_binary(data) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>    secret_key <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>Application</span><span style=color:#ff79c6>.</span>fetch_env!(<span style=color:#f1fa8c>:myapp</span>, <span style=color:#f1fa8c>:ecto_secret_key</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span>    <span style=color:#ff79c6>case</span> <span style=color:#50fa7b>Crypto</span><span style=color:#ff79c6>.</span>decrypt(data, secret_key) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span>      {<span style=color:#f1fa8c>:error</span>, _} <span style=color:#ff79c6>-&gt;</span> <span style=color:#f1fa8c>:error</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span>      ok <span style=color:#ff79c6>-&gt;</span> ok
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35</span>  <span style=color:#8be9fd;font-style:italic>def</span> load(_), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:error</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37</span>  <span style=color:#8be9fd;font-style:italic>def</span> embed_as(_), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:dump</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38</span><span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39</span>
+</code></pre></div><h2 id=3-use-it-in-your-schema>3. Use it in your schema</h2>
+<ul>
+<li>You must add secret key to your app config first.</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>config <span style=color:#f1fa8c>:myapp</span>, <span style=color:#f1fa8c>:ecto_secret_key</span>, <span style=color:#f1fa8c>&#34;your key using Crypto.generate_secret&#34;</span>
+</code></pre></div><ul>
+<li>Add to schema</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>schema <span style=color:#f1fa8c>&#34;users&#34;</span> <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>    field <span style=color:#f1fa8c>:name</span>, <span style=color:#f1fa8c>:string</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>    ...
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>    field <span style=color:#f1fa8c>:secret</span>, <span style=color:#50fa7b>EncryptedText</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>    ...
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span><span style=color:#ff79c6>end</span>
+</code></pre></div><p>Your data are safe now.</p>
+<h2 id=4-conclusion>4. Conclusion</h2>
+<p>With Crypto you can implement encrypted field for any type of data you want.</p>
+<p>There is an issue when you want to change your secret key, you have to load your data row by row, decrypt and then encrypt with new key and update to database.</p>
+<p>I found this article which explains very well about crypto if you are interested <a href=https://www.thegreatcodeadventure.com/elixir-encryption-with-erlang-crypto/>https://www.thegreatcodeadventure.com/elixir-encryption-with-erlang-crypto/</a>
+Although she uses old crypto API so it will throw some warnings.</p>
+<p>I implemented encrypted type for text and map for my company project here if you want to use it:</p>
+<p><a href=https://github.com/onpointvn/magik/tree/main/lib/ecto_type>Github</a></p>
+<p>Thanks for reading.</p>
+</div>
+</div>
+<div class=single-post-meta>
+<div class="row justify-content-center">
+<div class="col-md-6 text-center text-md-left">
+<ul class="post-meta-tags list-unstyled list-inline">
+<li class=list-inline-item>
+<a href=https://bluzky.github.io/tags/elixir>#elixir</a>
+</li>
+<li class=list-inline-item>
+<a href=https://bluzky.github.io/tags/ecto>#ecto</a>
+</li>
+<li class=list-inline-item>
+<a href=https://bluzky.github.io/tags/crypto>#crypto</a>
+</li>
+</ul>
+</div>
+<div class="col-md-6 text-center text-md-right mt-4 mt-md-0">
+<ul class="social-links has-bg-color list-unstyled list-inline" style=line-height:0>
+<li class=list-inline-item>
+<a class="resp-sharing-button__link d-block" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fbluzky.github.io%2fblog%2f2021-08-20-encrypt-data-with-ecto%2f" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small">
+<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+<i data-eva=facebook-outline class=text-dark></i>
+</div>
+</div>
+</a>
+</li>
+<li class=list-inline-item>
+<a class="resp-sharing-button__link d-block" href="https://twitter.com/intent/tweet/?text=How%20to%20encrypt%20your%20data%20with%20Ecto&url=https%3a%2f%2fbluzky.github.io%2fblog%2f2021-08-20-encrypt-data-with-ecto%2f" target=_blank rel=noopener aria-label>
+<div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
+<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+<i data-eva=twitter-outline class=text-dark></i>
+</div>
+</div>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class=single-post-author>
+<div class="row justify-content-center">
+<div class=col-md-12>
+<div class="media d-block d-sm-flex text-center text-sm-left">
+<a href=https://bluzky.github.io/author/dung-nguyen/><img loading=lazy class="img-fluid rounded-circle mr-0 mr-sm-4 mb-4" src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen"></a>
+<div class=media-body>
+<h4>
+<a href=https://bluzky.github.io/author/dung-nguyen/ class="text-dark font-weight-700">Dung Nguyen</a>
+</h4>
+<p class=font-primary>Hi! I&rsquo;m Dung Nguyen. I&rsquo;m an Elixir developer at OnPoint Vietnam.</p>
+<ul class="social-links list-unstyled list-inline ml-0 ml-sm-n2">
+<li class=list-inline-item>
+<a href=https://www.linkedin.com/in/dung-nguyen-tien-695ba135/>
+<i class="lab linkedin-outline"></i>
+</a>
+</li>
+<li class=list-inline-item>
+<a href=https://www.github.com/bluzky>
+<i class="lab github-outline"></i>
+</a>
+</li>
+<li class=list-inline-item>
+<a href=https://dev.to/bluzky>
+<i class="lab book-outline"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=single-post-similer>
+<div class="row justify-content-center">
+<div class=col-md-12>
+<div class="row mt-3">
+<div id=disqus_thread class=w-100></div>
+</div>
+</div>
+</div>
+</div>
+<div class=single-post-similer>
+<div class="row justify-content-center">
+<div class=col-md-12>
+<div class="row mt-3">
+<div class=col-12>
+<h3 class="text-dark font-weight-800 mb-4 pb-2">
+You May Also Like
+</h3>
+</div>
+<div class=col-md-6><article class="card post-card">
+<a href=https://bluzky.github.io/blog/2021-07-10-render-response-json-view/>
+<img loading=lazy class="w-100 rounded" src=https://bluzky.github.io/img/json-view.png alt="Elixir phoenix - Render Ecto schema to json with relationships">
+</a>
+<div class=card-body>
+<ul class="card-meta list-inline mb-2">
+<li class="list-inline-item mb-2">
+<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
+<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
+<span>Dung Nguyen</span>
+</a>
+</li>
+<li class="list-inline-item mb-2">
+<span>10 Jul, 2021</span>
+</li>
+</ul>
+<h3 class=mb-3>
+<a class=post-title href=https://bluzky.github.io/blog/2021-07-10-render-response-json-view/>Elixir phoenix - Render Ecto schema to json with relationships</a>
+</h3>
+<p>When writing API with Phoenix and render json to client,
+For some fields I want to keep it original value. For some fields, I want to do some …</p>
+<ul class="card-meta list-inline">
+<li class="list-inline-item mb-2">
+<ul class="card-meta-tag list-inline">
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/elixir>elixir</a>
+</li>
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/phoenix>phoenix</a>
+</li>
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/json-view>json view</a>
+</li>
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/ecto>ecto</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</article>
+</div>
+<div class=col-md-6><article class="card post-card">
+<a href=https://bluzky.github.io/blog/2020-10-30-compose-ecto-query-from-client/>
+<img loading=lazy class="w-100 rounded" src=https://bluzky.github.io/img/request-to-query.png alt="Compose Ecto Query From Client">
+</a>
+<div class=card-body>
+<ul class="card-meta list-inline mb-2">
+<li class="list-inline-item mb-2">
+<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
+<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
+<span>Dung Nguyen</span>
+</a>
+</li>
+<li class="list-inline-item mb-2">
+<span>30 Oct, 2020</span>
+</li>
+</ul>
+<h3 class=mb-3>
+<a class=post-title href=https://bluzky.github.io/blog/2020-10-30-compose-ecto-query-from-client/>Compose Ecto Query From Client</a>
+</h3>
+<p>The story At our company, OnPoint, we are building an ecommerce website using Phoenix Framework. And I am working on admin to manage product, orders …</p>
+<ul class="card-meta list-inline">
+<li class="list-inline-item mb-2">
+<ul class="card-meta-tag list-inline">
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/elixir>elixir</a>
+</li>
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/phoenix>phoenix</a>
+</li>
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/query>query</a>
+</li>
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/ecto>ecto</a>
+</li>
+<li class="list-inline-item tag">
+<a href=https://bluzky.github.io/tags/querie>querie</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<footer class="section-sm p-0">
+<div class=container>
+<div class="row justify-content-center align-items-center">
+<div class=col-lg-5>
+</div>
+<div class="col-lg-12 text-center mb-3">
+<ul class="social-links icon-box list-unstyled list-inline font-weight-500 mb-3">
+</ul>
+<p class="mb-0 font-weight-500 copyright-text content">
+Blog by Dung Nguyen.Theme by <a href=https://gethugothemes.com/>Gethugothemes</a>
+</p>
+</div>
+</div>
+</div>
+</footer>
+<script src=https://unpkg.com/eva-icons></script>
+<script data-turbolinks-suppress-warning src=/js/vendor.min.e8b43a49809453b05c67c402f4ef9f014ea047b1e351a77943c2f08c978e06e6dd1eb7279560628d119926cab96a55a422c55b47fa351500c8c2fe5e59a26234.js integrity="sha512-6LQ6SYCUU7BcZ8QC9O+fAU6gR7HjUad5Q8LwjJeOBubdHrcnlWBijRGZJsq5alWkIsVbR/o1FQDIwv5eWaJiNA=="></script>
+<script>(function(){var a=document,b=a.createElement("script");b.src="https://the-orange-1.disqus.com/embed.js",b.setAttribute("data-timestamp",+new Date),(a.head||a.body).appendChild(b)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+</body>
+</html>
