@@ -7,6 +7,8 @@ draft: false
 image: "/img/tarams-parse.png"
 ---
 
+**Version mới của thư viện `Tarams` không tương thích với bản cũ. Các bạn đọc bài mới ở đây nhé [How to validate request params in Phoenix](/blog/2021-08-14-validate-request-params-with-phoenix)
+
 Yêu cầu chuẩn hoá và validate các tham số truyền lên từ client là yêu cầu cơ bản khi xây dựng API Web. Mình đã có một bài hướng dẫn sử dụng Ecto.Changeset để chuẩn hoá trong bài viết này:
 
 [Parse và validate request param trong Phoenix với Ecto ](https://dev.to/bluzky/parse-va-validate-request-param-trong-phoenix-v-i-ecto-151a)

@@ -1,6 +1,6 @@
 ---
 title: "Build your own library to render json response in Phoenix"
-date: 2021-08-23T20:00:50+07:00
+date: 2021-07-23
 tags: ["elixir", "phoenix", "json view"]
 author: Dung Nguyen
 image: "/img/build-a-json-view.png"
@@ -8,7 +8,7 @@ draft: false
 ---
 
 In my previous article, I introduced my library call `JsonView` to render json response easier. You can read it here:
-[Render Ecto schema to json with relationships with JsonView](/blog/2021-07-10-render-response-json-view.md)
+[Render Ecto schema to json with relationships with JsonView](/blog/2021-07-10-render-response-json-view)
 
 
 Today I will guide you to write your own Json render view. Let's start.
