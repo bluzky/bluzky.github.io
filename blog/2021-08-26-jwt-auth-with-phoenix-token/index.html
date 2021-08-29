@@ -1,7 +1,7 @@
 <!doctype html><html lang=en-us>
 <head>
 <meta charset=utf-8>
-<title>JWT Auth with Phoenix.Token</title>
+<title>JWT alternative token Authentication with Phoenix.Token</title>
 <meta name=author content="Dung Nguyen">
 <meta name=description content="  Drinking orange juice is good for your health. Reading some orange code is good too :D  ">
 <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=5">
@@ -72,7 +72,7 @@
 <div class=pr-lg-4>
 <div class=single-post>
 <div class="text-center mb-5">
-<h1 class="mb-4 post-title">JWT Auth with Phoenix.Token</h1>
+<h1 class="mb-4 post-title">JWT alternative token Authentication with Phoenix.Token</h1>
 <ul class="card-meta list-inline">
 <li class=list-inline-item>
 <a href=#! class=card-meta-author>
@@ -92,12 +92,12 @@
 <img loading=lazy class="img-fluid rounded" src=https://bluzky.github.io/img/jwt-phoenix.png alt="Image not Found">
 </div>
 <div class=content><p>In this post, you&rsquo;ll learn how to implement JWT-based authentication using <code>Phoenix.Token</code>.</p>
-<p>In our previous projects, we use <code>guardian</code> library to implement JWT authentication. <code>Guardian</code> is a great library which provides lots of method and tool to work with aunthentication. But sometime we don&rsquo;t need them all. And recently, I found <code>Phoenix.Token</code> module shipped with <code>phoenix</code> framework that helps me to implement JWT authentication with few lines of code.</p>
+<p>In our previous projects, we use <code>guardian</code> library to implement JWT authentication. <code>Guardian</code> is a great library which provides lots of method and tool to work with authentication. But sometime we don&rsquo;t need them all. And recently, I found <code>Phoenix.Token</code> module shipped with <code>phoenix</code> framework that helps me to implement JWT alternative token authentication with few lines of code.</p>
 <p>Let&rsquo;s do it.</p>
-<h2 id=1-implement-jwttoken-module>1. Implement JwtToken module</h2>
+<h2 id=1-implement-token-module>1. Implement Token module</h2>
 <p>Here is the document of <a href=https://hexdocs.pm/phoenix/Phoenix.Token.html>Phoenix.Token</a>.</p>
-<p>We just wrap <code>sign</code> and <code>verify</code> function from <code>Phoenix.Token</code> to create and check for valid JWT token.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.JwtToken</span> <span style=color:#ff79c6>do</span>
+<p>We just wrap <code>sign</code> and <code>verify</code> function from <code>Phoenix.Token</code> to create and check for valid token.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.Token</span> <span style=color:#ff79c6>do</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>  <span style=color:#50fa7b>@signing_salt</span> <span style=color:#f1fa8c>&#34;octosell_api&#34;</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>  <span style=color:#6272a4># token for 2 week</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>  <span style=color:#50fa7b>@token_age_secs</span> <span style=color:#bd93f9>14</span> <span style=color:#ff79c6>*</span> <span style=color:#bd93f9>86_400</span>
@@ -113,27 +113,26 @@
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>  <span style=color:#50fa7b>@doc</span> <span style=color:#f1fa8c>&#34;&#34;&#34;
 </span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#f1fa8c>  Verify given token by:
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#f1fa8c>  - Check if this token is issued and stored in Redis
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#f1fa8c>  - Verify token signature
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#f1fa8c>  - Verify expiration time
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#f1fa8c>  &#34;&#34;&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>  <span style=color:#50fa7b>@spec</span> verify(<span style=color:#50fa7b>String</span><span style=color:#ff79c6>.</span>t()) <span style=color:#ff79c6>::</span> {<span style=color:#f1fa8c>:ok</span>, any()} <span style=color:#ff79c6>|</span> {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>:unauthenticated</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>  <span style=color:#8be9fd;font-style:italic>def</span> verify(token) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>    <span style=color:#ff79c6>case</span> <span style=color:#50fa7b>Phoenix.Token</span><span style=color:#ff79c6>.</span>verify(<span style=color:#50fa7b>MyAppWeb.Endpoint</span>, <span style=color:#50fa7b>@signing_salt</span>, token,
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>             <span style=color:#f1fa8c>max_age</span>: <span style=color:#50fa7b>@token_age_secs</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>           ) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>      {<span style=color:#f1fa8c>:ok</span>, data} <span style=color:#ff79c6>-&gt;</span> {<span style=color:#f1fa8c>:ok</span>, data}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>      _error <span style=color:#ff79c6>-&gt;</span> {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>:unauthenticated</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>    <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span><span style=color:#ff79c6>end</span>
-</code></pre></div><p>Here we wrap in <code>JwtToken</code> module to simplify API. We pass <code>MyAppWeb.Endpoint</code> here to use secret key that config for endpoint. You can pass secret key from config as firt argument.</p>
-<h2 id=2-generate-jwt-token>2. Generate JWT token</h2>
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#f1fa8c>  - Verify token signature
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#f1fa8c>  - Verify expiration time
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#f1fa8c>  &#34;&#34;&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>  <span style=color:#50fa7b>@spec</span> verify(<span style=color:#50fa7b>String</span><span style=color:#ff79c6>.</span>t()) <span style=color:#ff79c6>::</span> {<span style=color:#f1fa8c>:ok</span>, any()} <span style=color:#ff79c6>|</span> {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>:unauthenticated</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>  <span style=color:#8be9fd;font-style:italic>def</span> verify(token) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>    <span style=color:#ff79c6>case</span> <span style=color:#50fa7b>Phoenix.Token</span><span style=color:#ff79c6>.</span>verify(<span style=color:#50fa7b>MyAppWeb.Endpoint</span>, <span style=color:#50fa7b>@signing_salt</span>, token,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>             <span style=color:#f1fa8c>max_age</span>: <span style=color:#50fa7b>@token_age_secs</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>           ) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>      {<span style=color:#f1fa8c>:ok</span>, data} <span style=color:#ff79c6>-&gt;</span> {<span style=color:#f1fa8c>:ok</span>, data}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>      _error <span style=color:#ff79c6>-&gt;</span> {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>:unauthenticated</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>    <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>  <span style=color:#ff79c6>end</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span><span style=color:#ff79c6>end</span>
+</code></pre></div><p>Here we wrap in <code>Token</code> module to simplify API. We pass <code>MyAppWeb.Endpoint</code> here to use secret key that config for endpoint. You can pass secret key from config as firt argument.</p>
+<h2 id=2-generate-token>2. Generate token</h2>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyAppWeb.SessionController</span> <span style=color:#ff79c6>do</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>  ...
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>  <span style=color:#8be9fd;font-style:italic>def</span> new(conn, %{<span style=color:#f1fa8c>&#34;email&#34;</span> <span style=color:#ff79c6>=&gt;</span> email, <span style=color:#f1fa8c>&#34;password&#34;</span> <span style=color:#ff79c6>=&gt;</span> password}) <span style=color:#ff79c6>do</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>    with {<span style=color:#f1fa8c>:ok</span>, user} <span style=color:#ff79c6>&lt;-</span> <span style=color:#50fa7b>Account</span><span style=color:#ff79c6>.</span>authenticate_user(email, password),
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>         {<span style=color:#f1fa8c>:ok</span>, token} <span style=color:#ff79c6>&lt;-</span> <span style=color:#50fa7b>MyApp.JwtToken</span><span style=color:#ff79c6>.</span>sign(%{<span style=color:#f1fa8c>user_id</span>: user<span style=color:#ff79c6>.</span>id}) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>         {<span style=color:#f1fa8c>:ok</span>, token} <span style=color:#ff79c6>&lt;-</span> <span style=color:#50fa7b>MyApp.Token</span><span style=color:#ff79c6>.</span>sign(%{<span style=color:#f1fa8c>user_id</span>: user<span style=color:#ff79c6>.</span>id}) <span style=color:#ff79c6>do</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>      ...
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>      <span style=color:#6272a4># return token to client</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>    <span style=color:#ff79c6>else</span>
@@ -143,9 +142,9 @@
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>  <span style=color:#ff79c6>end</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#ff79c6>end</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>
-</code></pre></div><p>Here we create JWT token with a map <code>%{user_id: user.id}</code> and return to client.</p>
+</code></pre></div><p>Here we create Phoenix token with a map <code>%{user_id: user.id}</code> and return to client.</p>
 <h2 id=3-build-plug-to-verify-token>3. Build Plug to verify token</h2>
-<p>Client sent jwt token to server via header <code>Authorization</code>. We extract token and call <code>JwtToken.verify</code> to check if jwt token is valid and not expired.</p>
+<p>Client sent token to server via header <code>Authorization</code>. We extract token and call <code>Token.verify</code> to check if token is valid and not expired.</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.Plug.Authenticate</span> <span style=color:#ff79c6>do</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>  <span style=color:#ff79c6>import</span> <span style=color:#50fa7b>Plug.Conn</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>  <span style=color:#ff79c6>require</span> <span style=color:#50fa7b>Logger</span>
@@ -156,7 +155,7 @@
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>  <span style=color:#8be9fd;font-style:italic>def</span> call(conn, _opts) <span style=color:#ff79c6>do</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>    with [<span style=color:#f1fa8c>&#34;Bearer &#34;</span> <span style=color:#ff79c6>&lt;&gt;</span> token] <span style=color:#ff79c6>&lt;-</span> get_req_header(conn, <span style=color:#f1fa8c>&#34;authorization&#34;</span>),
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>         {<span style=color:#f1fa8c>:ok</span>, data} <span style=color:#ff79c6>&lt;-</span> <span style=color:#50fa7b>MyApp.JwtToken</span><span style=color:#ff79c6>.</span>verify(token) <span style=color:#ff79c6>do</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>         {<span style=color:#f1fa8c>:ok</span>, data} <span style=color:#ff79c6>&lt;-</span> <span style=color:#50fa7b>MyApp.Token</span><span style=color:#ff79c6>.</span>verify(token) <span style=color:#ff79c6>do</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>      conn
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>      <span style=color:#ff79c6>|&gt;</span> assign(<span style=color:#f1fa8c>:current_user</span>, <span style=color:#50fa7b>MyApp.Account</span><span style=color:#ff79c6>.</span>get_user(data<span style=color:#ff79c6>.</span>user_id))
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>    <span style=color:#ff79c6>else</span>
@@ -195,8 +194,8 @@
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>
 </code></pre></div><p>We have done with it. Just a few line of code</p>
 <h2 id=conclusion>Conclusion</h2>
-<p>Implement JWT authentication with <code>Phoenix</code> is so easy and you may not need Guardian for your application.
-In this post I only implement simple version of JWT authentication. In real application, you should store jwt token signature in database or redis and</p>
+<p>Implement token authentication with <code>Phoenix</code> is so easy and you may not need Guardian for your application.
+In this post I only implement simple version of token authentication. In real application, you should store token signature in database or redis and</p>
 <ul>
 <li>In <code>Authenticate</code> plug check if the token exists in database.</li>
 <li>When user logout, clear it from database/redis to make sure that token cannot be used to make request anymore.</li>
@@ -215,9 +214,6 @@ In this post I only implement simple version of JWT authentication. In real appl
 <a href=https://bluzky.github.io/tags/phoenix>#phoenix</a>
 </li>
 <li class=list-inline-item>
-<a href=https://bluzky.github.io/tags/jwt>#jwt</a>
-</li>
-<li class=list-inline-item>
 <a href=https://bluzky.github.io/tags/authentication>#authentication</a>
 </li>
 </ul>
@@ -234,7 +230,7 @@ In this post I only implement simple version of JWT authentication. In real appl
 </a>
 </li>
 <li class=list-inline-item>
-<a class="resp-sharing-button__link d-block" href="https://twitter.com/intent/tweet/?text=JWT%20Auth%20with%20Phoenix.Token&url=https%3a%2f%2fbluzky.github.io%2fblog%2f2021-08-26-jwt-auth-with-phoenix-token%2f" target=_blank rel=noopener aria-label>
+<a class="resp-sharing-button__link d-block" href="https://twitter.com/intent/tweet/?text=JWT%20alternative%20token%20Authentication%20with%20Phoenix.Token&url=https%3a%2f%2fbluzky.github.io%2fblog%2f2021-08-26-jwt-auth-with-phoenix-token%2f" target=_blank rel=noopener aria-label>
 <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
 <div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
 <i data-eva=twitter-outline class=text-dark></i>
