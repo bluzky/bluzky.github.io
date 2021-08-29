@@ -1,5 +1,5 @@
 ---
-title: "How to encrypt your data with Ecto"
+title: "Encrypt your database with Ecto custom type"
 date: 2021-08-20
 tags: ["elixir", "ecto", "crypto"]
 author: Dung Nguyen
