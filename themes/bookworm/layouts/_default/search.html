@@ -1,5 +1,3 @@
-{{ define "main" }}
-
 <section class="section">
   <div class="container">
     <div class="row">
@@ -22,7 +20,7 @@
           <script id="search-result-template" type="text/x-js-template">
             <div class="col-lg-4 col-md-6 mb-4">
             <article class="card post-card" id="summary-${key}">
-              ${ isset image }<img loading="lazy" class="w-100" src="{{site.BaseURL}}${image}" alt="${title}">${end}
+              ${ isset image }<img loading="lazy" class="w-100" src="{{site.base_url}}${image}" alt="${title}">${end}
               <div class="card-body">
                 <h3 class="h4 mb-4">
                   <a class="post-title" href="${link}">${title}</a>
@@ -39,5 +37,3 @@
 
 <!-- Search index -->
 <script>var indexURL = {{"index.json" | abs_url}}</script>
-
-{{ end }}
