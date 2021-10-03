@@ -1,348 +1,366 @@
-<!doctype html><html lang=en-us>
-<head>
-<meta charset=utf-8>
-<title>Elixir Pattern Matching in a nut shell</title>
-<meta name=author content="Dung Nguyen">
-<meta name=description content="  Drinking orange juice is good for your health. Reading some orange code is good too :D  ">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=5">
-<link rel=icon href=https://bluzky.github.io/images/favicon.png type=image/x-icon>
-<link rel=preconnect href=https://fonts.gstatic.com>
-<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap">
-<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.a175996d51c7122a7871164dca713adc582e8df8a6b31ae1e7169ca0559953614b9378e577a3ce6d3e6bc8fa87b3e4f38305c3f1478fb0b4904d66b4caffe85a.css integrity="sha512-oXWZbVHHEip4cRZNynE63Fgujfimsxrh5xacoFWZU2FLk3jld6PObT5ryPqHs+TzgwXD8UePsLSQTWa0yv/oWg==" media=screen>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+  <meta charset="utf-8" />
+  <title>The Organge+</title>
+
+  <meta name="author" content="Dung Nguyen" />
+  <meta
+    name="description"
+    content=""
+  />
+
+  <!-- mobile responsive meta -->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=5"
+  />
+
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    href="/images/favicon.png"
+    type="image/x-icon"
+  />
+
+  <!-- CSS Plugins -->
+  <!-- plugins + stylesheet -->
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+
+
+<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css" media="screen" />
+
+
+
+<link rel="stylesheet" href="/css/style.css" media="screen" />
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap" />
+
+
+<link rel="stylesheet" href="/css/style.css" media="screen" />
+
+
+  
+  <script type=application/javascript>
+   var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
+  
+
 </head>
-<body>
-<div style="min-height:calc(100vh - 65px)">
-<div class=header-height-fix></div>
-<header class=header-nav>
-<div class=container>
-<div class=row>
-<div class=col-12>
-<nav class="navbar navbar-expand-lg navbar-light p-0">
-<a class="navbar-brand font-weight-bold mr-0" href=https://bluzky.github.io/>
-<img loading=lazy src=https://bluzky.github.io/images/logo.png alt="The Organge+" height=35px>
-</a>
-<button class="search-toggle d-inline-block d-lg-none ml-auto mr-3" data-toggle=search aria-label="Search Toggle">
-<i data-eva=search-outline></i>
-</button>
-<button class=navbar-toggler type=button data-toggle=collapse data-target=#navHeader aria-controls=navHeader aria-expanded=false aria-label="Toggle navigation">
-<i data-eva=menu-outline></i>
-<i class=d-none data-eva=close-outline></i>
-</button>
-<div class="collapse navbar-collapse" id=navHeader>
-<ul class="navbar-nav mx-auto">
-<li class=nav-item>
-<a class=nav-link href=https://bluzky.github.io/>Blog</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://bluzky.github.io/tags/>Tags</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://bluzky.github.io/about>About me</a>
-</li>
-</ul>
-<div class="navbar-right d-none d-lg-inline-block">
-<ul class="social-links list-unstyled list-inline">
-<li class="list-inline-item ml-4 d-none d-lg-inline-block">
-<button class=search-toggle data-toggle=search aria-label="Search Toggle">
-<i data-eva=search-outline></i>
-</button>
-</li>
-</ul>
-</div>
-</div>
-</nav>
-</div>
-</div>
-</div>
+
+
+  <body>
+    <div style="min-height: calc(100vh - 65px)">
+      <div class="header-height-fix"></div>
+<header class="header-nav">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="navbar navbar-expand-lg navbar-light p-0">
+          <a class="navbar-brand font-weight-bold mr-0" href="">
+            
+            <img
+              loading="lazy"
+              src="/images/logo.png"
+              alt="The Organge+"
+              height="35px"
+            />
+            
+          </a>
+
+          
+          <button
+            class="search-toggle d-inline-block d-lg-none ml-auto mr-3"
+            data-toggle="search"
+            aria-label="Search Toggle"
+          >
+            <i data-eva="search-outline"></i>
+          </button>
+          
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navHeader"
+            aria-controls="navHeader"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i data-eva="menu-outline"></i>
+            <i class="d-none" data-eva="close-outline"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navHeader">
+            <ul
+              class="navbar-nav mx-auto"
+            >
+              
+              
+              
+
+              
+              <li class="nav-item ">
+                <a class="nav-link" href="/">Blog</a>
+              </li>
+              
+              
+              
+              
+              
+
+              
+              <li class="nav-item ">
+                <a class="nav-link" href="/tags">Tags</a>
+              </li>
+              
+              
+              
+              
+              
+
+              
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle d-inline-block "
+                  href="#"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-expanded="false"
+                  >More</a
+                >
+                <ul class="dropdown-menu">
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/categories"
+                      >Category</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/elements"
+                      >Elements</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/privacy"
+                      >Privacy</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/terms-conditions"
+                      >Terms & Conditions</a
+                    >
+                  </li></ul>
+              </li>
+              
+              
+              
+              
+              
+
+              
+              <li class="nav-item ">
+                <a class="nav-link" href="/about">About me</a>
+              </li>
+              
+              
+              
+            </ul>
+
+            
+            <div class="navbar-right d-none d-lg-inline-block">
+              <ul class="social-links list-unstyled list-inline">
+                <li class="list-inline-item ml-4 d-none d-lg-inline-block">
+                  <button
+                    class="search-toggle"
+                    data-toggle="search"
+                    aria-label="Search Toggle"
+                  >
+                    <i data-eva="search-outline"></i>
+                  </button>
+                </li>
+              </ul>
+            </div>
+            
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
 </header>
-<div class=search-block>
-<div data-toggle=search-close>
-<i data-eva=close-outline class=text-primary></i>
+
+
+<div class="search-block">
+  <div data-toggle="search-close">
+    <i data-eva="close-outline" class="text-primary"></i>
+  </div>
+  <form action="/search/">
+    <input
+      id="search-query"
+      name="s"
+      type="search"
+      placeholder="Type words &amp; hit enter"
+      class="text-center"
+      aria-label="search-query"
+    />
+  </form>
 </div>
-<form action=/search>
-<input id=search-query name=s type=search placeholder="Type words & hit enter" class=text-center aria-label=search-query>
-</form>
-</div>
-<section class=section-sm>
-<div class=container>
-<div class="row justify-content-center">
-<div class=col-lg-10>
-<div class=pr-lg-4>
-<div class=single-post>
-<div class="text-center mb-5">
-<h1 class="mb-4 post-title">Elixir Pattern Matching in a nut shell</h1>
-<ul class="card-meta list-inline">
-<li class=list-inline-item>
-<a href=#! class=card-meta-author>
-<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
-<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
-<span>Dung Nguyen</span>
-</a>
-</a>
-</li>
-<li class=list-inline-item>|</li>
-<li class=list-inline-item>
-<span>29 June 2021</span>
-</li>
-</ul>
-</div>
-<div class="mb-5 text-center">
-<img loading=lazy class="img-fluid rounded" src=https://bluzky.github.io/img/pattern-matching.png alt="Image not Found">
-</div>
-<div class=content><p>If you are new to Elixir, Pattern Matching may be something strange to you. When you get familiar with it, you will know how powerful it is. And I&rsquo;m sure that you will definite love it. Pattern matching is used everywhere in your elixlir code . And I would bring it to other language that I use ( if I can :D)</p>
-<p>But it&rsquo;s not so hard.</p>
-<h2 id=what-does-pattern-matching-do>What does Pattern Matching do?</h2>
-<p>Give you a variable/value, you might want</p>
-<ol>
-<li>Check if data type is match your expected data type</li>
-<li>Check if structure of data match your expected data structure</li>
-<li>Assign matching part of data to a variable</li>
-</ol>
-<p>And pattern matching do all these thing for you. Just look at some example.</p>
-<p>When you try these example, it will raise exception if data doesn&rsquo;t match against the pattern. In real Elixir app, you won&rsquo;t use it this way, check <strong>Where it is used</strong> at the end of this article</p>
-<h2 id=pattern-matching-with-mapstruct>Pattern matching with Map/Struct</h2>
-<p><strong>1. Check if this data is a map</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>%{} <span style=color:#ff79c6>=</span> params
-</code></pre></div><p><strong>2. Check if data is a map and has key <code>email</code> and email value is <code>zoo@example.com</code></strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>%{<span style=color:#f1fa8c>&#34;email&#34;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#f1fa8c>&#34;zoo@example.com&#34;</span>} <span style=color:#ff79c6>=</span> params
-</code></pre></div><p><strong>3. Check if data is a map and has key <code>email</code>, if matchs pattern, assign value of key <code>email</code> to variable <code>my_email</code></strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>%{<span style=color:#f1fa8c>&#34;email&#34;</span> <span style=color:#ff79c6>=&gt;</span> my_email} <span style=color:#ff79c6>=</span> params
-</code></pre></div><p><strong>4. Check if data is a map and has key <code>email</code>, I don&rsquo;t want to extract value</strong></p>
-<p>use <code>_</code> to ignore value</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>%{<span style=color:#f1fa8c>&#34;email&#34;</span> <span style=color:#ff79c6>=&gt;</span> _} <span style=color:#ff79c6>=</span> params
-</code></pre></div><p><strong>5. Pattern matching nested map</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>%{<span style=color:#f1fa8c>&#34;address&#34;</span> <span style=color:#ff79c6>=&gt;</span> %{<span style=color:#f1fa8c>&#34;city&#34;</span> <span style=color:#ff79c6>=&gt;</span> city}} <span style=color:#ff79c6>=</span> params
-</code></pre></div><p><strong>6. Check if data is type struct <code>User</code></strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>%<span style=color:#50fa7b>User</span>{} <span style=color:#ff79c6>=</span> params
-</code></pre></div><blockquote>
-<p>The rest is same with map. Struct is basically a map with atom key.</p>
-</blockquote>
-<h2 id=pattern-matching-with-list>Pattern matching with List</h2>
-<p><strong>1. Check if data is empty lis</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>[] <span style=color:#ff79c6>=</span> params
-</code></pre></div><p><strong>2. Check if data is a list and not empty</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>[_<span style=color:#ff79c6>|</span>_] <span style=color:#ff79c6>=</span> params
-</code></pre></div><p><strong>3. Check if data is exact list</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>[<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>] <span style=color:#ff79c6>=</span> params
-</code></pre></div><p><strong>4. Check if data is list and extract first element and remaining</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>[first_element <span style=color:#ff79c6>|</span> remaining] <span style=color:#ff79c6>=</span> params
-</code></pre></div><h2 id=pattern-matching-with-tuple>Pattern matching with Tuple</h2>
-<p>You don&rsquo;t have much pattern to match against tuple</p>
-<p><strong>1. Check if data is tuple of 2 elements</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>{_, _} <span style=color:#ff79c6>=</span> params
-</code></pre></div><p><strong>2. Check if data is tuple and has specific value</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>{<span style=color:#f1fa8c>:ok</span>, data} <span style=color:#ff79c6>=</span> result
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#6272a4># you use this most of time</span>
-</code></pre></div><h2 id=where-to-use-pattern-matching>Where to use pattern matching</h2>
-<p><strong>1. case clause</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#ff79c6>case</span> user <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>	%<span style=color:#50fa7b>User</span>{<span style=color:#f1fa8c>is_active</span>: true} <span style=color:#ff79c6>-&gt;</span> <span style=color:#f1fa8c>&#34;Log you in&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>	%<span style=color:#50fa7b>User</span>{<span style=color:#f1fa8c>is_active</span>: false} <span style=color:#ff79c6>-&gt;</span> <span style=color:#f1fa8c>&#34;Check your email&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>	_others <span style=color:#ff79c6>-&gt;</span> <span style=color:#f1fa8c>&#34;Not a user&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span><span style=color:#ff79c6>end</span>
-</code></pre></div><p><strong>2. with clause</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>with {<span style=color:#f1fa8c>:ok</span>, user} <span style=color:#ff79c6>&lt;-</span> create_user(params) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>	<span style=color:#6272a4># your code</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#ff79c6>end</span>
-</code></pre></div><p><strong>3. function</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#8be9fd;font-style:italic>def</span> is_admin(%<span style=color:#50fa7b>User</span>{<span style=color:#f1fa8c>role</span>: <span style=color:#f1fa8c>&#34;admin&#34;</span>}), <span style=color:#f1fa8c>do</span>: true
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#8be9fd;font-style:italic>def</span> is_admin(%<span style=color:#50fa7b>User</span>{<span style=color:#f1fa8c>role</span>: _}), <span style=color:#f1fa8c>do</span>: false
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#8be9fd;font-style:italic>def</span> is_admin(_), <span style=color:#f1fa8c>do</span>: <span style=color:#ff79c6>raise</span> <span style=color:#f1fa8c>&#34;Not a user&#34;</span>
-</code></pre></div><h2 id=conclusion>Conclusion</h2>
-<p>At first, it&rsquo;s a bit strange to grasp, but gradually you can live without it. It is one of Elixir&rsquo;s features that I love most. And I think you will. Using it more and its power is in your hand.</p>
-</div>
-</div>
-<div class=single-post-meta>
-<div class="row justify-content-center">
-<div class="col-md-6 text-center text-md-left">
-<ul class="post-meta-tags list-unstyled list-inline">
-<li class=list-inline-item>
-<a href=https://bluzky.github.io/tags/elixir>#elixir</a>
-</li>
-<li class=list-inline-item>
-<a href=https://bluzky.github.io/tags/elixir-beginning>#elixir-beginning</a>
-</li>
-</ul>
-</div>
-<div class="col-md-6 text-center text-md-right mt-4 mt-md-0">
-<ul class="social-links has-bg-color list-unstyled list-inline" style=line-height:0>
-<li class=list-inline-item>
-<a class="resp-sharing-button__link d-block" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fbluzky.github.io%2fblog%2f2021-06-29-elixir-pattern-matching-in-a-nut-shell%2f" target=_blank rel=noopener aria-label>
-<div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small">
-<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
-<i data-eva=facebook-outline class=text-dark></i>
-</div>
-</div>
-</a>
-</li>
-<li class=list-inline-item>
-<a class="resp-sharing-button__link d-block" href="https://twitter.com/intent/tweet/?text=Elixir%20Pattern%20Matching%20in%20a%20nut%20shell&url=https%3a%2f%2fbluzky.github.io%2fblog%2f2021-06-29-elixir-pattern-matching-in-a-nut-shell%2f" target=_blank rel=noopener aria-label>
-<div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
-<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
-<i data-eva=twitter-outline class=text-dark></i>
-</div>
-</div>
-</a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class=single-post-author>
-<div class="row justify-content-center">
-<div class=col-md-12>
-<div class="media d-block d-sm-flex text-center text-sm-left">
-<a href=https://bluzky.github.io/author/dung-nguyen/><img loading=lazy class="img-fluid rounded-circle mr-0 mr-sm-4 mb-4" src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen"></a>
-<div class=media-body>
-<h4>
-<a href=https://bluzky.github.io/author/dung-nguyen/ class="text-dark font-weight-700">Dung Nguyen</a>
-</h4>
-<p class=font-primary>Hi! I&rsquo;m Dung Nguyen. I&rsquo;m an Elixir developer at OnPoint Vietnam.</p>
-<ul class="social-links list-unstyled list-inline ml-0 ml-sm-n2">
-<li class=list-inline-item>
-<a href=https://www.linkedin.com/in/dung-nguyen-tien-695ba135/>
-<i class="lab linkedin-outline"></i>
-</a>
-</li>
-<li class=list-inline-item>
-<a href=https://www.github.com/bluzky>
-<i class="lab github-outline"></i>
-</a>
-</li>
-<li class=list-inline-item>
-<a href=https://dev.to/bluzky>
-<i class="lab book-outline"></i>
-</a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class=single-post-similer>
-<div class="row justify-content-center">
-<div class=col-md-12>
-<div class="row mt-3">
-<div class=col-12>
-<h3 class="text-dark font-weight-800 mb-4 pb-2">
-You May Also Like
+
+
+
+      
+      <section class="section-sm pb-2 page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-8 mx-auto text-center">
+        
+        <h3 class="mb-3 text-dark font-weight-bold"><p>
+Elixir Pattern Matching in a nut shell</p>
 </h3>
-</div>
-<div class=col-md-6><article class="card post-card">
-<a href=https://bluzky.github.io/blog/2020-10-30-compose-ecto-query-from-client/>
-<img loading=lazy class="w-100 rounded" src=https://bluzky.github.io/img/request-to-query.png alt="Compose Ecto Query From Client">
-</a>
-<div class=card-body>
-<ul class="card-meta list-inline mb-2">
-<li class="list-inline-item mb-2">
-<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
-<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
-<span>Dung Nguyen</span>
-</a>
-</li>
-<li class="list-inline-item mb-2">
-<span>30 Oct, 2020</span>
-</li>
-</ul>
-<h3 class=mb-3>
-<a class=post-title href=https://bluzky.github.io/blog/2020-10-30-compose-ecto-query-from-client/>Compose Ecto Query From Client</a>
-</h3>
-<p>The story At our company, OnPoint, we are building an ecommerce website using Phoenix Framework. And I am working on admin to manage product, orders …</p>
-<ul class="card-meta list-inline">
-<li class="list-inline-item mb-2">
-<ul class="card-meta-tag list-inline">
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/elixir>elixir</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/phoenix>phoenix</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/query>query</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/ecto>ecto</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/querie>querie</a>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</article>
-</div>
-<div class=col-md-6><article class="card post-card">
-<a href=https://bluzky.github.io/blog/2020-10-01parse-validate-data-with-tarams/>
-<img loading=lazy class="w-100 rounded" src=https://bluzky.github.io/img/tarams-parse.png alt="Chuẩn hoá và validate dữ liệu trong Phoenix với thư viện Tarams">
-</a>
-<div class=card-body>
-<ul class="card-meta list-inline mb-2">
-<li class="list-inline-item mb-2">
-<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
-<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
-<span>Dung Nguyen</span>
-</a>
-</li>
-<li class="list-inline-item mb-2">
-<span>01 Oct, 2020</span>
-</li>
-</ul>
-<h3 class=mb-3>
-<a class=post-title href=https://bluzky.github.io/blog/2020-10-01parse-validate-data-with-tarams/>Chuẩn hoá và validate dữ liệu trong Phoenix với thư viện Tarams</a>
-</h3>
-<p>**Version mới của thư viện Tarams không tương thích với bản cũ. Các bạn đọc bài mới ở đây nhé How to validate request params in Phoenix
-Yêu cầu chuẩn …</p>
-<ul class="card-meta list-inline">
-<li class="list-inline-item mb-2">
-<ul class="card-meta-tag list-inline">
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/elixir>elixir</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/ecto>ecto</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/phoenix>phoenix</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/tarams>tarams</a>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</article>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+        
+
+
+        <ul class="list-inline breadcrumb-menu">
+        
+        <li class="list-inline-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        <li class="list-inline-item">/ &nbsp; <a href="/blog">Blog</a></li>
+        
+        
+        
+        
+        
+        <li class="list-inline-item">/ &nbsp; <a href="/blog/2021-06-29-elixir-pattern-matching-in-a-nut-shell">2021-06-29-elixir-pattern-matching-in-a-nut-shell</a></li>
+        
+        
+        
+        </ul>
+      </div>
+    </div>
+  </div>
 </section>
-</div>
-<footer class="section-sm p-0">
-<div class=container>
-<div class="row justify-content-center align-items-center">
-<div class=col-lg-5>
-</div>
-<div class="col-lg-12 text-center mb-3">
-<ul class="social-links icon-box list-unstyled list-inline font-weight-500 mb-3">
-</ul>
-<p class="mb-0 font-weight-500 copyright-text content">
-Blog by Dung Nguyen.Theme by <a href=https://gethugothemes.com/>Gethugothemes</a>
-</p>
-</div>
-</div>
-</div>
+
+      
+
+      <!-- checking blog -->
+
+
+<section class="section-sm">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="content"><p>If you are new to Elixir, Pattern Matching may be something strange to you. When you get familiar with it, you will know how powerful it is. And I'm sure that you will definite love it. Pattern matching is used everywhere in your elixlir code . And I would bring it to other language that I use ( if I can :D)</p><p>But it's not so hard. </p><h2 id="what-does-pattern-matching-do">What does Pattern Matching do?</h2><p>Give you a variable/value, you might want</p><ol><li>Check if data type is match your expected data type</li><li>Check if structure of data match your expected data structure</li><li>Assign matching part of data to a variable</li></ol><p>And pattern matching do all these thing for you. Just look at some example. </p><p>When you try these example, it will raise exception if data doesn't match against the pattern. In real Elixir app, you won't use it this way, check <strong>Where it is used</strong> at the end of this article</p><h2 id="pattern-matching-with-map-struct">Pattern matching with Map/Struct</h2><p><strong>1. Check if this data is a map</strong></p><pre><code class="elixir">%{} = params</code></pre><p><strong>2. Check if data is a map and has key <code class="inline">email</code> and email value is <code class="inline">zoo@example.com</code></strong></p><pre><code class="elixir">%{"email" => "zoo@example.com"} = params</code></pre><p><strong>3. Check if data is a map and has key <code class="inline">email</code>, if matchs pattern, assign value of key <code class="inline">email</code> to variable <code class="inline">my_email</code></strong></p><pre><code class="elixir">%{"email" => my_email} = params</code></pre><p><strong>4. Check if data is a map and has key <code class="inline">email</code>, I don't want to extract value</strong></p><p>use <code class="inline">_</code> to ignore value</p><pre><code class="elixir">%{"email" => _} = params</code></pre><p><strong>5. Pattern matching nested map</strong></p><pre><code class="elixir">%{"address" => %{"city" => city}} = params</code></pre><p><strong>6. Check if data is type struct <code class="inline">User</code></strong></p><pre><code class="elixir">%User{} = params</code></pre><blockquote><p>The rest is same with map. Struct is basically a map with atom key.</p></blockquote><h2 id="pattern-matching-with-list">Pattern matching with List</h2><p><strong>1. Check if data is empty lis</strong></p><pre><code class="elixir">[] = params</code></pre><p><strong>2. Check if data is a list and not empty</strong></p><pre><code class="elixir">[_|_] = params</code></pre><p><strong>3. Check if data is exact list</strong></p><pre><code class="elixir">[1, 2] = params</code></pre><p><strong>4. Check if data is list and extract first element and remaining</strong></p><pre><code class="elixir">[first_element | remaining] = params</code></pre><h2 id="pattern-matching-with-tuple">Pattern matching with Tuple</h2><p>You don't have much pattern to match against tuple</p><p><strong>1. Check if data is tuple of 2 elements</strong></p><pre><code class="elixir">{_, _} = params</code></pre><p><strong>2. Check if data is tuple and has specific value</strong></p><pre><code class="elixir">{:ok, data} = result
+# you use this most of time</code></pre><h2 id="where-to-use-pattern-matching">Where to use pattern matching</h2><p><strong>1. case clause</strong></p><pre><code class="elixir">case user do
+    %User{is_active: true} -> "Log you in"
+    %User{is_active: false} -> "Check your email"
+    _others -> "Not a user"
+end</code></pre><p><strong>2. with clause</strong></p><pre><code class="elixir">with {:ok, user} <- create_user(params) do
+    # your code
+end</code></pre><p><strong>3. function</strong></p><pre><code class="elixir">def is_admin(%User{role: "admin"}), do: true
+def is_admin(%User{role: _}), do: false
+def is_admin(_), do: raise "Not a user"</code></pre><h2 id="conclusion">Conclusion</h2><p>At first, it's a bit strange to grasp, but gradually you can live without it. It is one of Elixir's features that I love most. And I think you will. Using it more and its power is in your hand.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    </div>
+    <footer class="section-sm p-0">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-5">
+         
+      </div>
+      <div class="col-lg-12 text-center mb-3">
+        
+        <ul
+          class="social-links icon-box list-unstyled list-inline font-weight-500 mb-3"
+        >
+          
+        </ul>
+
+        <p class="mb-0 font-weight-500 copyright-text content">
+          <p>
+Blog by Dung Nguyen.Theme by <a href="https://gethugothemes.com/">Gethugothemes</a></p>
+
+        </p>
+      </div>
+    </div>
+  </div>
 </footer>
-<script src=https://unpkg.com/eva-icons></script>
-<script data-turbolinks-suppress-warning src=/js/vendor.min.e8b43a49809453b05c67c402f4ef9f014ea047b1e351a77943c2f08c978e06e6dd1eb7279560628d119926cab96a55a422c55b47fa351500c8c2fe5e59a26234.js integrity="sha512-6LQ6SYCUU7BcZ8QC9O+fAU6gR7HjUad5Q8LwjJeOBubdHrcnlWBijRGZJsq5alWkIsVbR/o1FQDIwv5eWaJiNA=="></script>
-</body>
+
+    <!-- JS Plugins + Main script -->
+
+
+<script data-turbolinks-suppress-warning src="/plugins/jquery/jquery.min.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/bootstrap/bootstrap.min.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/search/fuse.min.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/search/mark.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/search/search.js"></script>
+ 
+
+<script src="https://unpkg.com/eva-icons"></script>
+ 
+
+<script
+  data-turbolinks-suppress-warning
+  src="/js/script.js"
+></script>
+
+<!-- cookie -->
+
+
+<!-- DISQUS -->
+
+<script>
+  /**
+   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+  /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+  */
+  (function () {
+    // DON'T EDIT BELOW THIS LINE
+    var d = document,
+      s = d.createElement("script");
+    s.src = "https://.disqus.com/embed.js";
+    s.setAttribute("data-timestamp", +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+
+  </body>
 </html>

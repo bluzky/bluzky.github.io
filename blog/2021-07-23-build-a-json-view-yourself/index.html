@@ -1,506 +1,530 @@
-<!doctype html><html lang=en-us>
-<head>
-<meta charset=utf-8>
-<title>Build your own library to render json response in Phoenix</title>
-<meta name=author content="Dung Nguyen">
-<meta name=description content="  Drinking orange juice is good for your health. Reading some orange code is good too :D  ">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=5">
-<link rel=icon href=https://bluzky.github.io/images/favicon.png type=image/x-icon>
-<link rel=preconnect href=https://fonts.gstatic.com>
-<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap">
-<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.a175996d51c7122a7871164dca713adc582e8df8a6b31ae1e7169ca0559953614b9378e577a3ce6d3e6bc8fa87b3e4f38305c3f1478fb0b4904d66b4caffe85a.css integrity="sha512-oXWZbVHHEip4cRZNynE63Fgujfimsxrh5xacoFWZU2FLk3jld6PObT5ryPqHs+TzgwXD8UePsLSQTWa0yv/oWg==" media=screen>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+  <meta charset="utf-8" />
+  <title>The Organge+</title>
+
+  <meta name="author" content="Dung Nguyen" />
+  <meta
+    name="description"
+    content=""
+  />
+
+  <!-- mobile responsive meta -->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=5"
+  />
+
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    href="/images/favicon.png"
+    type="image/x-icon"
+  />
+
+  <!-- CSS Plugins -->
+  <!-- plugins + stylesheet -->
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+
+
+<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css" media="screen" />
+
+
+
+<link rel="stylesheet" href="/css/style.css" media="screen" />
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap" />
+
+
+<link rel="stylesheet" href="/css/style.css" media="screen" />
+
+
+  
+  <script type=application/javascript>
+   var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
+  
+
 </head>
-<body>
-<div style="min-height:calc(100vh - 65px)">
-<div class=header-height-fix></div>
-<header class=header-nav>
-<div class=container>
-<div class=row>
-<div class=col-12>
-<nav class="navbar navbar-expand-lg navbar-light p-0">
-<a class="navbar-brand font-weight-bold mr-0" href=https://bluzky.github.io/>
-<img loading=lazy src=https://bluzky.github.io/images/logo.png alt="The Organge+" height=35px>
-</a>
-<button class="search-toggle d-inline-block d-lg-none ml-auto mr-3" data-toggle=search aria-label="Search Toggle">
-<i data-eva=search-outline></i>
-</button>
-<button class=navbar-toggler type=button data-toggle=collapse data-target=#navHeader aria-controls=navHeader aria-expanded=false aria-label="Toggle navigation">
-<i data-eva=menu-outline></i>
-<i class=d-none data-eva=close-outline></i>
-</button>
-<div class="collapse navbar-collapse" id=navHeader>
-<ul class="navbar-nav mx-auto">
-<li class=nav-item>
-<a class=nav-link href=https://bluzky.github.io/>Blog</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://bluzky.github.io/tags/>Tags</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://bluzky.github.io/about>About me</a>
-</li>
-</ul>
-<div class="navbar-right d-none d-lg-inline-block">
-<ul class="social-links list-unstyled list-inline">
-<li class="list-inline-item ml-4 d-none d-lg-inline-block">
-<button class=search-toggle data-toggle=search aria-label="Search Toggle">
-<i data-eva=search-outline></i>
-</button>
-</li>
-</ul>
-</div>
-</div>
-</nav>
-</div>
-</div>
-</div>
+
+
+  <body>
+    <div style="min-height: calc(100vh - 65px)">
+      <div class="header-height-fix"></div>
+<header class="header-nav">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="navbar navbar-expand-lg navbar-light p-0">
+          <a class="navbar-brand font-weight-bold mr-0" href="">
+            
+            <img
+              loading="lazy"
+              src="/images/logo.png"
+              alt="The Organge+"
+              height="35px"
+            />
+            
+          </a>
+
+          
+          <button
+            class="search-toggle d-inline-block d-lg-none ml-auto mr-3"
+            data-toggle="search"
+            aria-label="Search Toggle"
+          >
+            <i data-eva="search-outline"></i>
+          </button>
+          
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navHeader"
+            aria-controls="navHeader"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i data-eva="menu-outline"></i>
+            <i class="d-none" data-eva="close-outline"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navHeader">
+            <ul
+              class="navbar-nav mx-auto"
+            >
+              
+              
+              
+
+              
+              <li class="nav-item ">
+                <a class="nav-link" href="/">Blog</a>
+              </li>
+              
+              
+              
+              
+              
+
+              
+              <li class="nav-item ">
+                <a class="nav-link" href="/tags">Tags</a>
+              </li>
+              
+              
+              
+              
+              
+
+              
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle d-inline-block "
+                  href="#"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-expanded="false"
+                  >More</a
+                >
+                <ul class="dropdown-menu">
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/categories"
+                      >Category</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/elements"
+                      >Elements</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/privacy"
+                      >Privacy</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/terms-conditions"
+                      >Terms & Conditions</a
+                    >
+                  </li></ul>
+              </li>
+              
+              
+              
+              
+              
+
+              
+              <li class="nav-item ">
+                <a class="nav-link" href="/about">About me</a>
+              </li>
+              
+              
+              
+            </ul>
+
+            
+            <div class="navbar-right d-none d-lg-inline-block">
+              <ul class="social-links list-unstyled list-inline">
+                <li class="list-inline-item ml-4 d-none d-lg-inline-block">
+                  <button
+                    class="search-toggle"
+                    data-toggle="search"
+                    aria-label="Search Toggle"
+                  >
+                    <i data-eva="search-outline"></i>
+                  </button>
+                </li>
+              </ul>
+            </div>
+            
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
 </header>
-<div class=search-block>
-<div data-toggle=search-close>
-<i data-eva=close-outline class=text-primary></i>
+
+
+<div class="search-block">
+  <div data-toggle="search-close">
+    <i data-eva="close-outline" class="text-primary"></i>
+  </div>
+  <form action="/search/">
+    <input
+      id="search-query"
+      name="s"
+      type="search"
+      placeholder="Type words &amp; hit enter"
+      class="text-center"
+      aria-label="search-query"
+    />
+  </form>
 </div>
-<form action=/search>
-<input id=search-query name=s type=search placeholder="Type words & hit enter" class=text-center aria-label=search-query>
-</form>
-</div>
-<section class=section-sm>
-<div class=container>
-<div class="row justify-content-center">
-<div class=col-lg-10>
-<div class=pr-lg-4>
-<div class=single-post>
-<div class="text-center mb-5">
-<h1 class="mb-4 post-title">Build your own library to render json response in Phoenix</h1>
-<ul class="card-meta list-inline">
-<li class=list-inline-item>
-<a href=#! class=card-meta-author>
-<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
-<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
-<span>Dung Nguyen</span>
-</a>
-</a>
-</li>
-<li class=list-inline-item>|</li>
-<li class=list-inline-item>
-<span>23 July 2021</span>
-</li>
-</ul>
-</div>
-<div class="mb-5 text-center">
-<img loading=lazy class="img-fluid rounded" src=https://bluzky.github.io/img/build-a-json-view.png alt="Image not Found">
-</div>
-<div class=content><p>In my previous article, I introduced my library call <code>JsonView</code> to render json response easier. You can read it here:
-<a href=/blog/2021-07-10-render-response-json-view>Render Ecto schema to json with relationships with JsonView</a></p>
-<p>Today I will guide you to write your own Json render view. Let&rsquo;s start.</p>
-<p>Now for example I have a Blog app with <code>User</code> <code>Category</code> , <code>Post</code> and <code>Comment</code> schemas.</p>
-<p>This is <code>PostView</code> which is generated by <code>Phoenix</code></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyBlogWeb.PostView</span> <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>  <span style=color:#ff79c6>use</span> <span style=color:#50fa7b>MyBlogWeb</span>, <span style=color:#f1fa8c>:view</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>  <span style=color:#ff79c6>alias</span> <span style=color:#50fa7b>MyBlogWeb.PostView</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>  <span style=color:#8be9fd;font-style:italic>def</span> render(<span style=color:#f1fa8c>&#34;index.json&#34;</span>, %{<span style=color:#f1fa8c>posts</span>: posts}) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>    %{<span style=color:#f1fa8c>data</span>: render_many(posts, <span style=color:#50fa7b>PostView</span>, <span style=color:#f1fa8c>&#34;post.json&#34;</span>)}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>  <span style=color:#8be9fd;font-style:italic>def</span> render(<span style=color:#f1fa8c>&#34;show.json&#34;</span>, %{<span style=color:#f1fa8c>post</span>: post}) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>    %{<span style=color:#f1fa8c>data</span>: render_one(post, <span style=color:#50fa7b>PostView</span>, <span style=color:#f1fa8c>&#34;post.json&#34;</span>)}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>  <span style=color:#8be9fd;font-style:italic>def</span> render(<span style=color:#f1fa8c>&#34;post.json&#34;</span>, %{<span style=color:#f1fa8c>post</span>: post}) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>    %{<span style=color:#f1fa8c>id</span>: post<span style=color:#ff79c6>.</span>id,
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>      <span style=color:#f1fa8c>title</span>: post<span style=color:#ff79c6>.</span>title,
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>      <span style=color:#f1fa8c>description</span>: post<span style=color:#ff79c6>.</span>description,
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>      <span style=color:#f1fa8c>content</span>: post<span style=color:#ff79c6>.</span>content,
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>      <span style=color:#f1fa8c>cover</span>: post<span style=color:#ff79c6>.</span>cover,
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>      <span style=color:#f1fa8c>is_published</span>: post<span style=color:#ff79c6>.</span>is_published}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span><span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>
-</code></pre></div><p><strong>Let&rsquo;s improve it</strong></p>
-<h3 id=1-use-maptake>1. Use <code>Map.take</code></h3>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#8be9fd;font-style:italic>def</span> render(<span style=color:#f1fa8c>&#34;post.json&#34;</span>, %{<span style=color:#f1fa8c>post</span>: post}) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>		<span style=color:#50fa7b>Map</span><span style=color:#ff79c6>.</span>take(post, [<span style=color:#f1fa8c>:id</span>, <span style=color:#f1fa8c>:title</span>, <span style=color:#f1fa8c>:description</span>, <span style=color:#f1fa8c>:content</span>, <span style=color:#f1fa8c>:cover</span>, <span style=color:#f1fa8c>:is_published</span>])
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>...
-</code></pre></div><p>This way you don&rsquo;t have to write much code every time you add a new attribute.</p>
-<h3 id=2-render-custom-field>2. Render custom field</h3>
-<p>You may want to:</p>
-<ul>
-<li>Format some field value instead of return original value</li>
-<li>Calculate virtual field</li>
-</ul>
-<p>Normally you will do this:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>	<span style=color:#8be9fd;font-style:italic>def</span> render(<span style=color:#f1fa8c>&#34;post.json&#34;</span>, %{<span style=color:#f1fa8c>post</span>: post}) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>    post
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Map</span><span style=color:#ff79c6>.</span>take([<span style=color:#f1fa8c>:id</span>, <span style=color:#f1fa8c>:title</span>, <span style=color:#f1fa8c>:description</span>, <span style=color:#f1fa8c>:content</span>, <span style=color:#f1fa8c>:cover</span>, <span style=color:#f1fa8c>:is_published</span>])
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>    <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Map</span><span style=color:#ff79c6>.</span>merge(%{
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>      <span style=color:#f1fa8c>comment_count</span>: render_comment_count(post),
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>      <span style=color:#f1fa8c>author_name</span>: render_author_name(post)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>    })
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>  <span style=color:#8be9fd;font-style:italic>def</span> render_comment_count(post) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>  	...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>  <span style=color:#8be9fd;font-style:italic>def</span> render_author_name(post) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>    ...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>  <span style=color:#ff79c6>end</span>
-</code></pre></div><p>Or you can reduce a bit of code by using pattern matching to render custom field value</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>	<span style=color:#8be9fd;font-style:italic>def</span> render(<span style=color:#f1fa8c>&#34;post.json&#34;</span>, %{<span style=color:#f1fa8c>post</span>: post}) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>    post
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Map</span><span style=color:#ff79c6>.</span>take([<span style=color:#f1fa8c>:id</span>, <span style=color:#f1fa8c>:title</span>, <span style=color:#f1fa8c>:description</span>, <span style=color:#f1fa8c>:content</span>, <span style=color:#f1fa8c>:cover</span>, <span style=color:#f1fa8c>:is_published</span>])
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>    <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Map</span><span style=color:#ff79c6>.</span>merge(render_custom_fields(post, [<span style=color:#f1fa8c>:comment_count</span>, <span style=color:#f1fa8c>:author_name</span>]))
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>  <span style=color:#8be9fd;font-style:italic>defp</span> render_custom_fields(struct, fields) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>    <span style=color:#50fa7b>Enum</span><span style=color:#ff79c6>.</span>map(fields, <span style=color:#ff79c6>fn</span> field <span style=color:#ff79c6>-&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>    	{field, render_field(field, struct)}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>    <span style=color:#ff79c6>end</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>    <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Enum</span><span style=color:#ff79c6>.</span>into(%{})
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>  <span style=color:#8be9fd;font-style:italic>defp</span> render_field(<span style=color:#f1fa8c>:comment_count</span>, post) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>    ...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>  <span style=color:#8be9fd;font-style:italic>defp</span> render_field(<span style=color:#f1fa8c>:author_name</span>, post) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>    ...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>  <span style=color:#ff79c6>end</span>
-</code></pre></div><p>Now every time you add a new custom field, just add field name to the list, and define a <code>render_field/2</code> function</p>
-<h3 id=3-render-relation-ship>3. Render relation ship</h3>
-<p>You may want to return the whole object of author. For example you have a view <code>UserView</code> so you can do:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span> <span style=color:#8be9fd;font-style:italic>def</span> render(<span style=color:#f1fa8c>&#34;post.json&#34;</span>, %{<span style=color:#f1fa8c>post</span>: post}) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>    post
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>    ...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>    <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Map</span><span style=color:#ff79c6>.</span>merge(%{
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>      <span style=color:#f1fa8c>author</span>: render_one(post<span style=color:#ff79c6>.</span>author, <span style=color:#50fa7b>MyBlogWeb.UserView</span>, <span style=color:#f1fa8c>&#34;user.json&#34;</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span>    })
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7</span> <span style=color:#ff79c6>end</span>
-</code></pre></div><p>It requires that author must be loaded, if not, you will get this error</p>
-<pre tabindex=0><code>** (KeyError) key :id not found in: #Ecto.Association.NotLoaded&lt;association :author is not loaded&gt;
-</code></pre><p>You can handle it by pattern matching against <code>Ecto.Association.NotLoaded</code></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span> <span style=color:#8be9fd;font-style:italic>def</span> render(<span style=color:#f1fa8c>&#34;post.json&#34;</span>, %{<span style=color:#f1fa8c>post</span>: post}) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>    post
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    ...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>    <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Map</span><span style=color:#ff79c6>.</span>merge(%{
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>      <span style=color:#f1fa8c>author</span>: render_relationship(post<span style=color:#ff79c6>.</span>author, <span style=color:#50fa7b>MyBlogWeb.UserView</span>, <span style=color:#f1fa8c>&#34;user.json&#34;</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>    })
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span> <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span> 
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span> <span style=color:#8be9fd;font-style:italic>defp</span> render_relationship(%<span style=color:#50fa7b>Ecto.Association.NotLoaded</span>{}, _, _), <span style=color:#f1fa8c>do</span>: nil
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span> 
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span> <span style=color:#8be9fd;font-style:italic>defp</span> render_relationship(relation, view, template) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>    render_one(relation, view, template)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span> <span style=color:#ff79c6>end</span>
-</code></pre></div><p>And it only render relations struct if loaded, otherwise it is set to nil.</p>
-<p>Now you can improve it to render list of relationships</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>def</span> render(<span style=color:#f1fa8c>&#34;post.json&#34;</span>, %{<span style=color:#f1fa8c>post</span>: post}) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>    post
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    ...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>    <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Map</span><span style=color:#ff79c6>.</span>merge(
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>      render_relationship(post, [
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>        {<span style=color:#f1fa8c>:author</span>, <span style=color:#50fa7b>MyBlogWeb.UserView</span>, <span style=color:#f1fa8c>&#34;user.json&#34;</span>},
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>        {<span style=color:#f1fa8c>:comments</span>, <span style=color:#50fa7b>MyBlogWeb.CommentView</span>, <span style=color:#f1fa8c>&#34;comment.json&#34;</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>      ])
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>    )
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#8be9fd;font-style:italic>defp</span> render_relationship(struct, relationships) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>    <span style=color:#50fa7b>Enum</span><span style=color:#ff79c6>.</span>map(relationships, <span style=color:#ff79c6>fn</span> {field, view, template} <span style=color:#ff79c6>-&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>      {field, render_relationship(<span style=color:#50fa7b>Map</span><span style=color:#ff79c6>.</span>get(struct, field), view, template)}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>    <span style=color:#ff79c6>end</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>    <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Enum</span><span style=color:#ff79c6>.</span>into(%{})
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#8be9fd;font-style:italic>defp</span> render_relationship(%<span style=color:#50fa7b>Ecto.Association.NotLoaded</span>{}, _, _), <span style=color:#f1fa8c>do</span>: nil
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span><span style=color:#8be9fd;font-style:italic>defp</span> render_relationship(relations, view, template) <span style=color:#ff79c6>when</span> is_list(relations) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>    render_many(relations, view, template)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span><span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span><span style=color:#8be9fd;font-style:italic>defp</span> render_relationship(relation, view, template) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>    render_one(relation, view, template)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span><span style=color:#ff79c6>end</span>
-</code></pre></div><p>With this way you can handle both single struct and list of struct.</p>
-<h3 id=4-combines-these-helper-functions>4. Combines these helper functions</h3>
-<p>You can combine them all in one function and only need to pass field definition to this function</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#50fa7b>@fields</span> [<span style=color:#f1fa8c>:id</span>, <span style=color:#f1fa8c>:title</span>, <span style=color:#f1fa8c>:description</span>, <span style=color:#f1fa8c>:content</span>, <span style=color:#f1fa8c>:cover</span>, <span style=color:#f1fa8c>:is_published</span>]
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>  <span style=color:#50fa7b>@custom_fiels</span> [<span style=color:#f1fa8c>:comment_count</span>, <span style=color:#f1fa8c>:author_name</span>]
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>  <span style=color:#50fa7b>@relationships</span> [
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>    {<span style=color:#f1fa8c>:author</span>, <span style=color:#50fa7b>MyBlogWeb.UserView</span>, <span style=color:#f1fa8c>&#34;user.json&#34;</span>},
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>    {<span style=color:#f1fa8c>:comments</span>, <span style=color:#50fa7b>MyBlogWeb.CommentView</span>, <span style=color:#f1fa8c>&#34;comment.json&#34;</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>  ]
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>  <span style=color:#8be9fd;font-style:italic>def</span> render(<span style=color:#f1fa8c>&#34;post.json&#34;</span>, %{<span style=color:#f1fa8c>post</span>: post}) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>    render_json(post, <span style=color:#50fa7b>@fields</span>, <span style=color:#50fa7b>@custom_fiels</span>, <span style=color:#50fa7b>@relationships</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>  <span style=color:#8be9fd;font-style:italic>def</span> render_json(struct, fields, custom_fields \\ [], relationships \\ []) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>    struct
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>    <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Map</span><span style=color:#ff79c6>.</span>take(fields)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>    <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Map</span><span style=color:#ff79c6>.</span>merge(render_custom_fields(struct, custom_fields))
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>    <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Map</span><span style=color:#ff79c6>.</span>merge(render_relationship(struct, relationships))
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>  <span style=color:#ff79c6>end</span>
-</code></pre></div><h2 id=move-them-to-a-helper>Move them to a helper</h2>
-<p>These functions are the same for every view, so let&rsquo;s move these code to a helper module <code>JsonViewHelper</code></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>JsonViewHelper</span> <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>  <span style=color:#ff79c6>import</span> <span style=color:#50fa7b>Phoenix.View</span>, <span style=color:#f1fa8c>only</span>: [<span style=color:#f1fa8c>render_one</span>: <span style=color:#bd93f9>3</span>, <span style=color:#f1fa8c>render_many</span>: <span style=color:#bd93f9>3</span>]
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>  <span style=color:#8be9fd;font-style:italic>def</span> render_json(struct, view, fields, custom_fields \\ [], relationships \\ []) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>    struct
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>    <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Map</span><span style=color:#ff79c6>.</span>take(fields)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>    <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Map</span><span style=color:#ff79c6>.</span>merge(render_custom_fields(struct, view, custom_fields))
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>    <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Map</span><span style=color:#ff79c6>.</span>merge(render_relationship(struct, relationships))
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>  <span style=color:#8be9fd;font-style:italic>defp</span> render_custom_fields(struct, view, fields) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>    <span style=color:#50fa7b>Enum</span><span style=color:#ff79c6>.</span>map(fields, <span style=color:#ff79c6>fn</span> field <span style=color:#ff79c6>-&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>      {field, view<span style=color:#ff79c6>.</span>render_field(field, struct)}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>    <span style=color:#ff79c6>end</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>    <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Enum</span><span style=color:#ff79c6>.</span>into(%{})
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>  <span style=color:#8be9fd;font-style:italic>defp</span> render_relationship(struct, relationships) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>    <span style=color:#50fa7b>Enum</span><span style=color:#ff79c6>.</span>map(relationships, <span style=color:#ff79c6>fn</span> {field, view, template} <span style=color:#ff79c6>-&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>      {field, render_relationship(<span style=color:#50fa7b>Map</span><span style=color:#ff79c6>.</span>get(struct, field), view, template)}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>    <span style=color:#ff79c6>end</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>    <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Enum</span><span style=color:#ff79c6>.</span>into(%{})
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>  <span style=color:#8be9fd;font-style:italic>defp</span> render_relationship(%<span style=color:#50fa7b>Ecto.Association.NotLoaded</span>{}, _, _), <span style=color:#f1fa8c>do</span>: nil
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>  <span style=color:#8be9fd;font-style:italic>defp</span> render_relationship(relations, view, template) <span style=color:#ff79c6>when</span> is_list(relations) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>    render_many(relations, view, template)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span>  <span style=color:#8be9fd;font-style:italic>defp</span> render_relationship(relation, view, template) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span>    render_one(relation, view, template)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34</span><span style=color:#ff79c6>end</span>
-</code></pre></div><p>Here I modify <code>render_custom_fields</code> a bit, because we call <code>render_field</code> to render custom field, so we have pass the view module as second parameter, so we can use the module to invoke those <code>render_field</code> that we define.</p>
-<p>And now render json response is much simple:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>BlogeeWeb.PostView</span> <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>	...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>  <span style=color:#50fa7b>@fields</span> [<span style=color:#f1fa8c>:id</span>, <span style=color:#f1fa8c>:title</span>, <span style=color:#f1fa8c>:description</span>, <span style=color:#f1fa8c>:content</span>, <span style=color:#f1fa8c>:cover</span>]
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>  <span style=color:#50fa7b>@custom_fields</span> [<span style=color:#f1fa8c>:status</span>]
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>  <span style=color:#50fa7b>@relationships</span> [
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>    {<span style=color:#f1fa8c>:author</span>, <span style=color:#50fa7b>BlogeeWeb.UserView</span>, <span style=color:#f1fa8c>&#34;basic_info.json&#34;</span>},
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>    {<span style=color:#f1fa8c>:category</span>, <span style=color:#50fa7b>BlogeeWeb.CategoryView</span>, <span style=color:#f1fa8c>&#34;category.json&#34;</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>  ]
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>  <span style=color:#8be9fd;font-style:italic>def</span> render(<span style=color:#f1fa8c>&#34;post.json&#34;</span>, %{<span style=color:#f1fa8c>post</span>: post}) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>    <span style=color:#50fa7b>JsonViewHelper</span><span style=color:#ff79c6>.</span>render_json(post, __MODULE__, <span style=color:#50fa7b>@fields</span>, <span style=color:#50fa7b>@custom_fields</span>, <span style=color:#50fa7b>@relationships</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>  <span style=color:#8be9fd;font-style:italic>def</span> render_field(<span style=color:#f1fa8c>:status</span>, post) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>    <span style=color:#ff79c6>if</span> post<span style=color:#ff79c6>.</span>is_published <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>      <span style=color:#f1fa8c>&#34;published&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>    <span style=color:#ff79c6>else</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>      <span style=color:#f1fa8c>&#34;draft&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>    <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#ff79c6>end</span>
-</code></pre></div><h2 id=hooray>Hooray</h2>
-<p>Thank you for reading to the end of this article. Hope that this can help.
-If you want to use render hook, take a look at my github for full code</p>
-<p><a href=https://github.com/bluzky/json_view>https://github.com/bluzky/json_view</a></p>
-</div>
-</div>
-<div class=single-post-meta>
-<div class="row justify-content-center">
-<div class="col-md-6 text-center text-md-left">
-<ul class="post-meta-tags list-unstyled list-inline">
-<li class=list-inline-item>
-<a href=https://bluzky.github.io/tags/elixir>#elixir</a>
-</li>
-<li class=list-inline-item>
-<a href=https://bluzky.github.io/tags/phoenix>#phoenix</a>
-</li>
-<li class=list-inline-item>
-<a href=https://bluzky.github.io/tags/json-view>#json view</a>
-</li>
-</ul>
-</div>
-<div class="col-md-6 text-center text-md-right mt-4 mt-md-0">
-<ul class="social-links has-bg-color list-unstyled list-inline" style=line-height:0>
-<li class=list-inline-item>
-<a class="resp-sharing-button__link d-block" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fbluzky.github.io%2fblog%2f2021-07-23-build-a-json-view-yourself%2f" target=_blank rel=noopener aria-label>
-<div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small">
-<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
-<i data-eva=facebook-outline class=text-dark></i>
-</div>
-</div>
-</a>
-</li>
-<li class=list-inline-item>
-<a class="resp-sharing-button__link d-block" href="https://twitter.com/intent/tweet/?text=Build%20your%20own%20library%20to%20render%20json%20response%20in%20Phoenix&url=https%3a%2f%2fbluzky.github.io%2fblog%2f2021-07-23-build-a-json-view-yourself%2f" target=_blank rel=noopener aria-label>
-<div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
-<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
-<i data-eva=twitter-outline class=text-dark></i>
-</div>
-</div>
-</a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class=single-post-author>
-<div class="row justify-content-center">
-<div class=col-md-12>
-<div class="media d-block d-sm-flex text-center text-sm-left">
-<a href=https://bluzky.github.io/author/dung-nguyen/><img loading=lazy class="img-fluid rounded-circle mr-0 mr-sm-4 mb-4" src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen"></a>
-<div class=media-body>
-<h4>
-<a href=https://bluzky.github.io/author/dung-nguyen/ class="text-dark font-weight-700">Dung Nguyen</a>
-</h4>
-<p class=font-primary>Hi! I&rsquo;m Dung Nguyen. I&rsquo;m an Elixir developer at OnPoint Vietnam.</p>
-<ul class="social-links list-unstyled list-inline ml-0 ml-sm-n2">
-<li class=list-inline-item>
-<a href=https://www.linkedin.com/in/dung-nguyen-tien-695ba135/>
-<i class="lab linkedin-outline"></i>
-</a>
-</li>
-<li class=list-inline-item>
-<a href=https://www.github.com/bluzky>
-<i class="lab github-outline"></i>
-</a>
-</li>
-<li class=list-inline-item>
-<a href=https://dev.to/bluzky>
-<i class="lab book-outline"></i>
-</a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class=single-post-similer>
-<div class="row justify-content-center">
-<div class=col-md-12>
-<div class="row mt-3">
-<div class=col-12>
-<h3 class="text-dark font-weight-800 mb-4 pb-2">
-You May Also Like
+
+
+
+      
+      <section class="section-sm pb-2 page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-8 mx-auto text-center">
+        
+        <h3 class="mb-3 text-dark font-weight-bold"><p>
+Build your own library to render json response in Phoenix</p>
 </h3>
-</div>
-<div class=col-md-6><article class="card post-card">
-<a href=https://bluzky.github.io/blog/2021-07-10-render-response-json-view/>
-<img loading=lazy class="w-100 rounded" src=https://bluzky.github.io/img/json-view.png alt="Elixir phoenix - Render Ecto schema to json with relationships">
-</a>
-<div class=card-body>
-<ul class="card-meta list-inline mb-2">
-<li class="list-inline-item mb-2">
-<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
-<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
-<span>Dung Nguyen</span>
-</a>
-</li>
-<li class="list-inline-item mb-2">
-<span>10 Jul, 2021</span>
-</li>
-</ul>
-<h3 class=mb-3>
-<a class=post-title href=https://bluzky.github.io/blog/2021-07-10-render-response-json-view/>Elixir phoenix - Render Ecto schema to json with relationships</a>
-</h3>
-<p>When writing API with Phoenix and render json to client,
-For some fields I want to keep it original value. For some fields, I want to do some …</p>
-<ul class="card-meta list-inline">
-<li class="list-inline-item mb-2">
-<ul class="card-meta-tag list-inline">
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/elixir>elixir</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/phoenix>phoenix</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/json-view>json view</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/ecto>ecto</a>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</article>
-</div>
-<div class=col-md-6><article class="card post-card">
-<a href=https://bluzky.github.io/blog/2020-10-30-compose-ecto-query-from-client/>
-<img loading=lazy class="w-100 rounded" src=https://bluzky.github.io/img/request-to-query.png alt="Compose Ecto Query From Client">
-</a>
-<div class=card-body>
-<ul class="card-meta list-inline mb-2">
-<li class="list-inline-item mb-2">
-<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
-<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
-<span>Dung Nguyen</span>
-</a>
-</li>
-<li class="list-inline-item mb-2">
-<span>30 Oct, 2020</span>
-</li>
-</ul>
-<h3 class=mb-3>
-<a class=post-title href=https://bluzky.github.io/blog/2020-10-30-compose-ecto-query-from-client/>Compose Ecto Query From Client</a>
-</h3>
-<p>The story At our company, OnPoint, we are building an ecommerce website using Phoenix Framework. And I am working on admin to manage product, orders …</p>
-<ul class="card-meta list-inline">
-<li class="list-inline-item mb-2">
-<ul class="card-meta-tag list-inline">
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/elixir>elixir</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/phoenix>phoenix</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/query>query</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/ecto>ecto</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/querie>querie</a>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</article>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+        
+
+
+        <ul class="list-inline breadcrumb-menu">
+        
+        <li class="list-inline-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        <li class="list-inline-item">/ &nbsp; <a href="/blog">Blog</a></li>
+        
+        
+        
+        
+        
+        <li class="list-inline-item">/ &nbsp; <a href="/blog/2021-07-23-build-a-json-view-yourself">2021-07-23-build-a-json-view-yourself</a></li>
+        
+        
+        
+        </ul>
+      </div>
+    </div>
+  </div>
 </section>
-</div>
-<footer class="section-sm p-0">
-<div class=container>
-<div class="row justify-content-center align-items-center">
-<div class=col-lg-5>
-</div>
-<div class="col-lg-12 text-center mb-3">
-<ul class="social-links icon-box list-unstyled list-inline font-weight-500 mb-3">
-</ul>
-<p class="mb-0 font-weight-500 copyright-text content">
-Blog by Dung Nguyen.Theme by <a href=https://gethugothemes.com/>Gethugothemes</a>
-</p>
-</div>
-</div>
-</div>
+
+      
+
+      <!-- checking blog -->
+
+
+<section class="section-sm">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="content"><p>In my previous article, I introduced my library call <code class="inline">JsonView</code> to render json response easier. You can read it here:
+<a href="/blog/2021-07-10-render-response-json-view">Render Ecto schema to json with relationships with JsonView</a></p><p>Today I will guide you to write your own Json render view. Let's start.</p><p>Now for example I have a Blog app with <code class="inline">User</code> <code class="inline">Category</code> , <code class="inline">Post</code> and <code class="inline">Comment</code> schemas.</p><p>This is <code class="inline">PostView</code> which is generated by <code class="inline">Phoenix</code></p><pre><code class="elixir">defmodule MyBlogWeb.PostView do
+  use MyBlogWeb, :view
+  alias MyBlogWeb.PostView
+
+  def render("index.json", %{posts: posts}) do
+    %{data: render_many(posts, PostView, "post.json")}
+  end
+
+  def render("show.json", %{post: post}) do
+    %{data: render_one(post, PostView, "post.json")}
+  end
+
+  def render("post.json", %{post: post}) do
+    %{id: post.id,
+      title: post.title,
+      description: post.description,
+      content: post.content,
+      cover: post.cover,
+      is_published: post.is_published}
+  end
+end
+</code></pre><p><strong>Let's improve it</strong></p><h3 id="1-use-map-take">1. Use <code class="inline">Map.take</code></h3><pre><code class="elixir">...
+def render("post.json", %{post: post}) do
+        Map.take(post, [:id, :title, :description, :content, :cover, :is_published])
+end
+...</code></pre><p>This way you don't have to write much code every time you add a new attribute.</p><h3 id="2-render-custom-field">2. Render custom field</h3><p>You may want to:</p><ul><li>Format some field value instead of return original value</li><li>Calculate virtual field</li></ul><p>Normally you will do this:</p><pre><code class="elixir">    def render("post.json", %{post: post}) do
+    post
+    |> Map.take([:id, :title, :description, :content, :cover, :is_published])
+    |> Map.merge(%{
+      comment_count: render_comment_count(post),
+      author_name: render_author_name(post)
+    })
+  end
+
+  def render_comment_count(post) do
+    ...
+  end
+
+  def render_author_name(post) do
+    ...
+  end</code></pre><p>Or you can reduce a bit of code by using pattern matching to render custom field value</p><pre><code class="elixir">    def render("post.json", %{post: post}) do
+    post
+    |> Map.take([:id, :title, :description, :content, :cover, :is_published])
+    |> Map.merge(render_custom_fields(post, [:comment_count, :author_name]))
+  end
+
+  defp render_custom_fields(struct, fields) do
+    Enum.map(fields, fn field ->
+        {field, render_field(field, struct)}
+    end)
+    |> Enum.into(%{})
+  end
+
+  defp render_field(:comment_count, post) do
+    ...
+  end
+
+  defp render_field(:author_name, post) do
+    ...
+  end</code></pre><p>Now every time you add a new custom field, just add field name to the list, and define a <code class="inline">render_field/2</code> function</p><h3 id="3-render-relation-ship">3. Render relation ship</h3><p>You may want to return the whole object of author. For example you have a view <code class="inline">UserView</code> so you can do:</p><pre><code class="elixir"> def render("post.json", %{post: post}) do
+    post
+    ...
+    |> Map.merge(%{
+      author: render_one(post.author, MyBlogWeb.UserView, "user.json")
+    })
+ end</code></pre><p>It requires that author must be loaded, if not, you will get this error</p><pre><code>** (KeyError) key :id not found in: #Ecto.Association.NotLoaded<association :author is not loaded></code></pre><p>You can handle it by pattern matching against <code class="inline">Ecto.Association.NotLoaded</code></p><pre><code class="elixir"> def render("post.json", %{post: post}) do
+    post
+    ...
+    |> Map.merge(%{
+      author: render_relationship(post.author, MyBlogWeb.UserView, "user.json")
+    })
+ end
+ 
+ defp render_relationship(%Ecto.Association.NotLoaded{}, _, _), do: nil
+ 
+ defp render_relationship(relation, view, template) do
+    render_one(relation, view, template)
+ end</code></pre><p>And it only render relations struct if loaded, otherwise it is set to nil.</p><p>Now you can improve it to render list of relationships</p><pre><code class="elixir">def render("post.json", %{post: post}) do
+    post
+    ...
+    |> Map.merge(
+      render_relationship(post, [
+        {:author, MyBlogWeb.UserView, "user.json"},
+        {:comments, MyBlogWeb.CommentView, "comment.json"}
+      ])
+    )
+end
+
+defp render_relationship(struct, relationships) do
+    Enum.map(relationships, fn {field, view, template} ->
+      {field, render_relationship(Map.get(struct, field), view, template)}
+    end)
+    |> Enum.into(%{})
+end
+
+defp render_relationship(%Ecto.Association.NotLoaded{}, _, _), do: nil
+
+defp render_relationship(relations, view, template) when is_list(relations) do
+    render_many(relations, view, template)
+end
+
+defp render_relationship(relation, view, template) do
+    render_one(relation, view, template)
+end</code></pre><p>With this way you can handle both single struct and list of struct.</p><h3 id="4-combines-these-helper-functions">4. Combines these helper functions</h3><p>You can combine them all in one function and only need to pass field definition to this function</p><pre><code class="elixir">@fields [:id, :title, :description, :content, :cover, :is_published]
+  @custom_fiels [:comment_count, :author_name]
+  @relationships [
+    {:author, MyBlogWeb.UserView, "user.json"},
+    {:comments, MyBlogWeb.CommentView, "comment.json"}
+  ]
+
+  def render("post.json", %{post: post}) do
+    render_json(post, @fields, @custom_fiels, @relationships)
+  end
+
+  def render_json(struct, fields, custom_fields \\ [], relationships \\ []) do
+    struct
+    |> Map.take(fields)
+    |> Map.merge(render_custom_fields(struct, custom_fields))
+    |> Map.merge(render_relationship(struct, relationships))
+  end</code></pre><h2 id="move-them-to-a-helper">Move them to a helper</h2><p>These functions are the same for every view, so let's move these code to a helper module <code class="inline">JsonViewHelper</code></p><pre><code class="elixir">defmodule JsonViewHelper do
+  import Phoenix.View, only: [render_one: 3, render_many: 3]
+
+  def render_json(struct, view, fields, custom_fields \\ [], relationships \\ []) do
+    struct
+    |> Map.take(fields)
+    |> Map.merge(render_custom_fields(struct, view, custom_fields))
+    |> Map.merge(render_relationship(struct, relationships))
+  end
+
+  defp render_custom_fields(struct, view, fields) do
+    Enum.map(fields, fn field ->
+      {field, view.render_field(field, struct)}
+    end)
+    |> Enum.into(%{})
+  end
+
+  defp render_relationship(struct, relationships) do
+    Enum.map(relationships, fn {field, view, template} ->
+      {field, render_relationship(Map.get(struct, field), view, template)}
+    end)
+    |> Enum.into(%{})
+  end
+
+  defp render_relationship(%Ecto.Association.NotLoaded{}, _, _), do: nil
+
+  defp render_relationship(relations, view, template) when is_list(relations) do
+    render_many(relations, view, template)
+  end
+
+  defp render_relationship(relation, view, template) do
+    render_one(relation, view, template)
+  end
+end</code></pre><p>Here I modify <code class="inline">render_custom_fields</code> a bit, because we call <code class="inline">render_field</code> to render custom field, so we have pass the view module as second parameter, so we can use the module to invoke those <code class="inline">render_field</code> that we define.</p><p>And now render json response is much simple:</p><pre><code class="elixir">defmodule BlogeeWeb.PostView do
+    ...
+  @fields [:id, :title, :description, :content, :cover]
+  @custom_fields [:status]
+  @relationships [
+    {:author, BlogeeWeb.UserView, "basic_info.json"},
+    {:category, BlogeeWeb.CategoryView, "category.json"}
+  ]
+  def render("post.json", %{post: post}) do
+    JsonViewHelper.render_json(post, __MODULE__, @fields, @custom_fields, @relationships)
+  end
+
+  def render_field(:status, post) do
+    if post.is_published do
+      "published"
+    else
+      "draft"
+    end
+  end
+end</code></pre><h2 id="hooray">Hooray</h2><p>Thank you for reading to the end of this article. Hope that this can help.
+If you want to use render hook, take a look at my github for full code</p><p><a href="https://github.com/bluzky/json_view">https://github.com/bluzky/json_view</a></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    </div>
+    <footer class="section-sm p-0">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-5">
+         
+      </div>
+      <div class="col-lg-12 text-center mb-3">
+        
+        <ul
+          class="social-links icon-box list-unstyled list-inline font-weight-500 mb-3"
+        >
+          
+        </ul>
+
+        <p class="mb-0 font-weight-500 copyright-text content">
+          <p>
+Blog by Dung Nguyen.Theme by <a href="https://gethugothemes.com/">Gethugothemes</a></p>
+
+        </p>
+      </div>
+    </div>
+  </div>
 </footer>
-<script src=https://unpkg.com/eva-icons></script>
-<script data-turbolinks-suppress-warning src=/js/vendor.min.e8b43a49809453b05c67c402f4ef9f014ea047b1e351a77943c2f08c978e06e6dd1eb7279560628d119926cab96a55a422c55b47fa351500c8c2fe5e59a26234.js integrity="sha512-6LQ6SYCUU7BcZ8QC9O+fAU6gR7HjUad5Q8LwjJeOBubdHrcnlWBijRGZJsq5alWkIsVbR/o1FQDIwv5eWaJiNA=="></script>
-</body>
+
+    <!-- JS Plugins + Main script -->
+
+
+<script data-turbolinks-suppress-warning src="/plugins/jquery/jquery.min.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/bootstrap/bootstrap.min.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/search/fuse.min.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/search/mark.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/search/search.js"></script>
+ 
+
+<script src="https://unpkg.com/eva-icons"></script>
+ 
+
+<script
+  data-turbolinks-suppress-warning
+  src="/js/script.js"
+></script>
+
+<!-- cookie -->
+
+
+<!-- DISQUS -->
+
+<script>
+  /**
+   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+  /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+  */
+  (function () {
+    // DON'T EDIT BELOW THIS LINE
+    var d = document,
+      s = d.createElement("script");
+    s.src = "https://.disqus.com/embed.js";
+    s.setAttribute("data-timestamp", +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+
+  </body>
 </html>

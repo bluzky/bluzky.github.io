@@ -1,528 +1,527 @@
-<!doctype html><html lang=en-us>
-<head>
-<meta charset=utf-8>
-<title>How to build an Elixir validator from scratch</title>
-<meta name=author content="Dung Nguyen">
-<meta name=description content="  Drinking orange juice is good for your health. Reading some orange code is good too :D  ">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=5">
-<link rel=icon href=https://bluzky.github.io/images/favicon.png type=image/x-icon>
-<link rel=preconnect href=https://fonts.gstatic.com>
-<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap">
-<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.a175996d51c7122a7871164dca713adc582e8df8a6b31ae1e7169ca0559953614b9378e577a3ce6d3e6bc8fa87b3e4f38305c3f1478fb0b4904d66b4caffe85a.css integrity="sha512-oXWZbVHHEip4cRZNynE63Fgujfimsxrh5xacoFWZU2FLk3jld6PObT5ryPqHs+TzgwXD8UePsLSQTWa0yv/oWg==" media=screen>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+  <meta charset="utf-8" />
+  <title>The Organge+</title>
+
+  <meta name="author" content="Dung Nguyen" />
+  <meta
+    name="description"
+    content=""
+  />
+
+  <!-- mobile responsive meta -->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=5"
+  />
+
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    href="/images/favicon.png"
+    type="image/x-icon"
+  />
+
+  <!-- CSS Plugins -->
+  <!-- plugins + stylesheet -->
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+
+
+<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css" media="screen" />
+
+
+
+<link rel="stylesheet" href="/css/style.css" media="screen" />
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap" />
+
+
+<link rel="stylesheet" href="/css/style.css" media="screen" />
+
+
+  
+  <script type=application/javascript>
+   var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
+  
+
 </head>
-<body>
-<div style="min-height:calc(100vh - 65px)">
-<div class=header-height-fix></div>
-<header class=header-nav>
-<div class=container>
-<div class=row>
-<div class=col-12>
-<nav class="navbar navbar-expand-lg navbar-light p-0">
-<a class="navbar-brand font-weight-bold mr-0" href=https://bluzky.github.io/>
-<img loading=lazy src=https://bluzky.github.io/images/logo.png alt="The Organge+" height=35px>
-</a>
-<button class="search-toggle d-inline-block d-lg-none ml-auto mr-3" data-toggle=search aria-label="Search Toggle">
-<i data-eva=search-outline></i>
-</button>
-<button class=navbar-toggler type=button data-toggle=collapse data-target=#navHeader aria-controls=navHeader aria-expanded=false aria-label="Toggle navigation">
-<i data-eva=menu-outline></i>
-<i class=d-none data-eva=close-outline></i>
-</button>
-<div class="collapse navbar-collapse" id=navHeader>
-<ul class="navbar-nav mx-auto">
-<li class=nav-item>
-<a class=nav-link href=https://bluzky.github.io/>Blog</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://bluzky.github.io/tags/>Tags</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://bluzky.github.io/about>About me</a>
-</li>
-</ul>
-<div class="navbar-right d-none d-lg-inline-block">
-<ul class="social-links list-unstyled list-inline">
-<li class="list-inline-item ml-4 d-none d-lg-inline-block">
-<button class=search-toggle data-toggle=search aria-label="Search Toggle">
-<i data-eva=search-outline></i>
-</button>
-</li>
-</ul>
-</div>
-</div>
-</nav>
-</div>
-</div>
-</div>
+
+
+  <body>
+    <div style="min-height: calc(100vh - 65px)">
+      <div class="header-height-fix"></div>
+<header class="header-nav">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="navbar navbar-expand-lg navbar-light p-0">
+          <a class="navbar-brand font-weight-bold mr-0" href="">
+            
+            <img
+              loading="lazy"
+              src="/images/logo.png"
+              alt="The Organge+"
+              height="35px"
+            />
+            
+          </a>
+
+          
+          <button
+            class="search-toggle d-inline-block d-lg-none ml-auto mr-3"
+            data-toggle="search"
+            aria-label="Search Toggle"
+          >
+            <i data-eva="search-outline"></i>
+          </button>
+          
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navHeader"
+            aria-controls="navHeader"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i data-eva="menu-outline"></i>
+            <i class="d-none" data-eva="close-outline"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navHeader">
+            <ul
+              class="navbar-nav mx-auto"
+            >
+              
+              
+              
+
+              
+              <li class="nav-item ">
+                <a class="nav-link" href="/">Blog</a>
+              </li>
+              
+              
+              
+              
+              
+
+              
+              <li class="nav-item ">
+                <a class="nav-link" href="/tags">Tags</a>
+              </li>
+              
+              
+              
+              
+              
+
+              
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle d-inline-block "
+                  href="#"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-expanded="false"
+                  >More</a
+                >
+                <ul class="dropdown-menu">
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/categories"
+                      >Category</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/elements"
+                      >Elements</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/privacy"
+                      >Privacy</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/terms-conditions"
+                      >Terms & Conditions</a
+                    >
+                  </li></ul>
+              </li>
+              
+              
+              
+              
+              
+
+              
+              <li class="nav-item ">
+                <a class="nav-link" href="/about">About me</a>
+              </li>
+              
+              
+              
+            </ul>
+
+            
+            <div class="navbar-right d-none d-lg-inline-block">
+              <ul class="social-links list-unstyled list-inline">
+                <li class="list-inline-item ml-4 d-none d-lg-inline-block">
+                  <button
+                    class="search-toggle"
+                    data-toggle="search"
+                    aria-label="Search Toggle"
+                  >
+                    <i data-eva="search-outline"></i>
+                  </button>
+                </li>
+              </ul>
+            </div>
+            
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
 </header>
-<div class=search-block>
-<div data-toggle=search-close>
-<i data-eva=close-outline class=text-primary></i>
+
+
+<div class="search-block">
+  <div data-toggle="search-close">
+    <i data-eva="close-outline" class="text-primary"></i>
+  </div>
+  <form action="/search/">
+    <input
+      id="search-query"
+      name="s"
+      type="search"
+      placeholder="Type words &amp; hit enter"
+      class="text-center"
+      aria-label="search-query"
+    />
+  </form>
 </div>
-<form action=/search>
-<input id=search-query name=s type=search placeholder="Type words & hit enter" class=text-center aria-label=search-query>
-</form>
-</div>
-<section class=section-sm>
-<div class=container>
-<div class="row justify-content-center">
-<div class=col-lg-10>
-<div class=pr-lg-4>
-<div class=single-post>
-<div class="text-center mb-5">
-<h1 class="mb-4 post-title">How to build an Elixir validator from scratch</h1>
-<ul class="card-meta list-inline">
-<li class=list-inline-item>
-<a href=#! class=card-meta-author>
-<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
-<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
-<span>Dung Nguyen</span>
-</a>
-</a>
-</li>
-<li class=list-inline-item>|</li>
-<li class=list-inline-item>
-<span>31 July 2021</span>
-</li>
-</ul>
-</div>
-<div class="mb-5 text-center">
-<img loading=lazy class="img-fluid rounded" src=https://bluzky.github.io/img/build-json-validator.webp alt="Image not Found">
-</div>
-<div class=content><p>Validation is a must have part of web application. You have to validate request parameter before processing, you validate data before inserting to database, and many more.</p>
-<p>Normally, I use <code>Ecto.Changeset</code> to do validation job. But it comes with changeset, I have to build schema, changeset then do the validation. Sometime you just don&rsquo;t need too much thing like that.</p>
-<p>So today we are going to build a simple validation module to use without changeset, or in some project you don&rsquo;t use <code>Ecto</code>, or just for learning.</p>
-<h2 id=what-our-validation-module-includes>What our validation module includes:</h2>
-<ul>
-<li>Type validation</li>
-<li>Number validation</li>
-<li>Length validation for <code>map, list, string</code></li>
-<li>String format validation using regex</li>
-<li>Inclusion, exclusion validations</li>
-</ul>
-<p>That&rsquo;s is quite enough, you can define more if you want.
-And the module will support a simple API to validate a value</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>validate(value<span style=color:#ff79c6>::</span>any(), validations<span style=color:#ff79c6>::</span>keyword()) <span style=color:#ff79c6>::</span> <span style=color:#f1fa8c>:ok</span> <span style=color:#ff79c6>|</span> {<span style=color:#f1fa8c>:error</span>, <span style=color:#50fa7b>String</span><span style=color:#ff79c6>.</span>t()}
-</code></pre></div><p>Let&rsquo;s start.</p>
-<h2 id=type-validation>Type validation</h2>
-<p>Let&rsquo;s call our module <code>Checky</code>. Type check is quite straight forward. Elixir support most of type check guard that we need:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>Checky</span> <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_type(value, <span style=color:#f1fa8c>:boolean</span>) <span style=color:#ff79c6>when</span> is_boolean(value), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_type(value, <span style=color:#f1fa8c>:integer</span>) <span style=color:#ff79c6>when</span> is_integer(value), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_type(value, <span style=color:#f1fa8c>:float</span>) <span style=color:#ff79c6>when</span> is_float(value), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_type(value, <span style=color:#f1fa8c>:number</span>) <span style=color:#ff79c6>when</span> is_number(value), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_type(value, <span style=color:#f1fa8c>:string</span>) <span style=color:#ff79c6>when</span> is_binary(value), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_type(value, <span style=color:#f1fa8c>:binary</span>) <span style=color:#ff79c6>when</span> is_binary(value), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_type(value, <span style=color:#f1fa8c>:tuple</span>) <span style=color:#ff79c6>when</span> is_tuple(value), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_type(value, <span style=color:#f1fa8c>:array</span>) <span style=color:#ff79c6>when</span> is_list(value), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_type(value, <span style=color:#f1fa8c>:list</span>) <span style=color:#ff79c6>when</span> is_list(value), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_type(value, <span style=color:#f1fa8c>:atom</span>) <span style=color:#ff79c6>when</span> is_atom(value), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_type(value, <span style=color:#f1fa8c>:function</span>) <span style=color:#ff79c6>when</span> is_function(value), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_type(value, <span style=color:#f1fa8c>:map</span>) <span style=color:#ff79c6>when</span> is_map(value), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>  <span style=color:#6272a4># we will add some more validation here</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_type(_, type), <span style=color:#f1fa8c>do</span>: {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>&#34;is not a </span><span style=color:#f1fa8c>#{</span>type<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#34;</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#ff79c6>end</span>
-</code></pre></div><p>Easy, right? Now let&rsquo;s support checking for <code>struct</code>:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>Checky</span> <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>  ...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>  <span style=color:#6272a4># from Elixir 1.12 you can do this</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_type(value, struct_name) <span style=color:#ff79c6>when</span> is_struct(value, struct_name), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span>  <span style=color:#6272a4># this is for Elixir before 1.12</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_type(%{<span style=color:#f1fa8c>__struct__</span>: struct}, struct_name) <span style=color:#ff79c6>when</span> struct <span style=color:#ff79c6>==</span> struct_name, <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8</span>  ...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">9</span><span style=color:#ff79c6>end</span>
-</code></pre></div><ul>
-<li>Here we check for <code>keyword</code></li>
-</ul>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>Checky</span> <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>  ...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>  <span style=color:#6272a4># empty list is also a empty keyword</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_type([] <span style=color:#ff79c6>=</span> _check_item, <span style=color:#f1fa8c>:keyword</span>), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>  <span style=color:#6272a4># if list item is a tuple of 2 and first element is atom then it is a keyword list</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_type(items, <span style=color:#f1fa8c>:keyword</span>) <span style=color:#ff79c6>when</span> is_list(items) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>    valid? <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>Enum</span><span style=color:#ff79c6>.</span>all(item, <span style=color:#ff79c6>fn</span> 
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>        {key, _} <span style=color:#ff79c6>when</span> is_atom(key) <span style=color:#ff79c6>-&gt;</span> true
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>        _ <span style=color:#ff79c6>-&gt;</span> false 
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>    <span style=color:#ff79c6>end</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>    
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>    <span style=color:#ff79c6>if</span> valid? <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>      <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>    <span style=color:#ff79c6>else</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>      {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>&#34;is not a keyword&#34;</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>    <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>  ...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#ff79c6>end</span>
-</code></pre></div><ul>
-<li>Now let support array check <code>{:array, type}</code> which is similar to <code>Ecto.Schema</code>.</li>
-</ul>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>Checky</span> <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>  ...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_type(value, {<span style=color:#f1fa8c>:array</span>, type}) <span style=color:#ff79c6>when</span> is_list(value) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>    <span style=color:#6272a4># We will check type for each value in the list</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>    array(value, <span style=color:#ff79c6>&amp;</span>validate_type(&amp;1, type))
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>  ...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>   <span style=color:#6272a4># loop and validate element in array using `validate_func`</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>  <span style=color:#8be9fd;font-style:italic>defp</span> array(data, validate_func)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>  <span style=color:#8be9fd;font-style:italic>defp</span> array([], _) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>    <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>  <span style=color:#6272a4># validate recursively, and return error if any vadation failed</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>  <span style=color:#8be9fd;font-style:italic>defp</span> array([h <span style=color:#ff79c6>|</span> t], validate_func) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>    <span style=color:#ff79c6>case</span> validate_func<span style=color:#ff79c6>.</span>(h) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>      <span style=color:#f1fa8c>:ok</span> <span style=color:#ff79c6>-&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>        array(t, validate_func)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>      err <span style=color:#ff79c6>-&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>        err
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>    <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span><span style=color:#ff79c6>end</span>
-</code></pre></div><p>Phew! We have done with type validation. You can add more type validation if you want.</p>
-<h2 id=format-validation>Format Validation</h2>
-<p>This validation is super easy, <code>Regex</code> do that for us:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>Checky</span> <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_format(value, check) <span style=color:#ff79c6>when</span> is_binary(value) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>    <span style=color:#ff79c6>if</span> <span style=color:#50fa7b>Regex</span><span style=color:#ff79c6>.</span>match?(check, value), <span style=color:#f1fa8c>do</span>: <span style=color:#f1fa8c>:ok</span>, <span style=color:#f1fa8c>else</span>: {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>&#34;does not match format&#34;</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_format(_value, _check) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7</span>    {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>&#34;format check only support string&#34;</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">9</span><span style=color:#ff79c6>end</span>
-</code></pre></div><h2 id=inclusion-and-exclusion-validation>Inclusion and exclusion validation</h2>
-<p>These are trivial checks too. Just make sure it is implement <code>Enumerable</code> protocol.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>Checky</span> <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_inclusion(value, enum) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    <span style=color:#ff79c6>if</span> <span style=color:#50fa7b>Enumerable</span><span style=color:#ff79c6>.</span>impl_for(enum) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>      <span style=color:#ff79c6>if</span> <span style=color:#50fa7b>Enum</span><span style=color:#ff79c6>.</span>member?(enum, value) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>        <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>      <span style=color:#ff79c6>else</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>        {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>&#34;not be in the inclusion list&#34;</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>      <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>    <span style=color:#ff79c6>else</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>      {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>&#34;given condition does not implement protocol Enumerable&#34;</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>    <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>  <span style=color:#50fa7b>@doc</span> <span style=color:#f1fa8c>&#34;&#34;&#34;
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#f1fa8c>  Check if value is **not** included in the given enumerable. Similar to `validate_inclusion/2`
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#f1fa8c>  &#34;&#34;&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_exclusion(value, enum) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>    <span style=color:#ff79c6>if</span> <span style=color:#50fa7b>Enumerable</span><span style=color:#ff79c6>.</span>impl_for(enum) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>      <span style=color:#ff79c6>if</span> <span style=color:#50fa7b>Enum</span><span style=color:#ff79c6>.</span>member?(enum, value) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>        {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>&#34;must not be in the exclusion list&#34;</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>      <span style=color:#ff79c6>else</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>        <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>      <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>    <span style=color:#ff79c6>else</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>      {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>&#34;given condition does not implement protocol Enumerable&#34;</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>    <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span><span style=color:#ff79c6>end</span>
-</code></pre></div><h2 id=number-validation>Number validation</h2>
-<p>This is one of the most complicated part of our module. It&rsquo;s not difficult, it&rsquo;s just long.
-We will support following checks:</p>
-<ul>
-<li><code>equal_to</code></li>
-<li><code>greater_than_or_equal_to</code> | <code>min</code></li>
-<li><code>greater_than</code></li>
-<li><code>less_than</code></li>
-<li><code>less_than_or_equal_to</code> | <code>max</code></li>
-</ul>
-<p>And it should support multiple check like this:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span> validate_number(x, [<span style=color:#f1fa8c>min</span>: <span style=color:#bd93f9>10</span>, <span style=color:#f1fa8c>max</span>: <span style=color:#bd93f9>20</span>])
-</code></pre></div><p>First we code validation function for single condition like this</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_number(number, {<span style=color:#f1fa8c>:equal_to</span>, check_value}) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>    <span style=color:#ff79c6>if</span> number <span style=color:#ff79c6>==</span> check_value <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>      <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>    <span style=color:#ff79c6>else</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>      {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>&#34;must be equal to </span><span style=color:#f1fa8c>#{</span>check_value<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#34;</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span>    <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7</span>  <span style=color:#ff79c6>end</span>
-</code></pre></div><p>As I said, it&rsquo;s so simple. You can fill the remaining check right? Or you can check the final code at the end of the post.
-After implementing all validation fucntion for number, it&rsquo;s time to support multiple condtion check.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>  <span style=color:#50fa7b>@spec</span> validate_number(integer() <span style=color:#ff79c6>|</span> float(), keyword()) <span style=color:#ff79c6>::</span> <span style=color:#f1fa8c>:ok</span> <span style=color:#ff79c6>|</span> error
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_number(value, checks) <span style=color:#ff79c6>when</span> is_list(checks) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    <span style=color:#ff79c6>if</span> is_number(value) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>      checks
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>      <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Enum</span><span style=color:#ff79c6>.</span>reduce(<span style=color:#f1fa8c>:ok</span>, <span style=color:#ff79c6>fn</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>        check, <span style=color:#f1fa8c>:ok</span> <span style=color:#ff79c6>-&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>          validate_number(value, check)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>        _, error <span style=color:#ff79c6>-&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>          error
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>      <span style=color:#ff79c6>end</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>    <span style=color:#ff79c6>else</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>      {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>&#34;must be a number&#34;</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>    <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>  <span style=color:#ff79c6>end</span>
-</code></pre></div><h2 id=length-validation>Length validation</h2>
-<p>Length is just a number, so we can reuse number validation. We just have to check if given value is one of support types: <code>list</code>, <code>map</code>, <code>string</code>, and <code>tuple</code></p>
-<p>We will implement <code>get_length/1</code> function to get data length first.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>  <span style=color:#50fa7b>@spec</span> get_length(any) <span style=color:#ff79c6>::</span> pos_integer() <span style=color:#ff79c6>|</span> {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>:wrong_type</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>  <span style=color:#8be9fd;font-style:italic>defp</span> get_length(param) <span style=color:#ff79c6>when</span> is_list(param), <span style=color:#f1fa8c>do</span>: length(param)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>  <span style=color:#8be9fd;font-style:italic>defp</span> get_length(param) <span style=color:#ff79c6>when</span> is_binary(param), <span style=color:#f1fa8c>do</span>: <span style=color:#50fa7b>String</span><span style=color:#ff79c6>.</span>length(param)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>  <span style=color:#8be9fd;font-style:italic>defp</span> get_length(param) <span style=color:#ff79c6>when</span> is_map(param), <span style=color:#f1fa8c>do</span>: param <span style=color:#ff79c6>|&gt;</span> <span style=color:#50fa7b>Map</span><span style=color:#ff79c6>.</span>keys() <span style=color:#ff79c6>|&gt;</span> get_length()
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>  <span style=color:#8be9fd;font-style:italic>defp</span> get_length(param) <span style=color:#ff79c6>when</span> is_tuple(param), <span style=color:#f1fa8c>do</span>: tuple_size(param)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span>  <span style=color:#8be9fd;font-style:italic>defp</span> get_length(_param), <span style=color:#f1fa8c>do</span>: {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>:wrong_type</span>}
-</code></pre></div><p>Then we do number validation on the length value</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>  <span style=color:#50fa7b>@spec</span> validate_length(support_length_types, keyword()) <span style=color:#ff79c6>::</span> <span style=color:#f1fa8c>:ok</span> <span style=color:#ff79c6>|</span> error
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate_length(value, checks) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    with length <span style=color:#ff79c6>when</span> is_integer(length) <span style=color:#ff79c6>&lt;-</span> get_length(value),
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>         <span style=color:#6272a4># validation length number</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>         <span style=color:#f1fa8c>:ok</span> <span style=color:#ff79c6>&lt;-</span> validate_number(length, checks) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>      <span style=color:#f1fa8c>:ok</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>    <span style=color:#ff79c6>else</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>      {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>:wrong_type</span>} <span style=color:#ff79c6>-&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>        {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>&#34;length check supports only lists, binaries, maps and tuples&#34;</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>      {<span style=color:#f1fa8c>:error</span>, msg} <span style=color:#ff79c6>-&gt;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>        <span style=color:#6272a4># we prepend length to message return by validation number to get full message</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>        <span style=color:#6272a4># like: &#34;length must be equal to x&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>        {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>&#34;length </span><span style=color:#f1fa8c>#{</span>msg<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#34;</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>    <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>  <span style=color:#ff79c6>end</span>
-</code></pre></div><h2 id=combine-all-validation>Combine all validation</h2>
-<p>Most of time you want to use multiple valitions on the data. So we will add a function that do multiple validation</p>
-<p>We define a simple structure for validation first. This is our validate function spec</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span> <span style=color:#50fa7b>@spec</span> validate(any(), keyword()) <span style=color:#ff79c6>::</span> <span style=color:#f1fa8c>:ok</span> <span style=color:#ff79c6>|</span> {<span style=color:#f1fa8c>:error</span>, messages}
-</code></pre></div><p>Then we can use it like this:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#50fa7b>Checky</span><span style=color:#ff79c6>.</span>validate(value, <span style=color:#f1fa8c>type</span>: <span style=color:#f1fa8c>:string</span>, <span style=color:#f1fa8c>format</span>: <span style=color:#f1fa8c>~r/</span><span style=color:#f1fa8c>\d\d</span><span style=color:#f1fa8c>.+/</span>, <span style=color:#f1fa8c>length</span>: [<span style=color:#f1fa8c>min</span>: <span style=color:#bd93f9>8</span>, <span style=color:#f1fa8c>max</span>: <span style=color:#bd93f9>20</span>])
-</code></pre></div><p>Validations is a keyword list with short name for validation:</p>
-<ul>
-<li><code>:type</code> -> <code>validate_type</code></li>
-<li><code>:format</code> -> <code>validate_format</code></li>
-<li><code>:in</code> -> <code>validate_inclusion</code></li>
-<li><code>:not_in</code> -> <code>validate_exclusion</code></li>
-<li><code>:number</code> -> <code>validate_number</code></li>
-<li><code>:length</code> -> <code>validate_length</code></li>
-</ul>
-<p><strong>Define mapping function:</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>  <span style=color:#8be9fd;font-style:italic>defp</span> get_validator(<span style=color:#f1fa8c>:type</span>), <span style=color:#f1fa8c>do</span>: <span style=color:#ff79c6>&amp;</span>validate_type<span style=color:#ff79c6>/</span><span style=color:#bd93f9>2</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>  <span style=color:#8be9fd;font-style:italic>defp</span> get_validator(<span style=color:#f1fa8c>:format</span>), <span style=color:#f1fa8c>do</span>: <span style=color:#ff79c6>&amp;</span>validate_format<span style=color:#ff79c6>/</span><span style=color:#bd93f9>2</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>  <span style=color:#8be9fd;font-style:italic>defp</span> get_validator(<span style=color:#f1fa8c>:number</span>), <span style=color:#f1fa8c>do</span>: <span style=color:#ff79c6>&amp;</span>validate_number<span style=color:#ff79c6>/</span><span style=color:#bd93f9>2</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>  <span style=color:#8be9fd;font-style:italic>defp</span> get_validator(<span style=color:#f1fa8c>:length</span>), <span style=color:#f1fa8c>do</span>: <span style=color:#ff79c6>&amp;</span>validate_length<span style=color:#ff79c6>/</span><span style=color:#bd93f9>2</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>  <span style=color:#8be9fd;font-style:italic>defp</span> get_validator(<span style=color:#f1fa8c>:in</span>), <span style=color:#f1fa8c>do</span>: <span style=color:#ff79c6>&amp;</span>validate_inclusion<span style=color:#ff79c6>/</span><span style=color:#bd93f9>2</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span>  <span style=color:#8be9fd;font-style:italic>defp</span> get_validator(<span style=color:#f1fa8c>:not_in</span>), <span style=color:#f1fa8c>do</span>: <span style=color:#ff79c6>&amp;</span>validate_exclusion<span style=color:#ff79c6>/</span><span style=color:#bd93f9>2</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7</span>  <span style=color:#8be9fd;font-style:italic>defp</span> get_validator(name), <span style=color:#f1fa8c>do</span>: {<span style=color:#f1fa8c>:error</span>, <span style=color:#f1fa8c>&#34;validate_</span><span style=color:#f1fa8c>#{</span>name<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c> is not support&#34;</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8</span>
-</code></pre></div><p><strong>Go checking validations one by one</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>  <span style=color:#8be9fd;font-style:italic>def</span> validate(value, validators) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>    do_validate(value, validators, <span style=color:#f1fa8c>:ok</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>  <span style=color:#8be9fd;font-style:italic>defp</span> do_validate(_, [], acc), <span style=color:#f1fa8c>do</span>: acc
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>  <span style=color:#6272a4># check validations one by one</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>  <span style=color:#8be9fd;font-style:italic>defp</span> do_validate(value, [h <span style=color:#ff79c6>|</span> t] <span style=color:#ff79c6>=</span> _validators, acc) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>    <span style=color:#ff79c6>case</span> do_validate(value, h) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>      <span style=color:#f1fa8c>:ok</span> <span style=color:#ff79c6>-&gt;</span> do_validate(value, t, acc)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>      error <span style=color:#ff79c6>-&gt;</span> error
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>    <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>  <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>  <span style=color:#6272a4># validate single validation</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>  <span style=color:#8be9fd;font-style:italic>defp</span> do_validate(value, {validator, opts}) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>    <span style=color:#ff79c6>case</span> get_validator(validator) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>      {<span style=color:#f1fa8c>:error</span>, _} <span style=color:#ff79c6>=</span> err <span style=color:#ff79c6>-&gt;</span> err
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>      validate_func <span style=color:#ff79c6>-&gt;</span> validate_func<span style=color:#ff79c6>.</span>(value, opts)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>    <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>  <span style=color:#ff79c6>end</span>
-</code></pre></div><h2 id=conclusion>Conclusion</h2>
-<p>Writing a validation module is not so hard. Now you can add more validations to fit your need. As I promised, this is the full source of the module with custom validation fucntion.
-<a href=https://github.com/bluzky/valdi/blob/main/lib/valdi.ex>https://github.com/bluzky/valdi/blob/main/lib/valdi.ex</a></p>
-<p>Thank you for reading to the end of this post. Please leave me a comment.</p>
-</div>
-</div>
-<div class=single-post-meta>
-<div class="row justify-content-center">
-<div class="col-md-6 text-center text-md-left">
-<ul class="post-meta-tags list-unstyled list-inline">
-<li class=list-inline-item>
-<a href=https://bluzky.github.io/tags/elixir>#elixir</a>
-</li>
-<li class=list-inline-item>
-<a href=https://bluzky.github.io/tags/validation>#validation</a>
-</li>
-</ul>
-</div>
-<div class="col-md-6 text-center text-md-right mt-4 mt-md-0">
-<ul class="social-links has-bg-color list-unstyled list-inline" style=line-height:0>
-<li class=list-inline-item>
-<a class="resp-sharing-button__link d-block" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fbluzky.github.io%2fblog%2f2021-07-31-build-elixir-validator-from-scratch%2f" target=_blank rel=noopener aria-label>
-<div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small">
-<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
-<i data-eva=facebook-outline class=text-dark></i>
-</div>
-</div>
-</a>
-</li>
-<li class=list-inline-item>
-<a class="resp-sharing-button__link d-block" href="https://twitter.com/intent/tweet/?text=How%20to%20build%20an%20Elixir%20validator%20from%20scratch&url=https%3a%2f%2fbluzky.github.io%2fblog%2f2021-07-31-build-elixir-validator-from-scratch%2f" target=_blank rel=noopener aria-label>
-<div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
-<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
-<i data-eva=twitter-outline class=text-dark></i>
-</div>
-</div>
-</a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class=single-post-author>
-<div class="row justify-content-center">
-<div class=col-md-12>
-<div class="media d-block d-sm-flex text-center text-sm-left">
-<a href=https://bluzky.github.io/author/dung-nguyen/><img loading=lazy class="img-fluid rounded-circle mr-0 mr-sm-4 mb-4" src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen"></a>
-<div class=media-body>
-<h4>
-<a href=https://bluzky.github.io/author/dung-nguyen/ class="text-dark font-weight-700">Dung Nguyen</a>
-</h4>
-<p class=font-primary>Hi! I&rsquo;m Dung Nguyen. I&rsquo;m an Elixir developer at OnPoint Vietnam.</p>
-<ul class="social-links list-unstyled list-inline ml-0 ml-sm-n2">
-<li class=list-inline-item>
-<a href=https://www.linkedin.com/in/dung-nguyen-tien-695ba135/>
-<i class="lab linkedin-outline"></i>
-</a>
-</li>
-<li class=list-inline-item>
-<a href=https://www.github.com/bluzky>
-<i class="lab github-outline"></i>
-</a>
-</li>
-<li class=list-inline-item>
-<a href=https://dev.to/bluzky>
-<i class="lab book-outline"></i>
-</a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class=single-post-similer>
-<div class="row justify-content-center">
-<div class=col-md-12>
-<div class="row mt-3">
-<div class=col-12>
-<h3 class="text-dark font-weight-800 mb-4 pb-2">
-You May Also Like
+
+
+
+      
+      <section class="section-sm pb-2 page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-8 mx-auto text-center">
+        
+        <h3 class="mb-3 text-dark font-weight-bold"><p>
+How to build an Elixir validator from scratch</p>
 </h3>
-</div>
-<div class=col-md-6><article class="card post-card">
-<a href=https://bluzky.github.io/blog/2021-07-23-build-a-json-view-yourself/>
-<img loading=lazy class="w-100 rounded" src=https://bluzky.github.io/img/build-a-json-view.png alt="Build your own library to render json response in Phoenix">
-</a>
-<div class=card-body>
-<ul class="card-meta list-inline mb-2">
-<li class="list-inline-item mb-2">
-<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
-<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
-<span>Dung Nguyen</span>
-</a>
-</li>
-<li class="list-inline-item mb-2">
-<span>23 Jul, 2021</span>
-</li>
-</ul>
-<h3 class=mb-3>
-<a class=post-title href=https://bluzky.github.io/blog/2021-07-23-build-a-json-view-yourself/>Build your own library to render json response in Phoenix</a>
-</h3>
-<p>In my previous article, I introduced my library call JsonView to render json response easier. You can read it here: Render Ecto schema to json with …</p>
-<ul class="card-meta list-inline">
-<li class="list-inline-item mb-2">
-<ul class="card-meta-tag list-inline">
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/elixir>elixir</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/phoenix>phoenix</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/json-view>json view</a>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</article>
-</div>
-<div class=col-md-6><article class="card post-card">
-<a href=https://bluzky.github.io/blog/2021-07-10-render-response-json-view/>
-<img loading=lazy class="w-100 rounded" src=https://bluzky.github.io/img/json-view.png alt="Elixir phoenix - Render Ecto schema to json with relationships">
-</a>
-<div class=card-body>
-<ul class="card-meta list-inline mb-2">
-<li class="list-inline-item mb-2">
-<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
-<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
-<span>Dung Nguyen</span>
-</a>
-</li>
-<li class="list-inline-item mb-2">
-<span>10 Jul, 2021</span>
-</li>
-</ul>
-<h3 class=mb-3>
-<a class=post-title href=https://bluzky.github.io/blog/2021-07-10-render-response-json-view/>Elixir phoenix - Render Ecto schema to json with relationships</a>
-</h3>
-<p>When writing API with Phoenix and render json to client,
-For some fields I want to keep it original value. For some fields, I want to do some …</p>
-<ul class="card-meta list-inline">
-<li class="list-inline-item mb-2">
-<ul class="card-meta-tag list-inline">
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/elixir>elixir</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/phoenix>phoenix</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/json-view>json view</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/ecto>ecto</a>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</article>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+        
+
+
+        <ul class="list-inline breadcrumb-menu">
+        
+        <li class="list-inline-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        <li class="list-inline-item">/ &nbsp; <a href="/blog">Blog</a></li>
+        
+        
+        
+        
+        
+        <li class="list-inline-item">/ &nbsp; <a href="/blog/2021-07-31-build-elixir-validator-from-scratch">2021-07-31-build-elixir-validator-from-scratch</a></li>
+        
+        
+        
+        </ul>
+      </div>
+    </div>
+  </div>
 </section>
-</div>
-<footer class="section-sm p-0">
-<div class=container>
-<div class="row justify-content-center align-items-center">
-<div class=col-lg-5>
-</div>
-<div class="col-lg-12 text-center mb-3">
-<ul class="social-links icon-box list-unstyled list-inline font-weight-500 mb-3">
-</ul>
-<p class="mb-0 font-weight-500 copyright-text content">
-Blog by Dung Nguyen.Theme by <a href=https://gethugothemes.com/>Gethugothemes</a>
-</p>
-</div>
-</div>
-</div>
+
+      
+
+      <!-- checking blog -->
+
+
+<section class="section-sm">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="content"><p>Validation is a must have part of web application. You have to validate request parameter before processing, you validate data before inserting to database, and many more.</p><p>Normally, I use <code class="inline">Ecto.Changeset</code> to do validation job. But it comes with changeset, I have to build schema, changeset then do the validation. Sometime you just don't need too much thing like that.</p><p>So today we are going to build a simple validation module to use without changeset, or in some project you don't use <code class="inline">Ecto</code>, or just for learning.</p><h2 id="what-our-validation-module-includes">What our validation module includes:</h2><ul><li>Type validation</li><li>Number validation</li><li>Length validation for <code class="inline">map, list, string</code></li><li>String format validation using regex</li><li>Inclusion, exclusion validations</li></ul><p>That's is quite enough, you can define more if you want.
+And the module will support a simple API to validate a value</p><pre><code class="elixir">validate(value::any(), validations::keyword()) :: :ok | {:error, String.t()}</code></pre><p>Let's start.</p><h2 id="type-validation">Type validation</h2><p>Let's call our module <code class="inline">Checky</code>. Type check is quite straight forward. Elixir support most of type check guard that we need:</p><pre><code class="elixir">defmodule Checky do
+  def validate_type(value, :boolean) when is_boolean(value), do: :ok
+  def validate_type(value, :integer) when is_integer(value), do: :ok
+  def validate_type(value, :float) when is_float(value), do: :ok
+  def validate_type(value, :number) when is_number(value), do: :ok
+  def validate_type(value, :string) when is_binary(value), do: :ok
+  def validate_type(value, :binary) when is_binary(value), do: :ok
+  def validate_type(value, :tuple) when is_tuple(value), do: :ok
+  def validate_type(value, :array) when is_list(value), do: :ok
+  def validate_type(value, :list) when is_list(value), do: :ok
+  def validate_type(value, :atom) when is_atom(value), do: :ok
+  def validate_type(value, :function) when is_function(value), do: :ok
+  def validate_type(value, :map) when is_map(value), do: :ok
+  # we will add some more validation here
+  def validate_type(_, type), do: {:error, "is not a #{type}"}
+end</code></pre><p>Easy, right? Now let's support checking for <code class="inline">struct</code>:</p><pre><code class="elixir">defmodule Checky do
+
+  ...
+  # from Elixir 1.12 you can do this
+  def validate_type(value, struct_name) when is_struct(value, struct_name), do: :ok
+  # this is for Elixir before 1.12
+  def validate_type(%{__struct__: struct}, struct_name) when struct == struct_name, do: :ok
+  ...
+end</code></pre><ul><li>Here we check for <code class="inline">keyword</code></li></ul><pre><code class="elixir">defmodule Checky do
+  ...
+  # empty list is also a empty keyword
+  def validate_type([] = _check_item, :keyword), do: :ok
+  # if list item is a tuple of 2 and first element is atom then it is a keyword list
+  def validate_type(items, :keyword) when is_list(items) do
+    valid? = Enum.all(item, fn 
+        {key, _} when is_atom(key) -> true
+        _ -> false 
+    end)
+    
+    if valid? do
+      :ok
+    else
+      {:error, "is not a keyword"}
+    end
+  end
+  ...
+end</code></pre><ul><li>Now let support array check <code class="inline">{:array, type}</code> which is similar to <code class="inline">Ecto.Schema</code>.</li></ul><pre><code class="elixir">defmodule Checky do
+  ...
+  def validate_type(value, {:array, type}) when is_list(value) do
+    # We will check type for each value in the list
+    array(value, &validate_type(&1, type))
+  end
+  ...
+   # loop and validate element in array using `validate_func`
+  defp array(data, validate_func)
+
+  defp array([], _) do
+    :ok
+  end
+
+  # validate recursively, and return error if any vadation failed
+  defp array([h | t], validate_func) do
+    case validate_func.(h) do
+      :ok ->
+        array(t, validate_func)
+      err ->
+        err
+    end
+  end
+end</code></pre><p>Phew! We have done with type validation. You can add more type validation if you want.</p><h2 id="format-validation">Format Validation</h2><p>This validation is super easy, <code class="inline">Regex</code> do that for us:</p><pre><code class="elixir">defmodule Checky end
+  def validate_format(value, check) when is_binary(value) do
+    if Regex.match?(check, value), do: :ok, else: {:error, "does not match format"}
+  end
+
+  def validate_format(_value, _check) do
+    {:error, "format check only support string"}
+  end
+end</code></pre><h2 id="inclusion-and-exclusion-validation">Inclusion and exclusion validation</h2><p>These are trivial checks too. Just make sure it is implement <code class="inline">Enumerable</code> protocol.</p><pre><code class="elixir">defmodule Checky do
+  def validate_inclusion(value, enum) do
+    if Enumerable.impl_for(enum) do
+      if Enum.member?(enum, value) do
+        :ok
+      else
+        {:error, "not be in the inclusion list"}
+      end
+    else
+      {:error, "given condition does not implement protocol Enumerable"}
+    end
+  end
+
+  @doc """
+  Check if value is **not** included in the given enumerable. Similar to `validate_inclusion/2`
+  """
+  def validate_exclusion(value, enum) do
+    if Enumerable.impl_for(enum) do
+      if Enum.member?(enum, value) do
+        {:error, "must not be in the exclusion list"}
+      else
+        :ok
+      end
+    else
+      {:error, "given condition does not implement protocol Enumerable"}
+    end
+  end
+end</code></pre><h2 id="number-validation">Number validation</h2><p>This is one of the most complicated part of our module. It's not difficult, it's just long.
+We will support following checks:</p><ul><li><code class="inline">equal_to</code></li><li><code class="inline">greater_than_or_equal_to</code> | <code class="inline">min</code></li><li><code class="inline">greater_than</code></li><li><code class="inline">less_than</code></li><li><code class="inline">less_than_or_equal_to</code> | <code class="inline">max</code></li></ul><p>And it should support multiple check like this:</p><pre><code class="elixir"> validate_number(x, [min: 10, max: 20])</code></pre><p>First we code validation function for single condition like this</p><pre><code class="elixir">  def validate_number(number, {:equal_to, check_value}) do
+    if number == check_value do
+      :ok
+    else
+      {:error, "must be equal to #{check_value}"}
+    end
+  end</code></pre><p>As I said, it's so simple. You can fill the remaining check right? Or you can check the final code at the end of the post.
+After implementing all validation fucntion for number, it's time to support multiple condtion check.</p><pre><code class="elixir">  @spec validate_number(integer() | float(), keyword()) :: :ok | error
+  def validate_number(value, checks) when is_list(checks) do
+    if is_number(value) do
+      checks
+      |> Enum.reduce(:ok, fn
+        check, :ok ->
+          validate_number(value, check)
+
+        _, error ->
+          error
+      end)
+    else
+      {:error, "must be a number"}
+    end
+  end</code></pre><h2 id="length-validation">Length validation</h2><p>Length is just a number, so we can reuse number validation. We just have to check if given value is one of support types: <code class="inline">list</code>, <code class="inline">map</code>, <code class="inline">string</code>, and <code class="inline">tuple</code></p><p>We will implement <code class="inline">get_length/1</code> function to get data length first.</p><pre><code class="elixir">  @spec get_length(any) :: pos_integer() | {:error, :wrong_type}
+  defp get_length(param) when is_list(param), do: length(param)
+  defp get_length(param) when is_binary(param), do: String.length(param)
+  defp get_length(param) when is_map(param), do: param |> Map.keys() |> get_length()
+  defp get_length(param) when is_tuple(param), do: tuple_size(param)
+  defp get_length(_param), do: {:error, :wrong_type}</code></pre><p>Then we do number validation on the length value</p><pre><code class="elixir">  @spec validate_length(support_length_types, keyword()) :: :ok | error
+  def validate_length(value, checks) do
+    with length when is_integer(length) <- get_length(value),
+         # validation length number
+         :ok <- validate_number(length, checks) do
+      :ok
+    else
+      {:error, :wrong_type} ->
+        {:error, "length check supports only lists, binaries, maps and tuples"}
+
+      {:error, msg} ->
+        # we prepend length to message return by validation number to get full message
+        # like: "length must be equal to x"
+        {:error, "length #{msg}"}
+    end
+  end</code></pre><h2 id="combine-all-validation">Combine all validation</h2><p>Most of time you want to use multiple valitions on the data. So we will add a function that do multiple validation</p><p>We define a simple structure for validation first. This is our validate function spec</p><pre><code class="elixir"> @spec validate(any(), keyword()) :: :ok | {:error, messages}</code></pre><p>Then we can use it like this:</p><pre><code class="elixir">Checky.validate(value, type: :string, format: ~r/\d\d.+/, length: [min: 8, max: 20])</code></pre><p>Validations is a keyword list with short name for validation:</p><ul><li><code class="inline">:type</code> -> <code class="inline">validate_type</code></li><li><code class="inline">:format</code> -> <code class="inline">validate_format</code></li><li><code class="inline">:in</code> -> <code class="inline">validate_inclusion</code></li><li><code class="inline">:not_in</code> -> <code class="inline">validate_exclusion</code></li><li><code class="inline">:number</code> -> <code class="inline">validate_number</code></li><li><code class="inline">:length</code> -> <code class="inline">validate_length</code></li></ul><p><strong>Define mapping function:</strong></p><pre><code class="elixir">  defp get_validator(:type), do: &validate_type/2
+  defp get_validator(:format), do: &validate_format/2
+  defp get_validator(:number), do: &validate_number/2
+  defp get_validator(:length), do: &validate_length/2
+  defp get_validator(:in), do: &validate_inclusion/2
+  defp get_validator(:not_in), do: &validate_exclusion/2
+  defp get_validator(name), do: {:error, "validate_#{name} is not support"}
+</code></pre><p><strong>Go checking validations one by one</strong></p><pre><code class="elixir">  def validate(value, validators) do
+    do_validate(value, validators, :ok)
+  end
+
+  defp do_validate(_, [], acc), do: acc
+
+  # check validations one by one
+  defp do_validate(value, [h | t] = _validators, acc) do
+    case do_validate(value, h) do
+      :ok -> do_validate(value, t, acc)
+      error -> error
+    end
+  end
+
+  # validate single validation
+  defp do_validate(value, {validator, opts}) do
+    case get_validator(validator) do
+      {:error, _} = err -> err
+      validate_func -> validate_func.(value, opts)
+    end
+  end</code></pre><h2 id="conclusion">Conclusion</h2><p>Writing a validation module is not so hard. Now you can add more validations to fit your need. As I promised, this is the full source of the module with custom validation fucntion.
+<a href="https://github.com/bluzky/valdi/blob/main/lib/valdi.ex">https://github.com/bluzky/valdi/blob/main/lib/valdi.ex</a></p><p>Thank you for reading to the end of this post. Please leave me a comment.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    </div>
+    <footer class="section-sm p-0">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-5">
+         
+      </div>
+      <div class="col-lg-12 text-center mb-3">
+        
+        <ul
+          class="social-links icon-box list-unstyled list-inline font-weight-500 mb-3"
+        >
+          
+        </ul>
+
+        <p class="mb-0 font-weight-500 copyright-text content">
+          <p>
+Blog by Dung Nguyen.Theme by <a href="https://gethugothemes.com/">Gethugothemes</a></p>
+
+        </p>
+      </div>
+    </div>
+  </div>
 </footer>
-<script src=https://unpkg.com/eva-icons></script>
-<script data-turbolinks-suppress-warning src=/js/vendor.min.e8b43a49809453b05c67c402f4ef9f014ea047b1e351a77943c2f08c978e06e6dd1eb7279560628d119926cab96a55a422c55b47fa351500c8c2fe5e59a26234.js integrity="sha512-6LQ6SYCUU7BcZ8QC9O+fAU6gR7HjUad5Q8LwjJeOBubdHrcnlWBijRGZJsq5alWkIsVbR/o1FQDIwv5eWaJiNA=="></script>
-</body>
+
+    <!-- JS Plugins + Main script -->
+
+
+<script data-turbolinks-suppress-warning src="/plugins/jquery/jquery.min.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/bootstrap/bootstrap.min.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/search/fuse.min.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/search/mark.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/search/search.js"></script>
+ 
+
+<script src="https://unpkg.com/eva-icons"></script>
+ 
+
+<script
+  data-turbolinks-suppress-warning
+  src="/js/script.js"
+></script>
+
+<!-- cookie -->
+
+
+<!-- DISQUS -->
+
+<script>
+  /**
+   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+  /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+  */
+  (function () {
+    // DON'T EDIT BELOW THIS LINE
+    var d = document,
+      s = d.createElement("script");
+    s.src = "https://.disqus.com/embed.js";
+    s.setAttribute("data-timestamp", +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+
+  </body>
 </html>

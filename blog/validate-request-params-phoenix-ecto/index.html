@@ -1,361 +1,413 @@
-<!doctype html><html lang=en-us>
-<head>
-<meta charset=utf-8>
-<title>Parse và validate request param trong Phoenix với Ecto</title>
-<meta name=author content="Dung Nguyen">
-<meta name=description content="  Drinking orange juice is good for your health. Reading some orange code is good too :D  ">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=5">
-<link rel=icon href=https://bluzky.github.io/images/favicon.png type=image/x-icon>
-<link rel=preconnect href=https://fonts.gstatic.com>
-<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap">
-<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.a175996d51c7122a7871164dca713adc582e8df8a6b31ae1e7169ca0559953614b9378e577a3ce6d3e6bc8fa87b3e4f38305c3f1478fb0b4904d66b4caffe85a.css integrity="sha512-oXWZbVHHEip4cRZNynE63Fgujfimsxrh5xacoFWZU2FLk3jld6PObT5ryPqHs+TzgwXD8UePsLSQTWa0yv/oWg==" media=screen>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+  <meta charset="utf-8" />
+  <title>The Organge+</title>
+
+  <meta name="author" content="Dung Nguyen" />
+  <meta
+    name="description"
+    content=""
+  />
+
+  <!-- mobile responsive meta -->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=5"
+  />
+
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    href="/images/favicon.png"
+    type="image/x-icon"
+  />
+
+  <!-- CSS Plugins -->
+  <!-- plugins + stylesheet -->
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+
+
+<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css" media="screen" />
+
+
+
+<link rel="stylesheet" href="/css/style.css" media="screen" />
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap" />
+
+
+<link rel="stylesheet" href="/css/style.css" media="screen" />
+
+
+  
+  <script type=application/javascript>
+   var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
+  
+
 </head>
-<body>
-<div style="min-height:calc(100vh - 65px)">
-<div class=header-height-fix></div>
-<header class=header-nav>
-<div class=container>
-<div class=row>
-<div class=col-12>
-<nav class="navbar navbar-expand-lg navbar-light p-0">
-<a class="navbar-brand font-weight-bold mr-0" href=https://bluzky.github.io/>
-<img loading=lazy src=https://bluzky.github.io/images/logo.png alt="The Organge+" height=35px>
-</a>
-<button class="search-toggle d-inline-block d-lg-none ml-auto mr-3" data-toggle=search aria-label="Search Toggle">
-<i data-eva=search-outline></i>
-</button>
-<button class=navbar-toggler type=button data-toggle=collapse data-target=#navHeader aria-controls=navHeader aria-expanded=false aria-label="Toggle navigation">
-<i data-eva=menu-outline></i>
-<i class=d-none data-eva=close-outline></i>
-</button>
-<div class="collapse navbar-collapse" id=navHeader>
-<ul class="navbar-nav mx-auto">
-<li class=nav-item>
-<a class=nav-link href=https://bluzky.github.io/>Blog</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://bluzky.github.io/tags/>Tags</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://bluzky.github.io/about>About me</a>
-</li>
-</ul>
-<div class="navbar-right d-none d-lg-inline-block">
-<ul class="social-links list-unstyled list-inline">
-<li class="list-inline-item ml-4 d-none d-lg-inline-block">
-<button class=search-toggle data-toggle=search aria-label="Search Toggle">
-<i data-eva=search-outline></i>
-</button>
-</li>
-</ul>
-</div>
-</div>
-</nav>
-</div>
-</div>
-</div>
+
+
+  <body>
+    <div style="min-height: calc(100vh - 65px)">
+      <div class="header-height-fix"></div>
+<header class="header-nav">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="navbar navbar-expand-lg navbar-light p-0">
+          <a class="navbar-brand font-weight-bold mr-0" href="">
+            
+            <img
+              loading="lazy"
+              src="/images/logo.png"
+              alt="The Organge+"
+              height="35px"
+            />
+            
+          </a>
+
+          
+          <button
+            class="search-toggle d-inline-block d-lg-none ml-auto mr-3"
+            data-toggle="search"
+            aria-label="Search Toggle"
+          >
+            <i data-eva="search-outline"></i>
+          </button>
+          
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navHeader"
+            aria-controls="navHeader"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i data-eva="menu-outline"></i>
+            <i class="d-none" data-eva="close-outline"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navHeader">
+            <ul
+              class="navbar-nav mx-auto"
+            >
+              
+              
+              
+
+              
+              <li class="nav-item ">
+                <a class="nav-link" href="/">Blog</a>
+              </li>
+              
+              
+              
+              
+              
+
+              
+              <li class="nav-item ">
+                <a class="nav-link" href="/tags">Tags</a>
+              </li>
+              
+              
+              
+              
+              
+
+              
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle d-inline-block "
+                  href="#"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-expanded="false"
+                  >More</a
+                >
+                <ul class="dropdown-menu">
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/categories"
+                      >Category</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/elements"
+                      >Elements</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/privacy"
+                      >Privacy</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/terms-conditions"
+                      >Terms & Conditions</a
+                    >
+                  </li></ul>
+              </li>
+              
+              
+              
+              
+              
+
+              
+              <li class="nav-item ">
+                <a class="nav-link" href="/about">About me</a>
+              </li>
+              
+              
+              
+            </ul>
+
+            
+            <div class="navbar-right d-none d-lg-inline-block">
+              <ul class="social-links list-unstyled list-inline">
+                <li class="list-inline-item ml-4 d-none d-lg-inline-block">
+                  <button
+                    class="search-toggle"
+                    data-toggle="search"
+                    aria-label="Search Toggle"
+                  >
+                    <i data-eva="search-outline"></i>
+                  </button>
+                </li>
+              </ul>
+            </div>
+            
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
 </header>
-<div class=search-block>
-<div data-toggle=search-close>
-<i data-eva=close-outline class=text-primary></i>
+
+
+<div class="search-block">
+  <div data-toggle="search-close">
+    <i data-eva="close-outline" class="text-primary"></i>
+  </div>
+  <form action="/search/">
+    <input
+      id="search-query"
+      name="s"
+      type="search"
+      placeholder="Type words &amp; hit enter"
+      class="text-center"
+      aria-label="search-query"
+    />
+  </form>
 </div>
-<form action=/search>
-<input id=search-query name=s type=search placeholder="Type words & hit enter" class=text-center aria-label=search-query>
-</form>
-</div>
-<section class=section-sm>
-<div class=container>
-<div class="row justify-content-center">
-<div class=col-lg-10>
-<div class=pr-lg-4>
-<div class=single-post>
-<div class="text-center mb-5">
-<h1 class="mb-4 post-title">Parse và validate request param trong Phoenix với Ecto</h1>
-<ul class="card-meta list-inline">
-<li class=list-inline-item>
-<a href=#! class=card-meta-author>
-<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
-<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
-<span>Dung Nguyen</span>
-</a>
-</a>
-</li>
-<li class=list-inline-item>|</li>
-<li class=list-inline-item>
-<span>26 September 2020</span>
-</li>
-</ul>
-</div>
-<div class="mb-5 text-center">
-<img loading=lazy class="img-fluid rounded" src=https://bluzky.github.io/img/parse-ecto-phoenix.png alt="Image not Found">
-</div>
-<div class=content><p>Khi viết các API hoặc cả các endpoint thì thông thường chúng ta sẽ có một số nhu cầu:</p>
-<ul>
-<li>Chỉ cho phép một số các tham số xác định được truyền vào.</li>
-<li>Chuyển các tham số về kiểu dữ liệu mong muốn</li>
-<li>Validate các tham số theo yêu cầu</li>
-</ul>
-<p>Bài viết này sẽ hướng dẫn các bạn giải quyết các vấn đề trên sử dụng <code>Ecto.Changeset</code></p>
-<p>Thư viện <code>Ecto</code> đã cung cấp sẵn cho chúng ta module <code>Changeset</code>. Nó hỗ trợ việc cast các tham số về đúng kiểu dữ liệu mong muốn, nó cũng hỗ trợ các phương thức để validate các tham số yêu cầu, và nó cũng cho phép bạn giới hạn tham số nào được truyền vào.</p>
-<p>Và sau đây là một ví dụ sử dụng <code>Chageset</code> để validate các tham số khi filter các đơn hàng.</p>
-<h2 id=1-đầu-tiên-bạn-phải-định-nghĩa-một-schema>1. Đầu tiên bạn phải định nghĩa một schema</h2>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.OrderFilterParams</span> <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>    <span style=color:#ff79c6>use</span> <span style=color:#50fa7b>Ecto.Schema</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    <span style=color:#ff79c6>import</span> <span style=color:#50fa7b>Ecto.Changeset</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>    schema <span style=color:#f1fa8c>&#34;order_filter_params&#34;</span> <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>        field <span style=color:#f1fa8c>:keyword</span>, <span style=color:#f1fa8c>:string</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>        field <span style=color:#f1fa8c>:category_id</span>,  <span style=color:#f1fa8c>:integer</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>        field <span style=color:#f1fa8c>:status</span>, <span style=color:#f1fa8c>:string</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>        field <span style=color:#f1fa8c>:start_date</span>, <span style=color:#f1fa8c>:utc_datetime</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>        field <span style=color:#f1fa8c>:end_date</span>, <span style=color:#f1fa8c>:utc_datetime</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>    <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#ff79c6>end</span>
-</code></pre></div><h2 id=2-cast-và-validate>2. Cast và validate</h2>
-<p>Sau đó phải định nghĩa một hàm để thực hiện việc cast tham số và validate <code>changeset</code>.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.OrderFilterParams</span> <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    ...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>    <span style=color:#50fa7b>@required</span> <span style=color:#f1fa8c>~w(category_id start_date)</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>    <span style=color:#50fa7b>@optional</span> <span style=color:#f1fa8c>~w(keyword status end_date)</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>    <span style=color:#8be9fd;font-style:italic>def</span> changeset(changeset_or_model, params) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>         cast(changeset_or_model, params, <span style=color:#50fa7b>@required</span> <span style=color:#ff79c6>++</span> <span style=color:#50fa7b>@optional</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>        <span style=color:#ff79c6>|&gt;</span> validate_required(<span style=color:#50fa7b>@required</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>    <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#ff79c6>end</span>
-</code></pre></div><h2 id=3-set-giá-trị-default-động>3. Set giá trị default động</h2>
-<p>Nếu bạn muốn sử dụng các giá trị default động, ví dụ như mặc định ngày kết thúc là ngày hiện tại, các bạn phải định nghĩa một function để set giá trị mong muốn.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.OrderFilterParams</span> <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    ...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>    <span style=color:#8be9fd;font-style:italic>def</span> changeset(changeset_or_model, params) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>         cast(changeset_or_model, params, <span style=color:#50fa7b>@required</span> <span style=color:#ff79c6>++</span> <span style=color:#50fa7b>@optional</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>        <span style=color:#ff79c6>|&gt;</span> validate_required(<span style=color:#50fa7b>@required</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>        <span style=color:#ff79c6>|&gt;</span> set_default_end_date()
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>    <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>    <span style=color:#8be9fd;font-style:italic>defp</span> set_defaut_end_date(changeset) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>        end_date <span style=color:#ff79c6>=</span> get_change(changeset, <span style=color:#f1fa8c>:end_date</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>        <span style=color:#ff79c6>if</span> is_nil(end_date) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>            put_change(changeset, <span style=color:#f1fa8c>:end_date</span>, <span style=color:#50fa7b>Timex</span><span style=color:#ff79c6>.</span>today())
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>        <span style=color:#ff79c6>else</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>            changeset
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>        <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>    <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#ff79c6>end</span>
-</code></pre></div><h2 id=4-sử-dụng-params-schema>4. Sử dụng Params schema</h2>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#8be9fd;font-style:italic>defmodule</span> <span style=color:#50fa7b>MyApp.OrderController</span> <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>    <span style=color:#ff79c6>use</span> <span style=color:#50fa7b>MyApp</span>, <span style=color:#f1fa8c>:controller</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    <span style=color:#ff79c6>alias</span> <span style=color:#50fa7b>MyApp.OrderFilterParams</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>    <span style=color:#8be9fd;font-style:italic>def</span> index(conn, params) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>        changeset <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>OrderFilterParams</span><span style=color:#ff79c6>.</span>changeset(%<span style=color:#50fa7b>OrderFilterParams</span>{}, params)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>        <span style=color:#ff79c6>if</span> changeset<span style=color:#ff79c6>.</span>valid? <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>            strong_params <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>Ecto.Changeset</span><span style=color:#ff79c6>.</span>apply_changes(changeset)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>				<span style=color:#50fa7b>IO</span><span style=color:#ff79c6>.</span>put(strong_params<span style=color:#ff79c6>.</span>keyword)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>            <span style=color:#6272a4># Do something with your params</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>        <span style=color:#ff79c6>else</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>            <span style=color:#6272a4># handle error</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>        <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>    <span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#ff79c6>end</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>
-</code></pre></div><p>Rất đơn giản đúng không, nếu bạn đã sử dụng <code>Ecto</code> thì việc này chỉ là ruồi muỗi. Tuy nhiên đơn giản thì phải có thứ đánh đổi chứ.</p>
-<h2 id=vài-thứ-mà-bạn-sẽ-thấy-bất-tiện>Vài thứ mà bạn sẽ thấy bất tiện</h2>
-<h3 id=1-lượng-code-mà-bạn-phải-viết-quá-nhiều>1. Lượng code mà bạn phải viết quá nhiều.</h3>
-<p>Thử tưởng tượng mỗi API bạn lại phải định nghĩa thêm một Module params cho nó thì phức tạp vl.</p>
-<p>Bạn có thể sử dụng schemaless, nhưng mà function của bạn sẽ rối nùi lên vì code logic và code xử lý params nó không liên quan gì tới nhau cả. Và bạn thì kiểu như đổ sting vào cơm để ăn vậy.</p>
-<h3 id=2-thiếu-linh-hoạt>2. Thiếu linh hoạt.</h3>
-<p>Điều này cũng đúng vì mục đích chính của <code>Ecto</code> là phục vụ cho việc định nghĩa các schema cho database.</p>
-<p>Đơn giản như việc định nghĩa giá trị default động như trên, bạn phải viết luôn 1 hàm mới</p>
-<p><strong>Tuy nhiên nó cũng có một ưu điểm là bạn không phải sử dụng thêm thư viện của bên thứ ba.</strong></p>
-<h2 id=kết>Kết</h2>
-<p>Nếu bạn không cần phải xử lý nhiều ràng buộc liên quan đến tham số của request thì đơn giản là cứ dùng <code>Changeset</code> thôi.</p>
-<p>Nếu bạn muốn nhanh gọn hơn thì trên Hex có một số thư viện để hỗ trợ định nghĩa param đơn giản hơn, ví dụ như <a href=https://github.com/bluzky/tarams/>https://github.com/bluzky/tarams/</a></p>
-<p>Thư viện này cung cấp cách thức đơn giản và nhanh chóng hơn để định nghĩa param cho API. Mình sẽ viết bài hướng dẫn sau.</p>
-</div>
-</div>
-<div class=single-post-meta>
-<div class="row justify-content-center">
-<div class="col-md-6 text-center text-md-left">
-<ul class="post-meta-tags list-unstyled list-inline">
-<li class=list-inline-item>
-<a href=https://bluzky.github.io/tags/elixir>#elixir</a>
-</li>
-<li class=list-inline-item>
-<a href=https://bluzky.github.io/tags/ecto>#ecto</a>
-</li>
-<li class=list-inline-item>
-<a href=https://bluzky.github.io/tags/phoenix>#phoenix</a>
-</li>
-</ul>
-</div>
-<div class="col-md-6 text-center text-md-right mt-4 mt-md-0">
-<ul class="social-links has-bg-color list-unstyled list-inline" style=line-height:0>
-<li class=list-inline-item>
-<a class="resp-sharing-button__link d-block" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fbluzky.github.io%2fblog%2fvalidate-request-params-phoenix-ecto%2f" target=_blank rel=noopener aria-label>
-<div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small">
-<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
-<i data-eva=facebook-outline class=text-dark></i>
-</div>
-</div>
-</a>
-</li>
-<li class=list-inline-item>
-<a class="resp-sharing-button__link d-block" href="https://twitter.com/intent/tweet/?text=Parse%20v%c3%a0%20validate%20request%20param%20trong%20Phoenix%20v%e1%bb%9bi%20Ecto&url=https%3a%2f%2fbluzky.github.io%2fblog%2fvalidate-request-params-phoenix-ecto%2f" target=_blank rel=noopener aria-label>
-<div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
-<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
-<i data-eva=twitter-outline class=text-dark></i>
-</div>
-</div>
-</a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class=single-post-author>
-<div class="row justify-content-center">
-<div class=col-md-12>
-<div class="media d-block d-sm-flex text-center text-sm-left">
-<a href=https://bluzky.github.io/author/dung-nguyen/><img loading=lazy class="img-fluid rounded-circle mr-0 mr-sm-4 mb-4" src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen"></a>
-<div class=media-body>
-<h4>
-<a href=https://bluzky.github.io/author/dung-nguyen/ class="text-dark font-weight-700">Dung Nguyen</a>
-</h4>
-<p class=font-primary>Hi! I&rsquo;m Dung Nguyen. I&rsquo;m an Elixir developer at OnPoint Vietnam.</p>
-<ul class="social-links list-unstyled list-inline ml-0 ml-sm-n2">
-<li class=list-inline-item>
-<a href=https://www.linkedin.com/in/dung-nguyen-tien-695ba135/>
-<i class="lab linkedin-outline"></i>
-</a>
-</li>
-<li class=list-inline-item>
-<a href=https://www.github.com/bluzky>
-<i class="lab github-outline"></i>
-</a>
-</li>
-<li class=list-inline-item>
-<a href=https://dev.to/bluzky>
-<i class="lab book-outline"></i>
-</a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class=single-post-similer>
-<div class="row justify-content-center">
-<div class=col-md-12>
-<div class="row mt-3">
-<div class=col-12>
-<h3 class="text-dark font-weight-800 mb-4 pb-2">
-You May Also Like
+
+
+
+      
+      <section class="section-sm pb-2 page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-8 mx-auto text-center">
+        
+        <h3 class="mb-3 text-dark font-weight-bold"><p>
+Parse và validate request param trong Phoenix với Ecto</p>
 </h3>
-</div>
-<div class=col-md-6><article class="card post-card">
-<div class=card-body>
-<ul class="card-meta list-inline mb-2">
-<li class="list-inline-item mb-2">
-<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
-<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
-<span>Dung Nguyen</span>
-</a>
-</li>
-<li class="list-inline-item mb-2">
-<span>18 May, 2018</span>
-</li>
-</ul>
-<h3 class=mb-3>
-<a class=post-title href=https://bluzky.github.io/blog/2018-05-17-ets-as-cache-phoenix/>Sử dụng ETS để tăng tốc ứng dụng với Phoenix</a>
-</h3>
-<p> Bài viết này sẽ hướng dẫn các bạn sử dụng ETS như là bộ nhớ cache để tăng tốc các ứng dụng web Phoenix
-Dành cho các bạn chưa biết:
-ETS (Erlang Term …</p>
-<ul class="card-meta list-inline">
-<li class="list-inline-item mb-2">
-<ul class="card-meta-tag list-inline">
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/elixir>elixir</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/phoenix>phoenix</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/ets>ETS</a>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</article>
-</div>
-<div class=col-md-6><article class="card post-card">
-<div class=card-body>
-<ul class="card-meta list-inline mb-2">
-<li class="list-inline-item mb-2">
-<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
-<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
-<span>Dung Nguyen</span>
-</a>
-</li>
-<li class="list-inline-item mb-2">
-<span>12 May, 2018</span>
-</li>
-</ul>
-<h3 class=mb-3>
-<a class=post-title href=https://bluzky.github.io/blog/2018-05-12-erlang-term-storage/>Elixir - Lưu trữ dữ liệu trên RAM với ETS</a>
-</h3>
-<p>ETS là gì? Có lẽ các bạn đã nghe qua về redis hoặc memcache, hoặc là cả hai. Còn nếu bạn chưa nghe tới bao giờ thì đó là những cơ sở dữ liệu lưu trữ …</p>
-<ul class="card-meta list-inline">
-<li class="list-inline-item mb-2">
-<ul class="card-meta-tag list-inline">
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/elixir>elixir</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/erlang>erlang</a>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</article>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+        
+
+
+        <ul class="list-inline breadcrumb-menu">
+        
+        <li class="list-inline-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        <li class="list-inline-item">/ &nbsp; <a href="/blog">Blog</a></li>
+        
+        
+        
+        
+        
+        <li class="list-inline-item">/ &nbsp; <a href="/blog/validate-request-params-phoenix-ecto">Validate-request-params-phoenix-ecto</a></li>
+        
+        
+        
+        </ul>
+      </div>
+    </div>
+  </div>
 </section>
-</div>
-<footer class="section-sm p-0">
-<div class=container>
-<div class="row justify-content-center align-items-center">
-<div class=col-lg-5>
-</div>
-<div class="col-lg-12 text-center mb-3">
-<ul class="social-links icon-box list-unstyled list-inline font-weight-500 mb-3">
-</ul>
-<p class="mb-0 font-weight-500 copyright-text content">
-Blog by Dung Nguyen.Theme by <a href=https://gethugothemes.com/>Gethugothemes</a>
-</p>
-</div>
-</div>
-</div>
+
+      
+
+      <!-- checking blog -->
+
+
+<section class="section-sm">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="content"><p>Khi viết các API hoặc cả các endpoint thì thông thường chúng ta sẽ có một số nhu cầu:</p><ul><li>Chỉ cho phép một số các tham số xác định được truyền vào.</li><li>Chuyển các tham số về kiểu dữ liệu mong muốn</li><li>Validate các tham số theo yêu cầu</li></ul><p>Bài viết này sẽ hướng dẫn các bạn giải quyết các vấn đề trên sử dụng <code class="inline">Ecto.Changeset</code></p><p>Thư viện <code class="inline">Ecto</code> đã cung cấp sẵn cho chúng ta module <code class="inline">Changeset</code>. Nó hỗ trợ việc cast các tham số về đúng kiểu dữ liệu mong muốn, nó cũng hỗ trợ các phương thức để validate các tham số yêu cầu, và nó cũng cho phép bạn giới hạn tham số nào được truyền vào.</p><p>Và sau đây là một ví dụ sử dụng <code class="inline">Chageset</code> để validate các tham số khi filter các đơn hàng.</p><h2 id="1-dau-tien-ban-phai-dinh-nghia-mot-schema">1. Đầu tiên bạn phải định nghĩa một schema</h2><pre><code class="elixir">defmodule MyApp.OrderFilterParams do
+    use Ecto.Schema
+    import Ecto.Changeset
+
+    schema "order_filter_params" do
+        field :keyword, :string
+        field :category_id,  :integer
+        field :status, :string
+        field :start_date, :utc_datetime
+        field :end_date, :utc_datetime
+    end
+end</code></pre><h2 id="2-cast-va-validate">2. Cast và validate</h2><p>Sau đó phải định nghĩa một hàm để thực hiện việc cast tham số và validate <code class="inline">changeset</code>.</p><pre><code class="elixir">defmodule MyApp.OrderFilterParams do
+
+    ...
+
+    @required ~w(category_id start_date)
+    @optional ~w(keyword status end_date)
+
+    def changeset(changeset_or_model, params) do
+         cast(changeset_or_model, params, @required ++ @optional)
+        |> validate_required(@required)
+    end
+end</code></pre><h2 id="3-set-gia-tri-default-dong">3. Set giá trị default động</h2><p>Nếu bạn muốn sử dụng các giá trị default động, ví dụ như mặc định ngày kết thúc là ngày hiện tại, các bạn phải định nghĩa một function để set giá trị mong muốn.</p><pre><code class="elixir">defmodule MyApp.OrderFilterParams do
+
+    ...
+
+    def changeset(changeset_or_model, params) do
+         cast(changeset_or_model, params, @required ++ @optional)
+        |> validate_required(@required)
+        |> set_default_end_date()
+    end
+
+    defp set_defaut_end_date(changeset) do
+        end_date = get_change(changeset, :end_date)
+        if is_nil(end_date) do
+            put_change(changeset, :end_date, Timex.today())
+        else
+            changeset
+        end
+    end
+end</code></pre><h2 id="4-su-dung-params-schema">4. Sử dụng Params schema</h2><pre><code class="elixir">defmodule MyApp.OrderController do
+    use MyApp, :controller
+    alias MyApp.OrderFilterParams
+
+    def index(conn, params) do
+        changeset = OrderFilterParams.changeset(%OrderFilterParams{}, params)
+
+        if changeset.valid? do
+            strong_params = Ecto.Changeset.apply_changes(changeset)
+                IO.put(strong_params.keyword)
+            # Do something with your params
+        else
+            # handle error
+        end
+    end
+end
+</code></pre><p>Rất đơn giản đúng không, nếu bạn đã sử dụng <code class="inline">Ecto</code> thì việc này chỉ là ruồi muỗi. Tuy nhiên đơn giản thì phải có thứ đánh đổi chứ.</p><h2 id="vai-thu-ma-ban-se-thay-bat-tien">Vài thứ mà bạn sẽ thấy bất tiện</h2><h3 id="1-luong-code-ma-ban-phai-viet-qua-nhieu">1. Lượng code mà bạn phải viết quá nhiều.</h3><p>Thử tưởng tượng mỗi API bạn lại phải định nghĩa thêm một Module params cho nó thì phức tạp vl.</p><p>Bạn có thể sử dụng schemaless, nhưng mà function của bạn sẽ rối nùi lên vì code logic và code xử lý params nó không liên quan gì tới nhau cả. Và bạn thì kiểu như đổ sting vào cơm để ăn vậy.</p><h3 id="2-thieu-linh-hoat">2. Thiếu linh hoạt.</h3><p>Điều này cũng đúng vì mục đích chính của <code class="inline">Ecto</code> là phục vụ cho việc định nghĩa các schema cho database.</p><p>Đơn giản như việc định nghĩa giá trị default động như trên, bạn phải viết luôn 1 hàm mới</p><p><strong>Tuy nhiên nó cũng có một ưu điểm là bạn không phải sử dụng thêm thư viện của bên thứ ba.</strong></p><h2 id="ket">Kết</h2><p>Nếu bạn không cần phải xử lý nhiều ràng buộc liên quan đến tham số của request thì đơn giản là cứ dùng <code class="inline">Changeset</code> thôi. </p><p>Nếu bạn muốn nhanh gọn hơn thì trên Hex có một số thư viện để hỗ trợ định nghĩa param đơn giản hơn, ví dụ như <a href="https://github.com/bluzky/tarams/">https://github.com/bluzky/tarams/</a></p><p>Thư viện này cung cấp cách thức đơn giản và nhanh chóng hơn để định nghĩa param cho API. Mình sẽ viết bài hướng dẫn sau.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    </div>
+    <footer class="section-sm p-0">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-5">
+         
+      </div>
+      <div class="col-lg-12 text-center mb-3">
+        
+        <ul
+          class="social-links icon-box list-unstyled list-inline font-weight-500 mb-3"
+        >
+          
+        </ul>
+
+        <p class="mb-0 font-weight-500 copyright-text content">
+          <p>
+Blog by Dung Nguyen.Theme by <a href="https://gethugothemes.com/">Gethugothemes</a></p>
+
+        </p>
+      </div>
+    </div>
+  </div>
 </footer>
-<script src=https://unpkg.com/eva-icons></script>
-<script data-turbolinks-suppress-warning src=/js/vendor.min.e8b43a49809453b05c67c402f4ef9f014ea047b1e351a77943c2f08c978e06e6dd1eb7279560628d119926cab96a55a422c55b47fa351500c8c2fe5e59a26234.js integrity="sha512-6LQ6SYCUU7BcZ8QC9O+fAU6gR7HjUad5Q8LwjJeOBubdHrcnlWBijRGZJsq5alWkIsVbR/o1FQDIwv5eWaJiNA=="></script>
-</body>
+
+    <!-- JS Plugins + Main script -->
+
+
+<script data-turbolinks-suppress-warning src="/plugins/jquery/jquery.min.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/bootstrap/bootstrap.min.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/search/fuse.min.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/search/mark.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/search/search.js"></script>
+ 
+
+<script src="https://unpkg.com/eva-icons"></script>
+ 
+
+<script
+  data-turbolinks-suppress-warning
+  src="/js/script.js"
+></script>
+
+<!-- cookie -->
+
+
+<!-- DISQUS -->
+
+<script>
+  /**
+   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+  /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+  */
+  (function () {
+    // DON'T EDIT BELOW THIS LINE
+    var d = document,
+      s = d.createElement("script");
+    s.src = "https://.disqus.com/embed.js";
+    s.setAttribute("data-timestamp", +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+
+  </body>
 </html>

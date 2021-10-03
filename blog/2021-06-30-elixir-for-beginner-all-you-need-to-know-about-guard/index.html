@@ -1,370 +1,374 @@
-<!doctype html><html lang=en-us>
-<head>
-<meta charset=utf-8>
-<title>Elixir for Beginner - All you need to know about guard</title>
-<meta name=author content="Dung Nguyen">
-<meta name=description content="  Drinking orange juice is good for your health. Reading some orange code is good too :D  ">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=5">
-<link rel=icon href=https://bluzky.github.io/images/favicon.png type=image/x-icon>
-<link rel=preconnect href=https://fonts.gstatic.com>
-<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap">
-<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.a175996d51c7122a7871164dca713adc582e8df8a6b31ae1e7169ca0559953614b9378e577a3ce6d3e6bc8fa87b3e4f38305c3f1478fb0b4904d66b4caffe85a.css integrity="sha512-oXWZbVHHEip4cRZNynE63Fgujfimsxrh5xacoFWZU2FLk3jld6PObT5ryPqHs+TzgwXD8UePsLSQTWa0yv/oWg==" media=screen>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+  <meta charset="utf-8" />
+  <title>The Organge+</title>
+
+  <meta name="author" content="Dung Nguyen" />
+  <meta
+    name="description"
+    content=""
+  />
+
+  <!-- mobile responsive meta -->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=5"
+  />
+
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    href="/images/favicon.png"
+    type="image/x-icon"
+  />
+
+  <!-- CSS Plugins -->
+  <!-- plugins + stylesheet -->
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+
+
+<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css" media="screen" />
+
+
+
+<link rel="stylesheet" href="/css/style.css" media="screen" />
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap" />
+
+
+<link rel="stylesheet" href="/css/style.css" media="screen" />
+
+
+  
+  <script type=application/javascript>
+   var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
+  
+
 </head>
-<body>
-<div style="min-height:calc(100vh - 65px)">
-<div class=header-height-fix></div>
-<header class=header-nav>
-<div class=container>
-<div class=row>
-<div class=col-12>
-<nav class="navbar navbar-expand-lg navbar-light p-0">
-<a class="navbar-brand font-weight-bold mr-0" href=https://bluzky.github.io/>
-<img loading=lazy src=https://bluzky.github.io/images/logo.png alt="The Organge+" height=35px>
-</a>
-<button class="search-toggle d-inline-block d-lg-none ml-auto mr-3" data-toggle=search aria-label="Search Toggle">
-<i data-eva=search-outline></i>
-</button>
-<button class=navbar-toggler type=button data-toggle=collapse data-target=#navHeader aria-controls=navHeader aria-expanded=false aria-label="Toggle navigation">
-<i data-eva=menu-outline></i>
-<i class=d-none data-eva=close-outline></i>
-</button>
-<div class="collapse navbar-collapse" id=navHeader>
-<ul class="navbar-nav mx-auto">
-<li class=nav-item>
-<a class=nav-link href=https://bluzky.github.io/>Blog</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://bluzky.github.io/tags/>Tags</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://bluzky.github.io/about>About me</a>
-</li>
-</ul>
-<div class="navbar-right d-none d-lg-inline-block">
-<ul class="social-links list-unstyled list-inline">
-<li class="list-inline-item ml-4 d-none d-lg-inline-block">
-<button class=search-toggle data-toggle=search aria-label="Search Toggle">
-<i data-eva=search-outline></i>
-</button>
-</li>
-</ul>
-</div>
-</div>
-</nav>
-</div>
-</div>
-</div>
+
+
+  <body>
+    <div style="min-height: calc(100vh - 65px)">
+      <div class="header-height-fix"></div>
+<header class="header-nav">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="navbar navbar-expand-lg navbar-light p-0">
+          <a class="navbar-brand font-weight-bold mr-0" href="">
+            
+            <img
+              loading="lazy"
+              src="/images/logo.png"
+              alt="The Organge+"
+              height="35px"
+            />
+            
+          </a>
+
+          
+          <button
+            class="search-toggle d-inline-block d-lg-none ml-auto mr-3"
+            data-toggle="search"
+            aria-label="Search Toggle"
+          >
+            <i data-eva="search-outline"></i>
+          </button>
+          
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navHeader"
+            aria-controls="navHeader"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i data-eva="menu-outline"></i>
+            <i class="d-none" data-eva="close-outline"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navHeader">
+            <ul
+              class="navbar-nav mx-auto"
+            >
+              
+              
+              
+
+              
+              <li class="nav-item ">
+                <a class="nav-link" href="/">Blog</a>
+              </li>
+              
+              
+              
+              
+              
+
+              
+              <li class="nav-item ">
+                <a class="nav-link" href="/tags">Tags</a>
+              </li>
+              
+              
+              
+              
+              
+
+              
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle d-inline-block "
+                  href="#"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-expanded="false"
+                  >More</a
+                >
+                <ul class="dropdown-menu">
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/categories"
+                      >Category</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/elements"
+                      >Elements</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/privacy"
+                      >Privacy</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/terms-conditions"
+                      >Terms & Conditions</a
+                    >
+                  </li></ul>
+              </li>
+              
+              
+              
+              
+              
+
+              
+              <li class="nav-item ">
+                <a class="nav-link" href="/about">About me</a>
+              </li>
+              
+              
+              
+            </ul>
+
+            
+            <div class="navbar-right d-none d-lg-inline-block">
+              <ul class="social-links list-unstyled list-inline">
+                <li class="list-inline-item ml-4 d-none d-lg-inline-block">
+                  <button
+                    class="search-toggle"
+                    data-toggle="search"
+                    aria-label="Search Toggle"
+                  >
+                    <i data-eva="search-outline"></i>
+                  </button>
+                </li>
+              </ul>
+            </div>
+            
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
 </header>
-<div class=search-block>
-<div data-toggle=search-close>
-<i data-eva=close-outline class=text-primary></i>
+
+
+<div class="search-block">
+  <div data-toggle="search-close">
+    <i data-eva="close-outline" class="text-primary"></i>
+  </div>
+  <form action="/search/">
+    <input
+      id="search-query"
+      name="s"
+      type="search"
+      placeholder="Type words &amp; hit enter"
+      class="text-center"
+      aria-label="search-query"
+    />
+  </form>
 </div>
-<form action=/search>
-<input id=search-query name=s type=search placeholder="Type words & hit enter" class=text-center aria-label=search-query>
-</form>
-</div>
-<section class=section-sm>
-<div class=container>
-<div class="row justify-content-center">
-<div class=col-lg-10>
-<div class=pr-lg-4>
-<div class=single-post>
-<div class="text-center mb-5">
-<h1 class="mb-4 post-title">Elixir for Beginner - All you need to know about guard</h1>
-<ul class="card-meta list-inline">
-<li class=list-inline-item>
-<a href=#! class=card-meta-author>
-<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
-<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
-<span>Dung Nguyen</span>
-</a>
-</a>
-</li>
-<li class=list-inline-item>|</li>
-<li class=list-inline-item>
-<span>30 June 2021</span>
-</li>
-</ul>
-</div>
-<div class="mb-5 text-center">
-<img loading=lazy class="img-fluid rounded" src=https://bluzky.github.io/img/elixir-guard.webp alt="Image not Found">
-</div>
-<div class=content><h2 id=what-is-guard-in-elixir>What is Guard in Elixir</h2>
-<p>In previous post, I explain what is Pattern Matching and how to use it.</p>
-<p><a href=https://dev.to/bluzky/elixir-pattern-matching-in-a-nutshell-5fef>Elixir pattern matching in a nutshell</a></p>
-<p>Pattern matching is so cool but some time I want to do some more complicated checking. With pattern matching I can easily do this</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#8be9fd;font-style:italic>def</span> can_access?(%<span style=color:#50fa7b>User</span>{<span style=color:#f1fa8c>paid_user</span>: true}), <span style=color:#f1fa8c>do</span>: true
-</code></pre></div><p>Yes, Pattern matching can do check value with exact value easily. But for example, I want to allow <code>user with level > 25</code> to access.</p>
-<p>How to do that check with Pattern matching?</p>
-<p>Pattern matching as it&rsquo;s named, it is used to match data against pattern. If you want to do more complex check, you need another guy. That is where <code>guard</code> shines, it is complement for Pattern Matching</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#8be9fd;font-style:italic>def</span> can_access?(%<span style=color:#50fa7b>User</span>{<span style=color:#f1fa8c>level</span>: level}) <span style=color:#ff79c6>when</span> level <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>25</span>, <span style=color:#f1fa8c>do</span>: true
-</code></pre></div><h2 id=what-is-guard>What is <code>guard</code></h2>
-<ul>
-<li>
-<p>Guard is a complement to your pattern matching to do more complex check.</p>
-</li>
-<li>
-<p>Guard expression is invoke after pattern mattching</p>
-</li>
-<li>
-<p>In many cases, <code>Guard</code> and <code>Pattern matching</code> can produce the same result, so use which you like.</p>
-</li>
-</ul>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#6272a4># sum on empty list</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#6272a4># pattern matching</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#8be9fd;font-style:italic>def</span> sum_list([] <span style=color:#ff79c6>=</span> _input), <span style=color:#f1fa8c>do</span>: <span style=color:#bd93f9>0</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span><span style=color:#6272a4># guard</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span><span style=color:#8be9fd;font-style:italic>def</span> sum_list(input) <span style=color:#ff79c6>when</span> input <span style=color:#ff79c6>==</span> [], <span style=color:#f1fa8c>do</span>: <span style=color:#bd93f9>0</span>
-</code></pre></div><p><strong>Some example</strong></p>
-<ul>
-<li>
-<p>Check primitive type</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#8be9fd;font-style:italic>def</span> sum(a, b) <span style=color:#ff79c6>when</span> is_integer(a) <span style=color:#ff79c6>and</span> is_integer(b) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>	a <span style=color:#ff79c6>+</span> b
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#ff79c6>end</span>
-</code></pre></div></li>
-<li>
-<p>Check value is nil/ not nil</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#8be9fd;font-style:italic>def</span> string_length(string) <span style=color:#ff79c6>when</span> <span style=color:#ff79c6>not</span> is_nil(string) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>	<span style=color:#6272a4># your code</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#ff79c6>end</span>
-</code></pre></div></li>
-<li>
-<p>Check if input in a list of allowed values</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#8be9fd;font-style:italic>def</span> can_edit?(%<span style=color:#50fa7b>User</span>{<span style=color:#f1fa8c>role</span>: role}) <span style=color:#ff79c6>when</span> role <span style=color:#ff79c6>in</span> [<span style=color:#f1fa8c>&#34;admin&#34;</span>, <span style=color:#f1fa8c>&#34;moderator&#34;</span>] <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>	true
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#ff79c6>end</span>
-</code></pre></div></li>
-<li>
-<p>And many more &mldr;</p>
-</li>
-</ul>
-<h2 id=where-to-use-guard>Where to use guard?</h2>
-<p>Where you can use Pattern Matching, you can use Guard</p>
-<ul>
-<li>
-<p><code>case</code> block</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#ff79c6>case</span> value <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>	x <span style=color:#ff79c6>when</span> is_binary(x) <span style=color:#ff79c6>-&gt;</span> <span style=color:#50fa7b>String</span><span style=color:#ff79c6>.</span>to_integer(x)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>	x <span style=color:#ff79c6>when</span> is_integer(x) <span style=color:#ff79c6>-&gt;</span> x
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>	_ <span style=color:#ff79c6>-&gt;</span> <span style=color:#ff79c6>raise</span> <span style=color:#f1fa8c>&#34;Invalid value&#34;</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span><span style=color:#ff79c6>end</span>
-</code></pre></div></li>
-<li>
-<p><code>with</code> block</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>with user <span style=color:#ff79c6>when</span> <span style=color:#ff79c6>not</span> is_nil(user) <span style=color:#ff79c6>&lt;-</span> find_user(id) <span style=color:#ff79c6>do</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>	<span style=color:#6272a4># your code block</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#ff79c6>end</span>
-</code></pre></div></li>
-<li>
-<p><code>function</code> clause as our example above</p>
-</li>
-</ul>
-<h2 id=why-my-guard-not-work>Why my guard not work?</h2>
-<p>Not all expression will work with guard. Only a list of built-in <code>guard</code> and combination of them work in guard expression.</p>
-<p>Check this from <a href=https://hexdocs.pm/elixir/guards.html#list-of-allowed-expressions>https://hexdocs.pm/elixir/guards.html#list-of-allowed-expressions</a></p>
-<blockquote>
-<ul>
-<li>comparison operators (<a href="https://hexdocs.pm/elixir/Kernel.html#==/2"><code>==</code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#!=/2"><code>!=</code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#===/2"><code>===</code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#!==/2"><code>!==</code></a>, <a href=https://hexdocs.pm/elixir/Kernel.html#%3E/2><code>></code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#%3E=/2"><code>>=</code></a>, <a href=https://hexdocs.pm/elixir/Kernel.html#%3C/2><code>&lt;</code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#%3C=/2"><code>&lt;=</code></a>)</li>
-<li>strictly boolean operators (<a href=https://hexdocs.pm/elixir/Kernel.html#and/2><code>and</code></a>, <a href=https://hexdocs.pm/elixir/Kernel.html#or/2><code>or</code></a>, <a href=https://hexdocs.pm/elixir/Kernel.html#not/1><code>not</code></a>). Note <a href=https://hexdocs.pm/elixir/Kernel.html#&&/2><code>&&</code></a>, <a href=https://hexdocs.pm/elixir/Kernel.html#%7C%7C/2><code>||</code></a>, and <a href=https://hexdocs.pm/elixir/Kernel.html#!/1><code>!</code></a> sibling operators are <strong>not allowed</strong> as they&rsquo;re not <em>strictly</em> boolean - meaning they don&rsquo;t require arguments to be booleans</li>
-<li>arithmetic unary and binary operators (<a href=https://hexdocs.pm/elixir/Kernel.html#+/1><code>+</code></a>, <a href=https://hexdocs.pm/elixir/Kernel.html#-/1><code>-</code></a>, <a href=https://hexdocs.pm/elixir/Kernel.html#+/2><code>+</code></a>, <a href=https://hexdocs.pm/elixir/Kernel.html#-/2><code>-</code></a>, <a href=https://hexdocs.pm/elixir/Kernel.html#*/2><code>*</code></a>, <a href=https://hexdocs.pm/elixir/Kernel.html#//2><code>/</code></a>)</li>
-<li><a href=https://hexdocs.pm/elixir/Kernel.html#in/2><code>in</code></a> and <a href=https://hexdocs.pm/elixir/Kernel.html#in/2><code>not in</code></a> operators (as long as the right-hand side is a list or a range)</li>
-<li>&ldquo;type-check&rdquo; functions (<a href=https://hexdocs.pm/elixir/Kernel.html#is_list/1><code>is_list/1</code></a>, <a href=https://hexdocs.pm/elixir/Kernel.html#is_number/1><code>is_number/1</code></a>, etc.)</li>
-<li>functions that work on built-in datatypes (<a href=https://hexdocs.pm/elixir/Kernel.html#abs/1><code>abs/1</code></a>, <a href=https://hexdocs.pm/elixir/Kernel.html#map_size/1><code>map_size/1</code></a>, etc.)</li>
-</ul>
-</blockquote>
-<h2 id=can-i-define-my-own-guard>Can I define my own guard?</h2>
-<p>Yes you can define a guard with <a href=https://hexdocs.pm/elixir/Kernel.html#defguard/1><code>defguard/1</code></a> and <a href=https://hexdocs.pm/elixir/Kernel.html#defguardp/1><code>defguardp/1</code></a> . But you should only define your own guard if you have a <strong>really really reasonable reason</strong> to do so.</p>
-<p>In my experience, I have never defined a guard my own, built-in guards are too enough.</p>
-<h2 id=conclustion>Conclustion</h2>
-<p>With Pattern matching and Guard, you have a super powerful combo in your hand. Let&rsquo;s code!</p>
-</div>
-</div>
-<div class=single-post-meta>
-<div class="row justify-content-center">
-<div class="col-md-6 text-center text-md-left">
-<ul class="post-meta-tags list-unstyled list-inline">
-<li class=list-inline-item>
-<a href=https://bluzky.github.io/tags/elixir>#elixir</a>
-</li>
-<li class=list-inline-item>
-<a href=https://bluzky.github.io/tags/elixir-beginner>#elixir-beginner</a>
-</li>
-</ul>
-</div>
-<div class="col-md-6 text-center text-md-right mt-4 mt-md-0">
-<ul class="social-links has-bg-color list-unstyled list-inline" style=line-height:0>
-<li class=list-inline-item>
-<a class="resp-sharing-button__link d-block" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fbluzky.github.io%2fblog%2f2021-06-30-elixir-for-beginner-all-you-need-to-know-about-guard%2f" target=_blank rel=noopener aria-label>
-<div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small">
-<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
-<i data-eva=facebook-outline class=text-dark></i>
-</div>
-</div>
-</a>
-</li>
-<li class=list-inline-item>
-<a class="resp-sharing-button__link d-block" href="https://twitter.com/intent/tweet/?text=Elixir%20for%20Beginner%20-%20All%20you%20need%20to%20know%20about%20guard&url=https%3a%2f%2fbluzky.github.io%2fblog%2f2021-06-30-elixir-for-beginner-all-you-need-to-know-about-guard%2f" target=_blank rel=noopener aria-label>
-<div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
-<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
-<i data-eva=twitter-outline class=text-dark></i>
-</div>
-</div>
-</a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class=single-post-author>
-<div class="row justify-content-center">
-<div class=col-md-12>
-<div class="media d-block d-sm-flex text-center text-sm-left">
-<a href=https://bluzky.github.io/author/dung-nguyen/><img loading=lazy class="img-fluid rounded-circle mr-0 mr-sm-4 mb-4" src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen"></a>
-<div class=media-body>
-<h4>
-<a href=https://bluzky.github.io/author/dung-nguyen/ class="text-dark font-weight-700">Dung Nguyen</a>
-</h4>
-<p class=font-primary>Hi! I&rsquo;m Dung Nguyen. I&rsquo;m an Elixir developer at OnPoint Vietnam.</p>
-<ul class="social-links list-unstyled list-inline ml-0 ml-sm-n2">
-<li class=list-inline-item>
-<a href=https://www.linkedin.com/in/dung-nguyen-tien-695ba135/>
-<i class="lab linkedin-outline"></i>
-</a>
-</li>
-<li class=list-inline-item>
-<a href=https://www.github.com/bluzky>
-<i class="lab github-outline"></i>
-</a>
-</li>
-<li class=list-inline-item>
-<a href=https://dev.to/bluzky>
-<i class="lab book-outline"></i>
-</a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class=single-post-similer>
-<div class="row justify-content-center">
-<div class=col-md-12>
-<div class="row mt-3">
-<div class=col-12>
-<h3 class="text-dark font-weight-800 mb-4 pb-2">
-You May Also Like
+
+
+
+      
+      <section class="section-sm pb-2 page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-8 mx-auto text-center">
+        
+        <h3 class="mb-3 text-dark font-weight-bold"><p>
+Elixir for Beginner - All you need to know about guard</p>
 </h3>
-</div>
-<div class=col-md-6><article class="card post-card">
-<a href=https://bluzky.github.io/blog/2021-06-29-elixir-pattern-matching-in-a-nut-shell/>
-<img loading=lazy class="w-100 rounded" src=https://bluzky.github.io/img/pattern-matching.png alt="Elixir Pattern Matching in a nut shell">
-</a>
-<div class=card-body>
-<ul class="card-meta list-inline mb-2">
-<li class="list-inline-item mb-2">
-<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
-<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
-<span>Dung Nguyen</span>
-</a>
-</li>
-<li class="list-inline-item mb-2">
-<span>29 Jun, 2021</span>
-</li>
-</ul>
-<h3 class=mb-3>
-<a class=post-title href=https://bluzky.github.io/blog/2021-06-29-elixir-pattern-matching-in-a-nut-shell/>Elixir Pattern Matching in a nut shell</a>
-</h3>
-<p>If you are new to Elixir, Pattern Matching may be something strange to you. When you get familiar with it, you will know how powerful it is. And …</p>
-<ul class="card-meta list-inline">
-<li class="list-inline-item mb-2">
-<ul class="card-meta-tag list-inline">
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/elixir>elixir</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/elixir-beginning>elixir-beginning</a>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</article>
-</div>
-<div class=col-md-6><article class="card post-card">
-<a href=https://bluzky.github.io/blog/2020-10-30-compose-ecto-query-from-client/>
-<img loading=lazy class="w-100 rounded" src=https://bluzky.github.io/img/request-to-query.png alt="Compose Ecto Query From Client">
-</a>
-<div class=card-body>
-<ul class="card-meta list-inline mb-2">
-<li class="list-inline-item mb-2">
-<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
-<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
-<span>Dung Nguyen</span>
-</a>
-</li>
-<li class="list-inline-item mb-2">
-<span>30 Oct, 2020</span>
-</li>
-</ul>
-<h3 class=mb-3>
-<a class=post-title href=https://bluzky.github.io/blog/2020-10-30-compose-ecto-query-from-client/>Compose Ecto Query From Client</a>
-</h3>
-<p>The story At our company, OnPoint, we are building an ecommerce website using Phoenix Framework. And I am working on admin to manage product, orders …</p>
-<ul class="card-meta list-inline">
-<li class="list-inline-item mb-2">
-<ul class="card-meta-tag list-inline">
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/elixir>elixir</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/phoenix>phoenix</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/query>query</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/ecto>ecto</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/querie>querie</a>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</article>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+        
+
+
+        <ul class="list-inline breadcrumb-menu">
+        
+        <li class="list-inline-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        <li class="list-inline-item">/ &nbsp; <a href="/blog">Blog</a></li>
+        
+        
+        
+        
+        
+        <li class="list-inline-item">/ &nbsp; <a href="/blog/2021-06-30-elixir-for-beginner-all-you-need-to-know-about-guard">2021-06-30-elixir-for-beginner-all-you-need-to-know-about-guard</a></li>
+        
+        
+        
+        </ul>
+      </div>
+    </div>
+  </div>
 </section>
-</div>
-<footer class="section-sm p-0">
-<div class=container>
-<div class="row justify-content-center align-items-center">
-<div class=col-lg-5>
-</div>
-<div class="col-lg-12 text-center mb-3">
-<ul class="social-links icon-box list-unstyled list-inline font-weight-500 mb-3">
-</ul>
-<p class="mb-0 font-weight-500 copyright-text content">
-Blog by Dung Nguyen.Theme by <a href=https://gethugothemes.com/>Gethugothemes</a>
-</p>
-</div>
-</div>
-</div>
+
+      
+
+      <!-- checking blog -->
+
+
+<section class="section-sm">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="content"><h2 id="what-is-guard-in-elixir">What is Guard in Elixir</h2><p>In previous post, I explain what is Pattern Matching and how to use it.</p><p><a href="https://dev.to/bluzky/elixir-pattern-matching-in-a-nutshell-5fef">Elixir pattern matching in a nutshell</a></p><p>Pattern matching is so cool but some time I want to do some more complicated checking. With pattern matching I can easily do this</p><pre><code class="elixir">def can_access?(%User{paid_user: true}), do: true</code></pre><p>Yes, Pattern matching can do check value with exact value easily. But for example, I want to allow <code class="inline">user with level > 25</code> to access.</p><p>How to do that check with Pattern matching?</p><p>Pattern matching as it's named, it is used to match data against pattern. If you want to do more complex check, you need another guy. That is where <code class="inline">guard</code> shines, it is complement for Pattern Matching</p><pre><code class="elixir">def can_access?(%User{level: level}) when level > 25, do: true</code></pre><h2 id="what-is-guard">What is <code class="inline">guard</code></h2><ul><li><p>Guard is a complement to your pattern matching to do more complex check.</p></li><li><p>Guard expression is invoke after pattern mattching</p></li><li><p>In many cases, <code class="inline">Guard</code> and <code class="inline">Pattern matching</code> can produce the same result, so use which you like.</p></li></ul><pre><code class="elixir"># sum on empty list
+# pattern matching
+def sum_list([] = _input), do: 0
+
+# guard
+def sum_list(input) when input == [], do: 0</code></pre><p><strong>Some example</strong></p><ul><li><p>Check primitive type</p><pre><code class="elixir">def sum(a, b) when is_integer(a) and is_integer(b) do
+  a + b
+end</code></pre></li><li><p>Check value is nil/ not nil</p><pre><code class="elixir">def string_length(string) when not is_nil(string) do
+  # your code
+end</code></pre></li><li><p>Check if input  in a list of allowed values</p><pre><code class="elixir">def can_edit?(%User{role: role}) when role in ["admin", "moderator"] do
+  true
+end</code></pre></li><li><p>And many more ...</p></li></ul><h2 id="where-to-use-guard">Where to use guard?</h2><p>Where you can use Pattern Matching, you can use Guard</p><ul><li><p><code class="inline">case</code> block</p><pre><code class="elixir">case value do
+  x when is_binary(x) -> String.to_integer(x)
+  x when is_integer(x) -> x
+  _ -> raise "Invalid value"
+end</code></pre></li><li><p><code class="inline">with</code> block</p><pre><code class="elixir">with user when not is_nil(user) <- find_user(id) do
+  # your code block
+end</code></pre></li><li><p><code class="inline">function</code> clause as our example above</p></li></ul><h2 id="why-my-guard-not-work">Why my guard not work?</h2><p>Not all expression will work with guard. Only a list of built-in <code class="inline">guard</code> and combination of them work in guard expression.</p><p>Check this from <a href="https://hexdocs.pm/elixir/guards.html#list-of-allowed-expressions">https://hexdocs.pm/elixir/guards.html#list-of-allowed-expressions</a></p><blockquote><ul><li>comparison operators (<a href="https://hexdocs.pm/elixir/Kernel.html#==/2"><code class="inline">==</code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#!=/2"><code class="inline">!=</code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#===/2"><code class="inline">===</code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#!==/2"><code class="inline">!==</code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#%3E/2"><code class="inline">></code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#%3E=/2"><code class="inline">>=</code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#%3C/2"><code class="inline"><</code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#%3C=/2"><code class="inline"><=</code></a>)</li><li>strictly boolean operators (<a href="https://hexdocs.pm/elixir/Kernel.html#and/2"><code class="inline">and</code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#or/2"><code class="inline">or</code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#not/1"><code class="inline">not</code></a>). Note <a href="https://hexdocs.pm/elixir/Kernel.html#&&/2"><code class="inline">&&</code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#%7C%7C/2"><code class="inline">||</code></a>, and <a href="https://hexdocs.pm/elixir/Kernel.html#!/1"><code class="inline">!</code></a> sibling operators are <strong>not allowed</strong> as they're not <em>strictly</em> boolean - meaning they don't require arguments to be booleans</li><li>arithmetic unary and binary operators (<a href="https://hexdocs.pm/elixir/Kernel.html#+/1"><code class="inline">+</code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#-/1"><code class="inline">-</code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#+/2"><code class="inline">+</code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#-/2"><code class="inline">-</code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#*/2"><code class="inline">*</code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#//2"><code class="inline">/</code></a>)</li><li><a href="https://hexdocs.pm/elixir/Kernel.html#in/2"><code class="inline">in</code></a> and <a href="https://hexdocs.pm/elixir/Kernel.html#in/2"><code class="inline">not in</code></a> operators (as long as the right-hand side is a list or a range)</li><li>"type-check" functions (<a href="https://hexdocs.pm/elixir/Kernel.html#is_list/1"><code class="inline">is_list/1</code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#is_number/1"><code class="inline">is_number/1</code></a>, etc.)</li><li>functions that work on built-in datatypes (<a href="https://hexdocs.pm/elixir/Kernel.html#abs/1"><code class="inline">abs/1</code></a>, <a href="https://hexdocs.pm/elixir/Kernel.html#map_size/1"><code class="inline">map_size/1</code></a>, etc.)</li></ul></blockquote><h2 id="can-i-define-my-own-guard">Can I define my own guard?</h2><p>Yes you can define a guard with  <a href="https://hexdocs.pm/elixir/Kernel.html#defguard/1"><code class="inline">defguard/1</code></a> and <a href="https://hexdocs.pm/elixir/Kernel.html#defguardp/1"><code class="inline">defguardp/1</code></a> . But you should only define your own guard if you have a <strong>really really reasonable reason</strong> to do so.</p><p>In my experience, I have never defined a guard my own, built-in guards are too enough.</p><h2 id="conclustion">Conclustion</h2><p>With Pattern matching and Guard, you have a super powerful combo in your hand. Let's code!</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    </div>
+    <footer class="section-sm p-0">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-5">
+         
+      </div>
+      <div class="col-lg-12 text-center mb-3">
+        
+        <ul
+          class="social-links icon-box list-unstyled list-inline font-weight-500 mb-3"
+        >
+          
+        </ul>
+
+        <p class="mb-0 font-weight-500 copyright-text content">
+          <p>
+Blog by Dung Nguyen.Theme by <a href="https://gethugothemes.com/">Gethugothemes</a></p>
+
+        </p>
+      </div>
+    </div>
+  </div>
 </footer>
-<script src=https://unpkg.com/eva-icons></script>
-<script data-turbolinks-suppress-warning src=/js/vendor.min.e8b43a49809453b05c67c402f4ef9f014ea047b1e351a77943c2f08c978e06e6dd1eb7279560628d119926cab96a55a422c55b47fa351500c8c2fe5e59a26234.js integrity="sha512-6LQ6SYCUU7BcZ8QC9O+fAU6gR7HjUad5Q8LwjJeOBubdHrcnlWBijRGZJsq5alWkIsVbR/o1FQDIwv5eWaJiNA=="></script>
-</body>
+
+    <!-- JS Plugins + Main script -->
+
+
+<script data-turbolinks-suppress-warning src="/plugins/jquery/jquery.min.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/bootstrap/bootstrap.min.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/search/fuse.min.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/search/mark.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/search/search.js"></script>
+ 
+
+<script src="https://unpkg.com/eva-icons"></script>
+ 
+
+<script
+  data-turbolinks-suppress-warning
+  src="/js/script.js"
+></script>
+
+<!-- cookie -->
+
+
+<!-- DISQUS -->
+
+<script>
+  /**
+   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+  /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+  */
+  (function () {
+    // DON'T EDIT BELOW THIS LINE
+    var d = document,
+      s = d.createElement("script");
+    s.src = "https://.disqus.com/embed.js";
+    s.setAttribute("data-timestamp", +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+
+  </body>
 </html>

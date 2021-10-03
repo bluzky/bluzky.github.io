@@ -1,334 +1,398 @@
-<!doctype html><html lang=en-us>
-<head>
-<meta charset=utf-8>
-<title>Truyền tham số động trong python (*args | **kwargs)?</title>
-<meta name=author content="Dung Nguyen">
-<meta name=description content="  Drinking orange juice is good for your health. Reading some orange code is good too :D  ">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=5">
-<link rel=icon href=https://bluzky.github.io/images/favicon.png type=image/x-icon>
-<link rel=preconnect href=https://fonts.gstatic.com>
-<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap">
-<link rel=stylesheet href=https://bluzky.github.io/css/vendor.min.a175996d51c7122a7871164dca713adc582e8df8a6b31ae1e7169ca0559953614b9378e577a3ce6d3e6bc8fa87b3e4f38305c3f1478fb0b4904d66b4caffe85a.css integrity="sha512-oXWZbVHHEip4cRZNynE63Fgujfimsxrh5xacoFWZU2FLk3jld6PObT5ryPqHs+TzgwXD8UePsLSQTWa0yv/oWg==" media=screen>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+  <meta charset="utf-8" />
+  <title>The Organge+</title>
+
+  <meta name="author" content="Dung Nguyen" />
+  <meta
+    name="description"
+    content=""
+  />
+
+  <!-- mobile responsive meta -->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=5"
+  />
+
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    href="/images/favicon.png"
+    type="image/x-icon"
+  />
+
+  <!-- CSS Plugins -->
+  <!-- plugins + stylesheet -->
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+
+
+<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css" media="screen" />
+
+
+
+<link rel="stylesheet" href="/css/style.css" media="screen" />
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap" />
+
+
+<link rel="stylesheet" href="/css/style.css" media="screen" />
+
+
+  
+  <script type=application/javascript>
+   var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-40665301-3','auto'),ga('send','pageview'))</script>
+  
+
 </head>
-<body>
-<div style="min-height:calc(100vh - 65px)">
-<div class=header-height-fix></div>
-<header class=header-nav>
-<div class=container>
-<div class=row>
-<div class=col-12>
-<nav class="navbar navbar-expand-lg navbar-light p-0">
-<a class="navbar-brand font-weight-bold mr-0" href=https://bluzky.github.io/>
-<img loading=lazy src=https://bluzky.github.io/images/logo.png alt="The Organge+" height=35px>
-</a>
-<button class="search-toggle d-inline-block d-lg-none ml-auto mr-3" data-toggle=search aria-label="Search Toggle">
-<i data-eva=search-outline></i>
-</button>
-<button class=navbar-toggler type=button data-toggle=collapse data-target=#navHeader aria-controls=navHeader aria-expanded=false aria-label="Toggle navigation">
-<i data-eva=menu-outline></i>
-<i class=d-none data-eva=close-outline></i>
-</button>
-<div class="collapse navbar-collapse" id=navHeader>
-<ul class="navbar-nav mx-auto">
-<li class=nav-item>
-<a class=nav-link href=https://bluzky.github.io/>Blog</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://bluzky.github.io/tags/>Tags</a>
-</li>
-<li class=nav-item>
-<a class=nav-link href=https://bluzky.github.io/about>About me</a>
-</li>
-</ul>
-<div class="navbar-right d-none d-lg-inline-block">
-<ul class="social-links list-unstyled list-inline">
-<li class="list-inline-item ml-4 d-none d-lg-inline-block">
-<button class=search-toggle data-toggle=search aria-label="Search Toggle">
-<i data-eva=search-outline></i>
-</button>
-</li>
-</ul>
-</div>
-</div>
-</nav>
-</div>
-</div>
-</div>
+
+
+  <body>
+    <div style="min-height: calc(100vh - 65px)">
+      <div class="header-height-fix"></div>
+<header class="header-nav">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="navbar navbar-expand-lg navbar-light p-0">
+          <a class="navbar-brand font-weight-bold mr-0" href="">
+            
+            <img
+              loading="lazy"
+              src="/images/logo.png"
+              alt="The Organge+"
+              height="35px"
+            />
+            
+          </a>
+
+          
+          <button
+            class="search-toggle d-inline-block d-lg-none ml-auto mr-3"
+            data-toggle="search"
+            aria-label="Search Toggle"
+          >
+            <i data-eva="search-outline"></i>
+          </button>
+          
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navHeader"
+            aria-controls="navHeader"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i data-eva="menu-outline"></i>
+            <i class="d-none" data-eva="close-outline"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navHeader">
+            <ul
+              class="navbar-nav mx-auto"
+            >
+              
+              
+              
+
+              
+              <li class="nav-item ">
+                <a class="nav-link" href="/">Blog</a>
+              </li>
+              
+              
+              
+              
+              
+
+              
+              <li class="nav-item ">
+                <a class="nav-link" href="/tags">Tags</a>
+              </li>
+              
+              
+              
+              
+              
+
+              
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle d-inline-block "
+                  href="#"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-expanded="false"
+                  >More</a
+                >
+                <ul class="dropdown-menu">
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/categories"
+                      >Category</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/elements"
+                      >Elements</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/privacy"
+                      >Privacy</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item "
+                      href="/terms-conditions"
+                      >Terms & Conditions</a
+                    >
+                  </li></ul>
+              </li>
+              
+              
+              
+              
+              
+
+              
+              <li class="nav-item ">
+                <a class="nav-link" href="/about">About me</a>
+              </li>
+              
+              
+              
+            </ul>
+
+            
+            <div class="navbar-right d-none d-lg-inline-block">
+              <ul class="social-links list-unstyled list-inline">
+                <li class="list-inline-item ml-4 d-none d-lg-inline-block">
+                  <button
+                    class="search-toggle"
+                    data-toggle="search"
+                    aria-label="Search Toggle"
+                  >
+                    <i data-eva="search-outline"></i>
+                  </button>
+                </li>
+              </ul>
+            </div>
+            
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
 </header>
-<div class=search-block>
-<div data-toggle=search-close>
-<i data-eva=close-outline class=text-primary></i>
+
+
+<div class="search-block">
+  <div data-toggle="search-close">
+    <i data-eva="close-outline" class="text-primary"></i>
+  </div>
+  <form action="/search/">
+    <input
+      id="search-query"
+      name="s"
+      type="search"
+      placeholder="Type words &amp; hit enter"
+      class="text-center"
+      aria-label="search-query"
+    />
+  </form>
 </div>
-<form action=/search>
-<input id=search-query name=s type=search placeholder="Type words & hit enter" class=text-center aria-label=search-query>
-</form>
-</div>
-<section class=section-sm>
-<div class=container>
-<div class="row justify-content-center">
-<div class=col-lg-10>
-<div class=pr-lg-4>
-<div class=single-post>
-<div class="text-center mb-5">
-<h1 class="mb-4 post-title">Truyền tham số động trong python (*args | **kwargs)?</h1>
-<ul class="card-meta list-inline">
-<li class=list-inline-item>
-<a href=#! class=card-meta-author>
-<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
-<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
-<span>Dung Nguyen</span>
-</a>
-</a>
-</li>
-<li class=list-inline-item>|</li>
-<li class=list-inline-item>
-<span>21 January 2018</span>
-</li>
-</ul>
-</div>
-<div class=content><p>Thực sự thì không nhất thiết phải là <code>*args</code> và <code>**kwargs</code>. điều quan trọng là tham số có 1 dấu sao * hay là 2 dấu sao **. Đặt tên tham số là *var hay **vars hay bất cứ thứ gì bạn muốn.
-Nhưng để dễ hiểu thì nên dùng tên chuẩn là <code>*args</code> và <code>**kwargs</code></p>
-<h2 id=1-args-và-kwargs-dùng-để-làm-gì>1. <code>*args</code> và <code>**kwargs</code> dùng để làm gì?</h2>
-<ul>
-<li>Khi khai báo 1 hàm, sử dụng <code>*args</code> và <code>**kwargs</code> cho phép bạn truyền vào bao nhiêu tham số cũng được mà không cần biết trước số lượng.
-<strong>Ví dụ</strong></li>
-</ul>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#6272a4># với giả sử các tham số truyền vào đều là số</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>sum</span>(<span style=color:#ff79c6>*</span>args):
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>	total <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>	<span style=color:#ff79c6>for</span> number <span style=color:#ff79c6>in</span> args:
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>  	total <span style=color:#ff79c6>+=</span> number
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>  <span style=color:#ff79c6>return</span> total
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#6272a4># gọi hàm</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#8be9fd;font-style:italic>sum</span>(<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>, <span style=color:#bd93f9>3</span>,<span style=color:#bd93f9>19</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#8be9fd;font-style:italic>sum</span>( <span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>100</span>)
-</code></pre></div><h2 id=2-args-và-kwargs-khác-gì-nhau>2. <code>*args</code> và <code>**kwargs</code> khác gì nhau?</h2>
-<ul>
-<li>Cho những bạn chưa biêt: Khi gọi hàm trong Python, có 2 kiểu truyền tham số:
-<ul>
-<li>Truyền tham số theo tên.</li>
-<li>Truyền tham số bình thường theo thứ tự khai báo đối số.
-<strong>Ví dụ</strong></li>
-</ul>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>register</span>(name, password):
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>	<span style=color:#ff79c6>....</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#6272a4># Truyền tham số theo kiểu thông thường, phải theo đúng thứ tự</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>register( <span style=color:#f1fa8c>&#39;Coulson&#39;</span>, <span style=color:#f1fa8c>&#39;hail_Hydra&#39;</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span><span style=color:#6272a4># Truyền tham số theo tên, Không cần phải theo thứ tự khai báo thao số</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span>register( password<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;cookHim&#39;</span>, name<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;Skye&#39;</span>)
-</code></pre></div></li>
-<li><strong><code>*args</code></strong> nhận các tham số truyền bình thường. Sử dụng <strong>args</strong> như một list.</li>
-<li><strong><code>**kwargs</code></strong> nhận tham số truyền theo tên. Sử dụng **kwargs** như một. dictionary</li>
-</ul>
-<p><strong>Ví dụ</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>test_args</span>(<span style=color:#ff79c6>*</span>args):
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>	<span style=color:#ff79c6>for</span> item <span style=color:#ff79c6>in</span> args:
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>   	<span style=color:#8be9fd;font-style:italic>print</span> item
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#ff79c6>&gt;&gt;</span>test_args(<span style=color:#f1fa8c>&#39;Hello&#39;</span>, <span style=color:#f1fa8c>&#39;world!&#39;</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>Hello
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>world!
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>test_kwargs</span>(<span style=color:#ff79c6>*</span>kwargs):
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>	<span style=color:#ff79c6>for</span> key, value <span style=color:#ff79c6>in</span> kwargs<span style=color:#ff79c6>.</span>iteritems():
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>   	<span style=color:#8be9fd;font-style:italic>print</span> <span style=color:#f1fa8c>&#39;</span><span style=color:#f1fa8c>{0}</span><span style=color:#f1fa8c> = </span><span style=color:#f1fa8c>{1}</span><span style=color:#f1fa8c>&#39;</span><span style=color:#ff79c6>.</span>format(key, value)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#ff79c6>&gt;&gt;</span>test_kwargs(name<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;Dzung&#39;</span>, age<span style=color:#ff79c6>=</span><span style=color:#bd93f9>10</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>age <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>10</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>name <span style=color:#ff79c6>=</span> Dzung
-</code></pre></div><h2 id=3-thứ-tự-sử-dụng-và-truyền-tham-số-args-kwargs-và-tham-số-bình-thường>3. Thứ tự sử dụng và truyền tham số <code>*args</code>, <code>**kwargs</code> và tham số bình thường</h2>
-<p>Khi sử dụng phải khai báo đối số theo thứ tự:</p>
-<blockquote>
-<p>**đối số xác đinh &ndash;> <code>*args</code> &ndash;> <code>**kwargs</code>**</p>
-</blockquote>
-<p>Đây là thứ tự bắt buộc. Và khi truyền tham số bạn cũng phải truyền theo đúng thứ tự này. Không thể truyền lẫn lộn giữa 2 loại.</p>
-<blockquote>
-<p>Khi sử dụng đồng thời <code>*args</code> <code>**kwargs</code> thì không thể truyền tham số bình thường theo tên</p>
-</blockquote>
-<p><strong>Ví dụ</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>show_detail</span>(name, <span style=color:#ff79c6>*</span>args, <span style=color:#ff79c6>**</span>kwargs):
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>	<span style=color:#ff79c6>.....</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>show_detail(name<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;Coulson&#39;</span>, <span style=color:#f1fa8c>&#39;agent&#39;</span>, age<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;40&#39;</span>, level<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;A&#39;</span>)
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#ff79c6>&gt;&gt;</span> Lỗi
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>show_detail_2</span>(name, <span style=color:#ff79c6>**</span>kwargs):
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>	<span style=color:#ff79c6>....</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>show_detail_2(name<span style=color:#ff79c6>=</span>Coulson<span style=color:#f1fa8c>&#39;, age=&#39;</span><span style=color:#bd93f9>40</span><span style=color:#f1fa8c>&#39;, level=&#39;</span>A<span style=color:#f1fa8c>&#39;)</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#ff79c6>&gt;&gt;</span> Chạy Ok
-</code></pre></div></div>
-</div>
-<div class=single-post-meta>
-<div class="row justify-content-center">
-<div class="col-md-6 text-center text-md-left">
-<ul class="post-meta-tags list-unstyled list-inline">
-<li class=list-inline-item>
-<a href=https://bluzky.github.io/tags/python>#python</a>
-</li>
-<li class=list-inline-item>
-<a href=https://bluzky.github.io/tags/python-basic>#python-basic</a>
-</li>
-</ul>
-</div>
-<div class="col-md-6 text-center text-md-right mt-4 mt-md-0">
-<ul class="social-links has-bg-color list-unstyled list-inline" style=line-height:0>
-<li class=list-inline-item>
-<a class="resp-sharing-button__link d-block" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fbluzky.github.io%2fblog%2f2018-01-21-truyen-tham-so-dong-python%2f" target=_blank rel=noopener aria-label>
-<div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small">
-<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
-<i data-eva=facebook-outline class=text-dark></i>
-</div>
-</div>
-</a>
-</li>
-<li class=list-inline-item>
-<a class="resp-sharing-button__link d-block" href="https://twitter.com/intent/tweet/?text=Truy%e1%bb%81n%20tham%20s%e1%bb%91%20%c4%91%e1%bb%99ng%20trong%20python%20%28%2aargs%20%7c%20%2a%2akwargs%29%3f&url=https%3a%2f%2fbluzky.github.io%2fblog%2f2018-01-21-truyen-tham-so-dong-python%2f" target=_blank rel=noopener aria-label>
-<div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
-<div aria-hidden=true class="resp-sharing-button__icon resp-sharing-button__icon--solid">
-<i data-eva=twitter-outline class=text-dark></i>
-</div>
-</div>
-</a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class=single-post-author>
-<div class="row justify-content-center">
-<div class=col-md-12>
-<div class="media d-block d-sm-flex text-center text-sm-left">
-<a href=https://bluzky.github.io/author/dung-nguyen/><img loading=lazy class="img-fluid rounded-circle mr-0 mr-sm-4 mb-4" src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen"></a>
-<div class=media-body>
-<h4>
-<a href=https://bluzky.github.io/author/dung-nguyen/ class="text-dark font-weight-700">Dung Nguyen</a>
-</h4>
-<p class=font-primary>Hi! I&rsquo;m Dung Nguyen. I&rsquo;m an Elixir developer at OnPoint Vietnam.</p>
-<ul class="social-links list-unstyled list-inline ml-0 ml-sm-n2">
-<li class=list-inline-item>
-<a href=https://www.linkedin.com/in/dung-nguyen-tien-695ba135/>
-<i class="lab linkedin-outline"></i>
-</a>
-</li>
-<li class=list-inline-item>
-<a href=https://www.github.com/bluzky>
-<i class="lab github-outline"></i>
-</a>
-</li>
-<li class=list-inline-item>
-<a href=https://dev.to/bluzky>
-<i class="lab book-outline"></i>
-</a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class=single-post-similer>
-<div class="row justify-content-center">
-<div class=col-md-12>
-<div class="row mt-3">
-<div class=col-12>
-<h3 class="text-dark font-weight-800 mb-4 pb-2">
-You May Also Like
+
+
+
+      
+      <section class="section-sm pb-2 page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-8 mx-auto text-center">
+        
+        <h3 class="mb-3 text-dark font-weight-bold"><p>
+Truyền tham số động trong python (<em>args | *</em>kwargs)?</p>
 </h3>
-</div>
-<div class=col-md-6><article class="card post-card">
-<div class=card-body>
-<ul class="card-meta list-inline mb-2">
-<li class="list-inline-item mb-2">
-<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
-<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
-<span>Dung Nguyen</span>
-</a>
-</li>
-<li class="list-inline-item mb-2">
-<span>21 Jan, 2018</span>
-</li>
-</ul>
-<h3 class=mb-3>
-<a class=post-title href=https://bluzky.github.io/blog/2018-01-21-python-xu-ly-mang-voi-filter-reduce/>Dùng MAP, FILTER và REDUCE để xử lý danh sách / list trong Python</a>
-</h3>
-<p>1. Giới thiệu List là một trong những kiểu dữ liệu được sử dụng rất nhiều trong python. Các thao tác thường được thực hiện trên list: xử lý từng phần …</p>
-<ul class="card-meta list-inline">
-<li class="list-inline-item mb-2">
-<ul class="card-meta-tag list-inline">
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/python>python</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/python-basic>python-basic</a>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</article>
-</div>
-<div class=col-md-6><article class="card post-card">
-<div class=card-body>
-<ul class="card-meta list-inline mb-2">
-<li class="list-inline-item mb-2">
-<a href=https://bluzky.github.io/author/dung-nguyen/ class=card-meta-author>
-<img loading=lazy src=https://bluzky.github.io/images/author/dung-nguyen.jpg alt="Dung Nguyen">
-<span>Dung Nguyen</span>
-</a>
-</li>
-<li class="list-inline-item mb-2">
-<span>21 Jan, 2018</span>
-</li>
-</ul>
-<h3 class=mb-3>
-<a class=post-title href=https://bluzky.github.io/blog/2018-01-21-python-decorator/>Python decorator là gì? dùng khi nào</a>
-</h3>
-<p>1. Decorator là gì? Decorator là một mẫu thiết kế (Design pattern) thường được dùng để thay đổi hành vi, chức năng của hàm(function) hoặc lớp (class) …</p>
-<ul class="card-meta list-inline">
-<li class="list-inline-item mb-2">
-<ul class="card-meta-tag list-inline">
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/python>python</a>
-</li>
-<li class="list-inline-item tag">
-<a href=https://bluzky.github.io/tags/python-basic>python-basic</a>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</article>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+        
+
+
+        <ul class="list-inline breadcrumb-menu">
+        
+        <li class="list-inline-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        <li class="list-inline-item">/ &nbsp; <a href="/blog">Blog</a></li>
+        
+        
+        
+        
+        
+        <li class="list-inline-item">/ &nbsp; <a href="/blog/2018-01-21-truyen-tham-so-dong-python">2018-01-21-truyen-tham-so-dong-python</a></li>
+        
+        
+        
+        </ul>
+      </div>
+    </div>
+  </div>
 </section>
-</div>
-<footer class="section-sm p-0">
-<div class=container>
-<div class="row justify-content-center align-items-center">
-<div class=col-lg-5>
-</div>
-<div class="col-lg-12 text-center mb-3">
-<ul class="social-links icon-box list-unstyled list-inline font-weight-500 mb-3">
-</ul>
-<p class="mb-0 font-weight-500 copyright-text content">
-Blog by Dung Nguyen.Theme by <a href=https://gethugothemes.com/>Gethugothemes</a>
-</p>
-</div>
-</div>
-</div>
+
+      
+
+      <!-- checking blog -->
+
+
+<section class="section-sm">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="content"><p>Thực sự thì không nhất thiết phải là <code class="inline">*args</code> và <code class="inline">**kwargs</code>. điều quan trọng là tham số có 1 dấu sao * hay là 2 dấu sao **. Đặt tên tham số là *var hay **vars hay bất cứ thứ gì bạn muốn.
+Nhưng để dễ hiểu thì nên dùng tên chuẩn là <code class="inline">*args</code> và <code class="inline">**kwargs</code></p><h2 id="1-args-va-kwargs-dung-de-lam-gi">1. <code class="inline">*args</code> và <code class="inline">**kwargs</code> dùng để làm gì?</h2><ul><li>Khi khai báo 1 hàm, sử dụng <code class="inline">*args</code> và <code class="inline">**kwargs</code> cho phép bạn truyền vào bao nhiêu tham số cũng được mà không cần biết trước số lượng.
+<strong>Ví dụ</strong></li></ul><pre><code class="python"># với giả sử các tham số truyền vào đều là số
+def sum(*args):
+    total = 0
+    for number in args:
+    total += number
+  return total
+
+# gọi hàm
+sum(1, 2, 3,19)
+sum( 1, 100)</code></pre><h2 id="2-args-va-kwargs-khac-gi-nhau">2. <code class="inline">*args</code> và <code class="inline">**kwargs</code> khác gì nhau?</h2><ul><li>Cho những bạn chưa biêt: Khi gọi hàm trong Python, có 2 kiểu truyền tham số:<ul><li>Truyền tham số theo tên.</li><li>Truyền tham số bình thường theo thứ tự khai báo đối số.
+<strong>Ví dụ</strong><pre><code class="python">def register(name, password):
+....
+# Truyền tham số theo kiểu thông thường, phải theo đúng thứ tự
+register( 'Coulson', 'hail_Hydra')
+# Truyền tham số theo tên, Không cần phải theo thứ tự khai báo thao số
+register( password='cookHim', name='Skye')</code></pre></li></ul></li><li><strong><code class="inline">*args</code></strong> nhận các tham số truyền bình thường. Sử dụng <strong>args</strong> như một list.</li><li><strong>`</strong>kwargs`<strong> nhận tham số truyền theo tên. Sử dụng </strong>kwargs** như một. dictionary</li></ul><p><strong>Ví dụ</strong></p><pre><code class="python">def test_args(*args):
+    for item in args:
+    print item
+
+>>test_args('Hello', 'world!')
+Hello
+world!
+
+def test_kwargs(*kwargs):
+    for key, value in kwargs.iteritems():
+    print '{0} = {1}'.format(key, value)
+
+>>test_kwargs(name='Dzung', age=10)
+age = 10
+name = Dzung</code></pre><h2 id="3-thu-tu-su-dung-va-truyen-tham-so-args-kwargs-va-">3. Thứ tự sử dụng và truyền tham số <code class="inline">*args</code>, <code class="inline">**kwargs</code> và tham số bình thường</h2><p>Khi sử dụng phải khai báo đối số theo thứ tự:</p><blockquote><p><strong>đối số xác đinh --> <code class="inline">*args</code> --> `</strong>kwargs`**</p></blockquote><p>Đây là thứ tự bắt buộc. Và khi truyền tham số bạn cũng phải truyền theo đúng thứ tự này. Không thể truyền lẫn lộn giữa 2 loại.</p><blockquote><p>Khi sử dụng đồng thời <code class="inline">*args</code> <code class="inline">**kwargs</code> thì không thể truyền tham số bình thường theo tên</p></blockquote><p><strong>Ví dụ</strong></p><pre><code class="python">def show_detail(name, *args, **kwargs):
+    .....
+
+show_detail(name='Coulson', 'agent', age='40', level='A')
+>> Lỗi
+
+def show_detail_2(name, **kwargs):
+    ....
+
+show_detail_2(name=Coulson', age='40', level='A')
+>> Chạy Ok</code></pre></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    </div>
+    <footer class="section-sm p-0">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-5">
+         
+      </div>
+      <div class="col-lg-12 text-center mb-3">
+        
+        <ul
+          class="social-links icon-box list-unstyled list-inline font-weight-500 mb-3"
+        >
+          
+        </ul>
+
+        <p class="mb-0 font-weight-500 copyright-text content">
+          <p>
+Blog by Dung Nguyen.Theme by <a href="https://gethugothemes.com/">Gethugothemes</a></p>
+
+        </p>
+      </div>
+    </div>
+  </div>
 </footer>
-<script src=https://unpkg.com/eva-icons></script>
-<script data-turbolinks-suppress-warning src=/js/vendor.min.e8b43a49809453b05c67c402f4ef9f014ea047b1e351a77943c2f08c978e06e6dd1eb7279560628d119926cab96a55a422c55b47fa351500c8c2fe5e59a26234.js integrity="sha512-6LQ6SYCUU7BcZ8QC9O+fAU6gR7HjUad5Q8LwjJeOBubdHrcnlWBijRGZJsq5alWkIsVbR/o1FQDIwv5eWaJiNA=="></script>
-</body>
+
+    <!-- JS Plugins + Main script -->
+
+
+<script data-turbolinks-suppress-warning src="/plugins/jquery/jquery.min.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/bootstrap/bootstrap.min.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/search/fuse.min.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/search/mark.js"></script>
+ 
+
+<script data-turbolinks-suppress-warning src="/plugins/search/search.js"></script>
+ 
+
+<script src="https://unpkg.com/eva-icons"></script>
+ 
+
+<script
+  data-turbolinks-suppress-warning
+  src="/js/script.js"
+></script>
+
+<!-- cookie -->
+
+
+<!-- DISQUS -->
+
+<script>
+  /**
+   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+  /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+  */
+  (function () {
+    // DON'T EDIT BELOW THIS LINE
+    var d = document,
+      s = d.createElement("script");
+    s.src = "https://.disqus.com/embed.js";
+    s.setAttribute("data-timestamp", +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+
+  </body>
 </html>
