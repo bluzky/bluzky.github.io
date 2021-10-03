@@ -1,19 +1,18 @@
 <!-- JS Plugins + Main script -->
-{{ $scripts := slice }} {{ range site.Params.plugins.js}} {{ if findRE "^http"
-.link }}
-<script src="{{ .link | absURL }}"></script>
-{{ else }} {{ $scripts = $scripts | append (resources.Get .link) }} {{ end }} {{
-end }} {{ $scripts := $scripts | append (resources.Get "js/script.js" | minify)
-}} {{ $scripts := $scripts | resources.Concat "/js/vendor.js" | minify |
-fingerprint "sha512" }}
+{% for link in site.params.plugins.js %}
+{% if link | match: "^http" %}
+<script src="{{ link }}"></script>
+{% else %}
+<script data-turbolinks-suppress-warning src="{{ link | abs_url }}"></script>
+{% endif %} {% endfor %}
+
 <script
   data-turbolinks-suppress-warning
-  src="{{ $scripts.RelPermalink }}"
-  integrity="{{ $scripts.Data.Integrity }}"
+  src="{{ '/js/script.js' | abs_url }}"
 ></script>
 
 <!-- cookie -->
-{{ if site.Params.cookies.enable }}
+{% if site.params.cookies.enable %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
 <div id="js-cookie-box" class="cookie-box cookie-box-hide">
   This site uses cookies. By continuing to use this website, you agree to their
@@ -30,7 +29,7 @@ fingerprint "sha512" }}
       cookieBox.classList.remove('cookie-box-hide');
       cookieButton.onclick = function () {
         Cookies.set('cookie-box', true, {
-          expires: {{ site.Params.cookies.expire_days }}
+          expires: {{ site.params.cookies.expire_days }}
         });
         cookieBox.classList.add('cookie-box-hide');
       };
@@ -57,10 +56,10 @@ fingerprint "sha512" }}
     display: none;
   }
 </style>
-{{ end }}
+{% endif %}
 
 <!-- DISQUS -->
-{{ if .Site.DisqusShortname }}
+{% if site.disqus_shortname %}
 <script>
   /**
    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
@@ -75,7 +74,7 @@ fingerprint "sha512" }}
     // DON'T EDIT BELOW THIS LINE
     var d = document,
       s = d.createElement("script");
-    s.src = "https://{{.Site.DisqusShortname}}.disqus.com/embed.js";
+    s.src = "https://{{site.disqus_shortname}}.disqus.com/embed.js";
     s.setAttribute("data-timestamp", +new Date());
     (d.head || d.body).appendChild(s);
   })();
@@ -86,4 +85,4 @@ fingerprint "sha512" }}
     >comments powered by Disqus.</a
   ></noscript
 >
-{{ end }}
+{% endif %}
