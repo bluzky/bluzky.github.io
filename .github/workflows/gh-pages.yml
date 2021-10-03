@@ -1,4 +1,4 @@
-name: github pages
+name: Elixir CI
 
 on:
   push:
@@ -7,23 +7,24 @@ on:
     branches: [ main ]
 
 jobs:
-  deploy:
-    runs-on: ubuntu-20.04
+  build:
+
+    name: Build and public sample site
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: 'latest'
-          extended: true
-
-      - name: Build
-        run: hugo --minify
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/main'
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          # cname: lwruan.com
+    - uses: actions/checkout@v2
+    - name: Set up Elixir
+      uses: erlef/setup-elixir@885971a72ed1f9240973bd92ab57af8c1aa68f24
+      with:
+        elixir-version: '1.12' # Define the elixir version [required]
+        otp-version: '22.3' # Define the OTP version [required]
+    - name: Build executable
+      run: mix escript.install github bluzky/ego --force
+    - name: Generate sample file
+      run: ~/.mix/escripts/ego build
+    - name: Deploy to target directory
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public
