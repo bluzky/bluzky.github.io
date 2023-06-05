@@ -1,0 +1,45 @@
+{
+  "main": [
+    {
+      "name": "Home",
+      "url": "/"
+    },
+    {
+      "name": "Categories",
+      "url": "/categories"
+    },
+    {
+      "name": "More",
+      "url": "",
+      "hasChildren": true,
+      "children": [
+        {
+          "name": "Authors",
+          "url": "/authors"
+        },
+        {
+          "name": "Tags",
+          "url": "/tags"
+        }
+      ]
+    },
+    {
+      "name": "About me",
+      "url": "/authors/dzung-nguyen"
+    }
+  ],
+  "footer": [
+    {
+      "name": "Home",
+      "url": "/"
+    },
+    {
+      "name": "Categories",
+      "url": "/categories"
+    },
+    {
+      "name": "About me",
+      "url": "/authors/dzung-nguyen"
+    }
+  ]
+}

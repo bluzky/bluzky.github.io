@@ -1,0 +1,35 @@
+{
+  "site": {
+    "title": "The Orange+",
+    "base_url": "https://bluzky.github.io",
+    "base_path": "/",
+    "trailing_slash": false,
+    "favicon": "/images/favicon.png",
+    "logo": "/images/logo.png",
+    "logo_width": "200",
+    "logo_height": "34",
+    "logo_text": "The Orange+"
+  },
+
+  "settings": {
+    "pagination": 5,
+    "summary_length": 100
+  },
+
+  "metadata": {
+    "meta_author": "Dzung Nguyen",
+    "meta_image": "/images/og-image.png",
+      "meta_description": "Drinking orange juice is good for your health. Reading some orange code is good too :D"
+  },
+
+  "params": {
+    "contact_form_action": "#",
+    "copyright": "Copyright © 2023 by Dzung Nguyen. A theme by [Themefisher](https://themefisher.com)"
+  },
+
+  "contactinfo": {
+    "address": "",
+    "email": "bluzky.1289@gmail.com",
+    "phone": "+84 973 511 321"
+  }
+}
