@@ -14,11 +14,9 @@ image: ''
 ---
 ## Install  `pyenv`  on MacOS
 
-```shell
-
-	  brew update
-
-	  brew install pyenv
+```
+brew update
+brew install pyenv
 
 ```
 
