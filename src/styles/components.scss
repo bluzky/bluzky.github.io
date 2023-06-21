@@ -89,8 +89,9 @@
 }
 
 .content *:not(pre)>code{
-    @apply rounded font-normal text-primary;
+    @apply rounded font-normal;
     background: rgba(255, 151, 0, 0.1);
+    color: #E06C75;
 }
 
 // footer

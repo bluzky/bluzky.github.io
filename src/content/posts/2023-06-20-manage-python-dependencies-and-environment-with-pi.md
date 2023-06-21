@@ -8,7 +8,8 @@ tags:
   - til
   - short
 draft: true
-image: ''
+image: '/images/posts/tldr.png'
+description: Pipenv helps you to manage Python project dependencies and virtualenv
 ---
 ## Why
 

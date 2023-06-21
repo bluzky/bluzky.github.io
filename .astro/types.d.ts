@@ -435,6 +435,20 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
+"2023-06-15-manage-python-version-with-pyenv.md": {
+	id: "2023-06-15-manage-python-version-with-pyenv.md";
+  slug: "2023-06-15-manage-python-version-with-pyenv";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
+"2023-06-20-manage-python-dependencies-and-environment-with-pi.md": {
+	id: "2023-06-20-manage-python-dependencies-and-environment-with-pi.md";
+  slug: "2023-06-20-manage-python-dependencies-and-environment-with-pi";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
 "validate-request-params-phoenix-ecto.md": {
 	id: "validate-request-params-phoenix-ecto.md";
   slug: "validate-request-params-phoenix-ecto";

@@ -10,7 +10,8 @@ tags:
   - python
   - til
 draft: false
-image: ''
+image: '/images/posts/tldr.png'
+description: Pyenv is a tool that make it so easy to manage python version and switch between version, both globally and by project.
 ---
 ## Install  `pyenv`  on MacOS
 
