@@ -21,10 +21,10 @@ const { tag } = Astro.params;
 const posts = await getSinglePage("posts");
 const filterByTags = taxonomyFilter(posts, "tags", tag);
 
-const title = humanize(tag || "");
+const title = '#' + tag
 ---
 
-<Base title={title || "Tag"}>
+<Base title={title}>
   <div class="section">
     <div class="container">
       <p class="text-center mb-4">Showing Posts From</p>
