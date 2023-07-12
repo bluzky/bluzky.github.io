@@ -8,7 +8,7 @@ tags:
   - elixir
   - til
 draft: false
-image: ''
+image: '/images/posts/til.png'
 categories:
   - elixir
 ---
